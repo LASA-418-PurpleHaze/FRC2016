@@ -1,5 +1,7 @@
 Instructions to get set up for programming this year.
 
+0. Install the Java 8 JDK.
+	http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 1. Follow the instructions here to set up eclipse and the official plugins, as well as the National Instruments updates for Windows only.
 	http://wpilib.screenstepslive.com/s/4485/m/13809/c/88899
 2. Install Netbeans from here. The most basic version will work.
