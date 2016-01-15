@@ -42,7 +42,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * autonomousPeriodic() - teleopPeriodic() - testPeriodoc()
  *
  */
-public class LasaIterative extends RobotBase {
+public class HazyIterative extends RobotBase {
 
     private volatile boolean m_disabledInitialized;
     private volatile boolean m_autonomousInitialized;
@@ -56,7 +56,7 @@ public class LasaIterative extends RobotBase {
      * indicate the status of initialization for disabled, autonomous, and
      * teleop code.
      */
-    public LasaIterative() {
+    public HazyIterative() {
         // set status for initialization of disabled, autonomous, and teleop code.
         m_disabledInitialized = false;
         m_autonomousInitialized = false;
