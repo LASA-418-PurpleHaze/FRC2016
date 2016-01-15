@@ -11,7 +11,8 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
     public HazyVision(AxisCamera axis, NIVision.Image image) {
         this.axis = axis;
         this.image = image;
-        axis.writeResolution(AxisCamera.Resolution.k640x480);
+        this.axis.writeResolution(AxisCamera.Resolution.k640x480);
+        this.filterContours();
     }
     
     @Override
@@ -26,5 +27,17 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
     
     private void getImage() {
         axis.getImage(image);
+    }
+    
+    private void filterContours() {
+        NIVision.imaqDrawLineOnImage(image, image, NIVision.DrawMode.DRAW_VALUE, new NIVision.Point(123, 234), new NIVision.Point(123, 567), 15);
+    }
+    
+    private void drawRect() {
+        
+    }
+    
+    public double getDistanceFromGoal() {
+        return 0;
     }
 }

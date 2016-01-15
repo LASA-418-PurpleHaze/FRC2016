@@ -9,6 +9,6 @@ package org.lasa.frc2016.statics;
  *
  * @author LASA Robotics
  */
-public class Constants {
+public class HazyConstant {
     public static int NIVISION_IMAGE_BORDER_SIZE = 480;
 }
