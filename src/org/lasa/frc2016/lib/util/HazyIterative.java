@@ -4,7 +4,7 @@
  /* must be accompanied by the FIRST BSD license file in the root directory of */
  /* the project.                                                               */
  /*----------------------------------------------------------------------------*/
-package org.lasa.frc2016;
+package org.lasa.frc2016.lib.util;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotBase;
