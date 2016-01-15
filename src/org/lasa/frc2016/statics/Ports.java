@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lasa.frc2016.ports;
+package org.lasa.frc2016.statics;
 
 /**
  *
@@ -11,4 +11,5 @@ package org.lasa.frc2016.ports;
  */
 public class Ports {
     public static String AXIS_CAMERA_IP = "10.4.18.10";
+    
 }

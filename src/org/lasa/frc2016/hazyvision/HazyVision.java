@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.lasa.frc2016.hazyvision;
 
 import com.ni.vision.NIVision;
@@ -10,10 +5,6 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author LASA Robotics
- */
 public class HazyVision implements Runnable { // I could swap this out with Thread
     AxisCamera axis;
     NIVision.Image image;

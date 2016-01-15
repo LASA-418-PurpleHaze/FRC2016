@@ -3,7 +3,7 @@ package org.lasa.frc2016;
 import com.ni.vision.NIVision;
 import org.lasa.frc2016.lib.util.HazyIterative;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
-import org.lasa.frc2016.ports.Ports;
+import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.hazyvision.HazyVision;
 
 public class Robot extends HazyIterative {
@@ -15,9 +15,9 @@ public class Robot extends HazyIterative {
     @Override
     public void robotInit() {
         axis = new AxisCamera(Ports.AXIS_CAMERA_IP);
-        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, 480);
+        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.NIVISION_IMAGE_BORDER_SIZE);
         hazyvision = new HazyVision(axis, image);
-        vision = new Thread(hazyvision);
+        vision = new Thread(hazyvision); // I can leave out the variable name
         vision.start();
    }
 
