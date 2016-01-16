@@ -51,7 +51,7 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
     }
     
     private void changeHSL() {
-        NIVision.imaqColorThreshold(image, image, 0, NIVision.ColorMode.HSL, HazyConstant.HAZY_HUE_RANGE, HazyConstant.HAZY_SATURATION_RANGE, HazyConstant.HAZY_SATURATION_RANGE);
+        NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, HazyConstant.HAZY_HUE_RANGE, HazyConstant.HAZY_SATURATION_RANGE, HazyConstant.HAZY_SATURATION_RANGE);
     }
 
     private void filterContours() {
@@ -59,7 +59,7 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
     }
 
     private void drawRect() {
-        NIVision.imaqDrawLineOnImage(image, image, NIVision.DrawMode.DRAW_VALUE, new NIVision.Point(123, 234), new NIVision.Point(123, 567), 15);
+        NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE, new NIVision.Point(123, 234), new NIVision.Point(123, 567), 15);
 
     }
 }
