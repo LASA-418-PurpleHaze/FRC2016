@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.lib.util.HazyIterative;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 import org.lasa.frc2016.statics.Ports;
-import org.lasa.frc2016.hazyvision.HazyVision;
+import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.statics.HazyConstant;
 
 public class Robot extends HazyIterative {

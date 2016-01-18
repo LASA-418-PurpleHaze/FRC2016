@@ -21,6 +21,14 @@ public class HazyConstant {
     public static Range HAZY_SATURATION_RANGE = new Range(199, 255);
     public static Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
     
+    public static double DRIVE_TRAIN_PID_KP = 1;
+    public static double DRIVE_TRAIN_PID_KI = 1;
+    public static double DRIVE_TRAIN_PID_KD = 1;
+    public static double DRIVE_TRAIN_PID_KF = 1;
+    public static double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
+    public static double DRIVE_TRAIN_PID_MAXU = 1;
+    public static double DRIVE_TRAIN_PID_MINU = -1;
+    
     public void loadFromFile() {
         try {
             BufferedReader r = new BufferedReader(new FileReader(new File("pathname")));
@@ -38,7 +46,5 @@ public class HazyConstant {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-        
-    }
+    }        
 }

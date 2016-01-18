@@ -7,7 +7,4 @@ public abstract class HazySubsystem {
     protected final String fileName = "logger.csv";
     public abstract void run();
     public abstract void putStatus();
-    public abstract void start();
-    public abstract void stop();
-    
 }

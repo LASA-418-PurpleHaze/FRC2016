@@ -1,4 +1,4 @@
-package org.lasa.frc2016.hazyvision;
+package org.lasa.frc2016.vision;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.CoordinateSystem;
