@@ -5,6 +5,7 @@
  */
 package org.lasa.frc2016.subsystem;
 
+import org.lasa.frc2016.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import org.lasa.frc2016.controlloop.HazyPID;
@@ -38,17 +39,17 @@ public class FlyWheel extends HazySubsystem {
 
     @Override
     public void run() {
-        flyWheelSpeed=flywheelPID.calculate(FLY_WHEEL_ENCODER.getRate());
+        flyWheelSpeed = flywheelPID.calculate(FLY_WHEEL_ENCODER.getRate());
         FLY_WHEEL_MOTOR_MASTER.set(flyWheelSpeed);
-        
+
     }
 
     @Override
     public void putStatus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void setFlyWheelSpeed(double flyWheel){
+
+    public void setFlyWheelSpeed(double flyWheel) {
         flywheelPID.setTarget(flyWheel);
     }
 

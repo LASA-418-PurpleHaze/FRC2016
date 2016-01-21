@@ -2,7 +2,7 @@ package org.lasa.frc2016;
 
 import com.ni.vision.NIVision;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasa.frc2016.lib.util.HazyIterative;
+import org.lasa.frc2016.lib.HazyIterative;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.vision.HazyVision;
@@ -15,14 +15,15 @@ public class Robot extends HazyIterative {
     HazyVision hazyvision;
     Thread vision;
     SmartDashboard dash;
+
     @Override
     public void robotInit() {
         axis = new AxisCamera(Ports.AXIS_CAMERA_IP);
         image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constant.NIVISION_IMAGE_BORDER_SIZE);
         hazyvision = new HazyVision(axis, image);
         vision = new Thread(hazyvision); // I can leave out the variable name
-        vision.start();        
-   }
+        vision.start();
+    }
 
     @Override
     public void autonomousInit() {
@@ -43,5 +44,5 @@ public class Robot extends HazyIterative {
     public void teleopInit() {
         super.teleopInit(); //To change body of generated methods, choose Tools | Templates.
     }
-   
+
 }

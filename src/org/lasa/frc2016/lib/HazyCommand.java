@@ -1,23 +1,24 @@
-package org.lasa.frc2016.command;
+package org.lasa.frc2016.lib;
 
-public abstract class Command {
+public abstract class HazyCommand {
 
     //Pointers to the next Command above or to the left in the tree.
-    Command up, left;
-    
+    HazyCommand up;
+    HazyCommand left;
+
     String name;
-    
+
     //Initialize this to something impossibly large instead of 0 so that isDone works right.
     private double startTime;
     double timeOut;
-    
+
     //Booleans to keep track of what state the command is in.
     protected boolean isDone;
     protected boolean stopped;
     protected boolean shouldRun;
     protected boolean isLeftDone;
 
-    public Command(Command up, Command left, String name, double timeOut) {
+    public HazyCommand(HazyCommand up, HazyCommand left, String name, double timeOut) {
         this.up = up;
         this.left = left;
         this.name = name;
@@ -25,16 +26,16 @@ public abstract class Command {
         this.startTime = Double.MAX_VALUE;
     }
 
-    public Command(String nm, double t) {
+    public HazyCommand(String nm, double t) {
         name = nm;
         timeOut = t;
     }
 
-    public void setUp(Command p) {
+    public void setUp(HazyCommand p) {
         up = p;
     }
 
-    public void setLeft(Command b) {
+    public void setLeft(HazyCommand b) {
         left = b;
     }
 

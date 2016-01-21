@@ -4,7 +4,7 @@
  /* must be accompanied by the FIRST BSD license file in the root directory of */
  /* the project.                                                               */
  /*----------------------------------------------------------------------------*/
-package org.lasa.frc2016.lib.util;
+package org.lasa.frc2016.lib;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -78,7 +78,6 @@ public class HazyIterative extends RobotBase {
         // Tell the DS that the robot is ready to be enabled
         FRCNetworkCommunicationsLibrary.FRCNetworkCommunicationObserveUserProgramStarting();
 
-        
         Notifier notifier = new Notifier(new ContinuousRunner());
         notifier.startPeriodic(continuousPeriod);
 
@@ -156,6 +155,7 @@ public class HazyIterative extends RobotBase {
     }
 
     class ContinuousRunner implements Runnable {
+
         @Override
         public void run() {
             if (isTest()) {
@@ -170,15 +170,14 @@ public class HazyIterative extends RobotBase {
                 if (m_autonomousInitialized) {
                     autonomousContinuous();
                 }
-            } else {
-                if (m_disabledInitialized) {
-                    disabledContinuous();
-                }
+            } else if (m_disabledInitialized) {
+                disabledContinuous();
             }
         }
     }
-    
+
     boolean disabledContinuousFirstRun = true;
+
     public void disabledContinuous() {
         if (disabledContinuousFirstRun) {
             System.out.println("Default LasaIterative.disabledContinuous() method... Overload me!");
@@ -188,6 +187,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean autonomousContinuousFirstRun = true;
+
     public void autonomousContinuous() {
         if (autonomousContinuousFirstRun) {
             System.out.println("Default LasaIterative.autonomousContinuous() method... Overload me!");
@@ -197,6 +197,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean teleopContinuousFirstRun = true;
+
     public void teleopContinuous() {
         if (teleopContinuousFirstRun) {
             System.out.println("Default LasaIterative.teleopContinuous() method... Overload me!");
@@ -206,6 +207,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean testContinuousFirstRun = true;
+
     public void testContinuous() {
         if (testContinuousFirstRun) {
             System.out.println("Default LasaIterative.testContinuous() method... Overload me!");

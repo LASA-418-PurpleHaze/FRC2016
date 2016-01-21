@@ -5,6 +5,7 @@
  */
 package org.lasa.frc2016.subsystem;
 
+import org.lasa.frc2016.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Victor;
 import org.lasa.frc2016.statics.Ports;
 

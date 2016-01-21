@@ -5,6 +5,7 @@
  */
 package org.lasa.frc2016.subsystem;
 
+import org.lasa.frc2016.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Victor;
 import org.lasa.frc2016.controlloop.HazyPID;
 import org.lasa.frc2016.statics.Constant;
@@ -14,14 +15,14 @@ import org.lasa.frc2016.statics.Ports;
  *
  * @author LASA Robotics
  */
-public class DriveTrain extends HazySubsystem{
-    
+public class DriveTrain extends HazySubsystem {
+
     private static DriveTrain instance;
 
     private Victor LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR, RIGHT_BACK_MOTOR;
     private double leftFrontSpeed, leftBackSpeed, rightFrontSpeed, rightBackSpeed;
     private HazyPID drivePID;
-    
+
     private DriveTrain() {
         LEFT_FRONT_MOTOR = new Victor(Ports.LEFT_FRONT_MOTOR);
         LEFT_BACK_MOTOR = new Victor(Ports.LEFT_BACK_MOTOR);
@@ -48,14 +49,12 @@ public class DriveTrain extends HazySubsystem{
     public void putStatus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void setDriveSpeeds(double leftFront, double leftBack, double rightFront, double rightBack) {
         leftFrontSpeed = leftFront;
         leftBackSpeed = leftBack;
         rightFrontSpeed = rightFront;
         rightBackSpeed = rightBack;
     }
-    
-    
-    
+
 }

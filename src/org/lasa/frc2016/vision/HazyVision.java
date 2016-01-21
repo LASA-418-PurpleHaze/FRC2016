@@ -49,7 +49,7 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
         this.filterContours();
         this.drawRect();
     }
-    
+
     private void changeHSL() {
         NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, Constant.HAZY_HUE_RANGE, Constant.HAZY_SATURATION_RANGE, Constant.HAZY_SATURATION_RANGE);
     }

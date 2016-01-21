@@ -16,11 +16,13 @@ import java.io.IOException;
  * @author LASA Robotics
  */
 public class Constant {
+
     public static int NIVISION_IMAGE_BORDER_SIZE = 480;
     public static Range HAZY_HUE_RANGE = new Range(44, 88);
     public static Range HAZY_SATURATION_RANGE = new Range(199, 255);
     public static Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
-    
+
+    // DriveTrain PID
     public static double DRIVE_TRAIN_PID_KP = 1;
     public static double DRIVE_TRAIN_PID_KI = 1;
     public static double DRIVE_TRAIN_PID_KD = 1;
@@ -28,6 +30,8 @@ public class Constant {
     public static double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
     public static double DRIVE_TRAIN_PID_MAXU = 1;
     public static double DRIVE_TRAIN_PID_MINU = -1;
+
+    // FlyWheel PID
     public static double FLYWHEEL_PID_KP = 1;
     public static double FLYWHEEL_PID_KI = 1;
     public static double FLYWHEEL_PID_KD = 1;
@@ -35,23 +39,23 @@ public class Constant {
     public static double FLYWHEEL_PID_DONE_BOUND = 1000;
     public static double FLYWHEEL_PID_MAXU = 1;
     public static double FLYWHEEL_PID_MINU = -1;
-    
+
     public void loadFromFile() {
         try {
             BufferedReader r = new BufferedReader(new FileReader(new File("pathname")));
             String line, key;
             double value;
             int spaceIndex;
-            while((line = r.readLine()) != null) {
+            while ((line = r.readLine()) != null) {
                 spaceIndex = line.indexOf(" ");
-                key = line.substring(0,spaceIndex);
+                key = line.substring(0, spaceIndex);
                 value = Double.valueOf(line.substring(spaceIndex + 1));
             }
-            
+
             r.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }        
+    }
 }
