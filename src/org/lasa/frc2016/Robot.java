@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.statics.Constant;
+import org.lasa.frc2016.subsystem.DriveTrain;
+import org.lasa.frc2016.subsystem.FlyWheel;
+import org.lasa.frc2016.subsystem.Intake;
 
 public class Robot extends HazyIterative {
 
@@ -15,6 +18,9 @@ public class Robot extends HazyIterative {
     HazyVision hazyvision;
     Thread vision;
     SmartDashboard dash;
+    DriveTrain driveTrain;
+    FlyWheel flyWheel;
+    Intake intake;
 
     @Override
     public void robotInit() {
@@ -23,6 +29,9 @@ public class Robot extends HazyIterative {
         hazyvision = new HazyVision(axis, image);
         vision = new Thread(hazyvision); // I can leave out the variable name
         vision.start();
+        driveTrain = DriveTrain.getInstance();
+        flyWheel = FlyWheel.getInstance();
+        intake = Intake.getInstance();
     }
 
     @Override
