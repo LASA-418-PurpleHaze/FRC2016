@@ -78,6 +78,7 @@ public class HazyIterative extends RobotBase {
         // Tell the DS that the robot is ready to be enabled
         FRCNetworkCommunicationsLibrary.FRCNetworkCommunicationObserveUserProgramStarting();
 
+        
         Notifier notifier = new Notifier(new ContinuousRunner());
         notifier.startPeriodic(continuousPeriod);
 

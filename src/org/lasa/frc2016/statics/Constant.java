@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * @author LASA Robotics
  */
-public class HazyConstant {
+public class Constant {
     public static int NIVISION_IMAGE_BORDER_SIZE = 480;
     public static Range HAZY_HUE_RANGE = new Range(44, 88);
     public static Range HAZY_SATURATION_RANGE = new Range(199, 255);
@@ -28,6 +28,13 @@ public class HazyConstant {
     public static double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
     public static double DRIVE_TRAIN_PID_MAXU = 1;
     public static double DRIVE_TRAIN_PID_MINU = -1;
+    public static double FLYWHEEL_PID_KP = 1;
+    public static double FLYWHEEL_PID_KI = 1;
+    public static double FLYWHEEL_PID_KD = 1;
+    public static double FLYWHEEL_PID_KF = 1;
+    public static double FLYWHEEL_PID_DONE_BOUND = 1000;
+    public static double FLYWHEEL_PID_MAXU = 1;
+    public static double FLYWHEEL_PID_MINU = -1;
     
     public void loadFromFile() {
         try {

@@ -10,7 +10,7 @@ import com.sun.org.apache.bcel.internal.Constants;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.lasa.frc2016.statics.HazyConstant;
+import org.lasa.frc2016.statics.Constant;
 
 public class HazyVision implements Runnable { // I could swap this out with Thread
 
@@ -51,7 +51,7 @@ public class HazyVision implements Runnable { // I could swap this out with Thre
     }
     
     private void changeHSL() {
-        NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, HazyConstant.HAZY_HUE_RANGE, HazyConstant.HAZY_SATURATION_RANGE, HazyConstant.HAZY_SATURATION_RANGE);
+        NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, Constant.HAZY_HUE_RANGE, Constant.HAZY_SATURATION_RANGE, Constant.HAZY_SATURATION_RANGE);
     }
 
     private void filterContours() {
