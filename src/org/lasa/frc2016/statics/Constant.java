@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.lasa.frc2016.statics;
 
 import com.ni.vision.NIVision.Range;
@@ -11,34 +6,30 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- *
- * @author LASA Robotics
- */
 public class Constant {
 
-    public static int NIVISION_IMAGE_BORDER_SIZE = 480;
-    public static Range HAZY_HUE_RANGE = new Range(44, 88);
-    public static Range HAZY_SATURATION_RANGE = new Range(199, 255);
-    public static Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
+    public static final int NIVISION_IMAGE_BORDER_SIZE = 480;
+    public static final Range HAZY_HUE_RANGE = new Range(44, 88);
+    public static final Range HAZY_SATURATION_RANGE = new Range(199, 255);
+    public static final Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
 
     // DriveTrain PID
-    public static double DRIVE_TRAIN_PID_KP = 1;
-    public static double DRIVE_TRAIN_PID_KI = 1;
-    public static double DRIVE_TRAIN_PID_KD = 1;
-    public static double DRIVE_TRAIN_PID_KF = 1;
-    public static double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
-    public static double DRIVE_TRAIN_PID_MAXU = 1;
-    public static double DRIVE_TRAIN_PID_MINU = -1;
+    public static final double DRIVE_TRAIN_PID_KP = 1;
+    public static final double DRIVE_TRAIN_PID_KI = 1;
+    public static final double DRIVE_TRAIN_PID_KD = 1;
+    public static final double DRIVE_TRAIN_PID_KF = 1;
+    public static final double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
+    public static final double DRIVE_TRAIN_PID_MAXU = 1;
+    public static final double DRIVE_TRAIN_PID_MINU = -1;
 
     // FlyWheel PID
-    public static double FLYWHEEL_PID_KP = 1;
-    public static double FLYWHEEL_PID_KI = 1;
-    public static double FLYWHEEL_PID_KD = 1;
-    public static double FLYWHEEL_PID_KF = 1;
-    public static double FLYWHEEL_PID_DONE_BOUND = 1000;
-    public static double FLYWHEEL_PID_MAXU = 1;
-    public static double FLYWHEEL_PID_MINU = -1;
+    public static final double FLYWHEEL_PID_KP = 1;
+    public static final double FLYWHEEL_PID_KI = 1;
+    public static final double FLYWHEEL_PID_KD = 1;
+    public static final double FLYWHEEL_PID_KF = 1;
+    public static final double FLYWHEEL_PID_DONE_BOUND = 1000;
+    public static final double FLYWHEEL_PID_MAXU = 1;
+    public static final double FLYWHEEL_PID_MINU = -1;
 
     public void loadFromFile() {
         try {
