@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.frc2016.lib.HazySubsystem;
+import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Victor;
 import org.lasa.frc2016.statics.Ports;
 
-/**
- *
- * @author 418
- */
 public class Intake extends HazySubsystem {
 
     private static Intake instance;
 
-    private Victor INTAKE_MOTOR;
+    private Victor intakeMotor;
     private double intakeSpeed;
 
     private Intake() {
-        INTAKE_MOTOR = new Victor(Ports.INTAKE_MOTOR);
+        intakeMotor = new Victor(Ports.INTAKE_MOTOR);
     }
 
     public static Intake getInstance() {
@@ -29,7 +20,7 @@ public class Intake extends HazySubsystem {
     }
 
     public void run() {
-        INTAKE_MOTOR.set(intakeSpeed);
+        intakeMotor.set(intakeSpeed);
     }
 
     public void putStatus() {

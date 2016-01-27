@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Constant {
 
     public static final int NIVISION_IMAGE_BORDER_SIZE = 480;
+    
     public static final Range HAZY_HUE_RANGE = new Range(44, 88);
     public static final Range HAZY_SATURATION_RANGE = new Range(199, 255);
     public static final Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
@@ -23,13 +24,16 @@ public class Constant {
     public static final double DRIVE_TRAIN_PID_MINU = -1;
 
     // FlyWheel PID
-    public static final double FLYWHEEL_PID_KP = 1;
-    public static final double FLYWHEEL_PID_KI = 1;
-    public static final double FLYWHEEL_PID_KD = 1;
-    public static final double FLYWHEEL_PID_KF = 1;
+    public static final double FLYWHEEL_PID_KP = 0;
+    public static final double FLYWHEEL_PID_KI = 0;
+    public static final double FLYWHEEL_PID_KD = 0;
+    public static final double FLYWHEEL_PID_KF = 0;
     public static final double FLYWHEEL_PID_DONE_BOUND = 1000;
     public static final double FLYWHEEL_PID_MAXU = 1;
     public static final double FLYWHEEL_PID_MINU = -1;
+    public static final int FLYWHEEL_PID_IZONE = 100;
+    public static final double FLYWHEEL_PID_RAMPRATE = 36;
+    public static final int FLYWHEEL_PID_PROFILE = 0;
 
     public void loadFromFile() {
         try {

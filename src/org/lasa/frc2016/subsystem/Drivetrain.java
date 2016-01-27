@@ -5,7 +5,7 @@
  */
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.frc2016.lib.HazySubsystem;
+import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Victor;
 import org.lasa.frc2016.controlloop.HazyPID;
 import org.lasa.frc2016.statics.Constant;
@@ -15,34 +15,34 @@ import org.lasa.frc2016.statics.Ports;
  *
  * @author LASA Robotics
  */
-public class DriveTrain extends HazySubsystem {
+public class Drivetrain extends HazySubsystem {
 
-    private static DriveTrain instance;
+    private static Drivetrain instance;
 
-    private Victor LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR, RIGHT_BACK_MOTOR;
+    private Victor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
     private double leftFrontSpeed, leftBackSpeed, rightFrontSpeed, rightBackSpeed;
     private HazyPID drivePID;
 
-    private DriveTrain() {
-        LEFT_FRONT_MOTOR = new Victor(Ports.LEFT_FRONT_MOTOR);
-        LEFT_BACK_MOTOR = new Victor(Ports.LEFT_BACK_MOTOR);
-        RIGHT_FRONT_MOTOR = new Victor(Ports.RIGHT_FRONT_MOTOR);
-        RIGHT_BACK_MOTOR = new Victor(Ports.RIGHT_BACK_MOTOR);
+    private Drivetrain() {
+        leftFrontMotor = new Victor(Ports.LEFT_FRONT_MOTOR);
+        leftBackMotor = new Victor(Ports.LEFT_BACK_MOTOR);
+        rightFrontMotor = new Victor(Ports.RIGHT_FRONT_MOTOR);
+        rightBackMotor = new Victor(Ports.RIGHT_BACK_MOTOR);
         drivePID = new HazyPID();
         drivePID.updatePID(Constant.DRIVE_TRAIN_PID_KP, Constant.DRIVE_TRAIN_PID_KI, Constant.DRIVE_TRAIN_PID_KD, Constant.DRIVE_TRAIN_PID_KF, Constant.DRIVE_TRAIN_PID_DONE_BOUND);
         drivePID.updateMaxMin(Constant.DRIVE_TRAIN_PID_MAXU, Constant.DRIVE_TRAIN_PID_MINU);
     }
 
-    public static DriveTrain getInstance() {
-        return (instance == null) ? instance = new DriveTrain() : instance;
+    public static Drivetrain getInstance() {
+        return (instance == null) ? instance = new Drivetrain() : instance;
     }
 
     @Override
     public void run() {
-        LEFT_FRONT_MOTOR.set(leftFrontSpeed);
-        LEFT_BACK_MOTOR.set(leftBackSpeed);
-        RIGHT_FRONT_MOTOR.set(rightFrontSpeed);
-        RIGHT_BACK_MOTOR.set(rightBackSpeed);
+        leftFrontMotor.set(leftFrontSpeed);
+        leftBackMotor.set(leftBackSpeed);
+        rightFrontMotor.set(rightFrontSpeed);
+        rightBackMotor.set(rightBackSpeed);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.lasa.frc2016.lib;
+package org.lasa.lib;
 
 public abstract class HazyCommand {
 

@@ -22,6 +22,6 @@ public class Ports {
     public static int FLY_WHEEL_MOTOR = 5;
 
     // Analog IO Ports
-    public static int FLY_WHEEL_ENCODER_FRONT = 6;
-    public static int FLY_WHEEL_ENCODER_BACK = 7;
+    
+    // Digital IO Ports
 }

@@ -1,10 +1,10 @@
-package org.lasa.frc2016.lib;
+package org.lasa.lib;
 
-import org.lasa.frc2016.lib.HazyCommand;
+import org.lasa.lib.HazyCommand;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CommandManager {
+public class CommandManager{
 
     private static ArrayList<HazyCommand> list = new ArrayList<>();
     private static HazyCommand lastAdded;
