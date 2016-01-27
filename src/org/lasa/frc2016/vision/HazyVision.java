@@ -5,6 +5,7 @@ import com.ni.vision.NIVision.CoordinateSystem;
 import com.ni.vision.NIVision.FindEdgeOptions2;
 import com.ni.vision.NIVision.FindEdgeReport;
 import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.Point;
 import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
 import com.ni.vision.NIVision.StraightEdgeOptions;
@@ -22,7 +23,7 @@ public final class HazyVision implements Runnable { // I could swap this out wit
     CoordinateSystem plane;
     FindEdgeOptions2 findEdgeOptions;
     StraightEdgeOptions straightEdgeOptions;
-    FindEdgeReport fer;
+    FindEdgeReport findEdgeReport;
 
     private Range hue;
     private Range saturation;
@@ -59,8 +60,14 @@ public final class HazyVision implements Runnable { // I could swap this out wit
     private void getImage() {
         camera.getImage(image);
         NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
-        NIVision.imaqFindEdge2(image, roi, plane, plane, fe02, se0);
-        NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE, new NIVision.Point(123, 234), new NIVision.Point(123, 567), 15);
+        findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
+        for (NIVision.StraightEdge straightEdge : findEdgeReport.straightEdges) {
+            NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE, 
+                    new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y), 
+                    new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
+        }
+        
+        
     }
 
     public void updateConstants() {
