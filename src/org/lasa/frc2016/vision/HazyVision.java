@@ -3,6 +3,7 @@ package org.lasa.frc2016.vision;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.CoordinateSystem;
 import com.ni.vision.NIVision.FindEdgeOptions2;
+import com.ni.vision.NIVision.FindEdgeReport;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
@@ -19,8 +20,9 @@ public final class HazyVision implements Runnable { // I could swap this out wit
     Image image;
     ROI roi;
     CoordinateSystem plane;
-    FindEdgeOptions2 fe02;
-    StraightEdgeOptions se0;
+    FindEdgeOptions2 findEdgeOptions;
+    StraightEdgeOptions straightEdgeOptions;
+    FindEdgeReport fer;
 
     private Range hue;
     private Range saturation;
@@ -32,8 +34,8 @@ public final class HazyVision implements Runnable { // I could swap this out wit
         image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH);
         roi = NIVision.imaqCreateROI();
         plane = NIVision.imaqCalibrationSetAxisInfo(image);
-        fe02 = new FindEdgeOptions2();
-        se0 = new StraightEdgeOptions();
+        findEdgeOptions = new FindEdgeOptions2();
+        straightEdgeOptions = new StraightEdgeOptions();
         camera.setExposureManual(30);
         camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH, Constants.USBCAMERA_IMAGE_HEIGHT);
     }
