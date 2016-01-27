@@ -4,6 +4,7 @@ import org.lasa.frc2016.command.LiftArm;
 import org.lasa.lib.CommandManager;
 
 public class DriverInput {
+
     public void run() {
         //example
         CommandManager.addCommand(new LiftArm("name", 10));

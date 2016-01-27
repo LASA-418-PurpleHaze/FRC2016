@@ -8,7 +8,7 @@ package org.lasa.frc2016.subsystem;
 import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Victor;
 import org.lasa.frc2016.controlloop.HazyPID;
-import org.lasa.frc2016.statics.Constant;
+import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 
 /**
@@ -29,8 +29,8 @@ public class Drivetrain extends HazySubsystem {
         rightFrontMotor = new Victor(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new Victor(Ports.RIGHT_BACK_MOTOR);
         drivePID = new HazyPID();
-        drivePID.updatePID(Constant.DRIVE_TRAIN_PID_KP, Constant.DRIVE_TRAIN_PID_KI, Constant.DRIVE_TRAIN_PID_KD, Constant.DRIVE_TRAIN_PID_KF, Constant.DRIVE_TRAIN_PID_DONE_BOUND);
-        drivePID.updateMaxMin(Constant.DRIVE_TRAIN_PID_MAXU, Constant.DRIVE_TRAIN_PID_MINU);
+        drivePID.updatePID(Constants.DRIVE_TRAIN_PID_KP, Constants.DRIVE_TRAIN_PID_KI, Constants.DRIVE_TRAIN_PID_KD, Constants.DRIVE_TRAIN_PID_KF, Constants.DRIVE_TRAIN_PID_DONE_BOUND);
+        drivePID.updateMaxMin(Constants.DRIVE_TRAIN_PID_MAXU, Constants.DRIVE_TRAIN_PID_MINU);
     }
 
     public static Drivetrain getInstance() {

@@ -1,18 +1,22 @@
 package org.lasa.frc2016.statics;
 
-import com.ni.vision.NIVision.Range;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import org.lasa.lib.HazyConstant;
 
-public class Constant {
+public class Constants extends HazyConstant {
 
-    public static final int NIVISION_IMAGE_BORDER_SIZE = 480;
-    
-    public static final Range HAZY_HUE_RANGE = new Range(44, 88);
-    public static final Range HAZY_SATURATION_RANGE = new Range(199, 255);
-    public static final Range HAZY_LUMINENCE_RANGE = new Range(37, 135);
+    public static final int USBCAMERA_IMAGE_WIDTH = 480;
+    public static final int USBCAMERA_IMAGE_HEIGHT = 640;
+
+    public static final int HAZYVISION_HUE_LOWER_BOUND = 44;
+    public static final int HAZYVISION_HUE_UPPER_BOUND = 88;
+    public static final int HAZYVISION_SATURATION_LOWER_BOUND = 199;
+    public static final int HAZYVISION_SATURATION_UPPER_BOUND = 255;
+    public static final int HAZYVISION_LUMINENCE_LOWER_BOUND = 37;
+    public static final int HAZYVISION_LUMINENCE_UPPER_BOUND = 135;
 
     // DriveTrain PID
     public static final double DRIVE_TRAIN_PID_KP = 1;

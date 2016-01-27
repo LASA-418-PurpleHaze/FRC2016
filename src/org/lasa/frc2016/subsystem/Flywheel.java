@@ -9,7 +9,7 @@ import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CANTalon;
 import org.lasa.frc2016.controlloop.HazyPID;
-import org.lasa.frc2016.statics.Constant;
+import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 
 /**
@@ -25,7 +25,7 @@ public class Flywheel extends HazySubsystem {
 
     private Flywheel() {
         flywheelMotorMaster = new CANTalon(Ports.FLY_WHEEL_MOTOR);
-        flywheelMotorMaster.setPID(Constant.FLYWHEEL_PID_KP, Constant.FLYWHEEL_PID_KI, Constant.FLYWHEEL_PID_KD, Constant.FLYWHEEL_PID_KF, Constant.FLYWHEEL_PID_IZONE, Constant.FLYWHEEL_PID_RAMPRATE, Constant.FLYWHEEL_PID_PROFILE);
+        flywheelMotorMaster.setPID(Constants.FLYWHEEL_PID_KP, Constants.FLYWHEEL_PID_KI, Constants.FLYWHEEL_PID_KD, Constants.FLYWHEEL_PID_KF, Constants.FLYWHEEL_PID_IZONE, Constants.FLYWHEEL_PID_RAMPRATE, Constants.FLYWHEEL_PID_PROFILE);
     }
 
     public static Flywheel getInstance() {
@@ -41,7 +41,7 @@ public class Flywheel extends HazySubsystem {
     public void putStatus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void setFlyWheelSpeed(double flyWheel) {
         flyWheelSpeed = flyWheel;
     }

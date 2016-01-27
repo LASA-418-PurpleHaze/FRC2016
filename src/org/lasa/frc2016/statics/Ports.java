@@ -14,6 +14,5 @@ public class Ports {
     public static int INTAKE_BUMP_SWITCH = 6;
 
     // Analog IO Ports
-    
     // Digital IO Ports
 }

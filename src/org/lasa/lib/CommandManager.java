@@ -4,7 +4,7 @@ import org.lasa.lib.HazyCommand;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CommandManager{
+public class CommandManager {
 
     private static ArrayList<HazyCommand> list = new ArrayList<>();
     private static HazyCommand lastAdded;
