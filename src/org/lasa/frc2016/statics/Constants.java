@@ -41,6 +41,8 @@ public class Constants extends HazyConstant {
     public static final int FLYWHEEL_PID_IZONE = 100;
     public static final double FLYWHEEL_PID_RAMPRATE = 36;
     public static final int FLYWHEEL_PID_PROFILE = 0;
+    
+    public static final double DEADBAND = 1;
 
     public void loadFromFile() {
         try {

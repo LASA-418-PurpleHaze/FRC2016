@@ -11,6 +11,8 @@ import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
+import org.lasa.lib.CheesyDriveHelper;
+import org.lasa.lib.HazyJoystick;
 
 public class Robot extends HazyIterative {
 
@@ -19,8 +21,10 @@ public class Robot extends HazyIterative {
     Drivetrain driveTrain;
     Flywheel flyWheel;
     Intake intake;
+    HazyJoystick driver, operator;
 
     DriverInput driverInput;
+    CheesyDriveHelper cheesyDrive;
 
     @Override
     public void robotInit() {
@@ -29,13 +33,17 @@ public class Robot extends HazyIterative {
         driveTrain = Drivetrain.getInstance();
         flyWheel = Flywheel.getInstance();
         intake = Intake.getInstance();
-
-        driverInput = new DriverInput();
+        driver = new HazyJoystick(0);
+        operator = new HazyJoystick(1);
+        driverInput = DriverInput.getInstance();
+        cheesyDrive = new CheesyDriveHelper(driveTrain);
+        
     }
 
     @Override
     public void teleopPeriodic() {
         driverInput.run();
+        cheesyDrive.cheesyDrive(driver.getLeftX(), driver.getRightY(), true, false);
     }
 
     @Override
