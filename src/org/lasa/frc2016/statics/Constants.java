@@ -17,8 +17,11 @@ public class Constants extends HazyConstant {
     public static final int HAZYVISION_SATURATION_UPPER_BOUND = 255;
     public static final int HAZYVISION_LUMINENCE_LOWER_BOUND = 37;
     public static final int HAZYVISION_LUMINENCE_UPPER_BOUND = 135;
+    
+    // Drivetrain Stufffff
+    public static final double DRIVE_SENSITIVITY = .65;
 
-    // DriveTrain PID
+    // Drivetrain PID
     public static final double DRIVE_TRAIN_PID_KP = 1;
     public static final double DRIVE_TRAIN_PID_KI = 1;
     public static final double DRIVE_TRAIN_PID_KD = 1;
@@ -27,7 +30,7 @@ public class Constants extends HazyConstant {
     public static final double DRIVE_TRAIN_PID_MAXU = 1;
     public static final double DRIVE_TRAIN_PID_MINU = -1;
 
-    // FlyWheel PID
+    // Flywheel PID
     public static final double FLYWHEEL_PID_KP = 0;
     public static final double FLYWHEEL_PID_KI = 0;
     public static final double FLYWHEEL_PID_KD = 0;

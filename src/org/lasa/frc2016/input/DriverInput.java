@@ -3,7 +3,7 @@ package org.lasa.frc2016.input;
 import org.lasa.frc2016.command.LiftArm;
 import org.lasa.lib.CommandManager;
 
-public class DriverInput {
+public class DriverInput implements Runnable {
 
     public void run() {
         //example
