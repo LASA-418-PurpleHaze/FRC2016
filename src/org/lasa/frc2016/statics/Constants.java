@@ -5,7 +5,7 @@ import org.lasa.lib.HazyConstant;
 public class Constants extends HazyConstant {
 
     // Vision Constants
-    public static final long VISIONHANDLER_INITAL_DELAY = 10;
+    public static final long VISIONHANDLER_INITIAL_DELAY = 10;
     public static final long VISIONHANDLER_PERIOD = 200;
     
     public static final int USBCAMERA_IMAGE_WIDTH = 480;
