@@ -26,8 +26,8 @@ public class Drivetrain extends HazySubsystem {
 
     @Override
     public void updateConstants() {
-        drivePID.updatePID(Constants.DRIVE_TRAIN_PID_KP, Constants.DRIVE_TRAIN_PID_KI, Constants.DRIVE_TRAIN_PID_KD, Constants.DRIVE_TRAIN_PID_KF, Constants.DRIVE_TRAIN_PID_DONE_BOUND);
-        drivePID.updateMaxMin(Constants.DRIVE_TRAIN_PID_MAXU, Constants.DRIVE_TRAIN_PID_MINU);
+        drivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
+        drivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
     }
 
     public enum Mode {

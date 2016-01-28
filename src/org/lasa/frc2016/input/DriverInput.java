@@ -1,6 +1,7 @@
 package org.lasa.frc2016.input;
 
 import org.lasa.frc2016.command.LiftArm;
+import org.lasa.frc2016.statics.Constants;
 import org.lasa.lib.CommandManager;
 import org.lasa.lib.HazyJoystick;
 
@@ -18,7 +19,16 @@ public class DriverInput implements Runnable {
     public double getThrottle() {
         return driver.getLeftY();
     }
+    
+    public double getWheel() {
+        return driver.getRightX();
+    }
+    
+    public boolean getQuickTurn() {
+        return driver.getButton(Constants.QUICKTURN_BUTTON);
+    }
 
+    @Override
     public void run() {
         //example
         CommandManager.addCommand(new LiftArm("name", 10));

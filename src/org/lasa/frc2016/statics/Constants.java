@@ -18,13 +18,13 @@ public class Constants extends HazyConstant {
     public static final double DRIVE_SENSITIVITY = .65;
 
     // Drivetrain PID
-    public static final double DRIVE_TRAIN_PID_KP = 1;
-    public static final double DRIVE_TRAIN_PID_KI = 1;
-    public static final double DRIVE_TRAIN_PID_KD = 1;
-    public static final double DRIVE_TRAIN_PID_KF = 1;
-    public static final double DRIVE_TRAIN_PID_DONE_BOUND = 1000;
-    public static final double DRIVE_TRAIN_PID_MAXU = 1;
-    public static final double DRIVE_TRAIN_PID_MINU = -1;
+    public static final double DRIVETRAIN_PID_KP = 1;
+    public static final double DRIVETRAIN_PID_KI = 1;
+    public static final double DRIVETRAIN_PID_KD = 1;
+    public static final double DRIVETRAIN_PID_KF = 1;
+    public static final double DRIVETRAIN_PID_DONE_BOUND = 1000;
+    public static final double DRIVETRAIN_PID_MAXU = 1;
+    public static final double DRIVETRAIN_PID_MINU = -1;
 
     // Flywheel PID
     public static final double FLYWHEEL_PID_KP = 0;
@@ -38,6 +38,8 @@ public class Constants extends HazyConstant {
     public static final double FLYWHEEL_PID_RAMPRATE = 36;
     public static final int FLYWHEEL_PID_PROFILE = 0;
 
+    // HazyJoystick
     public static final double DEADBAND = 1;
+    public static final int QUICKTURN_BUTTON = 4;
 
 }

@@ -1,13 +1,11 @@
 package org.lasa.lib;
 
 import org.lasa.frc2016.statics.Constants;
-import org.lasa.frc2016.subsystem.Drivetrain;
 
 public class CheesyDriveHelper {
 
     double oldWheel, quickStopAccumulator;
-    private double throttleDeadband = 0.02;
-    private double wheelDeadband = 0.02;
+    private double leftPwm, rightPwm;
 
     public void cheesyDrive(double throttle, double wheel, boolean isQuickTurn) {
 
@@ -25,7 +23,7 @@ public class CheesyDriveHelper {
         wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
                 / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 
-        double leftPwm, rightPwm, overPower;
+        double overPower;
         double sensitivity;
 
         double angularPower;
@@ -90,9 +88,18 @@ public class CheesyDriveHelper {
             leftPwm += overPower * (-1.0 - rightPwm);
             rightPwm = -1.0;
         }
+        
     }
 
     private static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
+    }
+    
+    public double getLeftPWM() {
+        return leftPwm;
+    }
+    
+    public double getRightPWM() {
+        return rightPwm;
     }
 }
