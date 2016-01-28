@@ -10,9 +10,11 @@ public class Ports {
     public static int RIGHT_FRONT_MOTOR = 2;
     public static int RIGHT_BACK_MOTOR = 3;
     public static int INTAKE_MOTOR = 4;
-    public static int FLY_WHEEL_MOTOR = 5;
-    public static int INTAKE_BUMP_SWITCH = 6;
-
+    public static int FLY_WHEEL_MOTOR_MASTER = 5;
+    public static int FLY_WHEEL_MOTOR_SLAVE = 6;
+    
     // Analog IO Ports
+    
     // Digital IO Ports
+    public static int INTAKE_BUMP_SWITCH = 6;
 }

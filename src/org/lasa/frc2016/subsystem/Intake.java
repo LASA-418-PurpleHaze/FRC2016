@@ -9,13 +9,14 @@ public class Intake extends HazySubsystem {
 
     private static Intake instance;
 
-    private VictorSP intakeMotor;
+    private final VictorSP intakeMotor;
     private double intakeSpeed;
 
     private byte state;
 
     public static final byte OFF = 0;
     public static final byte INTAKING = 1;
+    public static final byte OUTTAKING = 2;
 
     private boolean hasBall;
 
@@ -47,6 +48,10 @@ public class Intake extends HazySubsystem {
                     intakeSpeed = 1.0;
                 }
                 break;
+            case OUTTAKING:
+                hasBall = false;
+                intakeSpeed = -1.0;
+                break;
         }
 
         if (newState != state) {
@@ -58,6 +63,7 @@ public class Intake extends HazySubsystem {
         intakeMotor.set(intakeSpeed);
     }
 
+    @Override
     public void pushToDashboard() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -68,5 +74,10 @@ public class Intake extends HazySubsystem {
 
     public boolean hasBall() {
         return hasBall;
+    }
+
+    @Override
+    public void updateConstants() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

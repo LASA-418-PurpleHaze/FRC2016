@@ -1,31 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor
- */
 package org.lasa.frc2016.subsystem;
 
 import org.lasa.lib.HazySubsystem;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CANTalon;
-import org.lasa.frc2016.controlloop.HazyPID;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 
-/**
- *
- * @author 418
- */
 public class Flywheel extends HazySubsystem {
 
     private static Flywheel instance;
 
-    private CANTalon flywheelMotorMaster, flywheelMotorSlave;
+    private final CANTalon flywheelMotorMaster, flywheelMotorSlave;
     private double flyWheelSpeed;
 
     private Flywheel() {
-        flywheelMotorMaster = new CANTalon(Ports.FLY_WHEEL_MOTOR);
+        flywheelMotorMaster = new CANTalon(Ports.FLY_WHEEL_MOTOR_MASTER);
         flywheelMotorMaster.setPID(Constants.FLYWHEEL_PID_KP, Constants.FLYWHEEL_PID_KI, Constants.FLYWHEEL_PID_KD, Constants.FLYWHEEL_PID_KF, Constants.FLYWHEEL_PID_IZONE, Constants.FLYWHEEL_PID_RAMPRATE, Constants.FLYWHEEL_PID_PROFILE);
+        flywheelMotorSlave = new CANTalon(Ports.FLY_WHEEL_MOTOR_SLAVE);
+        flywheelMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+        flywheelMotorSlave.set(flywheelMotorMaster.getDeviceID());
     }
 
     public static Flywheel getInstance() {
@@ -44,6 +36,11 @@ public class Flywheel extends HazySubsystem {
 
     public void setFlyWheelSpeed(double flyWheel) {
         flyWheelSpeed = flyWheel;
+    }
+
+    @Override
+    public void updateConstants() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
