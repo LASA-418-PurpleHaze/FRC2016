@@ -9,5 +9,7 @@ public abstract class HazySubsystem {
 
     public abstract void run();
 
-    public abstract void putStatus();
+    public abstract void updateConstants();
+
+    public abstract void pushToDashboard();
 }

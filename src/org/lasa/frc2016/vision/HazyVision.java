@@ -10,7 +10,6 @@ import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
 import com.ni.vision.NIVision.StraightEdgeOptions;
 import edu.wpi.first.wpilibj.vision.USBCamera;
-import oracle.jrockit.jfr.tools.ConCatRepository;
 import org.lasa.frc2016.statics.Constants;
 
 public final class HazyVision implements Runnable { // I could swap this out with Thread
@@ -62,12 +61,11 @@ public final class HazyVision implements Runnable { // I could swap this out wit
         NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
         findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
         for (NIVision.StraightEdge straightEdge : findEdgeReport.straightEdges) {
-            NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE, 
-                    new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y), 
+            NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE,
+                    new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y),
                     new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
         }
-        
-        
+
     }
 
     public void updateConstants() {

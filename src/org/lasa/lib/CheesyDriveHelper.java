@@ -5,43 +5,25 @@ import org.lasa.frc2016.subsystem.Drivetrain;
 
 public class CheesyDriveHelper {
 
-    private Drivetrain drivetrain;
     double oldWheel, quickStopAccumulator;
     private double throttleDeadband = 0.02;
     private double wheelDeadband = 0.02;
 
-    public CheesyDriveHelper(Drivetrain drivetrain) {
-        this.drivetrain = drivetrain;
-    }
-
-    public void cheesyDrive(double throttle, double wheel, boolean isQuickTurn,
-                            boolean isHighGear) {
+    public void cheesyDrive(double throttle, double wheel, boolean isQuickTurn) {
 
         double wheelNonLinearity;
-
-        wheel = handleDeadband(wheel, wheelDeadband);
-        throttle = handleDeadband(throttle, throttleDeadband);
 
         double negInertia = wheel - oldWheel;
         oldWheel = wheel;
 
-        if (isHighGear) {
-            wheelNonLinearity = 0.6;
-            // Apply a sin function that's scaled to make it feel better.
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-        } else {
-            wheelNonLinearity = 0.5;
-            // Apply a sin function that's scaled to make it feel better.
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-        }
+        wheelNonLinearity = 0.6;
+        // Apply a sin function that's scaled to make it feel better.
+        wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+                / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+        wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+                / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+        wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+                / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 
         double leftPwm, rightPwm, overPower;
         double sensitivity;
@@ -52,21 +34,9 @@ public class CheesyDriveHelper {
         // Negative inertia!
         double negInertiaAccumulator = 0.0;
         double negInertiaScalar;
-        if (isHighGear) {
-            negInertiaScalar = 4.0;
-            sensitivity = Constants.DRIVE_SENSITIVITY;
-        } else {
-            if (wheel * negInertia > 0) {
-                negInertiaScalar = 2.5;
-            } else {
-                if (Math.abs(wheel) > 0.65) {
-                    negInertiaScalar = 5.0;
-                } else {
-                    negInertiaScalar = 3.0;
-                }
-            }
-            sensitivity = .85; // Constants.sensitivityLow.getDouble();
-        }
+        negInertiaScalar = 4.0;
+        sensitivity = Constants.DRIVE_SENSITIVITY;
+
         double negInertiaPower = negInertia * negInertiaScalar;
         negInertiaAccumulator += negInertiaPower;
 
@@ -88,11 +58,7 @@ public class CheesyDriveHelper {
                         + alpha * limit(wheel, 1.0) * 5;
             }
             overPower = 1.0;
-            if (isHighGear) {
-                sensitivity = 1.0;
-            } else {
-                sensitivity = 1.0;
-            }
+            sensitivity = 1.0;
             angularPower = wheel;
         } else {
             overPower = 0.0;
@@ -124,13 +90,8 @@ public class CheesyDriveHelper {
             leftPwm += overPower * (-1.0 - rightPwm);
             rightPwm = -1.0;
         }
-        drivetrain.setDriveSpeeds(leftPwm, leftPwm, rightPwm, rightPwm);
     }
 
-    public double handleDeadband(double val, double deadband) {
-        return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
-    }
-    
     private static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
     }
