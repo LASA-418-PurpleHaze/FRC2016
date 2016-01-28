@@ -12,7 +12,7 @@ import com.ni.vision.NIVision.StraightEdgeOptions;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 import org.lasa.frc2016.statics.Constants;
 
-public final class HazyVision implements Runnable { // I could swap this out with Thread
+public final class HazyVision implements Runnable {
 
     private static HazyVision instance;
 
