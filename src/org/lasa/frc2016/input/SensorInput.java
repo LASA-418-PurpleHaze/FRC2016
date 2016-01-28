@@ -16,7 +16,8 @@ public class SensorInput {
 
     private SensorInput() {
         navX = new AHRS(SPI.Port.kMXP);
-        
+        leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
+        rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
         intakeSwitch = new DigitalInput(Ports.INTAKE_BUMP_SWITCH);
     }
 
