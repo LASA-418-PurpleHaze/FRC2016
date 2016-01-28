@@ -1,6 +1,7 @@
 package org.lasa.frc2016;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasa.frc2016.command.CheesyDrive;
 import org.lasa.lib.HazyIterative;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
@@ -9,13 +10,14 @@ import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.lib.CheesyDriveHelper;
+import org.lasa.lib.CommandManager;
 import org.lasa.lib.HazyJoystick;
 
 public class Robot extends HazyIterative {
 
     Thread vision;
-    Drivetrain driveTrain;
-    Flywheel flyWheel;
+    Drivetrain drivetrain;
+    Flywheel flywheel;
     Intake intake;
 
     DriverInput driverInput;
@@ -26,8 +28,8 @@ public class Robot extends HazyIterative {
     public void robotInit() {
         //ScheduledExectorService 5hz/200ms (make a Constant)
         new Thread(HazyVision.getInstance()).start();
-        driveTrain = Drivetrain.getInstance();
-        flyWheel = Flywheel.getInstance();
+        drivetrain = Drivetrain.getInstance();
+        flywheel = Flywheel.getInstance();
         intake = Intake.getInstance();
 
         driverInput = DriverInput.getInstance();
@@ -36,26 +38,54 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        driveTrain.updateConstants();
+        if(!CommandManager.empty()) {
+            CommandManager.cancelAll();
+        }
+        drivetrain.updateConstants();
+        flywheel.updateConstants();
+        intake.updateConstants();
     }
 
     @Override
     public void teleopPeriodic() {
         driverInput.run();
-        driveTrain.pushToDashboard();
+        drivetrain.pushToDashboard();
+        flywheel.pushToDashboard();
+        intake.pushToDashboard();
     }
 
     @Override
     public void teleopContinuous() {
         sensorInput.run();
-        driveTrain.run();
+        drivetrain.run();
+        flywheel.run();
+        intake.run();
+        CommandManager.run();
     }
 
     @Override
     public void autonomousInit() {
-        super.autonomousInit(); //To change body of generated methods, choose Tools | Templates.
+        if(!CommandManager.empty()) {
+            CommandManager.cancelAll();
+        }
+        drivetrain.updateConstants();
+        flywheel.updateConstants();
+        intake.updateConstants();
     }
 
+    @Override
+    public void autonomousPeriodic() {
+    }
+
+    @Override
+    public void autonomousContinuous() {
+        sensorInput.run();
+        drivetrain.run();
+        flywheel.run();
+        intake.run();
+        CommandManager.run();
+    }
+    
     @Override
     public void disabledInit() {
         super.disabledInit(); //To change body of generated methods, choose Tools | Templates.

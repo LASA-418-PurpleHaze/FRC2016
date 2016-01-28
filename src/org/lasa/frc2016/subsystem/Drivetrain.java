@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.lasa.frc2016.subsystem;
 
 import org.lasa.lib.HazySubsystem;
@@ -12,26 +7,23 @@ import org.lasa.frc2016.controlloop.HazyPID;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 
-/**
- *
- * @author LASA Robotics
- */
 public class Drivetrain extends HazySubsystem {
 
     private static Drivetrain instance;
 
-    private VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
+    private final VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
     private double leftSpeed, rightSpeed;
-    private HazyPID drivePID;
+    private final HazyPID leftDrivePID, rightDrivePID;
 
     @Override
     public void updateConstants() {
-        drivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
-        drivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
+        leftDrivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
+        rightDrivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
+        leftDrivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
+        rightDrivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
     }
 
     public enum Mode {
-
         RAW, CONTROLLED;
     }
 
@@ -46,8 +38,8 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        drivePID = new HazyPID();
-        updateConstants();
+        leftDrivePID = new HazyPID();
+        rightDrivePID = new HazyPID();
     }
 
     public static Drivetrain getInstance() {
@@ -57,8 +49,11 @@ public class Drivetrain extends HazySubsystem {
     @Override
     public void run() {
         //control loop stuff
+        if (mode == Mode.CONTROLLED) {
+            leftSpeed = leftDrivePID.calculate(sensorInput.getLeftArcLength());
+            rightSpeed = rightDrivePID.calculate(sensorInput.getRightArcLength());
+        }
 
-        //output
         leftFrontMotor.set(leftSpeed);
         leftBackMotor.set(leftSpeed);
         rightFrontMotor.set(rightSpeed);
@@ -68,6 +63,10 @@ public class Drivetrain extends HazySubsystem {
     @Override
     public void pushToDashboard() {
         SmartDashboard.putNumber("leftSpeed", leftSpeed);
+        SmartDashboard.putNumber("rightSpeed", rightSpeed);
+        SmartDashboard.putString("Mode", mode.toString());
+        SmartDashboard.putNumber("leftPID Set Point", leftDrivePID.getTargetVal());
+        SmartDashboard.putNumber("rightPID Set Point", rightDrivePID.getTargetVal());
     }
 
     public void setDriveSpeeds(double left, double right) {
@@ -79,8 +78,8 @@ public class Drivetrain extends HazySubsystem {
 
     public void setControlSetpoint(double distance, double angle) {
         if (mode == Mode.CONTROLLED) {
-            //set control loop stuff
+            leftDrivePID.setTarget(Math.sqrt(Math.pow(distance*Math.cos(Math.toRadians(angle)), 2) + Math.pow(distance*Math.sin(Math.toRadians(angle)), 2)));
+            rightDrivePID.setTarget(Math.sqrt(Math.pow(distance*Math.cos(Math.toRadians(angle)), 2) + Math.pow(distance*Math.sin(Math.toRadians(angle)), 2)));
         }
     }
-
 }

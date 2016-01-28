@@ -7,7 +7,7 @@ public class CommandManager {
 
     private static ArrayList<HazyCommand> list = new ArrayList<>();
     private static HazyCommand lastAdded;
-
+    
     public static void addCommand(HazyCommand c) {
         list.add(c);
     }
@@ -23,6 +23,13 @@ public class CommandManager {
         c.setLeft(lastAdded);
         c.setUp(null);
         lastAdded = c;
+        list.add(c);
+    }
+    
+    // I believe this would be fine
+    public static void addContinuous(HazyCommand c) {
+        c.setLeft(lastAdded);
+        c.setUp(c);
         list.add(c);
     }
 

@@ -1,6 +1,9 @@
 package org.lasa.frc2016.input;
 
+import org.lasa.frc2016.command.CheesyDrive;
+import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.LiftArm;
+import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.lib.CommandManager;
 import org.lasa.lib.HazyJoystick;
@@ -27,10 +30,23 @@ public class DriverInput implements Runnable {
     public boolean getQuickTurn() {
         return driver.getButton(Constants.QUICKTURN_BUTTON);
     }
+    
+    public boolean getIntake() {
+        return operator.getButton(Constants.INTAKE_BUTTON);
+    }
+    
+    public boolean getOuttake() {
+        return operator.getButton(Constants.OUTTAKE_BUTTON);
+    }
 
     @Override
     public void run() {
-        //example
-        CommandManager.addCommand(new LiftArm("name", 10));
+        CommandManager.addContinuous(new CheesyDrive("CheesyDrive", 1000));
+        
+        if(getIntake()) {
+            CommandManager.addCommand(new InfeedBall("Infeed", 10));
+        } else if(getOuttake()) {
+            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
+        }
     }
 }

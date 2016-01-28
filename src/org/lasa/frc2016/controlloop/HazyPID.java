@@ -25,6 +25,10 @@ public class HazyPID {
     public void setTarget(double val) {
         targetValue = val;
     }
+    
+    public double getTargetVal() {
+        return targetValue;
+    }
 
     public void updatePID(double kP, double kI, double kD, double kF, double doneBound) {
         this.kP = kP;

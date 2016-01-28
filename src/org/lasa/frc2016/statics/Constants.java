@@ -41,5 +41,7 @@ public class Constants extends HazyConstant {
     // HazyJoystick
     public static final double DEADBAND = 1;
     public static final int QUICKTURN_BUTTON = 4;
+    public static final int INTAKE_BUTTON = 3;
+    public static final int OUTTAKE_BUTTON = 4;
 
 }

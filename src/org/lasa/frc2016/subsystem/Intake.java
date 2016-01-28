@@ -2,6 +2,7 @@ package org.lasa.frc2016.subsystem;
 
 import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Ports;
 
@@ -65,11 +66,7 @@ public class Intake extends HazySubsystem {
 
     @Override
     public void pushToDashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setDirection(double speed) {
-        intakeSpeed = speed;
+        SmartDashboard.putNumber("state", state);
     }
 
     public boolean hasBall() {
@@ -79,5 +76,9 @@ public class Intake extends HazySubsystem {
     @Override
     public void updateConstants() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public double getIntakeSpeed() {
+        return intakeMotor.get();
     }
 }

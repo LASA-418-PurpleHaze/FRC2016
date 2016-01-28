@@ -10,9 +10,24 @@ public class StopIntake extends HazyCommand {
     }
 
     @Override
-    public void run() {
-        Intake.getInstance().setDirection(0);
-
+    public void start() {
+        intake.setState(Intake.OFF);
     }
+
+    @Override
+    public void run() {
+    }
+
+    @Override
+    public void stop() {
+    }
+
+    // Check this
+    @Override
+    public boolean isDone() {
+        return Math.abs(intake.getIntakeSpeed()) < .1;
+    }
+    
+    
 
 }

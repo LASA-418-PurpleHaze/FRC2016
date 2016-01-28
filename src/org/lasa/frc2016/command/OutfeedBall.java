@@ -5,14 +5,26 @@ import org.lasa.frc2016.subsystem.Intake;
 
 public class OutfeedBall extends HazyCommand {
 
-    public OutfeedBall(HazyCommand up, HazyCommand left, String name, double timeOut) {
-        super(up, left, name, timeOut);
+    public OutfeedBall(String name, double timeOut) {
+        super(name, timeOut);
+    }
+
+    @Override
+    public void start() {
+        intake.setState(Intake.OUTTAKING);
     }
 
     @Override
     public void run() {
-        Intake.getInstance().setDirection(-1);
+    }
 
+    @Override
+    public void stop() {
+    }
+
+    @Override
+    public boolean isDone() {
+        return !intake.hasBall();
     }
 
 }
