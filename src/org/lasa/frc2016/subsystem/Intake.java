@@ -1,6 +1,5 @@
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.input.SensorInput;

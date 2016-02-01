@@ -1,4 +1,4 @@
-package org.lasa.frc2016.controlloop;
+package org.lasa.lib.controlloop;
 
 public class HazyPID {
 

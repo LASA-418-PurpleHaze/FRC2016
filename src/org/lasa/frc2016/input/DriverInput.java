@@ -5,7 +5,7 @@ import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.LiftArm;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.statics.Constants;
-import org.lasa.lib.CommandManager;
+import org.lasa.frc2016.command.CommandManager;
 import org.lasa.lib.HazyJoystick;
 
 public class DriverInput implements Runnable {

@@ -13,7 +13,7 @@ import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.lib.CheesyDriveHelper;
-import org.lasa.lib.CommandManager;
+import org.lasa.frc2016.command.CommandManager;
 
 public class Robot extends HazyIterative {
 

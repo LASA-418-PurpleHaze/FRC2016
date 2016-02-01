@@ -1,4 +1,4 @@
-package org.lasa.lib;
+package org.lasa.frc2016.subsystem;
 
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;

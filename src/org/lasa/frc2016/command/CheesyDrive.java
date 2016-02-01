@@ -1,7 +1,6 @@
 package org.lasa.frc2016.command;
 
 import org.lasa.lib.CheesyDriveHelper;
-import org.lasa.lib.HazyCommand;
 
 public class CheesyDrive extends HazyCommand {
     
