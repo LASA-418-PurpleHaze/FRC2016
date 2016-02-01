@@ -13,7 +13,7 @@ public class SensorInput {
     public static AHRS navX;
     public static DigitalInput intakeSwitch;
     public static Encoder leftSide, rightSide;
-    
+
     private double navXCompassHeadingVal, rightSideEncoderVal, leftSideEncoderVal;
     private boolean intakeSwitchVal;
 
@@ -34,19 +34,19 @@ public class SensorInput {
         rightSideEncoderVal = rightSide.get();
         intakeSwitchVal = intakeSwitch.get();
     }
-    
+
     public double getNavXCompassHeading() {
         return navXCompassHeadingVal;
     }
-    
+
     public double getLeftSideValue() {
         return leftSideEncoderVal;
     }
-    
+
     public double getRightSideValue() {
         return rightSideEncoderVal;
     }
-    
+
     public boolean getIntakeSwitchValue() {
         return intakeSwitchVal;
     }

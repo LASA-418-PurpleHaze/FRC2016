@@ -31,7 +31,7 @@ public class Robot extends HazyIterative {
     public void robotInit() {
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
-        
+
         drivetrain = Drivetrain.getInstance();
         flywheel = Flywheel.getInstance();
         intake = Intake.getInstance();
@@ -41,7 +41,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        if(!CommandManager.empty()) {
+        if (!CommandManager.empty()) {
             CommandManager.cancelAll();
         }
         drivetrain.updateConstants();
@@ -68,7 +68,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
-        if(!CommandManager.empty()) {
+        if (!CommandManager.empty()) {
             CommandManager.cancelAll();
         }
         drivetrain.updateConstants();
@@ -88,7 +88,7 @@ public class Robot extends HazyIterative {
         intake.run();
         CommandManager.run();
     }
-    
+
     @Override
     public void disabledInit() {
         super.disabledInit(); //To change body of generated methods, choose Tools | Templates.
@@ -98,5 +98,4 @@ public class Robot extends HazyIterative {
     public void testInit() {
         super.testInit(); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

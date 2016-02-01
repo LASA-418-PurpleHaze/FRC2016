@@ -25,7 +25,7 @@ public class HazyPID {
     public void setTarget(double val) {
         targetValue = val;
     }
-    
+
     public double getTargetVal() {
         return targetValue;
     }

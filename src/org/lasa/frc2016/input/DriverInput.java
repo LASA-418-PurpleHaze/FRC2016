@@ -22,19 +22,19 @@ public class DriverInput implements Runnable {
     public double getThrottle() {
         return driver.getLeftY();
     }
-    
+
     public double getWheel() {
         return driver.getRightX();
     }
-    
+
     public boolean getQuickTurn() {
         return driver.getButton(Constants.QUICKTURN_BUTTON);
     }
-    
+
     public boolean getIntake() {
         return operator.getButton(Constants.INTAKE_BUTTON);
     }
-    
+
     public boolean getOuttake() {
         return operator.getButton(Constants.OUTTAKE_BUTTON);
     }
@@ -42,10 +42,10 @@ public class DriverInput implements Runnable {
     @Override
     public void run() {
         CommandManager.addContinuous(new CheesyDrive("CheesyDrive", 1000));
-        
-        if(getIntake()) {
+
+        if (getIntake()) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
-        } else if(getOuttake()) {
+        } else if (getOuttake()) {
             CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
         }
     }

@@ -76,7 +76,7 @@ public class Intake extends HazySubsystem {
     public void updateConstants() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public double getIntakeSpeed() {
         return intakeMotor.get();
     }

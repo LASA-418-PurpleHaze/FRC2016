@@ -23,6 +23,7 @@ public class Drivetrain extends HazySubsystem {
     }
 
     public enum Mode {
+
         RAW, CONTROLLED;
     }
 

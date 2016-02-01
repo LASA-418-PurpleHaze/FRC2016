@@ -88,17 +88,17 @@ public class CheesyDriveHelper {
             leftPwm += overPower * (-1.0 - rightPwm);
             rightPwm = -1.0;
         }
-        
+
     }
 
     private static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
     }
-    
+
     public double getLeftPWM() {
         return leftPwm;
     }
-    
+
     public double getRightPWM() {
         return rightPwm;
     }
