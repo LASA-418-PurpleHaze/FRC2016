@@ -41,7 +41,7 @@ public class Intake extends HazySubsystem {
                 intakeSpeed = 0.0;
                 break;
             case INTAKING:
-                if (SensorInput.getInstance().getIntakeBumpSwitch()) {
+                if (sensorInput.getIntakeSwitchValue()) {
                     hasBall = true;
                     newState = OFF;
 

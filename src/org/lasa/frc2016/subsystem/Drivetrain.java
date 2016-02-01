@@ -50,8 +50,6 @@ public class Drivetrain extends HazySubsystem {
     public void run() {
         //control loop stuff
         if (mode == Mode.CONTROLLED) {
-            leftSpeed = leftDrivePID.calculate(sensorInput.getLeftArcLength());
-            rightSpeed = rightDrivePID.calculate(sensorInput.getRightArcLength());
         }
 
         leftFrontMotor.set(leftSpeed);
@@ -78,8 +76,6 @@ public class Drivetrain extends HazySubsystem {
 
     public void setControlSetpoint(double distance, double angle) {
         if (mode == Mode.CONTROLLED) {
-            leftDrivePID.setTarget(Math.sqrt(Math.pow(distance*Math.cos(Math.toRadians(angle)), 2) + Math.pow(distance*Math.sin(Math.toRadians(angle)), 2)));
-            rightDrivePID.setTarget(Math.sqrt(Math.pow(distance*Math.cos(Math.toRadians(angle)), 2) + Math.pow(distance*Math.sin(Math.toRadians(angle)), 2)));
         }
     }
 }

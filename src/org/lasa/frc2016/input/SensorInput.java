@@ -33,5 +33,21 @@ public class SensorInput {
         leftSideEncoderVal = leftSide.get();
         rightSideEncoderVal = rightSide.get();
         intakeSwitchVal = intakeSwitch.get();
-    }    
+    }
+    
+    public double getNavXCompassHeading() {
+        return navXCompassHeadingVal;
+    }
+    
+    public double getLeftSideValue() {
+        return leftSideEncoderVal;
+    }
+    
+    public double getRightSideValue() {
+        return rightSideEncoderVal;
+    }
+    
+    public boolean getIntakeSwitchValue() {
+        return intakeSwitchVal;
+    }
 }
