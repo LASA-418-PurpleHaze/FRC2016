@@ -1,10 +1,10 @@
 /*----------------------------------------------------------------------------*/
- /* Copyright (c) FIRST 2008-2016. All Rights Reserved.                        */
- /* Open Source Software - may be modified and shared by FRC teams. The code   */
- /* must be accompanied by the FIRST BSD license file in the root directory of */
- /* the project.                                                               */
- /*----------------------------------------------------------------------------*/
-package org.lasa.frc2016;
+/* Copyright (c) FIRST 2008-2016. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+package org.lasa.lib;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -155,6 +155,7 @@ public class HazyIterative extends RobotBase {
     }
 
     class ContinuousRunner implements Runnable {
+
         @Override
         public void run() {
             if (isTest()) {
@@ -169,15 +170,14 @@ public class HazyIterative extends RobotBase {
                 if (m_autonomousInitialized) {
                     autonomousContinuous();
                 }
-            } else {
-                if (m_disabledInitialized) {
-                    disabledContinuous();
-                }
+            } else if (m_disabledInitialized) {
+                disabledContinuous();
             }
         }
     }
-    
+
     boolean disabledContinuousFirstRun = true;
+
     public void disabledContinuous() {
         if (disabledContinuousFirstRun) {
             System.out.println("Default LasaIterative.disabledContinuous() method... Overload me!");
@@ -187,6 +187,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean autonomousContinuousFirstRun = true;
+
     public void autonomousContinuous() {
         if (autonomousContinuousFirstRun) {
             System.out.println("Default LasaIterative.autonomousContinuous() method... Overload me!");
@@ -196,6 +197,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean teleopContinuousFirstRun = true;
+
     public void teleopContinuous() {
         if (teleopContinuousFirstRun) {
             System.out.println("Default LasaIterative.teleopContinuous() method... Overload me!");
@@ -205,6 +207,7 @@ public class HazyIterative extends RobotBase {
     }
 
     boolean testContinuousFirstRun = true;
+
     public void testContinuous() {
         if (testContinuousFirstRun) {
             System.out.println("Default LasaIterative.testContinuous() method... Overload me!");
