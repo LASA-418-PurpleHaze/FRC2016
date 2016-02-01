@@ -5,11 +5,16 @@ import org.lasa.frc2016.input.SensorInput;
 
 public abstract class HazySubsystem {
     
-    protected DriverInput driverInput = DriverInput.getInstance();
-    protected SensorInput sensorInput = SensorInput.getInstance();
+    protected DriverInput driverInput;
+    protected SensorInput sensorInput;
 
     protected String errorMsg;
     protected final String fileName = "logger.csv";
+    
+    protected HazySubsystem() {
+        sensorInput = SensorInput.getInstance();
+        driverInput = DriverInput.getInstance();
+    }
 
     public abstract void run();
 
