@@ -21,12 +21,8 @@ public class StopIntake extends HazyCommand {
     public void stop() {
     }
 
-    // Check this
     @Override
     public boolean isDone() {
-        return Math.abs(intake.getIntakeSpeed()) < .1;
+        return true;
     }
-    
-    
-
 }
