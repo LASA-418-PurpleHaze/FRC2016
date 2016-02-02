@@ -1,7 +1,7 @@
 package org.lasa.frc2016.command;
 
 import org.lasa.frc2016.subsystem.Intake;
-import org.lasa.lib.HazyCommand;
+import org.lasa.frc2016.command.HazyCommand;
 
 public class Shoot extends HazyCommand {
 
