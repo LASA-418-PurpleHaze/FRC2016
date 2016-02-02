@@ -1,6 +1,5 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.frc2016.command.HazyCommand;
 import java.util.ArrayList;
 import java.util.Iterator;
 
