@@ -18,6 +18,7 @@ public class Intake extends HazySubsystem {
     public static final byte OFF = 0;
     public static final byte INTAKING = 1;
     public static final byte OUTTAKING = 2;
+    public static final byte LOADSHOOTER = 3;
 
     private boolean hasBall;
 
@@ -52,6 +53,10 @@ public class Intake extends HazySubsystem {
             case OUTTAKING:
                 hasBall = false;
                 intakeSpeed = -1.0;
+                break;
+            case LOADSHOOTER:
+                hasBall = false;
+                intakeSpeed = 1.0;
                 break;
         }
 

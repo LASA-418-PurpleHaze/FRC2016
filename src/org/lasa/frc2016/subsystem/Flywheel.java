@@ -34,8 +34,12 @@ public class Flywheel extends HazySubsystem {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setFlyWheelSpeed(double flyWheel) {
+    public void setFlywheelSpeed(double flyWheel) {
         flyWheelSpeed = flyWheel;
+    }
+    
+    public double getFlywheelSpeed() {
+        return flywheelMotorMaster.getSpeed();
     }
 
     @Override

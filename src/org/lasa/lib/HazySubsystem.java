@@ -5,7 +5,6 @@ import org.lasa.frc2016.input.SensorInput;
 
 public abstract class HazySubsystem {
     
-    protected DriverInput driverInput = DriverInput.getInstance();
     protected SensorInput sensorInput = SensorInput.getInstance();
 
     protected String errorMsg;

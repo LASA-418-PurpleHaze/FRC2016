@@ -3,10 +3,10 @@ package org.lasa.frc2016.command;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.lib.HazyCommand;
 
-public class LiftArm extends HazyCommand {
+public class Shoot extends HazyCommand {
 
-    public LiftArm(String name, double timeOut) {
-        super(name, timeOut);
+    public Shoot(String nm, double t) {
+        super(nm, t);
     }
 
    @Override
@@ -27,4 +27,5 @@ public class LiftArm extends HazyCommand {
         return !intake.hasBall();
     }
 
+    
 }

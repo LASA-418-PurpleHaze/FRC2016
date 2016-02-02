@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import org.lasa.frc2016.command.CheesyDrive;
 import org.lasa.lib.HazyIterative;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
@@ -44,6 +45,7 @@ public class Robot extends HazyIterative {
         if(!CommandManager.empty()) {
             CommandManager.cancelAll();
         }
+        CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
         drivetrain.updateConstants();
         flywheel.updateConstants();
         intake.updateConstants();
@@ -51,6 +53,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopPeriodic() {
+        CommandManager.run();
         driverInput.run();
         drivetrain.pushToDashboard();
         flywheel.pushToDashboard();
@@ -63,7 +66,7 @@ public class Robot extends HazyIterative {
         drivetrain.run();
         flywheel.run();
         intake.run();
-        CommandManager.run();
+        
     }
 
     @Override

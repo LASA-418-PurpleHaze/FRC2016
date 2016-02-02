@@ -23,4 +23,10 @@ public class Ports {
     
     // Digital IO Ports
     public static int INTAKE_BUMP_SWITCH = 6;
+    
+    //Joystick Ports
+    public static final int SHOOTER_BUTTON = 5;
+    public static final int QUICKTURN_BUTTON = 4;
+    public static final int INTAKE_BUTTON = 3;
+    public static final int OUTTAKE_BUTTON = 4;
 }

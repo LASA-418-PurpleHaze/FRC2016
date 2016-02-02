@@ -41,11 +41,15 @@ public class Constants extends HazyConstant {
     public static final int FLYWHEEL_PID_IZONE = 100;
     public static final double FLYWHEEL_PID_RAMPRATE = 36;
     public static final int FLYWHEEL_PID_PROFILE = 0;
+    public static final int FLYWHEEL_SPINUP_SPEED = 16000;
 
     // HazyJoystick
     public static final double DEADBAND = 1;
-    public static final int QUICKTURN_BUTTON = 4;
-    public static final int INTAKE_BUTTON = 3;
-    public static final int OUTTAKE_BUTTON = 4;
+
+    @Override
+    public String getFileLocation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
 }
