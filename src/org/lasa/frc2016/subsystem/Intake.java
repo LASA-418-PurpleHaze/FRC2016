@@ -1,6 +1,5 @@
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.input.SensorInput;
@@ -42,7 +41,7 @@ public class Intake extends HazySubsystem {
                 intakeSpeed = 0.0;
                 break;
             case INTAKING:
-                if (SensorInput.getInstance().getIntakeBumpSwitch()) {
+                if (sensorInput.getIntakeSwitchValue()) {
                     hasBall = true;
                     newState = OFF;
 
@@ -82,7 +81,7 @@ public class Intake extends HazySubsystem {
     public void updateConstants() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public double getIntakeSpeed() {
         return intakeMotor.get();
     }

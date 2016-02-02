@@ -14,6 +14,9 @@ public class SensorInput {
     public static DigitalInput intakeSwitch;
     public static Encoder leftSide, rightSide;
 
+    private double navXCompassHeadingVal, rightSideEncoderVal, leftSideEncoderVal;
+    private boolean intakeSwitchVal;
+
     private SensorInput() {
         navX = new AHRS(SPI.Port.kMXP);
         leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
@@ -26,31 +29,25 @@ public class SensorInput {
     }
 
     public void run() {
-
+        navXCompassHeadingVal = navX.getCompassHeading();
+        leftSideEncoderVal = leftSide.get();
+        rightSideEncoderVal = rightSide.get();
+        intakeSwitchVal = intakeSwitch.get();
     }
 
-    public boolean getIntakeBumpSwitch() {
-        return intakeSwitch.get();
+    public double getNavXCompassHeading() {
+        return navXCompassHeadingVal;
     }
-    
-    public double getCurrentHeading() {
-        return navX.getCompassHeading() * Math.PI / 180;
+
+    public double getLeftSideValue() {
+        return leftSideEncoderVal;
     }
-    
-    public double getLeftDistanceTraveled() {
-        return leftSide.getDistance();
+
+    public double getRightSideValue() {
+        return rightSideEncoderVal;
     }
-    
-    public double getLeftArcLength() {
-        return Math.sqrt(Math.pow(this.getLeftDistanceTraveled() * Math.cos(Math.toRadians(this.getCurrentHeading())), 2) + Math.pow(this.getLeftDistanceTraveled() * Math.cos(Math.toRadians(this.getCurrentHeading())), 2));
+
+    public boolean getIntakeSwitchValue() {
+        return intakeSwitchVal;
     }
-    
-    public double getRightDistanceTraveled() {
-        return rightSide.getDistance();
-    }
-    
-    public double getRightArcLength() {
-        return Math.sqrt(Math.pow(this.getRightDistanceTraveled() * Math.cos(Math.toRadians(this.getCurrentHeading())), 2) + Math.pow(this.getRightDistanceTraveled() * Math.cos(Math.toRadians(this.getCurrentHeading())), 2));
-    }
-    
 }

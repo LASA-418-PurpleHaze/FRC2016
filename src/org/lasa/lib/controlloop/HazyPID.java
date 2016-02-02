@@ -1,4 +1,4 @@
-package org.lasa.frc2016.controlloop;
+package org.lasa.lib.controlloop;
 
 public class HazyPID {
 
@@ -25,7 +25,7 @@ public class HazyPID {
     public void setTarget(double val) {
         targetValue = val;
     }
-    
+
     public double getTargetVal() {
         return targetValue;
     }

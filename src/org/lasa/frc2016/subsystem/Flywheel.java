@@ -1,6 +1,5 @@
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.lib.HazySubsystem;
 import edu.wpi.first.wpilibj.CANTalon;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;

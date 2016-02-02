@@ -1,6 +1,5 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.lib.HazyCommand;
 import org.lasa.frc2016.subsystem.Intake;
 
 public class StopIntake extends HazyCommand {
@@ -22,12 +21,8 @@ public class StopIntake extends HazyCommand {
     public void stop() {
     }
 
-    // Check this
     @Override
     public boolean isDone() {
-        return Math.abs(intake.getIntakeSpeed()) < .1;
+        return true;
     }
-    
-    
-
 }

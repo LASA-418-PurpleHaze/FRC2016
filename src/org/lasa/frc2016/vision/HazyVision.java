@@ -24,9 +24,12 @@ public final class HazyVision implements Runnable {
     StraightEdgeOptions straightEdgeOptions;
     FindEdgeReport findEdgeReport;
 
-    private Range hue;
-    private Range saturation;
-    private Range luminence;
+    private Range hue, saturation, luminence;
+    private Point startPoint, endPoint;
+    private int lowestX, lowestY = Integer.MAX_VALUE;
+    private int highestX, highestY = 0;
+
+    private volatile double distance;
 
     private HazyVision() {
         this.updateConstants();
@@ -49,6 +52,7 @@ public final class HazyVision implements Runnable {
         while (true) {
             try {
                 this.getImage();
+                distance = this.calculate();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Meow");
@@ -62,10 +66,37 @@ public final class HazyVision implements Runnable {
         findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
         for (NIVision.StraightEdge straightEdge : findEdgeReport.straightEdges) {
             NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE,
-                    new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y),
-                    new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
+                    startPoint = new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y),
+                    endPoint = new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
+            if (lowestX > startPoint.x) {
+                lowestX = startPoint.x;
+            } else if (lowestX > endPoint.x) {
+                lowestX = endPoint.x;
+            }
+            if (lowestY > startPoint.y) {
+                lowestY = startPoint.y;
+            } else if (lowestY > endPoint.y) {
+                lowestY = endPoint.y;
+            }
+            if (highestX < startPoint.x) {
+                highestX = startPoint.x;
+            } else if (highestX > endPoint.x) {
+                highestX = endPoint.x;
+            }
+            if (highestY < startPoint.y) {
+                highestY = startPoint.y;
+            } else if (highestY > endPoint.y) {
+                highestY = endPoint.y;
+            }
         }
+    }
 
+    private double calculate() {
+        return 0;
+    }
+
+    public synchronized double getDistanceFromHighGoal() {
+        return distance;
     }
 
     public void updateConstants() {

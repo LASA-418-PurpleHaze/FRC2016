@@ -12,15 +12,14 @@ public class Ports {
     public static final int INTAKE_MOTOR = 0;
     public static final int FLYWHEEL_MASTER_MOTOR = 5;
     public static final int FLYWHEEL_SLAVE_MOTOR = 6;
-    
+
     // Encoder Ports
     public static final int LEFT_SIDE_A_ENCODER = 0;
     public static final int LEFT_SIDE_B_ENCODER = 1;
     public static final int RIGHT_SIDE_A_ENCODER = 0;
     public static final int RIGHT_SIDE_B_ENCODER = 0;
-    
+
     // Analog IO Ports
-    
     // Digital IO Ports
     public static int INTAKE_BUMP_SWITCH = 6;
     

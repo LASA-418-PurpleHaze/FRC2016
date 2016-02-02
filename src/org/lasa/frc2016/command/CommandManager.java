@@ -1,5 +1,6 @@
-package org.lasa.lib;
+package org.lasa.frc2016.command;
 
+import org.lasa.frc2016.command.HazyCommand;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,7 +8,7 @@ public class CommandManager {
 
     private static ArrayList<HazyCommand> list = new ArrayList<>();
     private static HazyCommand lastAdded;
-    
+
     public static void addCommand(HazyCommand c) {
         list.add(c);
     }
@@ -25,7 +26,7 @@ public class CommandManager {
         lastAdded = c;
         list.add(c);
     }
-    
+
     // I believe this would be fine
     public static void addContinuous(HazyCommand c) {
         c.setLeft(lastAdded);

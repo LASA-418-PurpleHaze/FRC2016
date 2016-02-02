@@ -1,7 +1,6 @@
 package org.lasa.frc2016.command;
 
 import org.lasa.frc2016.subsystem.Intake;
-import org.lasa.lib.HazyCommand;
 
 public class InfeedBall extends HazyCommand {
 
