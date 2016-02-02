@@ -1,7 +1,7 @@
 package org.lasa.frc2016.command;
 
 import org.lasa.frc2016.statics.Constants;
-
+    
 public class SpinUpShooter extends HazyCommand {
 
     public SpinUpShooter(String nm, double t) {
