@@ -3,7 +3,7 @@ package org.lasa.frc2016.subsystem;
 import edu.wpi.first.wpilibj.CANTalon;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
-
+/**
 public class Flywheel extends HazySubsystem {
 
     private static Flywheel instance;
@@ -15,8 +15,8 @@ public class Flywheel extends HazySubsystem {
         flywheelMotorMaster = new CANTalon(Ports.FLYWHEEL_MASTER_MOTOR);
         flywheelMotorMaster.setPID(Constants.FLYWHEEL_PID_KP, Constants.FLYWHEEL_PID_KI, Constants.FLYWHEEL_PID_KD, Constants.FLYWHEEL_PID_KF, Constants.FLYWHEEL_PID_IZONE, Constants.FLYWHEEL_PID_RAMPRATE, Constants.FLYWHEEL_PID_PROFILE);
         flywheelMotorSlave = new CANTalon(Ports.FLYWHEEL_SLAVE_MOTOR);
-        flywheelMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
-        flywheelMotorSlave.set(flywheelMotorMaster.getDeviceID());
+        //flywheelMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+        //flywheelMotorSlave.set(flywheelMotorMaster.getDeviceID());
     }
 
     public static Flywheel getInstance() {
@@ -47,3 +47,4 @@ public class Flywheel extends HazySubsystem {
     }
 
 }
+**/

@@ -1,5 +1,6 @@
 package org.lasa.frc2016.input;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
@@ -16,16 +17,18 @@ public class DriverInput implements Runnable {
     
     private boolean lastGetIntake = false;
 
+    private double throttle, wheel;
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
 
     public double getThrottle() {
-        return driver.getLeftY();
+        DriverStation.reportError("DriverInput", false);
+        return throttle;
     }
 
     public double getWheel() {
-        return driver.getRightX();
+        return wheel;
     }
 
     public boolean getQuickTurn() {
@@ -42,6 +45,9 @@ public class DriverInput implements Runnable {
 
     @Override
     public void run() {
+        throttle = driver.getLeftY();
+        wheel = driver.getRightX();
+        
 
         if (getIntake()) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));

@@ -10,7 +10,7 @@ public class AimAndSpinUpShooter extends HazyCommand {
 
    @Override
     public void start() {
-        flywheel.setFlywheelSpeed(Constants.FLYWHEEL_SPINUP_SPEED);
+        //flywheel.setFlywheelSpeed(Constants.FLYWHEEL_SPINUP_SPEED);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class AimAndSpinUpShooter extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return flywheel.getFlywheelSpeed() > Constants.FLYWHEEL_SPINUP_SPEED;
+        return /**flywheel.getFlywheelSpeed() >**/ false;
     }
 
 }

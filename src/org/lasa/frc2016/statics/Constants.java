@@ -44,7 +44,7 @@ public class Constants extends HazyConstant {
     public static final int FLYWHEEL_SPINUP_SPEED = 16000;
 
     // HazyJoystick
-    public static final double DEADBAND = 1;
+    public static final double DEADBAND = .1;
 
     @Override
     public String getFileLocation() {

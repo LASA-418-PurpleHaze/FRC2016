@@ -1,5 +1,7 @@
 package org.lasa.frc2016;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -11,17 +13,18 @@ import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
-import org.lasa.frc2016.subsystem.Flywheel;
+//import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.lib.CheesyDriveHelper;
 import org.lasa.frc2016.command.CommandManager;
+import org.lasa.lib.HazyJoystick;
 
 public class Robot extends HazyIterative {
 
     Runnable vision;
     ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
-    Flywheel flywheel;
+    //Flywheel flywheel;
     Intake intake;
 
     DriverInput driverInput;
@@ -34,37 +37,40 @@ public class Robot extends HazyIterative {
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
 
         drivetrain = Drivetrain.getInstance();
-        flywheel = Flywheel.getInstance();
+       // flywheel = Flywheel.getInstance();
         intake = Intake.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
+        //DriverStation.reportError("Meow", false);
+        
     }
 
     @Override
     public void teleopInit() {
-        if (!CommandManager.empty()) {
-            CommandManager.cancelAll();
-        }
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        drivetrain.updateConstants();
-        flywheel.updateConstants();
-        intake.updateConstants();
+        
+        //drivetrain.updateConstants();
+      //  flywheel.updateConstants();
+        //intake.updateConstants();
     }
 
     @Override
     public void teleopPeriodic() {
         CommandManager.run();
         driverInput.run();
-        drivetrain.pushToDashboard();
-        flywheel.pushToDashboard();
-        intake.pushToDashboard();
+        drivetrain.run();
+        //drivetrain.pushToDashboard();
+       // flywheel.pushToDashboard();
+        //intake.pushToDashboard();
     }
 
     @Override
     public void teleopContinuous() {
+        DriverStation.reportError("Meow", false);
         sensorInput.run();
-        drivetrain.run();
-        flywheel.run();
+        
+        
+       // flywheel.run();
         intake.run();
         
     }
@@ -75,7 +81,7 @@ public class Robot extends HazyIterative {
             CommandManager.cancelAll();
         }
         drivetrain.updateConstants();
-        flywheel.updateConstants();
+      //  flywheel.updateConstants();
         intake.updateConstants();
     }
 
@@ -87,7 +93,7 @@ public class Robot extends HazyIterative {
     public void autonomousContinuous() {
         sensorInput.run();
         drivetrain.run();
-        flywheel.run();
+       // flywheel.run();
         intake.run();
         CommandManager.run();
     }

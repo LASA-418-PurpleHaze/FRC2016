@@ -79,7 +79,7 @@ public class Intake extends HazySubsystem {
 
     @Override
     public void updateConstants() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("meow");
     }
 
     public double getIntakeSpeed() {
