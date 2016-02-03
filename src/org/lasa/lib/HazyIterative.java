@@ -85,16 +85,16 @@ public class HazyIterative extends RobotBase {
         LiveWindow.setEnabled(false);
         while (true) {
             // Call the appropriate function depending upon the current robot mode
-            if (isOperatorControl()) {
+            if (isDisabled()) {
                 // call DisabledInit() if we are now just entering disabled mode from
                 // either a different mode or from power-on
-                if (!m_teleopInitialized) {
+                if (!m_disabledInitialized) {
                     LiveWindow.setEnabled(false);
-                    teleopInit();
-                    m_teleopInitialized = true;
+                    disabledInit();
+                    m_teleopInitialized = false;
                     m_testInitialized = false;
                     m_autonomousInitialized = false;
-                    m_disabledInitialized = false;
+                    m_disabledInitialized = true;
                 }
                 if (nextPeriodReady()) {
                     FRCNetworkCommunicationsLibrary.FRCNetworkCommunicationObserveUserProgramDisabled();
@@ -136,13 +136,13 @@ public class HazyIterative extends RobotBase {
             } else {
                 // call Teleop_Init() if this is the first time
                 // we've entered teleop_mode
-                if (!m_disabledInitialized) {
+                if (!m_teleopInitialized) {
                     LiveWindow.setEnabled(false);
-                    disabledInit();
-                    m_disabledInitialized = true;
+                    teleopInit();
+                    m_disabledInitialized = false;
                     // reset the initialization flags for the other modes
                     m_autonomousInitialized = false;
-                    m_teleopInitialized = false;
+                    m_teleopInitialized = true;
                     m_testInitialized = false;
                 }
                 if (nextPeriodReady()) {
