@@ -37,7 +37,7 @@ public class CheesyDrive extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return super.isDone(); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
     
     
