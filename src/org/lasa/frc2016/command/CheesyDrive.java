@@ -7,7 +7,7 @@ public class CheesyDrive extends HazyCommand {
 
     CheesyDriveHelper cheesyDrive;
 
-    private double leftSide, rightSide;
+    private double leftSide, rightSide, throttle, wheel;
     private boolean quickTurnEnabled;
 
     public CheesyDrive(String nm, double t) {
@@ -16,12 +16,14 @@ public class CheesyDrive extends HazyCommand {
 
     @Override
     public void run() {
-        leftSide = driverInput.getLeftSide();
-        rightSide = driverInput.getRightSide();
+        throttle = driverInput.getThrottle();
+        wheel = driverInput.getWheel();
         quickTurnEnabled = driverInput.getQuickTurn();
         
         //cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
         //drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
+        leftSide = throttle - wheel;
+        rightSide = throttle + wheel;
         drivetrain.setDriveSpeeds(leftSide, rightSide);
     }
 

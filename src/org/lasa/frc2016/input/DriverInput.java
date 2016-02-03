@@ -16,17 +16,17 @@ public class DriverInput implements Runnable {
     
     private boolean lastGetIntake = false;
 
-    private double leftSide, rightSide;
+    private double throttle, wheel;
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
 
-    public double getLeftSide() {
-        return leftSide;
+    public double getThrottle() {
+        return throttle;
     }
 
-    public double getRightSide() {
-        return rightSide;
+    public double getWheel() {
+        return wheel;
     }
 
     public boolean getQuickTurn() {
@@ -43,8 +43,8 @@ public class DriverInput implements Runnable {
 
     @Override
     public void run() {
-        leftSide = driver.getLeftY();
-        rightSide = driver.getRightY();
+        throttle = driver.getLeftY();
+        wheel = driver.getRightX();
         
         if (getIntake()) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
