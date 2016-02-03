@@ -66,10 +66,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopContinuous() {
-        DriverStation.reportError("Meow", false);
         sensorInput.run();
-        
-        
        // flywheel.run();
         intake.run();
         

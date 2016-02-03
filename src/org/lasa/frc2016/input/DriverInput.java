@@ -23,7 +23,6 @@ public class DriverInput implements Runnable {
     }
 
     public double getThrottle() {
-        DriverStation.reportError("DriverInput", false);
         return throttle;
     }
 
@@ -36,11 +35,11 @@ public class DriverInput implements Runnable {
     }
 
     public boolean getIntake() {
-        return operator.getButton(Ports.INTAKE_BUTTON);
+        return driver.getButton(Ports.INTAKE_BUTTON);
     }
 
     public boolean getOuttake() {
-        return operator.getButton(Ports.OUTTAKE_BUTTON);
+        return driver.getButton(Ports.OUTTAKE_BUTTON);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class DriverInput implements Runnable {
         throttle = driver.getLeftY();
         wheel = driver.getRightX();
         
-
+        /**
         if (getIntake()) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
         } else if (getOuttake()) {
@@ -57,6 +56,7 @@ public class DriverInput implements Runnable {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
         lastGetIntake = getIntake();
+        **/
     }
 }
   

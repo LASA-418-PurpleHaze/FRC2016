@@ -162,16 +162,16 @@ public class HazyIterative extends RobotBase {
                 if (m_testInitialized) {
                     testContinuous();
                 }
-            } else if (isOperatorControl()) {
-                if (m_teleopInitialized) {
+            } else if (isDisabled()) {
+                if (m_disabledInitialized) {
                     teleopContinuous();
                 }
             } else if (isAutonomous()) {
                 if (m_autonomousInitialized) {
                     autonomousContinuous();
                 }
-            } else if (m_disabledInitialized) {
-                disabledContinuous();
+            } else {
+                teleopContinuous();
             }
         }
     }
