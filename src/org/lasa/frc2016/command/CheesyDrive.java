@@ -24,4 +24,21 @@ public class CheesyDrive extends HazyCommand {
         //cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
         drivetrain.setDriveSpeeds(/**cheesyDrive.getLeftPWM()**/throttle, /**12/11*cheesyDrive.getRightPWM()**/ wheel);
     }
+
+    @Override
+    public void start() {
+        super.start(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void stop() {
+        super.stop(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isDone() {
+        return super.isDone(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }
