@@ -1,6 +1,5 @@
 package org.lasa.frc2016;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,7 +16,6 @@ import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.lib.CheesyDriveHelper;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.lib.HazyJoystick;
 
 public class Robot extends HazyIterative {
 

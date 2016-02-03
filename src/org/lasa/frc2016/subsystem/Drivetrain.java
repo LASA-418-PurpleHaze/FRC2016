@@ -1,6 +1,5 @@
 package org.lasa.frc2016.subsystem;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.lib.controlloop.HazyPID;
@@ -41,6 +40,8 @@ public class Drivetrain extends HazySubsystem {
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
         leftDrivePID = new HazyPID();
         rightDrivePID = new HazyPID();
+        leftFrontMotor.setInverted(true);
+        leftBackMotor.setInverted(true);
     }
 
     public static Drivetrain getInstance() {
@@ -69,7 +70,6 @@ public class Drivetrain extends HazySubsystem {
 
     public void setDriveSpeeds(double left, double right) {
         //if (mode == Mode.RAW) {
-            DriverStation.reportError("DriveSpeeds2", false);
             leftSpeed = left;
             rightSpeed = right;
         //}

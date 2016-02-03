@@ -1,6 +1,5 @@
 package org.lasa.frc2016.input;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
@@ -17,17 +16,17 @@ public class DriverInput implements Runnable {
     
     private boolean lastGetIntake = false;
 
-    private double throttle, wheel;
+    private double leftSide, rightSide;
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
 
-    public double getThrottle() {
-        return throttle;
+    public double getLeftSide() {
+        return leftSide;
     }
 
-    public double getWheel() {
-        return wheel;
+    public double getRightSide() {
+        return rightSide;
     }
 
     public boolean getQuickTurn() {
@@ -35,19 +34,18 @@ public class DriverInput implements Runnable {
     }
 
     public boolean getIntake() {
-        return driver.getButton(Ports.INTAKE_BUTTON);
+        return operator.getButton(Ports.INTAKE_BUTTON);
     }
 
     public boolean getOuttake() {
-        return driver.getButton(Ports.OUTTAKE_BUTTON);
+        return operator.getButton(Ports.OUTTAKE_BUTTON);
     }
 
     @Override
     public void run() {
-        throttle = driver.getLeftY();
-        wheel = driver.getRightX();
+        leftSide = driver.getLeftY();
+        rightSide = driver.getRightY();
         
-        /**
         if (getIntake()) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
         } else if (getOuttake()) {
@@ -56,7 +54,6 @@ public class DriverInput implements Runnable {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
         lastGetIntake = getIntake();
-        **/
     }
 }
   
