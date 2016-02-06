@@ -9,6 +9,7 @@ import com.ni.vision.NIVision.Point;
 import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
 import com.ni.vision.NIVision.StraightEdgeOptions;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 import org.lasa.frc2016.statics.Constants;
 
@@ -30,17 +31,21 @@ public final class HazyVision implements Runnable {
     private int highestX, highestY = 0;
 
     private volatile double distance;
+    private final CameraServer cameraServer;
 
     private HazyVision() {
         this.updateConstants();
-        camera.openCamera();
-        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH);
-        roi = NIVision.imaqCreateROI();
-        plane = NIVision.imaqCalibrationSetAxisInfo(image);
-        findEdgeOptions = new FindEdgeOptions2();
-        straightEdgeOptions = new StraightEdgeOptions();
-        camera.setExposureManual(30);
-        camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH, Constants.USBCAMERA_IMAGE_HEIGHT);
+        camera = new USBCamera();
+        cameraServer = CameraServer.getInstance();
+        //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
+        //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH);
+        //roi = NIVision.imaqCreateROI();
+        //plane = NIVision.imaqCalibrationSetAxisInfo(image);
+        //findEdgeOptions = new FindEdgeOptions2();
+        //straightEdgeOptions = new StraightEdgeOptions();
+        //camera.setExposureManual(30);
+        //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH, Constants.USBCAMERA_IMAGE_HEIGHT);
+        cameraServer.startAutomaticCapture(camera);
     }
 
     public static HazyVision getInstance() {
@@ -51,7 +56,8 @@ public final class HazyVision implements Runnable {
     public void run() {
         while (true) {
             try {
-                this.getImage();
+                ;
+                //this.getImage();
                 distance = this.calculate();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

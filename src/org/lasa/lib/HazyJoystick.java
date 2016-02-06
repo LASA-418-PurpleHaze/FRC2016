@@ -1,4 +1,4 @@
-package org.lasa.lib;
+ package org.lasa.lib;
 
 import edu.wpi.first.wpilibj.Joystick;
 import org.lasa.frc2016.statics.Constants;
@@ -34,9 +34,9 @@ public class HazyJoystick {
     private double handleDeadBand(double input) {
         if (Math.abs(input) > Constants.DEADBAND) {
             if (input > 0) {
-                return (input - Constants.DEADBAND) / (1 - Constants.DEADBAND);
+                return Math.pow((input - Constants.DEADBAND)/(1 - Constants.DEADBAND),2);
             } else {
-                return (input + Constants.DEADBAND) / (1 - Constants.DEADBAND);
+                return -Math.pow((input + Constants.DEADBAND)/(1 - Constants.DEADBAND),2);
             }
         } else {
             return 0.0;

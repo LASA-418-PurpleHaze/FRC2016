@@ -14,13 +14,14 @@ public class DriverInput implements Runnable {
 
     private static DriverInput instance;
     
-    private boolean lastGetIntake = false;
-
     private double throttle, wheel;
+    private boolean lastGetIntake, lastGetOuttake = false;
+    private boolean quickTurn, intake, outtake;
+
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
-
+    
     public double getThrottle() {
         return throttle;
     }
@@ -30,30 +31,34 @@ public class DriverInput implements Runnable {
     }
 
     public boolean getQuickTurn() {
-        return driver.getButton(Ports.QUICKTURN_BUTTON);
+        return quickTurn;
     }
 
     public boolean getIntake() {
-        return operator.getButton(Ports.INTAKE_BUTTON);
+        return intake;
     }
 
     public boolean getOuttake() {
-        return operator.getButton(Ports.OUTTAKE_BUTTON);
+        return outtake;
     }
 
     @Override
     public void run() {
         throttle = driver.getLeftY();
         wheel = driver.getRightX();
+        quickTurn = driver.getButton(Ports.QUICKTURN_BUTTON);
+        intake = operator.getButton(Ports.INTAKE_BUTTON);
+        outtake = operator.getButton(Ports.OUTTAKE_BUTTON);
         
-        if (getIntake()) {
+        if (getIntake() && !lastGetIntake) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
-        } else if (getOuttake()) {
+        } else if (getOuttake() && !lastGetOuttake) {
             CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
         } else {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
         lastGetIntake = getIntake();
+        lastGetOuttake = getOuttake();
     }
 }
   

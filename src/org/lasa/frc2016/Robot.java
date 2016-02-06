@@ -19,7 +19,7 @@ import org.lasa.frc2016.command.CommandManager;
 
 public class Robot extends HazyIterative {
 
-    Runnable vision;
+    HazyVision hazyVision;
     ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
     //Flywheel flywheel;
@@ -31,8 +31,11 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
+        hazyVision = HazyVision.getInstance();
+        Thread thread = new Thread(hazyVision);
+        thread.start();
         //scheduler = Executors.newScheduledThreadPool(1);
-        //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
+        //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
 
         drivetrain = Drivetrain.getInstance();
        // flywheel = Flywheel.getInstance();
