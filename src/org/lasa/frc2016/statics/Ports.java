@@ -12,6 +12,10 @@ public class Ports {
     public static final int INTAKE_MOTOR = 0;
     public static final int FLYWHEEL_MASTER_MOTOR = 5;
     public static final int FLYWHEEL_SLAVE_MOTOR = 6;
+    public static final int LEFT_ARM_LIFTER = 7;
+    public static final int RIGHT_ARM_LIFTER = 8;
+    public static final int LEFT_ARM_EXTENDER = 9;
+    public static final int RIGHT_ARM_EXTENDER = 10;
 
     // Encoder Ports
     public static final int LEFT_SIDE_A_ENCODER = 0;
@@ -21,11 +25,15 @@ public class Ports {
 
     // Analog IO Ports
     // Digital IO Ports
-    public static int INTAKE_BUMP_SWITCH = 6;
+    public static final int INTAKE_BUMP_SWITCH = 6;
     
     //Joystick Ports
     public static final int SHOOTER_BUTTON = 5;
     public static final int QUICKTURN_BUTTON = 4;
     public static final int INTAKE_BUTTON = 3;
     public static final int OUTTAKE_BUTTON = 4;
+    
+    //Arm input stuff
+    public static final int DISTANCE_SENSOR = 0;
+    public static final int ANGLE_SENSOR = 0;
 }

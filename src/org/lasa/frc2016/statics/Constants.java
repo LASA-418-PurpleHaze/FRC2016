@@ -42,6 +42,15 @@ public class Constants extends HazyConstant {
     public static final double FLYWHEEL_PID_RAMPRATE = 36;
     public static final int FLYWHEEL_PID_PROFILE = 0;
     public static final int FLYWHEEL_SPINUP_SPEED = 16000;
+    
+    // Arm PID
+    public static final double ARM_PID_KP = 1;
+    public static final double ARM_PID_KI = 1;
+    public static final double ARM_PID_KD = 1;
+    public static final double ARM_PID_KF = 1;
+    public static final double ARM_PID_DONE_BOUND = 1000;
+    public static final double ARM_PID_MAXU = 1;
+    public static final double ARM_PID_MINU = -1;
 
     // HazyJoystick
     public static final double DEADBAND = .15;
