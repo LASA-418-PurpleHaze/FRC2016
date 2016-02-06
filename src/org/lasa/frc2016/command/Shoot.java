@@ -6,6 +6,7 @@ public class Shoot extends HazyCommand {
 
     public Shoot(String nm, double t) {
         super(nm, t);
+        this.setUp(new SpinUpAndAimShooter());
     }
 
    @Override
