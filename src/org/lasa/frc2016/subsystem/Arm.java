@@ -42,10 +42,10 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void updateConstants() {
-        armDistancePID.updatePID(Constants.ARM_PID_KP, Constants.ARM_PID_KI, Constants.ARM_PID_KD, Constants.ARM_PID_KF, Constants.ARM_PID_DONE_BOUND);
-        armDistancePID.updateMaxMin(Constants.ARM_PID_MAXU, Constants.ARM_PID_MINU);
-        armAnglePID.updatePID(Constants.ARM_PID_KP, Constants.ARM_PID_KI, Constants.ARM_PID_KD, Constants.ARM_PID_KF, Constants.ARM_PID_DONE_BOUND);
-        armAnglePID.updateMaxMin(Constants.ARM_PID_MAXU, Constants.ARM_PID_MINU);
+        armDistancePID.updatePID(Constants.ELEVATOR_PID_KP.getDouble(), Constants.ELEVATOR_PID_KI.getDouble(), Constants.ELEVATOR_PID_KD.getDouble(), Constants.ELEVATOR_PID_KF.getDouble(), Constants.ELEVATOR_PID_DONE_BOUND.getDouble());
+        armDistancePID.updateMaxMin(Constants.ELEVATOR_PID_MAXU.getDouble(), Constants.ELEVATOR_PID_MINU.getDouble());
+        armAnglePID.updatePID(Constants.TILT_PID_KP.getDouble(), Constants.TILT_PID_KI.getDouble(), Constants.TILT_PID_KD.getDouble(), Constants.TILT_PID_KF.getDouble(), Constants.TILT_PID_DONE_BOUND.getDouble());
+        armAnglePID.updateMaxMin(Constants.TILT_PID_MAXU.getDouble(), Constants.TILT_PID_MINU.getDouble());
     }
 
     @Override

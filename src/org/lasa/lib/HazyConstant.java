@@ -36,6 +36,14 @@ public abstract class HazyConstant {
         public void setVal(double value) {
             this.value = value;
         }
+        
+        public double getDouble() {
+            return this.value;
+        }
+        
+        public int getInt() {
+            return (int) this.value;
+        }
     }
 
     public void loadFromFile() {

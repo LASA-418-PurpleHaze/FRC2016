@@ -1,14 +1,15 @@
  package org.lasa.lib;
 
 import edu.wpi.first.wpilibj.Joystick;
-import org.lasa.frc2016.statics.Constants;
 
 public class HazyJoystick {
 
     Joystick controller;
+    double deadband;
 
-    public HazyJoystick(int joystickPort) {
+    public HazyJoystick(int joystickPort, double deadband) {
         controller = new Joystick(joystickPort);
+        this.deadband = deadband;
     }
 
     public double getLeftX() {
@@ -32,11 +33,11 @@ public class HazyJoystick {
     }
 
     private double handleDeadBand(double input) {
-        if (Math.abs(input) > Constants.DEADBAND) {
+        if (Math.abs(input) > deadband) {
             if (input > 0) {
-                return Math.pow((input - Constants.DEADBAND)/(1 - Constants.DEADBAND),2);
+                return Math.pow((input - deadband)/(1 - deadband),2);
             } else {
-                return -Math.pow((input + Constants.DEADBAND)/(1 - Constants.DEADBAND),2);
+                return -Math.pow((input + deadband)/(1 - deadband),2);
             }
         } else {
             return 0.0;

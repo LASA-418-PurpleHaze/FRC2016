@@ -9,8 +9,8 @@ import org.lasa.lib.HazyJoystick;
 
 public class DriverInput implements Runnable {
 
-    HazyJoystick driver = new HazyJoystick(0);
-    HazyJoystick operator = new HazyJoystick(1);
+    HazyJoystick driver = new HazyJoystick(0, 0.15);
+    HazyJoystick operator = new HazyJoystick(1, 0.15);
 
     private static DriverInput instance;
     
