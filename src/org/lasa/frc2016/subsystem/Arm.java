@@ -7,14 +7,14 @@ import org.lasa.frc2016.statics.Ports;
 import org.lasa.lib.controlloop.HazyPID;
 
 public class Arm extends HazySubsystem {
-    
+
     private static Arm instance;
-    
+
     private final VictorSP leftArmLifter, rightArmLifter, leftArmExtender, rightArmExtender;
     private final HazyPID armDistancePID, armAnglePID;
     private double leftArmSpeed, rightArmSpeed, distance, angle;
     private AnalogInput stringPot, distanceVal;
-    
+
     private Arm() {
         leftArmLifter = new VictorSP(Ports.LEFT_ARM_LIFTER);
         rightArmLifter = new VictorSP(Ports.RIGHT_ARM_LIFTER);
@@ -25,7 +25,7 @@ public class Arm extends HazySubsystem {
         armDistancePID = new HazyPID();
         armAnglePID = new HazyPID();
     }
-    
+
     public static Arm getInstance() {
         return (instance == null) ? instance = new Arm() : instance;
     }
@@ -52,11 +52,10 @@ public class Arm extends HazySubsystem {
     public void pushToDashboard() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void setControlPoint(double distance, double angle) {
         armDistancePID.setTarget(distance);
         armAnglePID.setTarget(angle);
     }
-    
-    
+
 }

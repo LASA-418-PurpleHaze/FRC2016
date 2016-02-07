@@ -38,20 +38,20 @@ public class Robot extends HazyIterative {
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
 
         drivetrain = Drivetrain.getInstance();
-       // flywheel = Flywheel.getInstance();
+        // flywheel = Flywheel.getInstance();
         intake = Intake.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
         //DriverStation.reportError("Meow", false);
-        
+
     }
 
     @Override
     public void teleopInit() {
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        
+
         //drivetrain.updateConstants();
-      //  flywheel.updateConstants();
+        //  flywheel.updateConstants();
         //intake.updateConstants();
     }
 
@@ -61,16 +61,16 @@ public class Robot extends HazyIterative {
         driverInput.run();
         drivetrain.run();
         //drivetrain.pushToDashboard();
-       // flywheel.pushToDashboard();
+        // flywheel.pushToDashboard();
         //intake.pushToDashboard();
     }
 
     @Override
     public void teleopContinuous() {
         sensorInput.run();
-       // flywheel.run();
+        // flywheel.run();
         intake.run();
-        
+
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Robot extends HazyIterative {
             CommandManager.cancelAll();
         }
         drivetrain.updateConstants();
-      //  flywheel.updateConstants();
+        //  flywheel.updateConstants();
         intake.updateConstants();
     }
 
@@ -91,7 +91,7 @@ public class Robot extends HazyIterative {
     public void autonomousContinuous() {
         sensorInput.run();
         drivetrain.run();
-       // flywheel.run();
+        // flywheel.run();
         intake.run();
         CommandManager.run();
     }

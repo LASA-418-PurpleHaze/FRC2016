@@ -24,6 +24,5 @@ public class Drive extends HazyCommand {
     public void start() {
         super.start(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

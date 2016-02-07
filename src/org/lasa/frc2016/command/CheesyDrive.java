@@ -19,7 +19,7 @@ public class CheesyDrive extends HazyCommand {
         throttle = driverInput.getThrottle();
         wheel = driverInput.getWheel();
         quickTurnEnabled = driverInput.getQuickTurn();
-        
+
         //cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
         //drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
         leftSide = throttle - wheel;
@@ -41,6 +41,5 @@ public class CheesyDrive extends HazyCommand {
     public boolean isDone() {
         return false;
     }
-    
-    
+
 }

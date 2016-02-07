@@ -1,4 +1,4 @@
- package org.lasa.lib;
+package org.lasa.lib;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -35,9 +35,9 @@ public class HazyJoystick {
     private double handleDeadBand(double input) {
         if (Math.abs(input) > deadband) {
             if (input > 0) {
-                return Math.pow((input - deadband)/(1 - deadband),2);
+                return Math.pow((input - deadband) / (1 - deadband), 2);
             } else {
-                return -Math.pow((input + deadband)/(1 - deadband),2);
+                return -Math.pow((input + deadband) / (1 - deadband), 2);
             }
         } else {
             return 0.0;

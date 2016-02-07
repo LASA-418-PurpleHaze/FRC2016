@@ -42,7 +42,7 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor.setInverted(true);
         straighPID = new HazyPID();
         turnPID = new HazyPID();
-        
+
         updateConstants();
     }
 
@@ -70,8 +70,8 @@ public class Drivetrain extends HazySubsystem {
 
     public void setDriveSpeeds(double left, double right) {
         //if (mode == Mode.RAW) {
-            leftSpeed = left;
-            rightSpeed = right;
+        leftSpeed = left;
+        rightSpeed = right;
         //}
     }
 

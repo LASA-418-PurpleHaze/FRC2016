@@ -13,7 +13,7 @@ public class DriverInput implements Runnable {
     HazyJoystick operator = new HazyJoystick(1, 0.15);
 
     private static DriverInput instance;
-    
+
     private double throttle, wheel;
     private boolean lastGetIntake, lastGetOuttake = false;
     private boolean quickTurn, intake, outtake;
@@ -21,7 +21,7 @@ public class DriverInput implements Runnable {
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
-    
+
     public double getThrottle() {
         return throttle;
     }
@@ -49,7 +49,7 @@ public class DriverInput implements Runnable {
         quickTurn = driver.getButton(Ports.QUICKTURN_BUTTON);
         intake = operator.getButton(Ports.INTAKE_BUTTON);
         outtake = operator.getButton(Ports.OUTTAKE_BUTTON);
-        
+
         if (getIntake() && !lastGetIntake) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
         } else if (getOuttake() && !lastGetOuttake) {
@@ -61,4 +61,3 @@ public class DriverInput implements Runnable {
         lastGetOuttake = getOuttake();
     }
 }
-  
