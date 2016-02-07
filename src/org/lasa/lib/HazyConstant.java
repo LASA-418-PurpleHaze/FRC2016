@@ -18,12 +18,13 @@ import java.util.logging.Logger;
  * @author 418
  */
 public abstract class HazyConstant {
-    
+
     private static ArrayList<Constant> constManager = new ArrayList(11);
-    
+
     public abstract String getFileLocation();
 
     public static class Constant {
+
         public String name;
         public double value;
 
@@ -32,9 +33,17 @@ public abstract class HazyConstant {
             this.value = value;
             constManager.add(this);
         }
-        
+
         public void setVal(double value) {
             this.value = value;
+        }
+
+        public double getDouble() {
+            return this.value;
+        }
+
+        public int getInt() {
+            return (int) this.value;
         }
     }
 
@@ -48,8 +57,8 @@ public abstract class HazyConstant {
                 spaceIndex = line.indexOf(" ");
                 key = line.substring(0, spaceIndex);
                 value = Double.valueOf(line.substring(spaceIndex + 1));
-                for(Constant constant : constManager) {
-                    if(!key.equals(constant.name)) {
+                for (Constant constant : constManager) {
+                    if (!key.equals(constant.name)) {
                         constant.setVal(value);
                     }
                 }

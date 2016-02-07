@@ -8,7 +8,7 @@ public class Shoot extends HazyCommand {
         super(nm, t);
     }
 
-   @Override
+    @Override
     public void start() {
         intake.setState(Intake.LOADSHOOTER);
     }
@@ -26,5 +26,4 @@ public class Shoot extends HazyCommand {
         return !intake.hasBall();
     }
 
-    
 }

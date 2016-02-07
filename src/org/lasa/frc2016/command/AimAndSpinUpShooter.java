@@ -1,14 +1,12 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.frc2016.statics.Constants;
-    
 public class AimAndSpinUpShooter extends HazyCommand {
 
     public AimAndSpinUpShooter(String nm, double t) {
         super(nm, t);
     }
 
-   @Override
+    @Override
     public void start() {
         //flywheel.setFlywheelSpeed(Constants.FLYWHEEL_SPINUP_SPEED);
     }
@@ -23,7 +21,10 @@ public class AimAndSpinUpShooter extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return /**flywheel.getFlywheelSpeed() >**/ false;
+        return /**
+                 * flywheel.getFlywheelSpeed() >*
+                 */
+                false;
     }
 
 }

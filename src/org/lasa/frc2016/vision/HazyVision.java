@@ -106,8 +106,8 @@ public final class HazyVision implements Runnable {
     }
 
     public void updateConstants() {
-        hue = new Range(Constants.HAZYVISION_HUE_LOWER_BOUND, Constants.HAZYVISION_HUE_UPPER_BOUND);
-        saturation = new Range(Constants.HAZYVISION_SATURATION_LOWER_BOUND, Constants.HAZYVISION_SATURATION_UPPER_BOUND);
-        luminence = new Range(Constants.HAZYVISION_LUMINENCE_LOWER_BOUND, Constants.HAZYVISION_LUMINENCE_UPPER_BOUND);
+        hue = new Range(Constants.HAZYVISION_HUE_LOWER_BOUND.getInt(), Constants.HAZYVISION_HUE_UPPER_BOUND.getInt());
+        saturation = new Range(Constants.HAZYVISION_SATURATION_LOWER_BOUND.getInt(), Constants.HAZYVISION_SATURATION_UPPER_BOUND.getInt());
+        luminence = new Range(Constants.HAZYVISION_LUMINENCE_LOWER_BOUND.getInt(), Constants.HAZYVISION_LUMINENCE_UPPER_BOUND.getInt());
     }
 }

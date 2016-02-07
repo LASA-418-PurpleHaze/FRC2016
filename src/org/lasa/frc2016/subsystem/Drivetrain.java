@@ -12,14 +12,14 @@ public class Drivetrain extends HazySubsystem {
 
     private final VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
     private double leftSpeed, rightSpeed;
-    private final HazyPID leftDrivePID, rightDrivePID;
+    private final HazyPID straighPID, turnPID;
 
     @Override
     public void updateConstants() {
-        leftDrivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
-        rightDrivePID.updatePID(Constants.DRIVETRAIN_PID_KP, Constants.DRIVETRAIN_PID_KI, Constants.DRIVETRAIN_PID_KD, Constants.DRIVETRAIN_PID_KF, Constants.DRIVETRAIN_PID_DONE_BOUND);
-        leftDrivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
-        rightDrivePID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU, Constants.DRIVETRAIN_PID_MINU);
+        straighPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
+        straighPID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU.getDouble(), Constants.DRIVETRAIN_PID_MINU.getDouble());
+        turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
+        turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
 
     public enum Mode {
@@ -38,10 +38,12 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        leftDrivePID = new HazyPID();
-        rightDrivePID = new HazyPID();
         leftFrontMotor.setInverted(true);
         leftBackMotor.setInverted(true);
+        straighPID = new HazyPID();
+        turnPID = new HazyPID();
+
+        updateConstants();
     }
 
     public static Drivetrain getInstance() {
@@ -64,14 +66,12 @@ public class Drivetrain extends HazySubsystem {
         SmartDashboard.putNumber("leftSpeed", leftSpeed);
         SmartDashboard.putNumber("rightSpeed", rightSpeed);
         SmartDashboard.putString("Mode", mode.toString());
-        SmartDashboard.putNumber("leftPID Set Point", leftDrivePID.getTargetVal());
-        SmartDashboard.putNumber("rightPID Set Point", rightDrivePID.getTargetVal());
     }
 
     public void setDriveSpeeds(double left, double right) {
         //if (mode == Mode.RAW) {
-            leftSpeed = left;
-            rightSpeed = right;
+        leftSpeed = left;
+        rightSpeed = right;
         //}
     }
 

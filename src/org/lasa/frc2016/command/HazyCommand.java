@@ -4,18 +4,16 @@ import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Drivetrain;
-//import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
 
 public abstract class HazyCommand {
 
-    protected Drivetrain drivetrain = Drivetrain.getInstance();
-    protected Intake intake = Intake.getInstance();
-    //protected Flywheel flywheel = Flywheel.getInstance();
-    protected Arm arm = Arm.getInstance();
-    protected DriverInput driverInput = DriverInput.getInstance();
-    protected SensorInput sensorInput = SensorInput.getInstance();
-
+    protected Drivetrain drivetrain;
+    protected Intake intake;
+    //protected Flywheel    flywheel;
+    protected DriverInput driverInput;
+    protected SensorInput sensorInput;
+    protected Arm arm;
     //Pointers to the next Command above or to the left in the tree.
     HazyCommand up;
     HazyCommand left;
@@ -33,6 +31,13 @@ public abstract class HazyCommand {
     protected boolean isLeftDone;
 
     public HazyCommand(HazyCommand up, HazyCommand left, String name, double timeOut) {
+        drivetrain = Drivetrain.getInstance();
+        intake = Intake.getInstance();
+        //flywheel = Flywheel.getInstance();
+        driverInput = DriverInput.getInstance();
+        sensorInput = SensorInput.getInstance();
+        arm = Arm.getInstance();
+
         this.up = up;
         this.left = left;
         this.name = name;

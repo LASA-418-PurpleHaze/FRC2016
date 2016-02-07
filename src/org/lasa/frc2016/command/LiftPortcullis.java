@@ -4,17 +4,18 @@ public class LiftPortcullis extends HazyCommand {
     
 
     public LiftPortcullis(String name, double timeOut) {
+
         super(name, timeOut);
     }
 
-   @Override
+    @Override
     public void start() {
         arm.setControlPoint(20, 45);
     }
 
     @Override
     public void run() {
-        
+
     }
 
     @Override
