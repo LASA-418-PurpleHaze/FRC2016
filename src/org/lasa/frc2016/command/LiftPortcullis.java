@@ -1,18 +1,15 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.lib.controlloop.HazyPID;
+public class LiftPortcullis extends HazyCommand {
+    
 
-
-public class LiftArm extends HazyCommand {
-
-    public LiftArm(String name, double timeOut) {
+    public LiftPortcullis(String name, double timeOut) {
         super(name, timeOut);
-        HazyPID liftArmPID = new HazyPID();
     }
 
    @Override
     public void start() {
-        
+        arm.setControlPoint(20, 45);
     }
 
     @Override
@@ -26,6 +23,7 @@ public class LiftArm extends HazyCommand {
 
     @Override
     public boolean isDone() {
+        return arm.getArmDistancePID().onTarget() && arm.getArmAnglePID().onTarget();
     }
 
 }

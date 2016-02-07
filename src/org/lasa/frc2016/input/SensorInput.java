@@ -1,6 +1,7 @@
 package org.lasa.frc2016.input;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -13,7 +14,8 @@ public class SensorInput {
     public static AHRS navX;
     public static DigitalInput intakeSwitch;
     public static Encoder leftSide, rightSide;
-
+    
+    private AnalogInput stringPot, distanceVal;
     private double navXCompassHeadingVal, rightSideEncoderVal, leftSideEncoderVal;
     private boolean intakeSwitchVal;
 
@@ -22,6 +24,8 @@ public class SensorInput {
         leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
         rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
         intakeSwitch = new DigitalInput(Ports.INTAKE_BUMP_SWITCH);
+        stringPot = new AnalogInput(Ports.ANGLE_SENSOR);
+        distanceVal = new AnalogInput(Ports.DISTANCE_SENSOR);
     }
 
     public static SensorInput getInstance() {
@@ -49,5 +53,13 @@ public class SensorInput {
 
     public boolean getIntakeSwitchValue() {
         return intakeSwitchVal;
+    }
+    
+    public double getStringPot() {
+        return stringPot.getValue();
+    }
+    
+    public double getDistanceVal(){
+        return distanceVal.getValue();
     }
 }

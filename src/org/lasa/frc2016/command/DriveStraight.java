@@ -1,9 +1,13 @@
 package org.lasa.frc2016.command;
 
-public class Drive extends HazyCommand {
+public class DriveStraight extends HazyCommand {
+    
+    private double distance;
 
-    public Drive(String name, double timeOut) {
+    public DriveStraight(String name, double timeOut, double distance) {
         super(name, timeOut);
+        this.distance = distance;
+        drivetrain.setControlSetpoint(distance, 0);
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.lasa.frc2016.command;
 
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
+import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Drivetrain;
 //import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
@@ -11,6 +12,7 @@ public abstract class HazyCommand {
     protected Drivetrain drivetrain = Drivetrain.getInstance();
     protected Intake intake = Intake.getInstance();
     //protected Flywheel flywheel = Flywheel.getInstance();
+    protected Arm arm = Arm.getInstance();
     protected DriverInput driverInput = DriverInput.getInstance();
     protected SensorInput sensorInput = SensorInput.getInstance();
 

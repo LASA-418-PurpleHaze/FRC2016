@@ -2,6 +2,8 @@ package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 import org.lasa.lib.controlloop.HazyPID;
@@ -13,15 +15,13 @@ public class Arm extends HazySubsystem {
     private final VictorSP leftArmLifter, rightArmLifter, leftArmExtender, rightArmExtender;
     private final HazyPID armDistancePID, armAnglePID;
     private double leftArmSpeed, rightArmSpeed, distance, angle;
-    private AnalogInput stringPot, distanceVal;
+    
     
     private Arm() {
         leftArmLifter = new VictorSP(Ports.LEFT_ARM_LIFTER);
         rightArmLifter = new VictorSP(Ports.RIGHT_ARM_LIFTER);
         leftArmExtender = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmExtender = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
-        stringPot = new AnalogInput(Ports.ANGLE_SENSOR);
-        distanceVal = new AnalogInput(Ports.DISTANCE_SENSOR);
         armDistancePID = new HazyPID();
         armAnglePID = new HazyPID();
     }
@@ -32,8 +32,8 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        distance = armDistancePID.calculate(distanceVal.getValue());
-        angle = armAnglePID.calculate(stringPot.getValue());
+        distance = armDistancePID.calculate(sensorInput.getDistanceVal());
+        angle = armAnglePID.calculate(sensorInput.getStringPot());
         leftArmLifter.set(angle);
         rightArmLifter.set(angle);
         leftArmExtender.set(distance);
@@ -50,12 +50,21 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void pushToDashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SmartDashboard.putNumber("ArmDistancePID Control Point:", armDistancePID.getTargetVal());
+        SmartDashboard.putNumber("ArmAnglePID Control Point:", armAnglePID.getTargetVal());
     }
     
-    public void setControlPoint(double distance, double angle) {
-        armDistancePID.setTarget(distance);
+    public void setControlPoint(double height, double ) {
+        armDistancePID.setTarget();
         armAnglePID.setTarget(angle);
+    }
+    
+    public HazyPID getArmAnglePID(){
+        return armAnglePID;
+    }
+    
+    public HazyPID getArmDistancePID(){
+        return armDistancePID;
     }
     
     
