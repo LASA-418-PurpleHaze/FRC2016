@@ -1,5 +1,7 @@
 package org.lasa.frc2016.command;
 
+import edu.wpi.first.wpilibj.Timer;
+import java.sql.Time;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.subsystem.Arm;
@@ -55,8 +57,9 @@ public abstract class HazyCommand {
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
         
-        name = nm;
-        timeOut = t;
+        this.name = nm;
+        this.timeOut = t;
+        this.startTime = Double.MAX_VALUE;
     }
 
     public void setUp(HazyCommand p) {
@@ -68,7 +71,7 @@ public abstract class HazyCommand {
     }
 
     public void start() {
-        startTime = System.currentTimeMillis();
+        startTime = Timer.getFPGATimestamp();
         up = null;
     }
 

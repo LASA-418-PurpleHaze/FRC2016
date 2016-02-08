@@ -1,5 +1,6 @@
 package org.lasa.frc2016.subsystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Ports;
@@ -17,7 +18,7 @@ public class Intake extends HazySubsystem {
     public static final byte INTAKING = 1;
     public static final byte OUTTAKING = 2;
     public static final byte LOADINGSHOOTER = 3;
-    private final static String[] stateNames = {"OFF", "INTAKING", "OUTTAKING", "SHOOTING"};
+    private final static String[] stateNames = {"OFF", "INTAKING", "OUTTAKING", "LOADINGSHOOTER"};
 
     private boolean hasBall;
 

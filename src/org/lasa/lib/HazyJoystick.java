@@ -1,5 +1,6 @@
 package org.lasa.lib;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class HazyJoystick {

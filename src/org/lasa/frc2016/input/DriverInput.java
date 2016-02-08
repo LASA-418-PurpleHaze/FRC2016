@@ -3,7 +3,6 @@ package org.lasa.frc2016.input;
 import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
-import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.lib.HazyJoystick;
 
@@ -54,7 +53,9 @@ public class DriverInput implements Runnable {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
         } else if (getOuttake() && !lastGetOuttake) {
             CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
-        } else {
+        } else if(!getIntake() && lastGetIntake){
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        } else if(!getOuttake() && lastGetOuttake) {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
         lastGetIntake = getIntake();
