@@ -1,6 +1,5 @@
 package org.lasa.frc2016.subsystem;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Ports;
@@ -18,7 +17,7 @@ public class Intake extends HazySubsystem {
     public static final byte INTAKING = 1;
     public static final byte OUTTAKING = 2;
     public static final byte LOADINGSHOOTER = 3;
-    private final static String[] stateNames = {"OFF", "INTAKING", "OUTTAKING", "LOADINGSHOOTER"};
+    private final static String[] STATENAMES = {"OFF", "INTAKING", "OUTTAKING", "LOADINGSHOOTER"};
 
     private boolean hasBall;
 
@@ -58,19 +57,17 @@ public class Intake extends HazySubsystem {
                 intakeSpeed = 1.0;
                 break;
         }
-
         if (newState != state) {
             state = newState;
             run();
         }
-
         //output
         intakeMotor.set(intakeSpeed);
     }
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putString("state", stateNames[state]);
+        SmartDashboard.putString("I_State", STATENAMES[state]);
     }
 
     public boolean hasBall() {
@@ -79,10 +76,5 @@ public class Intake extends HazySubsystem {
 
     @Override
     public void updateConstants() {
-        System.out.print("meow");
-    }
-
-    public double getIntakeSpeed() {
-        return intakeMotor.get();
     }
 }

@@ -9,7 +9,7 @@ public class Constants extends HazyConstant {
     public static final Constant VISIONHANDLER_PERIOD = new Constant("V_Period", 200);
 
     public static final Constant USBCAMERA_IMAGE_WIDTH = new Constant("V_CameraWidth", 480);
-    public static final Constant USBCAMERA_IMAGE_Height = new Constant("V_CameraHeight", 640);
+    public static final Constant USBCAMERA_IMAGE_HEIGHT = new Constant("V_CameraHeight", 640);
 
     public static final Constant HAZYVISION_HUE_LOWER_BOUND = new Constant("V_HueLower", 44);
     public static final Constant HAZYVISION_HUE_UPPER_BOUND = new Constant("V_HueUpper", 88);

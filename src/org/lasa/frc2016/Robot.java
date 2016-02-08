@@ -12,7 +12,6 @@ import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
-//import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.subsystem.Arm;
@@ -71,7 +70,6 @@ public class Robot extends HazyIterative {
         sensorInput.run();
         flywheel.run();
         arm.run();
-
     }
 
     @Override

@@ -39,7 +39,6 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-
         rightFrontMotor.setInverted(true);
         rightBackMotor.setInverted(true);
         straightPID = new HazyPID();
@@ -74,9 +73,9 @@ public class Drivetrain extends HazySubsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putNumber("leftSpeed", leftSpeed);
-        SmartDashboard.putNumber("rightSpeed", rightSpeed);
-        SmartDashboard.putString("Mode", mode.toString());
+        SmartDashboard.putNumber("D_LeftSpeed", leftSpeed);
+        SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
+        SmartDashboard.putString("D_Mode", mode.toString());
     }
 
     public void setDriveSpeeds(double left, double right) {
