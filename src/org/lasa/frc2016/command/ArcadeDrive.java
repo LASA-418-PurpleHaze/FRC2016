@@ -12,7 +12,7 @@ public class ArcadeDrive extends HazyCommand {
     public void run() {
         double throttle = driverInput.getThrottle();
         double wheel = driverInput.getWheel();
-        
+
         drivetrain.setDriveSpeeds(throttle + wheel, throttle - wheel);
     }
 
@@ -21,7 +21,7 @@ public class ArcadeDrive extends HazyCommand {
         drivetrain.setDriveSpeeds(0.0, 0.0);
         super.stop();
     }
-    
+
     @Override
     public boolean isDone() {
         return DriverStation.getInstance().isDisabled();

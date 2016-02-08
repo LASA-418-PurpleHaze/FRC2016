@@ -92,7 +92,7 @@ public class Arm extends HazySubsystem {
         tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
         elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
     }
-    
+
     public boolean isDone() {
         return tiltProfileFollower.isDone() && elevatorProfileFollower.isDone();
     }

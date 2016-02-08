@@ -1,6 +1,5 @@
 package org.lasa.lib.controlloop;
 
-
 public class TorquePV extends ControlLoop {
 
     private double kP;
@@ -78,4 +77,3 @@ public class TorquePV extends ControlLoop {
         return Math.abs(profile.getCurrentVelocity() - actualVelocity) < doneRange;
     }
 }
-    

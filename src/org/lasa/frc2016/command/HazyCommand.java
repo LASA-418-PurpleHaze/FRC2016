@@ -17,7 +17,7 @@ public abstract class HazyCommand {
     protected Arm arm;
     protected DriverInput driverInput;
     protected SensorInput sensorInput;
-    
+
     //Pointers to the next Command above or to the left in the tree.
     HazyCommand up;
     HazyCommand left;
@@ -56,7 +56,7 @@ public abstract class HazyCommand {
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
-        
+
         this.name = nm;
         this.timeOut = t;
         this.startTime = Double.MAX_VALUE;

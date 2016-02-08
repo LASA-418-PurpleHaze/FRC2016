@@ -14,7 +14,7 @@ public class SensorInput {
     public static AHRS navX;
     public static DigitalInput intakeSwitch;
     public static Encoder leftSide, rightSide, armTilt, armExtension;
-    
+
     private AnalogInput stringPot, distanceVal;
     private double navXCompassHeadingVal;
     private double rightSideEncoderVal, leftSideEncoderVal;
@@ -61,19 +61,19 @@ public class SensorInput {
     public boolean getIntakeSwitchValue() {
         return intakeSwitchVal;
     }
-    
+
     public double getArmTiltPostion() {
         return armTiltPostionVal;
     }
-    
+
     public double getArmExtensionPostion() {
         return armExtensionPositionVal;
     }
-    
+
     public double getArmTiltRate() {
         return armTiltRateVal;
     }
-    
+
     public double getArmExtensionRate() {
         return armExtensionRateVal;
     }

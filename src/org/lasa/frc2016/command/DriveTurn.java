@@ -1,7 +1,7 @@
 package org.lasa.frc2016.command;
 
 public class DriveTurn extends HazyCommand {
-    
+
     private double angle;
 
     public DriveTurn(String name, double timeOut, double angle) {

@@ -12,10 +12,10 @@ public class Drivetrain extends HazySubsystem {
 
     private final VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
     private double leftSpeed, rightSpeed;
-    
+
     private final HazyPID straightPID, turnPID;
     private double straightSetpoint, turnSetpoint;
-    
+
     @Override
     public void updateConstants() {
         straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
@@ -39,7 +39,7 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        
+
         rightFrontMotor.setInverted(true);
         rightBackMotor.setInverted(true);
         straightPID = new HazyPID();
@@ -81,38 +81,38 @@ public class Drivetrain extends HazySubsystem {
 
     public void setDriveSpeeds(double left, double right) {
         mode = Mode.RAW;
-        
+
         leftSpeed = left;
         rightSpeed = right;
     }
-    
+
     public boolean isDistanceDone() {
         return mode == Mode.STRAIGHT_CONTROLLED && straightPID.onTarget();
     }
-    
+
     public boolean isTurnDone() {
         return mode == Mode.TURN_CONTROLLED && turnPID.onTarget();
     }
 
     public void setDistanceSetpoint(double distance) {
         mode = Mode.STRAIGHT_CONTROLLED;
-        
+
         turnSetpoint = 0.0;
         turnPID.setTarget(0.0);
         turnPID.reset();
-        
+
         straightSetpoint = distance;
         straightPID.setTarget(straightSetpoint);
         straightPID.reset();
     }
-    
+
     public void setTurnSetpoint(double angle) {
         mode = Mode.TURN_CONTROLLED;
-        
+
         straightSetpoint = 0.0;
         straightPID.setTarget(0.0);
         straightPID.reset();
-        
+
         turnSetpoint = angle;
         turnPID.setTarget(turnSetpoint);
         turnPID.reset();

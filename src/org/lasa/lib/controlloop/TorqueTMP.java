@@ -102,16 +102,15 @@ public class TorqueTMP {
         //Cruise time is cruising distance divided by the speed at which we cruise.
         if (topSpeed != 0) {
             cruiseTime = cruiseDistance / topSpeed;
-            
+
         } else {
             cruiseTime = 0.0;
         }
         System.out.println(accelerationTime + cruiseTime + decelerationTime);
-        
+
         currentPosition = realPosition;
         currentVelocity = realSpeed;
-        
-        
+
     }
 
     /**

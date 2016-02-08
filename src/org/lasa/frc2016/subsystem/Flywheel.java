@@ -38,7 +38,7 @@ public class Flywheel extends HazySubsystem {
     }
 
     public void setFlywheelSpeed(double RPM) {
-        if(RPM == 0) {
+        if (RPM == 0) {
 //           flywheelMotorMaster.disableControl();
         }
 //        flywheelMotorMaster.set(targetRPM);
@@ -48,14 +48,14 @@ public class Flywheel extends HazySubsystem {
     public double getFlywheelSpeed() {
         return actualRPM;
     }
-    
+
     public boolean isSpunUp() {
         if (Math.abs(targetRPM - actualRPM) < doneBound) {
             ++doneCycles;
         } else {
             doneCycles = 0;
         }
-        
+
         return doneCycles > 10;
     }
 

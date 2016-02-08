@@ -36,7 +36,7 @@ public class Intake extends HazySubsystem {
 
     public void run() {
         byte newState = state;
-        
+
         switch (state) {
             case OFF:
                 intakeSpeed = 0.0;

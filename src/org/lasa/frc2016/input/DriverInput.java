@@ -21,7 +21,7 @@ public class DriverInput implements Runnable {
             lastPortcullis, lastSallyPort, lastDrawBridge, lastChevalDeFrise, lastResetArm = false;
     private boolean quickTurn, overrideMode;
     private boolean controlMode = true;
-    private boolean intake, outtake; 
+    private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, chevalDeFrise, resetArm;
     private boolean spinUpShooterOverride;
 
@@ -48,7 +48,7 @@ public class DriverInput implements Runnable {
     public boolean getOuttake() {
         return outtake;
     }
-    
+
     public boolean getSpinUpShooterRaw() {
         return spinUpShooterOverride;
     }
@@ -59,7 +59,7 @@ public class DriverInput implements Runnable {
         wheel = driver.getRightX();
         quickTurn = driver.getRightBumper();
         resetArm = driver.getA();
-        
+
         tiltRaw = operator.getLeftY();
         elevatorRaw = operator.getRightY();
         intake = operator.getRightBumper();
@@ -71,40 +71,40 @@ public class DriverInput implements Runnable {
 
         overrideMode = operator.getSelect();
         controlMode = operator.getSelect();
-        
+
         spinUpShooterOverride = operator.getNorth();
 
         if (intake && !lastIntake) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
         } else if (outtake && !lastOuttake) {
             CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
-        } else if(!intake && lastIntake){
+        } else if (!intake && lastIntake) {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
-        } else if(!outtake && lastOuttake) {
+        } else if (!outtake && lastOuttake) {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
-        
-        if(portcullis && !lastPortcullis) {
+
+        if (portcullis && !lastPortcullis) {
             CommandManager.addCommand(new SetArmPosition("Portcullis", 10, 10, 10));
-        } else if(sallyPort && !lastSallyPort) {
+        } else if (sallyPort && !lastSallyPort) {
             CommandManager.addCommand(new SetArmPosition("SallyPort", 10, 8, 12));
-        } else if(drawBridge && !lastDrawBridge) {
+        } else if (drawBridge && !lastDrawBridge) {
             CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, 15, 16));
-        } else if(chevalDeFrise && !lastChevalDeFrise) {
+        } else if (chevalDeFrise && !lastChevalDeFrise) {
             CommandManager.addCommand(new SetArmPosition("ChevalDeFrise", 10, 16, 16));
-        } else if(resetArm && !lastResetArm) {
+        } else if (resetArm && !lastResetArm) {
             CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
         }
-        
+
         lastIntake = intake;
         lastOuttake = outtake;
-        
+
         lastPortcullis = portcullis;
         lastSallyPort = sallyPort;
         lastDrawBridge = drawBridge;
         lastChevalDeFrise = chevalDeFrise;
         lastResetArm = resetArm;
-        
+
         lastSpinUpShooterOverride = spinUpShooterOverride;
     }
 }
