@@ -56,6 +56,18 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_PID_MAXU = new Constant("E_maxU", 1);
     public static final Constant ELEVATOR_PID_MINU = new Constant("E_minU", -1);
 
+    public static final Constant ELEVATOR_MP_MAX_VELOCITY = new Constant("EMP_maxV", 15);
+    public static final Constant ELEVATOR_MP_MAX_ACCELERATION = new Constant("EMP_maxA", 30);
+    
+    public static final Constant ELEVATOR_MPF_KP = new Constant("EMPF_kP", 0);
+    public static final Constant ELEVATOR_MPF_KV = new Constant("EMPF_kV", 0);
+    public static final Constant ELEVATOR_MPF_KFFV = new Constant("EMPF_kFFV", 0);
+    public static final Constant ELEVATOR_MPF_KFFA = new Constant("EMPF_kFFA", 0);
+    public static final Constant ELEVATOR_MPF_TUNED_VOLTAGE = new Constant("EMPF_TunedVoltage", 15);
+    public static final Constant ELEVATOR_MPF_DONE_CYCLES = new Constant("EMPF_DoneCycles", 5);
+    public static final Constant ELEVATOR_MPF_DONE_RANGE = new Constant("EMPF_DoneRange", 5);
+    public static final Constant ELEVATOR_MPF_POSITION_DONE_RANGE = new Constant("EMPF_PositonDoneRange", 5);
+    
     public static final Constant TILT_PID_KP = new Constant("T_kP", 0);
     public static final Constant TILT_PID_KI = new Constant("T_kI", 0);
     public static final Constant TILT_PID_KD = new Constant("T_kD", 0);
@@ -63,7 +75,19 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_PID_DONE_BOUND = new Constant("T_DoneBound", 0);
     public static final Constant TILT_PID_MAXU = new Constant("T_maxU", 1);
     public static final Constant TILT_PID_MINU = new Constant("T_minU", -1);
-
+    
+    public static final Constant TILT_MP_MAX_VELOCITY = new Constant("TMP_maxV", 15);
+    public static final Constant TILT_MP_MAX_ACCELERATION = new Constant("TMP_maxA", 30);
+    
+    public static final Constant TILT_MPF_KP = new Constant("TMPF_kP", 0);
+    public static final Constant TILT_MPF_KV = new Constant("TMPF_kV", 0);
+    public static final Constant TILT_MPF_KFFV = new Constant("TMPF_kFFV", 0);
+    public static final Constant TILT_MPF_KFFA = new Constant("TMPF_kFFA", 0);
+    public static final Constant TILT_MPF_TUNED_VOLTAGE = new Constant("TMPF_TunedVoltage", 15);
+    public static final Constant TILT_MPF_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
+    public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
+    public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
+    
     @Override
     public String getFileLocation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
