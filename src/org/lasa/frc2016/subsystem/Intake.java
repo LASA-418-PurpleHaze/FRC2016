@@ -11,12 +11,13 @@ public class Intake extends HazySubsystem {
     private final VictorSP intakeMotor;
     private double intakeSpeed;
 
-    private String state;
+    private byte state;
 
-    public static final String OFF = "OFF";
-    public static final String INTAKING = "INTAKING";
-    public static final String OUTTAKING = "OUTTAKING";
-    public static final String LOADINGSHOOTER = "LOADING SHOOTER";
+    public static final byte OFF = 0;
+    public static final byte INTAKING = 1;
+    public static final byte OUTTAKING = 2;
+    public static final byte LOADINGSHOOTER = 3;
+    private final static String[] stateNames = {"OFF", "INTAKING", "OUTTAKING", "SHOOTING"};
 
     private boolean hasBall;
 
@@ -28,12 +29,12 @@ public class Intake extends HazySubsystem {
         return (instance == null) ? instance = new Intake() : instance;
     }
 
-    public void setState(String state) {
+    public void setState(byte state) {
         this.state = state;
     }
 
     public void run() {
-        String newState = state;
+        byte newState = state;
 
         switch (state) {
             case OFF:
@@ -58,7 +59,7 @@ public class Intake extends HazySubsystem {
                 break;
         }
 
-        if (newState.compareTo(state) != 0) {
+        if (newState != state) {
             state = newState;
             run();
         }
@@ -69,7 +70,7 @@ public class Intake extends HazySubsystem {
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putString("state", state);
+        SmartDashboard.putString("state", stateNames[state]);
     }
 
     public boolean hasBall() {
