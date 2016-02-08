@@ -12,12 +12,12 @@ public class Drivetrain extends HazySubsystem {
 
     private final VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
     private double leftSpeed, rightSpeed;
-    private final HazyPID straighPID, turnPID;
+    private final HazyPID straightPID, turnPID;
 
     @Override
     public void updateConstants() {
-        straighPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
-        straighPID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU.getDouble(), Constants.DRIVETRAIN_PID_MINU.getDouble());
+        straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
+        straightPID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU.getDouble(), Constants.DRIVETRAIN_PID_MINU.getDouble());
         turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
@@ -40,10 +40,8 @@ public class Drivetrain extends HazySubsystem {
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
         leftFrontMotor.setInverted(true);
         leftBackMotor.setInverted(true);
-        straighPID = new HazyPID();
+        straightPID = new HazyPID();
         turnPID = new HazyPID();
-
-        updateConstants();
     }
 
     public static Drivetrain getInstance() {

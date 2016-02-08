@@ -53,9 +53,8 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("ArmAnglePID Control Point:", armAnglePID.getTargetVal());
     }
     
-    public void setControlPoint(double height, double ) {
-        armDistancePID.setTarget();
-        armAnglePID.setTarget(angle);
+    public void setControlPoint(double extension, double angle) {
+        
     }
     
     public HazyPID getArmAnglePID(){

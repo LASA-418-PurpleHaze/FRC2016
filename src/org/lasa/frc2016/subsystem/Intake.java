@@ -2,7 +2,6 @@ package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Ports;
 
 public class Intake extends HazySubsystem {
