@@ -7,26 +7,28 @@ public class DriveStraight extends HazyCommand {
     public DriveStraight(String name, double timeOut, double distance) {
         super(name, timeOut);
         this.distance = distance;
-        drivetrain.setControlSetpoint(distance, 0);
     }
 
     @Override
     public void run() {
+        //lol
     }
 
     @Override
     public boolean isDone() {
-        return super.isDone(); //To change body of generated methods, choose Tools | Templates.
+        return drivetrain.isDistanceDone();
     }
 
     @Override
     public void stop() {
-        super.stop(); //To change body of generated methods, choose Tools | Templates.
+        super.stop();
+        drivetrain.setDriveSpeeds(0.0, 0.0);
     }
 
     @Override
     public void start() {
-        super.start(); //To change body of generated methods, choose Tools | Templates.
+        super.start();
+        drivetrain.setDistanceSetpoint(distance);
     }
 
 }

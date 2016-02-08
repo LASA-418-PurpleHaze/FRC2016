@@ -17,7 +17,6 @@ public class HazyPID {
     }
 
     public boolean onTarget() {
-
         count = (Math.abs(targetValue - previousValue) < doneBound) ? ++count : 0;
         return count >= minCount;
     }
@@ -73,7 +72,7 @@ public class HazyPID {
         return output;
     }
 
-    void reset() {
+    public void reset() {
         error = 0;
         errorSum = 0;
         previousValue = 0;

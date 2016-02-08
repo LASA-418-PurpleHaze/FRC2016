@@ -44,7 +44,7 @@ public class DriverInput implements Runnable {
 
     @Override
     public void run() {
-        throttle = driver.getLeftY();
+        throttle = -driver.getLeftY();
         wheel = driver.getRightX();
         quickTurn = driver.getButton(Ports.QUICKTURN_BUTTON);
         intake = operator.getButton(Ports.INTAKE_BUTTON);

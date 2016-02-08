@@ -1,6 +1,6 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.frc2016.subsystem.Drivetrain.Mode;
+import edu.wpi.first.wpilibj.DriverStation;
 import org.lasa.lib.CheesyDriveHelper;
 
 public class CheesyDrive extends HazyCommand {
@@ -20,26 +20,19 @@ public class CheesyDrive extends HazyCommand {
         wheel = driverInput.getWheel();
         quickTurnEnabled = driverInput.getQuickTurn();
 
-        //cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
-        //drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
-        leftSide = throttle - wheel;
-        rightSide = throttle + wheel;
-        drivetrain.setDriveSpeeds(leftSide, rightSide);
-    }
-
-    @Override
-    public void start() {
-        drivetrain.setMode(Mode.RAW);
+        cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
+        drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
     }
 
     @Override
     public void stop() {
-        super.stop(); //To change body of generated methods, choose Tools | Templates.
+        drivetrain.setDriveSpeeds(0.0, 0.0);
+        super.stop();
     }
 
     @Override
     public boolean isDone() {
-        return false;
+        return DriverStation.getInstance().isDisabled();
     }
 
 }

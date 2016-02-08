@@ -67,9 +67,7 @@ public abstract class HazyCommand {
         return startTime != Double.MAX_VALUE;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
+    public abstract boolean isDone();
 
     public abstract void run();
 
