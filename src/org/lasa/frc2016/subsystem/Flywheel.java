@@ -9,17 +9,17 @@ public class Flywheel extends HazySubsystem {
 
     private static Flywheel instance;
 
-    private final CANTalon flywheelMotorMaster, flywheelMotorSlave;
+//    private final CANTalon flywheelMotorMaster, flywheelMotorSlave;
     private double targetRPM;
     private double actualRPM;
     private double doneBound;
     private double doneCycles;
 
     private Flywheel() {
-        flywheelMotorMaster = new CANTalon(Ports.FLYWHEEL_MASTER_MOTOR);
-        flywheelMotorSlave = new CANTalon(Ports.FLYWHEEL_SLAVE_MOTOR);
-        flywheelMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
-        flywheelMotorSlave.set(flywheelMotorMaster.getDeviceID());
+//        flywheelMotorMaster = new CANTalon(Ports.FLYWHEEL_MASTER_MOTOR);
+//        flywheelMotorSlave = new CANTalon(Ports.FLYWHEEL_SLAVE_MOTOR);
+//        flywheelMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+//        flywheelMotorSlave.set(flywheelMotorMaster.getDeviceID());
     }
 
     public static Flywheel getInstance() {
@@ -28,7 +28,7 @@ public class Flywheel extends HazySubsystem {
 
     @Override
     public void run() {
-        actualRPM = flywheelMotorMaster.getSpeed();
+//        actualRPM = flywheelMotorMaster.getSpeed();
     }
 
     @Override
@@ -38,7 +38,10 @@ public class Flywheel extends HazySubsystem {
     }
 
     public void setFlywheelSpeed(double RPM) {
-        flywheelMotorMaster.set(targetRPM);
+        if(RPM == 0) {
+//           flywheelMotorMaster.disableControl();
+        }
+//        flywheelMotorMaster.set(targetRPM);
         targetRPM = RPM;
     }
 
@@ -59,9 +62,9 @@ public class Flywheel extends HazySubsystem {
     @Override
     public void updateConstants() {
         doneBound = Constants.FLYWHEEL_PID_DONE_BOUND.getDouble();
-        flywheelMotorMaster.setPID(Constants.FLYWHEEL_PID_KP.getDouble(),
-                Constants.FLYWHEEL_PID_KI.getDouble(), Constants.FLYWHEEL_PID_KD.getDouble(),
-                Constants.FLYWHEEL_PID_KF.getDouble(), Constants.FLYWHEEL_PID_IZONE.getInt(),
-                Constants.FLYWHEEL_PID_RAMPRATE.getDouble(), Constants.FLYWHEEL_PID_PROFILE.getInt());
+//        flywheelMotorMaster.setPID(Constants.FLYWHEEL_PID_KP.getDouble(),
+//                Constants.FLYWHEEL_PID_KI.getDouble(), Constants.FLYWHEEL_PID_KD.getDouble(),
+//                Constants.FLYWHEEL_PID_KF.getDouble(), Constants.FLYWHEEL_PID_IZONE.getInt(),
+//                Constants.FLYWHEEL_PID_RAMPRATE.getDouble(), Constants.FLYWHEEL_PID_PROFILE.getInt());
     }
 }

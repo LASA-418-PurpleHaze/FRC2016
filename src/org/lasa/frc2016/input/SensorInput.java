@@ -13,10 +13,13 @@ public class SensorInput {
 
     public static AHRS navX;
     public static DigitalInput intakeSwitch;
-    public static Encoder leftSide, rightSide;
+    public static Encoder leftSide, rightSide, armTilt, armExtension;
     
     private AnalogInput stringPot, distanceVal;
-    private double navXCompassHeadingVal, rightSideEncoderVal, leftSideEncoderVal;
+    private double navXCompassHeadingVal;
+    private double rightSideEncoderVal, leftSideEncoderVal;
+    private double armTiltPostionVal, armExtensionPositionVal;
+    private double armTiltRateVal, armExtensionRateVal;
     private boolean intakeSwitchVal;
 
     private SensorInput() {
@@ -24,8 +27,8 @@ public class SensorInput {
         leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
         rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
         intakeSwitch = new DigitalInput(Ports.INTAKE_BUMP_SWITCH);
-        stringPot = new AnalogInput(Ports.ANGLE_SENSOR);
-        distanceVal = new AnalogInput(Ports.DISTANCE_SENSOR);
+        armTilt = new Encoder(Ports.ARM_TILT_A_ENCODER, Ports.ARM_TILT_B_ENCODER);
+        armExtension = new Encoder(Ports.ARM_EXTENSION_A_ENCODER, Ports.ARM_EXTENSION_B_ENCODER);
     }
 
     public static SensorInput getInstance() {
@@ -37,6 +40,10 @@ public class SensorInput {
         leftSideEncoderVal = leftSide.get();
         rightSideEncoderVal = rightSide.get();
         intakeSwitchVal = intakeSwitch.get();
+        armTiltPostionVal = armTilt.get();
+        armExtensionPositionVal = armExtension.get();
+        armTiltRateVal = armTilt.getRate();
+        armExtensionRateVal = armExtension.getRate();
     }
 
     public double getNavXCompassHeading() {
@@ -55,11 +62,20 @@ public class SensorInput {
         return intakeSwitchVal;
     }
     
-    public double getStringPot() {
-        return stringPot.getValue();
+    public double getArmTiltPostion() {
+        return armTiltPostionVal;
     }
     
-    public double getDistanceVal(){
-        return distanceVal.getValue();
+    public double getArmExtensionPostion() {
+        return armExtensionPositionVal;
     }
+    
+    public double getArmTiltRate() {
+        return armTiltRateVal;
+    }
+    
+    public double getArmExtensionRate() {
+        return armExtensionRateVal;
+    }
+
 }

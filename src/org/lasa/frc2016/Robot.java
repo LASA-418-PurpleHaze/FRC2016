@@ -23,7 +23,7 @@ public class Robot extends HazyIterative {
     HazyVision hazyVision;
     ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
-//    Flywheel flywheel;
+    Flywheel flywheel;
     Intake intake;
     Arm arm;
     DriverInput driverInput;
@@ -37,7 +37,7 @@ public class Robot extends HazyIterative {
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
-//        flywheel = Flywheel.getInstance();
+        flywheel = Flywheel.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
@@ -49,7 +49,7 @@ public class Robot extends HazyIterative {
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
-//        flywheel.updateConstants();
+        flywheel.updateConstants();
         intake.updateConstants();
         arm.updateConstants();
     }
@@ -61,7 +61,7 @@ public class Robot extends HazyIterative {
         drivetrain.run();
         intake.run();
         drivetrain.pushToDashboard();
-//        flywheel.pushToDashboard();
+        flywheel.pushToDashboard();
         intake.pushToDashboard();
         arm.pushToDashboard();
     }
@@ -69,7 +69,7 @@ public class Robot extends HazyIterative {
     @Override
     public void teleopContinuous() {
         sensorInput.run();
-//        flywheel.run();
+        flywheel.run();
         arm.run();
 
     }
@@ -77,7 +77,7 @@ public class Robot extends HazyIterative {
     @Override
     public void autonomousInit() {
         drivetrain.updateConstants();
-//        flywheel.updateConstants();
+        flywheel.updateConstants();
         intake.updateConstants();
         arm.updateConstants();
     }
@@ -85,7 +85,7 @@ public class Robot extends HazyIterative {
     @Override
     public void autonomousPeriodic() {
         CommandManager.run();
-//        flywheel.run();
+        flywheel.run();
     }
 
     @Override

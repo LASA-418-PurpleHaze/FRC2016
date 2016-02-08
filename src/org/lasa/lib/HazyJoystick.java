@@ -60,6 +60,10 @@ public class HazyJoystick {
     public boolean getStart() {
         return controller.getRawButton(8);
     }
+    
+    public boolean getNorth() {
+        return controller.getPOV() == 1;
+    }
 
     private double handleDeadBand(double input) {
         if (Math.abs(input) > deadband) {

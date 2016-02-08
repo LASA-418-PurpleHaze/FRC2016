@@ -1,5 +1,7 @@
 package org.lasa.frc2016.subsystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Constants;
@@ -13,23 +15,23 @@ public class Arm extends HazySubsystem {
     private static Arm instance;
 
     private final VictorSP leftArmTilter, rightArmTifter, leftArmElevator, rightArmElevator;
-    private final HazyPID ElevatorPID, TiltPID;
-    private final TorqueTMP TiltProfile, ElevatorProfile;
-    private final TorquePV TiltProfileFollower, ElevatorProfileFollower;
-    private double leftArmSpeed, rightArmSpeed, distance, angle;
+    private final TorqueTMP tiltProfile, elevatorProfile;
+    private final TorquePV tiltProfileFollower, elevatorProfileFollower;
+    private double targetAngle, actualAngle, actualAngleRate;
+    private double targetExtension, actualExtension, actualExtensionRate;
+    private double tiltMotorOutput, elevatorMotorOutput;
+    private double dt, prevTime;
 
     private Arm() {
+        prevTime = Timer.getFPGATimestamp(); // FIX
         leftArmTilter = new VictorSP(Ports.LEFT_ARM_LIFTER);
         rightArmTifter = new VictorSP(Ports.RIGHT_ARM_LIFTER);
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
-        TiltPID = new HazyPID();
-        ElevatorPID = new HazyPID();
-        TiltProfile = new TorqueTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
-        ElevatorProfile = new TorqueTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
-        TiltProfileFollower = new TorquePV();
-        ElevatorProfileFollower = new TorquePV();
-        
+        tiltProfile = new TorqueTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
+        elevatorProfile = new TorqueTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
+        tiltProfileFollower = new TorquePV();
+        elevatorProfileFollower = new TorquePV();
     }
 
     public static Arm getInstance() {
@@ -38,48 +40,60 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        distance = ElevatorPID.calculate(sensorInput.getDistanceVal());
-        angle = TiltPID.calculate(sensorInput.getStringPot());
-        leftArmTilter.set(angle);
-        rightArmTifter.set(angle);
-        leftArmElevator.set(distance);
-        rightArmElevator.set(distance);
+        dt = Timer.getFPGATimestamp() - prevTime;
+        prevTime = Timer.getFPGATimestamp();
+        actualAngle = sensorInput.getArmTiltPostion();
+        actualExtension = sensorInput.getArmExtensionPostion();
+        actualAngleRate = sensorInput.getArmTiltRate();
+        actualExtensionRate = sensorInput.getArmExtensionRate();
+        tiltProfile.calculateNextSituation(dt);
+        elevatorProfile.calculateNextSituation(dt);
+        tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
+        elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, actualExtension, actualExtensionRate);
+        leftArmTilter.set(tiltMotorOutput);
+        rightArmTifter.set(tiltMotorOutput);
+        leftArmElevator.set(elevatorMotorOutput);
+        rightArmElevator.set(elevatorMotorOutput);
     }
 
     @Override
     public void updateConstants() {
-        TiltPID.updatePID(Constants.TILT_PID_KP.getDouble(), Constants.TILT_PID_KI.getDouble(), Constants.TILT_PID_KD.getDouble(), Constants.TILT_PID_KF.getDouble(), Constants.TILT_PID_DONE_BOUND.getDouble());
-        TiltPID.updateMaxMin(Constants.TILT_PID_MAXU.getDouble(), Constants.TILT_PID_MINU.getDouble());
-        ElevatorPID.updatePID(Constants.ELEVATOR_PID_KP.getDouble(), Constants.ELEVATOR_PID_KI.getDouble(), Constants.ELEVATOR_PID_KD.getDouble(), Constants.ELEVATOR_PID_KF.getDouble(), Constants.ELEVATOR_PID_DONE_BOUND.getDouble());
-        ElevatorPID.updateMaxMin(Constants.ELEVATOR_PID_MAXU.getDouble(), Constants.ELEVATOR_PID_MINU.getDouble());
-        TiltProfileFollower.setGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
+        tiltProfileFollower.setGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
                 Constants.TILT_MPF_KFFV.getDouble(), Constants.TILT_MPF_KFFA.getDouble());
-        TiltProfileFollower.setTunedVoltage(Constants.TILT_MPF_TUNED_VOLTAGE.getDouble());
-        TiltProfileFollower.setDoneCycles(Constants.TILT_MPF_DONE_CYCLES.getInt());
-        TiltProfileFollower.setDoneRange(Constants.TILT_MPF_DONE_RANGE.getDouble());
-        TiltProfileFollower.setPositionDoneRange(Constants.TILT_MPF_POSITION_DONE_RANGE.getDouble());
-        ElevatorProfileFollower.setGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
+        tiltProfileFollower.setTunedVoltage(Constants.TILT_MPF_TUNED_VOLTAGE.getDouble());
+        tiltProfileFollower.setDoneCycles(Constants.TILT_MPF_DONE_CYCLES.getInt());
+        tiltProfileFollower.setDoneRange(Constants.TILT_MPF_DONE_RANGE.getDouble());
+        tiltProfileFollower.setPositionDoneRange(Constants.TILT_MPF_POSITION_DONE_RANGE.getDouble());
+        elevatorProfileFollower.setGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
                 Constants.ELEVATOR_MPF_KFFV.getDouble(), Constants.ELEVATOR_MPF_KFFA.getDouble());
-        ElevatorProfileFollower.setTunedVoltage(Constants.ELEVATOR_MPF_TUNED_VOLTAGE.getDouble());
-        ElevatorProfileFollower.setDoneCycles(Constants.ELEVATOR_MPF_DONE_CYCLES.getInt());
-        ElevatorProfileFollower.setDoneRange(Constants.ELEVATOR_MPF_DONE_RANGE.getDouble());
-        ElevatorProfileFollower.setPositionDoneRange(Constants.ELEVATOR_MPF_POSITION_DONE_RANGE.getDouble());
+        elevatorProfileFollower.setTunedVoltage(Constants.ELEVATOR_MPF_TUNED_VOLTAGE.getDouble());
+        elevatorProfileFollower.setDoneCycles(Constants.ELEVATOR_MPF_DONE_CYCLES.getInt());
+        elevatorProfileFollower.setDoneRange(Constants.ELEVATOR_MPF_DONE_RANGE.getDouble());
+        elevatorProfileFollower.setPositionDoneRange(Constants.ELEVATOR_MPF_POSITION_DONE_RANGE.getDouble());
     }
 
     @Override
     public void pushToDashboard() {
+        SmartDashboard.putNumber("T_TargetAngle", targetAngle);
+        SmartDashboard.putNumber("T_ActualAngle", actualAngle);
+        SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
+        SmartDashboard.putNumber("T_TargetExtesion", targetExtension);
+        SmartDashboard.putNumber("T_ActualExtension", actualExtension);
+        SmartDashboard.putNumber("T_ActualExtensionRate", actualExtensionRate);
+    }
+
+    public void setControlPoint(double x, double y) {
+        if (!DriverStation.getInstance().isFMSAttached() || DriverStation.getInstance().getMatchTime() < 20) {
+            y = Math.min(y, 40);
+        }
+        x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
+        targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
+        targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
+        elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
     }
     
-    public void setControlPoint(double angle, double extension) {
-        TiltProfile.generateTrapezoid(angle, extension, leftArmSpeed);
-        ElevatorProfile.generateTrapezoid(extension, extension, leftArmSpeed);
-    }
-    
-    public HazyPID getArmAnglePID(){
-        return TiltPID;
-    }
-    
-    public HazyPID getArmDistancePID(){
-        return ElevatorPID;
+    public boolean isDone() {
+        return tiltProfileFollower.isDone() && elevatorProfileFollower.isDone();
     }
 }

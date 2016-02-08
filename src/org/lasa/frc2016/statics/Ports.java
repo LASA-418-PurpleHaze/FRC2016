@@ -22,6 +22,10 @@ public class Ports {
     public static final int LEFT_SIDE_B_ENCODER = 1;
     public static final int RIGHT_SIDE_A_ENCODER = 2;
     public static final int RIGHT_SIDE_B_ENCODER = 3;
+    public static final int ARM_TILT_A_ENCODER = 4;
+    public static final int ARM_TILT_B_ENCODER = 5;
+    public static final int ARM_EXTENSION_A_ENCODER = 7;
+    public static final int ARM_EXTENSION_B_ENCODER = 8;
 
     // Analog IO Ports
     // Digital IO Ports

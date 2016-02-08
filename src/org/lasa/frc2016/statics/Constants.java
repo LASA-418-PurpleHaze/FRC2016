@@ -48,14 +48,8 @@ public class Constants extends HazyConstant {
     public static final Constant FLYWHEEL_SHORT_RPM = new Constant("F_ShortShotRPM", 0);
     public static final Constant FLYWHEEL_LONG_RPM = new Constant("F_LongShotRPM", 0);
 
-    public static final Constant ELEVATOR_PID_KP = new Constant("E_kP", 0);
-    public static final Constant ELEVATOR_PID_KI = new Constant("E_kI", 0);
-    public static final Constant ELEVATOR_PID_KD = new Constant("E_kD", 0);
-    public static final Constant ELEVATOR_PID_KF = new Constant("E_kF", 0);
-    public static final Constant ELEVATOR_PID_DONE_BOUND = new Constant("E_DoneBound", 0);
-    public static final Constant ELEVATOR_PID_MAXU = new Constant("E_maxU", 1);
-    public static final Constant ELEVATOR_PID_MINU = new Constant("E_minU", -1);
-
+    public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
+    
     public static final Constant ELEVATOR_MP_MAX_VELOCITY = new Constant("EMP_maxV", 15);
     public static final Constant ELEVATOR_MP_MAX_ACCELERATION = new Constant("EMP_maxA", 30);
     
@@ -68,13 +62,7 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_MPF_DONE_RANGE = new Constant("EMPF_DoneRange", 5);
     public static final Constant ELEVATOR_MPF_POSITION_DONE_RANGE = new Constant("EMPF_PositonDoneRange", 5);
     
-    public static final Constant TILT_PID_KP = new Constant("T_kP", 0);
-    public static final Constant TILT_PID_KI = new Constant("T_kI", 0);
-    public static final Constant TILT_PID_KD = new Constant("T_kD", 0);
-    public static final Constant TILT_PID_KF = new Constant("T_kF", 0);
-    public static final Constant TILT_PID_DONE_BOUND = new Constant("T_DoneBound", 0);
-    public static final Constant TILT_PID_MAXU = new Constant("T_maxU", 1);
-    public static final Constant TILT_PID_MINU = new Constant("T_minU", -1);
+    public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
     
     public static final Constant TILT_MP_MAX_VELOCITY = new Constant("TMP_maxV", 15);
     public static final Constant TILT_MP_MAX_ACCELERATION = new Constant("TMP_maxA", 30);

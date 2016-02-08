@@ -36,16 +36,15 @@ public class Intake extends HazySubsystem {
 
     public void run() {
         byte newState = state;
-
+        
         switch (state) {
             case OFF:
                 intakeSpeed = 0.0;
                 break;
             case INTAKING:
-                if (sensorInput.getIntakeSwitchValue()) {
+                if (!sensorInput.getIntakeSwitchValue()) {
                     hasBall = true;
                     newState = OFF;
-
                 } else {
                     intakeSpeed = 1.0;
                 }
