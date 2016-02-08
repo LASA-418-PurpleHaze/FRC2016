@@ -77,7 +77,7 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
         SmartDashboard.putNumber("T_ActualAngle", actualAngle);
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
-        SmartDashboard.putNumber("T_TargetExtesion", targetExtension);
+        SmartDashboard.putNumber("T_TargetExtension", targetExtension);
         SmartDashboard.putNumber("T_ActualExtension", actualExtension);
         SmartDashboard.putNumber("T_ActualExtensionRate", actualExtensionRate);
     }
