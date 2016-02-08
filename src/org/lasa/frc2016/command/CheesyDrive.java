@@ -12,6 +12,7 @@ public class CheesyDrive extends HazyCommand {
 
     public CheesyDrive(String nm, double t) {
         super(nm, t);
+        cheesyDrive = new CheesyDriveHelper();
     }
 
     @Override

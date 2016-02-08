@@ -28,12 +28,12 @@ public class Ports {
     public static final int INTAKE_BUMP_SWITCH = 6;
 
     //Joystick Ports
-    public static final int SHOOTER_BUTTON = 5;
-    public static final int QUICKTURN_BUTTON = 4;
+    public static final int SHOOTER_BUTTON = 2;
+    public static final int QUICKTURN_BUTTON = 6;
     public static final int INTAKE_BUTTON = 3;
     public static final int OUTTAKE_BUTTON = 4;
 
     //Arm input stuff
-    public static final int DISTANCE_SENSOR = 0;
-    public static final int ANGLE_SENSOR = 0;
+    public static final int DISTANCE_SENSOR = 3;
+    public static final int ANGLE_SENSOR = 2;
 }

@@ -21,11 +21,11 @@ public class HazyJoystick {
     }
 
     public double getRightX() {
-        return handleDeadBand(controller.getRawAxis(2));
+        return handleDeadBand(controller.getRawAxis(4));
     }
 
     public double getRightY() {
-        return handleDeadBand(controller.getRawAxis(3));
+        return handleDeadBand(controller.getRawAxis(5));
     }
 
     public boolean getButton(int button) {
