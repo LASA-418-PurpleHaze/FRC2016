@@ -78,7 +78,7 @@ public class Constants extends HazyConstant {
 
     @Override
     public String getFileLocation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "~/constants.txt";
     }
 
 }

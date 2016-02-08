@@ -38,7 +38,7 @@ public abstract class HazyConstant {
 
     public void loadFromFile() {
         try {
-            BufferedReader r = new BufferedReader(new FileReader(new File("pathname")));
+            BufferedReader r = new BufferedReader(new FileReader(new File(getFileLocation())));
             String line, key;
             double value;
             int spaceIndex;
