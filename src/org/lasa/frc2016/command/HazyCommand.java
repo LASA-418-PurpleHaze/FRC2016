@@ -48,6 +48,13 @@ public abstract class HazyCommand {
     }
 
     public HazyCommand(String nm, double t) {
+        drivetrain = Drivetrain.getInstance();
+        intake = Intake.getInstance();
+        flywheel = Flywheel.getInstance();
+        arm = Arm.getInstance();
+        driverInput = DriverInput.getInstance();
+        sensorInput = SensorInput.getInstance();
+        
         name = nm;
         timeOut = t;
     }
