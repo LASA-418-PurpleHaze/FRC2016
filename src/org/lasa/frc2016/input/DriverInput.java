@@ -46,9 +46,9 @@ public class DriverInput implements Runnable {
     public void run() {
         throttle = -driver.getLeftY();
         wheel = driver.getRightX();
-        quickTurn = driver.getButton(Ports.QUICKTURN_BUTTON);
-        intake = operator.getButton(Ports.INTAKE_BUTTON);
-        outtake = operator.getButton(Ports.OUTTAKE_BUTTON);
+        quickTurn = driver.getRightBumper();
+        intake = operator.getA();
+        outtake = operator.getB();
 
         if (getIntake() && !lastGetIntake) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
