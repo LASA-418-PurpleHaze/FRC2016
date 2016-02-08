@@ -99,7 +99,7 @@ public class Drivetrain extends HazySubsystem {
         turnPID.reset();
         
         straightSetpoint = distance;
-        straightPID.setTarget(distance);
+        straightPID.setTarget(straightSetpoint);
         straightPID.reset();
     }
     
@@ -111,7 +111,7 @@ public class Drivetrain extends HazySubsystem {
         straightPID.reset();
         
         turnSetpoint = angle;
-        turnPID.setTarget(angle);
+        turnPID.setTarget(turnSetpoint);
         turnPID.reset();
     }
 }
