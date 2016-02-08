@@ -52,17 +52,20 @@ public class Drivetrain extends HazySubsystem {
 
     @Override
     public void run() {
-        //control loop stuff
-        if (mode == Mode.STRAIGHT_CONTROLLED) {
-            leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftSideValue() + sensorInput.getRightSideValue()) / 2);
-        } else if (mode == Mode.TURN_CONTROLLED) {
-            double power = turnPID.calculate(sensorInput.getNavXCompassHeading());
-            leftSpeed = -power;
-            rightSpeed = power;
-        } else if (mode == Mode.RAW) {
-            //lol
+        if (null != mode) { //control loop stuff
+            switch (mode) {
+                case STRAIGHT_CONTROLLED:
+                    leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftSideValue() + sensorInput.getRightSideValue()) / 2);
+                    break;
+                case TURN_CONTROLLED:
+                    double power = turnPID.calculate(sensorInput.getNavXCompassHeading());
+                    leftSpeed = -power;
+                    rightSpeed = power;
+                    break;
+                case RAW:
+                    break;
+            }
         }
-        
         leftFrontMotor.set(leftSpeed);
         leftBackMotor.set(leftSpeed);
         rightFrontMotor.set(rightSpeed);
