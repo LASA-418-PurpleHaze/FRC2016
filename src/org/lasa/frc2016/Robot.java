@@ -1,5 +1,6 @@
 package org.lasa.frc2016;
 
+import edu.wpi.first.wpilibj.Servo;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -14,6 +15,7 @@ import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
+import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Flywheel;
 
@@ -27,12 +29,14 @@ public class Robot extends HazyIterative {
     Arm arm;
     DriverInput driverInput;
     SensorInput sensorInput;
-
+    Constants constManager;
+    
     @Override
     public void robotInit() {
-//        hazyVision = HazyVision.getInstance();
-//        Thread thread = new Thread(hazyVision);
-//        thread.start();
+        constManager = new Constants();
+        hazyVision = HazyVision.getInstance();
+        Thread thread = new Thread(hazyVision);
+        thread.start();
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
@@ -45,6 +49,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
+        constManager.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
@@ -74,6 +79,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
+        constManager.loadFromFile();
         drivetrain.updateConstants();
         flywheel.updateConstants();
         intake.updateConstants();

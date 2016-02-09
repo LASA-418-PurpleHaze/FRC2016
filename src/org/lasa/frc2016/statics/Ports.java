@@ -34,4 +34,6 @@ public class Ports {
     //Arm input stuff
     public static final int DISTANCE_SENSOR = 3;
     public static final int ANGLE_SENSOR = 2;
+    
+    //Servo ports
 }
