@@ -5,27 +5,25 @@ import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.frc2016.command.DriveStraight;
-import org.lasa.frc2016.command.DriveTurn;
-import org.lasa.frc2016.command.HazyCommand;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
 import org.lasa.frc2016.command.SpinUpShooter;
 import org.lasa.frc2016.command.StopShooter;
+import org.lasa.frc2016.subsystem.Flywheel;
 import org.lasa.lib.HazyJoystick;
 
 public class DriveTeamInput implements Runnable {
 
     HazyJoystick driver = new HazyJoystick(0, 0.15);
     HazyJoystick operator = new HazyJoystick(1, 0.15);
-    
-    private Shooter shooter;
+
+    private Flywheel shooter;
 
     private static DriveTeamInput instance;
 
     private double throttle, wheel, tiltRaw, elevatorRaw;
     private boolean lastIntake, lastOuttake, lastSpinUpShooterOverride,
-            lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm, 
+            lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm,
             lastAutoShooterPrep, lastShoot = false;
     private boolean quickTurn, overrideMode;
     private boolean potatoMode = true;
@@ -33,8 +31,10 @@ public class DriveTeamInput implements Runnable {
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean autoShooterPrep, shoot;
     private boolean spinUpShooterOverride;
-    
-    private HazyCommand c;
+
+    private DriveTeamInput() {
+        shooter = Flywheel.getInstance();
+    }
 
     public static DriveTeamInput getInstance() {
         return (instance == null) ? instance = new DriveTeamInput() : instance;
@@ -60,9 +60,7 @@ public class DriveTeamInput implements Runnable {
         return outtake;
     }
 
-    private void DriveTeamInput() {
-        shooter = Shooter.getInstance();
-        
+    private void input() {
         throttle = -driver.getLeftY();
         wheel = driver.getRightX();
         quickTurn = driver.getRightBumper();
@@ -99,7 +97,7 @@ public class DriveTeamInput implements Runnable {
         lastDrawBridge = drawBridge;
         lastSeeSaw = seeSaw;
         lastResetArm = resetArm;
-        
+
         lastAutoShooterPrep = autoShooterPrep;
         lastShoot = shoot;
 
@@ -108,7 +106,7 @@ public class DriveTeamInput implements Runnable {
 
     @Override
     public void run() {
-        DriveTeamInput();
+        input();
 
         if (intake && !lastIntake) {
             CommandManager.addCommand(new InfeedBall("Infeed", 10));
@@ -135,12 +133,12 @@ public class DriveTeamInput implements Runnable {
                 CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
             }
         } else if (overrideMode) {
-            
+
         }
-        
+
         if (potatoMode) {
-            if(autoShooterPrep && !lastAutoShooterPrep) {
-                CommandManager.addCommand(c = new AimAndSpinUpShooter("AutoPrepShooter", 10));
+            if (autoShooterPrep && !lastAutoShooterPrep) {
+                CommandManager.addCommand(new AimAndSpinUpShooter("AutoPrepShooter", 10));
             } else if (!autoShooterPrep && lastAutoShooterPrep) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
@@ -148,13 +146,13 @@ public class DriveTeamInput implements Runnable {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }
         } else if (overrideMode) {
-            if(spinUpShooterOverride && !lastSpinUpShooterOverride) {
-                CommandManager.addCommand(c = new SpinUpShooter("PrepShooter", 10, 14000));
-                if(shoot && !lastShoot && c.isDone()) {
-                    CommandManager.addCommand(new Shoot("Shoot", 10));
-                }
+            if (spinUpShooterOverride && !lastSpinUpShooterOverride) {
+                CommandManager.addCommand(new SpinUpShooter("PrepShooter", 10, 14000));
             } else if (!spinUpShooterOverride && spinUpShooterOverride) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
+            }
+            if (shoot && !lastShoot && shooter.isSpunUp()) {
+                CommandManager.addCommand(new Shoot("Shoot", 10));
             }
         }
 
