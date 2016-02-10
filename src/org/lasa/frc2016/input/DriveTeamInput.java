@@ -11,12 +11,12 @@ import org.lasa.frc2016.command.SpinUpShooter;
 import org.lasa.frc2016.command.StopShooter;
 import org.lasa.lib.HazyJoystick;
 
-public class DriverInput implements Runnable {
+public class DriveTeamInput implements Runnable {
 
     HazyJoystick driver = new HazyJoystick(0, 0.15);
     HazyJoystick operator = new HazyJoystick(1, 0.15);
 
-    private static DriverInput instance;
+    private static DriveTeamInput instance;
 
     private double throttle, wheel, tiltRaw, elevatorRaw;
     private boolean lastIntake, lastOuttake, lastSpinUpShooterOverride,
@@ -27,8 +27,8 @@ public class DriverInput implements Runnable {
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean spinUpShooterOverride;
 
-    public static DriverInput getInstance() {
-        return (instance == null) ? instance = new DriverInput() : instance;
+    public static DriveTeamInput getInstance() {
+        return (instance == null) ? instance = new DriveTeamInput() : instance;
     }
 
     public double getThrottle() {

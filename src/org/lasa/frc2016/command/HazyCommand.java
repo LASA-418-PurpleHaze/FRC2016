@@ -2,7 +2,7 @@ package org.lasa.frc2016.command;
 
 import edu.wpi.first.wpilibj.Timer;
 import java.sql.Time;
-import org.lasa.frc2016.input.DriverInput;
+import org.lasa.frc2016.input.DriveTeamInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Drivetrain;
@@ -15,7 +15,7 @@ public abstract class HazyCommand {
     protected Intake intake;
     protected Flywheel flywheel;
     protected Arm arm;
-    protected DriverInput driverInput;
+    protected DriveTeamInput driverInput;
     protected SensorInput sensorInput;
 
     //Pointers to the next Command above or to the left in the tree.
@@ -39,7 +39,7 @@ public abstract class HazyCommand {
         intake = Intake.getInstance();
         flywheel = Flywheel.getInstance();
         arm = Arm.getInstance();
-        driverInput = DriverInput.getInstance();
+        driverInput = DriveTeamInput.getInstance();
         sensorInput = SensorInput.getInstance();
 
         this.up = up;
@@ -54,7 +54,7 @@ public abstract class HazyCommand {
         intake = Intake.getInstance();
         flywheel = Flywheel.getInstance();
         arm = Arm.getInstance();
-        driverInput = DriverInput.getInstance();
+        driverInput = DriveTeamInput.getInstance();
         sensorInput = SensorInput.getInstance();
 
         this.name = nm;

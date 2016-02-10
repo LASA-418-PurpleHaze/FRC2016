@@ -1,11 +1,11 @@
 package org.lasa.frc2016.subsystem;
 
-import org.lasa.frc2016.input.DriverInput;
+import org.lasa.frc2016.input.DriveTeamInput;
 import org.lasa.frc2016.input.SensorInput;
 
 public abstract class HazySubsystem {
 
-    protected DriverInput driverInput;
+    protected DriveTeamInput driverInput;
     protected SensorInput sensorInput;
 
     protected String errorMsg;
@@ -13,7 +13,7 @@ public abstract class HazySubsystem {
 
     protected HazySubsystem() {
         sensorInput = SensorInput.getInstance();
-        driverInput = DriverInput.getInstance();
+        driverInput = DriveTeamInput.getInstance();
     }
 
     public abstract void run();
