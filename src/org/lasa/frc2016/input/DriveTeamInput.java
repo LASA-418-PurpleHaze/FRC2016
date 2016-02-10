@@ -22,7 +22,7 @@ public class DriveTeamInput implements Runnable {
     private boolean lastIntake, lastOuttake, lastSpinUpShooterOverride,
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm = false;
     private boolean quickTurn, overrideMode;
-    private boolean easyMode = true;
+    private boolean potatoeMode = true;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean spinUpShooterOverride;
@@ -70,8 +70,8 @@ public class DriveTeamInput implements Runnable {
         drawBridge = operator.getX();
         seeSaw = operator.getY();
 
+        potatoMode = operator.getStart();
         overrideMode = operator.getSelect();
-        easyMode = operator.getStart();
 
         spinUpShooterOverride = operator.getNorth();
     }
