@@ -7,6 +7,7 @@ import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.command.DriveStraight;
 import org.lasa.frc2016.command.DriveTurn;
+import org.lasa.frc2016.command.HazyCommand;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
 import org.lasa.frc2016.command.SpinUpShooter;
@@ -30,6 +31,8 @@ public class DriveTeamInput implements Runnable {
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean autoShooterPrep, shoot;
     private boolean spinUpShooterOverride;
+    
+    private HazyCommand c;
 
     public static DriveTeamInput getInstance() {
         return (instance == null) ? instance = new DriveTeamInput() : instance;
@@ -132,16 +135,18 @@ public class DriveTeamInput implements Runnable {
         }
         
         if (potatoMode) {
-            if(autoShooterPrep && !autoShooterPrep) {
-                CommandManager.addCommand(new AimAndSpinUpShooter("AutoPrepShooter", 10));
-                if(shoot && !lastShoot) {
+            if(autoShooterPrep && !lastAutoShooterPrep) {
+                CommandManager.addCommand(c = new AimAndSpinUpShooter("AutoPrepShooter", 10));
+                if(shoot && !lastShoot && c.isDone()) {
                     CommandManager.addSequential(new Shoot("Shoot", 10));
                 }
+            } else if (!autoShooterPrep && lastAutoShooterPrep) {
+                CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
         } else if (overrideMode) {
             if(spinUpShooterOverride && !lastSpinUpShooterOverride) {
-                CommandManager.addCommand(new SpinUpShooter("PrepShooter", 10, 14000));
-                if(shoot && !lastShoot) {
+                CommandManager.addCommand(c = new SpinUpShooter("PrepShooter", 10, 14000));
+                if(shoot && !lastShoot && c.isDone()) {
                     CommandManager.addCommand(new Shoot("Shoot", 10));
                 }
             } else if (!spinUpShooterOverride && spinUpShooterOverride) {
