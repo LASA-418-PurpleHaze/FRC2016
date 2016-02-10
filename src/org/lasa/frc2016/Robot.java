@@ -33,9 +33,7 @@ public class Robot extends HazyIterative {
     @Override
     public void robotInit() {
         constManager = new Constants();
-        hazyVision = HazyVision.getInstance();
-        Thread thread = new Thread(hazyVision);
-        thread.start();
+        new Thread(HazyVision.getInstance()).start();
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
