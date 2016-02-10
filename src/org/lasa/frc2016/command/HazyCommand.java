@@ -8,6 +8,7 @@ import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Shooter;
 import org.lasa.frc2016.subsystem.Intake;
+import org.lasa.frc2016.vision.HazyVision;
 
 public abstract class HazyCommand {
 
@@ -17,6 +18,7 @@ public abstract class HazyCommand {
     protected Arm arm;
     protected DriveTeamInput driverInput;
     protected SensorInput sensorInput;
+    protected HazyVision hazyVision;
 
     //Pointers to the next Command above or to the left in the tree.
     HazyCommand up;
@@ -41,6 +43,7 @@ public abstract class HazyCommand {
         arm = Arm.getInstance();
         driverInput = DriveTeamInput.getInstance();
         sensorInput = SensorInput.getInstance();
+        hazyVision = HazyVision.getInstance();
 
         this.up = up;
         this.left = left;

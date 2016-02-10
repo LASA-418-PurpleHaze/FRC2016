@@ -2,13 +2,15 @@ package org.lasa.frc2016.command;
 
 public class AimAndSpinUpShooter extends HazyCommand {
 
+    
     public AimAndSpinUpShooter(String nm, double t) {
         super(nm, t);
+        
     }
 
     @Override
     public void start() {
-        //flywheel.setFlywheelSpeed(Constants.FLYWHEEL_SPINUP_SPEED);
+//        shooter.setShooterSpeed(hazyVision.getRPM());
     }
 
     @Override

@@ -10,13 +10,23 @@ import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
 import com.ni.vision.NIVision.StraightEdgeOptions;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.vision.USBCamera;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lasa.frc2016.statics.Constants;
 
 public final class HazyVision implements Runnable {
 
     private static HazyVision instance;
 
+    private ArrayList<Integer> visionLookUpTable;
+    
     USBCamera camera;
     Image image;
     ROI roi;
@@ -96,16 +106,33 @@ public final class HazyVision implements Runnable {
             }
         }
     }
-
+    
     private double calculate() {
         return 0;
     }
 
-    public double getDistanceFromHighGoal() {
-        return distance;
+    public synchronized int getRPM() {
+        return visionLookUpTable.get((int) distance);
     }
 
-    public void updateConstants() {
+    private void updateConstants() {
+        visionLookUpTable = new ArrayList<>(1);
+        try {
+            BufferedReader r = new BufferedReader(new FileReader("VisionTable.txt"));
+            String line;
+            while ((line = r.readLine()) != null) {
+                for(int x = 0; !line.equals(""); x++) {
+                    visionLookUpTable.add(Integer.parseInt(line));
+                }
+            }
+            r.close();
+        } catch (FileNotFoundException ex) {
+            DriverStation.reportError(ex.toString(), true);
+
+        } catch (IOException ex) {
+            Logger.getLogger(HazyVision.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         hue = new Range(Constants.HAZYVISION_HUE_LOWER_BOUND.getInt(), Constants.HAZYVISION_HUE_UPPER_BOUND.getInt());
         saturation = new Range(Constants.HAZYVISION_SATURATION_LOWER_BOUND.getInt(), Constants.HAZYVISION_SATURATION_UPPER_BOUND.getInt());
         luminence = new Range(Constants.HAZYVISION_LUMINENCE_LOWER_BOUND.getInt(), Constants.HAZYVISION_LUMINENCE_UPPER_BOUND.getInt());

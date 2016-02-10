@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public abstract class HazyConstant {
 
     private static ArrayList<Constant> constManager = new ArrayList(11);
-
+    BufferedReader r;
+    
     public abstract String getFileLocation();
 
     public static class Constant {
@@ -38,7 +39,7 @@ public abstract class HazyConstant {
 
     public void loadFromFile() {
         try {
-            BufferedReader r = new BufferedReader(new FileReader(new File(getFileLocation())));
+            r = new BufferedReader(new FileReader(new File(getFileLocation())));
             String line, key;
             double value;
             int spaceIndex;
