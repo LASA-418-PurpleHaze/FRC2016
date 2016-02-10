@@ -10,8 +10,8 @@ public class Ports {
     public static final int RIGHT_FRONT_MOTOR = 4;
     public static final int RIGHT_BACK_MOTOR = 3;
     public static final int INTAKE_MOTOR = 0;
-    public static final int FLYWHEEL_MASTER_MOTOR = 5;
-    public static final int FLYWHEEL_SLAVE_MOTOR = 6;
+    public static final int SHOOTER_MASTER_MOTOR = 5;
+    public static final int SHOOTER_SLAVE_MOTOR = 6;
     public static final int LEFT_ARM_LIFTER = 7;
     public static final int RIGHT_ARM_LIFTER = 8;
     public static final int LEFT_ARM_EXTENDER = 9;

@@ -11,12 +11,12 @@ public class SpinUpShooter extends HazyCommand {
 
     public void start() {
         super.start();
-        flywheel.setFlywheelSpeed(RPM);
+        shooter.setShooterSpeed(RPM);
     }
 
     @Override
     public boolean isDone() {
-        return flywheel.isSpunUp();
+        return shooter.isSpunUp();
     }
 
     @Override

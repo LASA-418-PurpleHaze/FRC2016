@@ -9,7 +9,7 @@ import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
 import org.lasa.frc2016.command.SpinUpShooter;
 import org.lasa.frc2016.command.StopShooter;
-import org.lasa.frc2016.subsystem.Flywheel;
+import org.lasa.frc2016.subsystem.Shooter;
 import org.lasa.lib.HazyJoystick;
 
 public class DriveTeamInput implements Runnable {
@@ -17,7 +17,7 @@ public class DriveTeamInput implements Runnable {
     HazyJoystick driver = new HazyJoystick(0, 0.15);
     HazyJoystick operator = new HazyJoystick(1, 0.15);
 
-    private Flywheel shooter;
+    private Shooter shooter;
 
     private static DriveTeamInput instance;
 
@@ -33,7 +33,7 @@ public class DriveTeamInput implements Runnable {
     private boolean spinUpShooterOverride;
 
     private DriveTeamInput() {
-        shooter = Flywheel.getInstance();
+        shooter = Shooter.getInstance();
     }
 
     public static DriveTeamInput getInstance() {

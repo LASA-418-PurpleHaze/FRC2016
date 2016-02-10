@@ -35,18 +35,18 @@ public class Constants extends HazyConstant {
     public static final Constant GYRO_PID_MAXU = new Constant("G_maxU", 1);
     public static final Constant GYRO_PID_MINU = new Constant("G_minU", -1);
 
-    public static final Constant FLYWHEEL_PID_KP = new Constant("F_kP", 0);
-    public static final Constant FLYWHEEL_PID_KI = new Constant("F_kI", 0);
-    public static final Constant FLYWHEEL_PID_KD = new Constant("F_kD", 0);
-    public static final Constant FLYWHEEL_PID_KF = new Constant("F_kF", 0);
-    public static final Constant FLYWHEEL_PID_DONE_BOUND = new Constant("F_DoneBound", 1000);
-    public static final Constant FLYWHEEL_PID_MAXU = new Constant("F_maxU", 1);
-    public static final Constant FLYWHEEL_PID_MINU = new Constant("F_minU", -1);
-    public static final Constant FLYWHEEL_PID_IZONE = new Constant("F_IZone", 0);
-    public static final Constant FLYWHEEL_PID_RAMPRATE = new Constant("F_RampRate", 0);
-    public static final Constant FLYWHEEL_PID_PROFILE = new Constant("F_Profile", 0);
-    public static final Constant FLYWHEEL_SHORT_RPM = new Constant("F_ShortShotRPM", 0);
-    public static final Constant FLYWHEEL_LONG_RPM = new Constant("F_LongShotRPM", 0);
+    public static final Constant SHOOTER_PID_KP = new Constant("F_kP", 0);
+    public static final Constant SHOOTER_PID_KI = new Constant("F_kI", 0);
+    public static final Constant SHOOTER_PID_KD = new Constant("F_kD", 0);
+    public static final Constant SHOOTER_PID_KF = new Constant("F_kF", 0);
+    public static final Constant SHOOTER_PID_DONE_BOUND = new Constant("F_DoneBound", 1000);
+    public static final Constant SHOOTER_PID_MAXU = new Constant("F_maxU", 1);
+    public static final Constant SHOOTER_PID_MINU = new Constant("F_minU", -1);
+    public static final Constant SHOOTER_PID_IZONE = new Constant("F_IZone", 0);
+    public static final Constant SHOOTER_PID_RAMPRATE = new Constant("F_RampRate", 0);
+    public static final Constant SHOOTER_PID_PROFILE = new Constant("F_Profile", 0);
+    public static final Constant SHOOTER_SHORT_RPM = new Constant("F_ShortShotRPM", 0);
+    public static final Constant SHOOTER_LONG_RPM = new Constant("F_LongShotRPM", 0);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
 

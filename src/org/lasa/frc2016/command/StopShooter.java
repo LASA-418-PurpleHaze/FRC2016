@@ -12,12 +12,12 @@ public class StopShooter extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        flywheel.setFlywheelSpeed(RPM);
+        shooter.setShooterSpeed(RPM);
     }
 
     @Override
     public boolean isDone() {
-        return !flywheel.isSpunUp();
+        return !shooter.isSpunUp();
     }
 
     @Override

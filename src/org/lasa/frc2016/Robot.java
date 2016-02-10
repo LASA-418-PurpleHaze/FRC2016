@@ -16,14 +16,14 @@ import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.subsystem.Arm;
-import org.lasa.frc2016.subsystem.Flywheel;
+import org.lasa.frc2016.subsystem.Shooter;
 
 public class Robot extends HazyIterative {
 
     HazyVision hazyVision;
     ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
-    Flywheel flywheel;
+    Shooter flywheel;
     Intake intake;
     Arm arm;
     DriveTeamInput driverInput;
@@ -39,7 +39,7 @@ public class Robot extends HazyIterative {
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
-        flywheel = Flywheel.getInstance();
+        flywheel = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriveTeamInput.getInstance();
