@@ -2,7 +2,7 @@ package org.lasa.frc2016.command;
 
 import edu.wpi.first.wpilibj.Timer;
 import java.sql.Time;
-import org.lasa.frc2016.input.DriveTeamInput;
+import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Drivetrain;
@@ -16,7 +16,7 @@ public abstract class HazyCommand {
     protected Intake intake;
     protected Shooter shooter;
     protected Arm arm;
-    protected DriveTeamInput driverInput;
+    protected DriverInput driverInput;
     protected SensorInput sensorInput;
     protected HazyVision hazyVision;
 
@@ -41,7 +41,7 @@ public abstract class HazyCommand {
         intake = Intake.getInstance();
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
-        driverInput = DriveTeamInput.getInstance();
+        driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
         hazyVision = HazyVision.getInstance();
 
@@ -57,7 +57,7 @@ public abstract class HazyCommand {
         intake = Intake.getInstance();
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
-        driverInput = DriveTeamInput.getInstance();
+        driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
 
         this.name = nm;

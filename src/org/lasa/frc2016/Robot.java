@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.lasa.frc2016.command.ArcadeDrive;
 import org.lasa.frc2016.command.CheesyDrive;
 import org.lasa.lib.HazyIterative;
-import org.lasa.frc2016.input.DriveTeamInput;
+import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.vision.HazyVision;
@@ -26,7 +26,7 @@ public class Robot extends HazyIterative {
     Shooter flywheel;
     Intake intake;
     Arm arm;
-    DriveTeamInput driverInput;
+    DriverInput driverInput;
     SensorInput sensorInput;
     Constants constManager;
     
@@ -40,7 +40,7 @@ public class Robot extends HazyIterative {
         flywheel = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
-        driverInput = DriveTeamInput.getInstance();
+        driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
     }
 
