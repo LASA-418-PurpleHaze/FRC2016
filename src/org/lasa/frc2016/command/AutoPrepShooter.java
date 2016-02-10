@@ -1,9 +1,9 @@
 package org.lasa.frc2016.command;
 
-public class AimAndSpinUpShooter extends HazyCommand {
+public class AutoPrepShooter extends HazyCommand {
 
     
-    public AimAndSpinUpShooter(String nm, double t) {
+    public AutoPrepShooter(String nm, double t) {
         super(nm, t);
         
     }

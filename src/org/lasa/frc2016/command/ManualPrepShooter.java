@@ -1,10 +1,10 @@
 package org.lasa.frc2016.command;
 
-public class SpinUpShooter extends HazyCommand {
+public class ManualPrepShooter extends HazyCommand {
 
     private double RPM;
 
-    public SpinUpShooter(String nm, double t, double rpm) {
+    public ManualPrepShooter(String nm, double t, double rpm) {
         super(nm, t);
         this.RPM = rpm;
     }

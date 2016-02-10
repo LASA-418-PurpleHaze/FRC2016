@@ -1,13 +1,13 @@
 package org.lasa.frc2016.input;
 
-import org.lasa.frc2016.command.AimAndSpinUpShooter;
+import org.lasa.frc2016.command.AutoPrepShooter;
 import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
-import org.lasa.frc2016.command.SpinUpShooter;
+import org.lasa.frc2016.command.ManualPrepShooter;
 import org.lasa.frc2016.command.StopShooter;
 import org.lasa.frc2016.subsystem.Shooter;
 import org.lasa.lib.HazyJoystick;
@@ -107,7 +107,7 @@ public class DriveTeamInput implements Runnable {
     private void shooterControl() {
         if (potatoMode) {
             if (autoShooterPrep && !lastAutoShooterPrep) {
-                CommandManager.addCommand(new AimAndSpinUpShooter("AutoPrepShooter", 10));
+                CommandManager.addCommand(new AutoPrepShooter("AutoPrepShooter", 10));
             } else if (!autoShooterPrep && lastAutoShooterPrep) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
@@ -116,7 +116,7 @@ public class DriveTeamInput implements Runnable {
             }
         } else if (overrideMode) {
             if (spinUpShooterOverride && !lastSpinUpShooterOverride) {
-                CommandManager.addCommand(new SpinUpShooter("PrepShooter", 10, 14000));
+                CommandManager.addCommand(new ManualPrepShooter("PrepShooter", 10, 14000));
             } else if (!spinUpShooterOverride && spinUpShooterOverride) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
