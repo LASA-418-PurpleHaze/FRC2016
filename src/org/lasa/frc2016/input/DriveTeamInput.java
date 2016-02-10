@@ -18,6 +18,8 @@ public class DriveTeamInput implements Runnable {
 
     HazyJoystick driver = new HazyJoystick(0, 0.15);
     HazyJoystick operator = new HazyJoystick(1, 0.15);
+    
+    private Shooter shooter;
 
     private static DriveTeamInput instance;
 
@@ -59,6 +61,8 @@ public class DriveTeamInput implements Runnable {
     }
 
     private void DriveTeamInput() {
+        shooter = Shooter.getInstance();
+        
         throttle = -driver.getLeftY();
         wheel = driver.getRightX();
         quickTurn = driver.getRightBumper();
@@ -137,11 +141,11 @@ public class DriveTeamInput implements Runnable {
         if (potatoMode) {
             if(autoShooterPrep && !lastAutoShooterPrep) {
                 CommandManager.addCommand(c = new AimAndSpinUpShooter("AutoPrepShooter", 10));
-                if(shoot && !lastShoot && c.isDone()) {
-                    CommandManager.addSequential(new Shoot("Shoot", 10));
-                }
             } else if (!autoShooterPrep && lastAutoShooterPrep) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
+            }
+            if (shoot && !lastShoot && shooter.isSpunUp()) {
+                CommandManager.addCommand(new Shoot("Shoot", 10));
             }
         } else if (overrideMode) {
             if(spinUpShooterOverride && !lastSpinUpShooterOverride) {
