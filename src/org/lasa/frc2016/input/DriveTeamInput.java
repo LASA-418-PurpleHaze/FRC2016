@@ -134,8 +134,8 @@ public class DriveTeamInput implements Runnable {
         if (potatoMode) {
             if(autoShooterPrep && !autoShooterPrep) {
                 CommandManager.addCommand(new AimAndSpinUpShooter("AutoPrepShooter", 10));
-                if(shoot && !lastShoot) { // need to find a way for it to wait on the prep to finish
-                    CommandManager.addCommand(new Shoot("Shoot", 10));
+                if(shoot && !lastShoot) {
+                    CommandManager.addSequential(new Shoot("Shoot", 10));
                 }
             }
         } else if (overrideMode) {
