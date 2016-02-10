@@ -22,7 +22,7 @@ public class DriveTeamInput implements Runnable {
     private boolean lastIntake, lastOuttake, lastSpinUpShooterOverride,
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm = false;
     private boolean quickTurn, overrideMode;
-    private boolean potatoeMode = true;
+    private boolean potatoMode = true;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean spinUpShooterOverride;
