@@ -103,39 +103,8 @@ public class DriveTeamInput implements Runnable {
 
         lastSpinUpShooterOverride = spinUpShooterOverride;
     }
-
-    @Override
-    public void run() {
-        input();
-
-        if (intake && !lastIntake) {
-            CommandManager.addCommand(new InfeedBall("Infeed", 10));
-        } else if (outtake && !lastOuttake) {
-            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
-        } else if (!intake && lastIntake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
-        } else if (!outtake && lastOuttake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
-        }
-
-        if (potatoMode) {
-            if (portcullis && !lastPortcullis) {
-                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, 10, 10));
-                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, 10, 24));
-            } else if (sallyPort && !lastSallyPort) {
-                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, 8, 12));
-            } else if (drawBridge && !lastDrawBridge) {
-                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, 15, 16));
-            } else if (seeSaw && !lastSeeSaw) {
-                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, 15, 1));
-                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, 15, 0));
-            } else if (resetArm && !lastResetArm) {
-                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
-            }
-        } else if (overrideMode) {
-
-        }
-
+    
+    private void shooterControl() {
         if (potatoMode) {
             if (autoShooterPrep && !lastAutoShooterPrep) {
                 CommandManager.addCommand(new AimAndSpinUpShooter("AutoPrepShooter", 10));
@@ -155,7 +124,46 @@ public class DriveTeamInput implements Runnable {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }
         }
+    }
+    
+    private void armControl() {
+        if (potatoMode) {
+            if (portcullis && !lastPortcullis) {
+                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, 10, 10));
+                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, 10, 24));
+            } else if (sallyPort && !lastSallyPort) {
+                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, 8, 12));
+            } else if (drawBridge && !lastDrawBridge) {
+                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, 15, 16));
+            } else if (seeSaw && !lastSeeSaw) {
+                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, 15, 1));
+                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, 15, 0));
+            } else if (resetArm && !lastResetArm) {
+                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
+            }
+        } else if (overrideMode) {
 
+        }
+    }
+    
+    private void intakeControl() {
+        if (intake && !lastIntake) {
+            CommandManager.addCommand(new InfeedBall("Infeed", 10));
+        } else if (outtake && !lastOuttake) {
+            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
+        } else if (!intake && lastIntake) {
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        } else if (!outtake && lastOuttake) {
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        }
+    }
+
+    @Override
+    public void run() {
+        input();
+        intakeControl();
+        armControl();
+        shooterControl();
         latch();
     }
 }
