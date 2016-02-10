@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.command.AutoPrepShooter;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.command.DriveStraight;
+import org.lasa.frc2016.command.DriveTurn;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
 
@@ -33,10 +34,15 @@ public class Auto implements Runnable {
             case 1:
                 CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, 15, 0));
                 CommandManager.addSequential(new SetArmPosition("Portcullis", 10, 15, 16));
-                CommandManager.addParallel(new DriveStraight("DriveOverDefense", 10, 24));
+                CommandManager.addSequential(new DriveStraight("DriveOverDefense", 10, 24));
                 break;
             case 2:
                 CommandManager.addCommand(new SetArmPosition("PrepSallyPort", 10, 15, 24));
+                CommandManager.addSequential(new SetArmPosition("CatchSally", 10, 15, 23));
+                CommandManager.addSequential(new DriveTurn("AdjustBot", 10, -48.59));
+                CommandManager.addSequential(new DriveStraight("PullBack", 10, -63.5));
+                CommandManager.addSequential(new DriveTurn("ReadjustBot", 10, 48.59));
+                CommandManager.addParallel(new DriveStraight("DontHitSallyYouJankPieceOfCrapRobot/DriveOverDefense", 10, 48));
                 break;
             case 3:
                 CommandManager.addCommand(new SetArmPosition("PrepDrawBridge", 10, 15, 29));

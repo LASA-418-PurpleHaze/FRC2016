@@ -31,7 +31,7 @@ public class Robot extends HazyIterative {
     SensorInput sensorInput;
     Constants constManager;
     
-    @Override
+    @Override 
     public void robotInit() {
         constManager = new Constants();
         new Thread(HazyVision.getInstance()).start();
