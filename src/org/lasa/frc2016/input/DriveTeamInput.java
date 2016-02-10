@@ -17,7 +17,7 @@ public class DriveTeamInput implements Runnable {
     HazyJoystick driver = new HazyJoystick(0, 0.15);
     HazyJoystick operator = new HazyJoystick(1, 0.15);
 
-    private Shooter shooter;
+    private final Shooter shooter;
 
     private static DriveTeamInput instance;
 
