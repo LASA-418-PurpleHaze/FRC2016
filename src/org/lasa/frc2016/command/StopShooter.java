@@ -2,7 +2,7 @@ package org.lasa.frc2016.command;
 
 public class StopShooter extends HazyCommand {
 
-    private double RPM;
+    private final double RPM;
 
     public StopShooter(String nm, double t) {
         super(nm, t);
