@@ -30,7 +30,7 @@ public final class HazyVision implements Runnable {
     private int lowestX, lowestY = Integer.MAX_VALUE;
     private int highestX, highestY = 0;
 
-    private volatile double distance;
+    private double distance;
     private final CameraServer cameraServer;
 
     private HazyVision() {
@@ -101,7 +101,7 @@ public final class HazyVision implements Runnable {
         return 0;
     }
 
-    public synchronized double getDistanceFromHighGoal() {
+    public double getDistanceFromHighGoal() {
         return distance;
     }
 

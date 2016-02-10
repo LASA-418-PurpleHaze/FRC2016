@@ -1,8 +1,5 @@
 package org.lasa.lib.controlloop;
 
-/**
- * Created by Gijs on 12/31/2014.
- */
 public class TorqueTMP {
 
     //Current value

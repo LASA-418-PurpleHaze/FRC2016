@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import org.lasa.frc2016.statics.Ports;
 
-public class SensorInput {
+public class SensorInput implements Runnable {
 
     private static SensorInput instance;
 
@@ -35,6 +35,7 @@ public class SensorInput {
         return (instance == null) ? instance = new SensorInput() : instance;
     }
 
+    @Override
     public void run() {
         navXCompassHeadingVal = navX.getCompassHeading();
         leftSideEncoderVal = leftSide.get();

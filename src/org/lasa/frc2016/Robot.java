@@ -15,7 +15,6 @@ import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.frc2016.statics.Ports;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Flywheel;
 

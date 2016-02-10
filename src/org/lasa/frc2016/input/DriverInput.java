@@ -18,11 +18,11 @@ public class DriverInput implements Runnable {
 
     private double throttle, wheel, tiltRaw, elevatorRaw;
     private boolean lastIntake, lastOuttake, lastSpinUpShooterOverride,
-            lastPortcullis, lastSallyPort, lastDrawBridge, lastChevalDeFrise, lastResetArm = false;
+            lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm = false;
     private boolean quickTurn, overrideMode;
     private boolean controlMode = true;
     private boolean intake, outtake;
-    private boolean portcullis, sallyPort, drawBridge, chevalDeFrise, resetArm;
+    private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean spinUpShooterOverride;
 
     public static DriverInput getInstance() {
@@ -67,7 +67,7 @@ public class DriverInput implements Runnable {
         portcullis = operator.getA();
         sallyPort = operator.getB();
         drawBridge = operator.getX();
-        chevalDeFrise = operator.getY();
+        seeSaw = operator.getY();
 
         overrideMode = operator.getSelect();
         controlMode = operator.getSelect();
@@ -90,8 +90,8 @@ public class DriverInput implements Runnable {
             CommandManager.addCommand(new SetArmPosition("SallyPort", 10, 8, 12));
         } else if (drawBridge && !lastDrawBridge) {
             CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, 15, 16));
-        } else if (chevalDeFrise && !lastChevalDeFrise) {
-            CommandManager.addCommand(new SetArmPosition("ChevalDeFrise", 10, 16, 16));
+        } else if (seeSaw && !lastSeeSaw) {
+            CommandManager.addCommand(new SetArmPosition("SeeSaw", 10, 16, 16));
         } else if (resetArm && !lastResetArm) {
             CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
         }
@@ -102,7 +102,7 @@ public class DriverInput implements Runnable {
         lastPortcullis = portcullis;
         lastSallyPort = sallyPort;
         lastDrawBridge = drawBridge;
-        lastChevalDeFrise = chevalDeFrise;
+        lastSeeSaw = seeSaw;
         lastResetArm = resetArm;
 
         lastSpinUpShooterOverride = spinUpShooterOverride;
