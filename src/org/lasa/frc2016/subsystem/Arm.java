@@ -37,6 +37,16 @@ public class Arm extends HazySubsystem {
         return (instance == null) ? instance = new Arm() : instance;
     }
 
+    public enum Mode {
+        RAW, CONTROLLED;
+    }
+
+    Mode mode;
+
+    public void setMode(Mode m) {
+        mode = m;
+    }
+
     @Override
     public void run() {
         dt = Timer.getFPGATimestamp() - prevTime;
@@ -47,8 +57,12 @@ public class Arm extends HazySubsystem {
         actualExtensionRate = sensorInput.getArmExtensionRate();
         tiltProfile.calculateNextSituation(dt);
         elevatorProfile.calculateNextSituation(dt);
-        tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
-        elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, actualExtension, actualExtensionRate);
+
+        if (mode == Mode.CONTROLLED) {
+            tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
+            elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, actualExtension, actualExtensionRate);
+        }
+        
         leftArmTilter.set(tiltMotorOutput);
         rightArmTifter.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
@@ -90,6 +104,13 @@ public class Arm extends HazySubsystem {
         targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
         elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
+    }
+    
+    public void setMotorSpeeds(double tiltSpeed, double elevatorSpeed) {
+        mode = Mode.RAW;
+        
+        tiltMotorOutput = tiltSpeed;
+        elevatorMotorOutput = elevatorSpeed;
     }
 
     public boolean isDone() {

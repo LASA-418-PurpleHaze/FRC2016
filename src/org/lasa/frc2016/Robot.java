@@ -15,6 +15,7 @@ import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
+import org.lasa.frc2016.command.SetArmPositionManual;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
 
@@ -48,6 +49,7 @@ public class Robot extends HazyIterative {
     public void teleopInit() {
         constManager.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
+        CommandManager.addCommand(new SetArmPositionManual("ManualArmPosition", 10);
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
         flywheel.updateConstants();
