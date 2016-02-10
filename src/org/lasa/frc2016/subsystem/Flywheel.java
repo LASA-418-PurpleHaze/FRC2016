@@ -50,6 +50,9 @@ public class Flywheel extends HazySubsystem {
     }
 
     public boolean isSpunUp() {
+        if (targetRPM == 0) {
+            return false;
+        }
         if (Math.abs(targetRPM - actualRPM) < doneBound) {
             ++doneCycles;
         } else {
