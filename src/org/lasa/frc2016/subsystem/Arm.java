@@ -37,11 +37,11 @@ public class Arm extends HazySubsystem {
         return (instance == null) ? instance = new Arm() : instance;
     }
 
-    public enum Mode {
-        RAW, CONTROLLED;
+    public static enum Mode {
+        OVERRIDE, CONTROLLED;
     }
 
-    Mode mode;
+    static volatile Mode mode;
 
     public void setMode(Mode m) {
         mode = m;
@@ -55,14 +55,14 @@ public class Arm extends HazySubsystem {
         actualExtension = sensorInput.getArmExtensionPostion();
         actualAngleRate = sensorInput.getArmTiltRate();
         actualExtensionRate = sensorInput.getArmExtensionRate();
-        tiltProfile.calculateNextSituation(dt);
-        elevatorProfile.calculateNextSituation(dt);
 
         if (mode == Mode.CONTROLLED) {
             tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
             elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, actualExtension, actualExtensionRate);
+            tiltProfile.calculateNextSituation(dt);
+            elevatorProfile.calculateNextSituation(dt);
         }
-        
+
         leftArmTilter.set(tiltMotorOutput);
         rightArmTifter.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
@@ -87,30 +87,33 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void pushToDashboard() {
+        SmartDashboard.putString("A_Mode", mode.toString());
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
         SmartDashboard.putNumber("T_ActualAngle", actualAngle);
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
-        SmartDashboard.putNumber("T_TargetExtension", targetExtension);
-        SmartDashboard.putNumber("T_ActualExtension", actualExtension);
-        SmartDashboard.putNumber("T_ActualExtensionRate", actualExtensionRate);
+        SmartDashboard.putNumber("E_TargetExtension", targetExtension);
+        SmartDashboard.putNumber("E_ActualExtension", actualExtension);
+        SmartDashboard.putNumber("E_ActualExtensionRate", actualExtensionRate);
     }
 
     public void setControlPoint(double x, double y) {
-        if (!DriverStation.getInstance().isFMSAttached() || DriverStation.getInstance().getMatchTime() < 20) {
-            y = Math.min(y, 40);
+        if (mode == Mode.CONTROLLED) {
+            if (!DriverStation.getInstance().isFMSAttached() || DriverStation.getInstance().getMatchTime() < 20) {
+                y = Math.min(y, 40);
+            }
+            x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
+            targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
+            targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+            tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
+            elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
         }
-        x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
-        targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
-        targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-        tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
-        elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
     }
-    
+
     public void setMotorSpeeds(double tiltSpeed, double elevatorSpeed) {
-        mode = Mode.RAW;
-        
-        tiltMotorOutput = tiltSpeed;
-        elevatorMotorOutput = elevatorSpeed;
+        if (mode == Mode.OVERRIDE) {
+            tiltMotorOutput = tiltSpeed;
+            elevatorMotorOutput = elevatorSpeed;
+        }
     }
 
     public boolean isDone() {

@@ -7,7 +7,7 @@ public class SetArmPosition extends HazyCommand {
     public SetArmPosition(String nm, double t, double x, double y) {
         super(nm, t);
         this.x = x;
-        this.y = y;;
+        this.y = y;
     }
 
     @Override

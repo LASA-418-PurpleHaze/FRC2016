@@ -1,6 +1,5 @@
 package org.lasa.frc2016;
 
-import edu.wpi.first.wpilibj.Servo;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -24,7 +23,7 @@ public class Robot extends HazyIterative {
     HazyVision hazyVision;
     ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
-    Shooter flywheel;
+    Shooter shooter;
     Intake intake;
     Arm arm;
     DriverInput driverInput;
@@ -34,11 +33,11 @@ public class Robot extends HazyIterative {
     @Override 
     public void robotInit() {
         constManager = new Constants();
-        new Thread(HazyVision.getInstance()).start();
+//        new Thread(HazyVision.getInstance()).start();
         //scheduler = Executors.newScheduledThreadPool(1);
         //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
-        flywheel = Shooter.getInstance();
+        shooter = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
@@ -49,10 +48,10 @@ public class Robot extends HazyIterative {
     public void teleopInit() {
         constManager.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        CommandManager.addCommand(new SetArmPositionManual("ManualArmPosition", 10);
+        CommandManager.addCommand(new SetArmPositionManual("ManualArmPosition", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
-        flywheel.updateConstants();
+        shooter.updateConstants();
         intake.updateConstants();
         arm.updateConstants();
     }
@@ -62,9 +61,10 @@ public class Robot extends HazyIterative {
         CommandManager.run();
         driverInput.run();
         drivetrain.run();
+        shooter.run();
         intake.run();
         drivetrain.pushToDashboard();
-        flywheel.pushToDashboard();
+        shooter.pushToDashboard();
         intake.pushToDashboard();
         arm.pushToDashboard();
     }
@@ -72,7 +72,7 @@ public class Robot extends HazyIterative {
     @Override
     public void teleopContinuous() {
         sensorInput.run();
-        flywheel.run();
+        
         arm.run();
     }
 
@@ -80,7 +80,7 @@ public class Robot extends HazyIterative {
     public void autonomousInit() {
         constManager.loadFromFile();
         drivetrain.updateConstants();
-        flywheel.updateConstants();
+        shooter.updateConstants();
         intake.updateConstants();
         arm.updateConstants();
     }
@@ -88,7 +88,7 @@ public class Robot extends HazyIterative {
     @Override
     public void autonomousPeriodic() {
         CommandManager.run();
-        flywheel.run();
+        shooter.run();
     }
 
     @Override

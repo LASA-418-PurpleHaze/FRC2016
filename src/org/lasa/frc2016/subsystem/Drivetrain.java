@@ -25,7 +25,7 @@ public class Drivetrain extends HazySubsystem {
     }
 
     public enum Mode {
-        RAW, STRAIGHT_CONTROLLED, TURN_CONTROLLED;
+        OVERRIDE, STRAIGHT_CONTROLLED, TURN_CONTROLLED;
     }
 
     Mode mode;
@@ -61,7 +61,7 @@ public class Drivetrain extends HazySubsystem {
                     leftSpeed = -power;
                     rightSpeed = power;
                     break;
-                case RAW:
+                case OVERRIDE:
                     break;
             }
         }
@@ -79,7 +79,7 @@ public class Drivetrain extends HazySubsystem {
     }
 
     public void setDriveSpeeds(double left, double right) {
-        mode = Mode.RAW;
+        mode = Mode.OVERRIDE;
 
         leftSpeed = left;
         rightSpeed = right;

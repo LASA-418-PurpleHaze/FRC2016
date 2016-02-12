@@ -68,8 +68,6 @@ public class HazyJoystick {
         return controller.getRawButton(8);
     }
     
-    
-
     public boolean getNorth() {
         return controller.getPOV() == 1;
     }
