@@ -128,7 +128,7 @@ public class DriverInput implements Runnable {
         } else {
             if (prepShooterOverride && !lastPrepShooterOverride) {
                 CommandManager.addCommand(new ManualPrepShooter("PrepShooter", 10, 14000));
-            } else if (!prepShooterOverride && prepShooterOverride) {
+            } else if (!prepShooterOverride && lastPrepShooterOverride) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
             if (shoot && !lastShoot && shooter.isSpunUp()) {
