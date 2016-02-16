@@ -8,6 +8,7 @@ public class Constants extends HazyConstant {
     public static final Constant VISIONHANDLER_INITIAL_DELAY = new Constant("V_InitialDelay", 10);
     public static final Constant VISIONHANDLER_PERIOD = new Constant("V_Period", 200);
 
+    public static final Constant USBCAMERA_DIAGONAL_FOV = new Constant("V_CameraDiagonalFOV", 68.5);
     public static final Constant USBCAMERA_IMAGE_WIDTH = new Constant("V_CameraWidth", 480);
     public static final Constant USBCAMERA_IMAGE_HEIGHT = new Constant("V_CameraHeight", 640);
 

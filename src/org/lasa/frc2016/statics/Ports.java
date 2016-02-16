@@ -5,17 +5,19 @@ public class Ports {
     public static String AXIS_CAMERA_IP = "10.4.18.10";
 
     // PWM Ports
+    public static final int INTAKE_MOTOR = 0;
     public static final int LEFT_FRONT_MOTOR = 2;
     public static final int LEFT_BACK_MOTOR = 1;
     public static final int RIGHT_FRONT_MOTOR = 4;
     public static final int RIGHT_BACK_MOTOR = 3;
-    public static final int INTAKE_MOTOR = 0;
     public static final int SHOOTER_MASTER_MOTOR = 0;
     public static final int SHOOTER_SLAVE_MOTOR = 1;
     public static final int LEFT_ARM_LIFTER = 7;
     public static final int RIGHT_ARM_LIFTER = 8;
     public static final int LEFT_ARM_EXTENDER = 9;
     public static final int RIGHT_ARM_EXTENDER = 10;
+    public static final int LEFT_SHOOTER_SERVO = 11;
+    public static final int RIGHT_SHOOTER_SERVO = 12;
 
     // Encoder Ports
     public static final int LEFT_SIDE_A_ENCODER = 0;

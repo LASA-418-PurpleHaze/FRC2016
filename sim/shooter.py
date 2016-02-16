@@ -1,7 +1,7 @@
 import numpy
 import matplotlib.pyplot as plt
 
-class Flywheel:
+class Shooter:
 	def __init__(self):
 		# Stall Torque in N m
 		self.stall_torque = .71
@@ -36,7 +36,7 @@ class Flywheel:
 		self.w += self.a * self.dt
 		self.theta += self.w * self.dt + 0.5 * self.a * self.dt * self.dt
 		
-x = Flywheel()
+x = Shooter()
 
 angles = []
 times = []

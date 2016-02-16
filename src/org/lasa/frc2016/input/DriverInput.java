@@ -72,6 +72,10 @@ public class DriverInput implements Runnable {
         return outtake;
     }
     
+    public boolean isOverride() {
+        return overrideMode;
+    }
+    
     private void input() {
         throttle = -driver.getLeftY();
         wheel = driver.getRightX();

@@ -28,7 +28,7 @@ public final class HazyVision implements Runnable {
     private ArrayList<Integer> visionLookUpTable;
     
     USBCamera camera;
-    Image image;
+    static Image image;
     ROI roi;
     CoordinateSystem plane;
     FindEdgeOptions2 findEdgeOptions;
@@ -39,6 +39,8 @@ public final class HazyVision implements Runnable {
     private Point startPoint, endPoint;
     private int lowestX, lowestY = Integer.MAX_VALUE;
     private int highestX, highestY = 0;
+    private int midX, midY;
+    private double length;
 
     private double distance;
     private final CameraServer cameraServer;
@@ -47,15 +49,16 @@ public final class HazyVision implements Runnable {
         this.updateConstants();
         camera = new USBCamera();
         cameraServer = CameraServer.getInstance();
+        camera.setExposureManual(30);
+        camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
-        //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH);
+        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         //roi = NIVision.imaqCreateROI();
         //plane = NIVision.imaqCalibrationSetAxisInfo(image);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
-        //camera.setExposureManual(30);
-        //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH, Constants.USBCAMERA_IMAGE_HEIGHT);
-        cameraServer.startAutomaticCapture(camera);
+        
+        
     }
 
     public static HazyVision getInstance() {
@@ -66,8 +69,7 @@ public final class HazyVision implements Runnable {
     public void run() {
         while (true) {
             try {
-                ;
-                //this.getImage();
+                cameraServer.setImage(this.getImage());
                 distance = this.calculate();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -76,7 +78,7 @@ public final class HazyVision implements Runnable {
         }
     }
 
-    private void getImage() {
+    private Image getImage() {
         camera.getImage(image);
         NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
         findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
@@ -105,9 +107,13 @@ public final class HazyVision implements Runnable {
                 highestY = endPoint.y;
             }
         }
+        return image;
     }
     
     private double calculate() {
+        midX = (highestX - lowestX)/2;
+        midY = (highestY - lowestY)/2;
+        length = Math.sqrt(Math.pow(highestX - midX, 2) + Math.pow(highestY - midY, 2));
         return 0;
     }
 
@@ -121,7 +127,7 @@ public final class HazyVision implements Runnable {
             BufferedReader r = new BufferedReader(new FileReader("VisionTable.txt"));
             String line;
             while ((line = r.readLine()) != null) {
-                for(int x = 0; !line.equals(""); x++) {
+                for(int x = 0;!line.equals(""); x++) {
                     visionLookUpTable.add(Integer.parseInt(line));
                 }
             }

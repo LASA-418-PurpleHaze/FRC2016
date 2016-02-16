@@ -1,6 +1,7 @@
 package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
@@ -10,6 +11,7 @@ public class Shooter extends HazySubsystem {
     private static Shooter instance;
 
     private final CANTalon shooterMotorMaster, shooterMotorSlave;
+    private final Servo leftShooterServo, rightShooterServo;
     private double targetRPM;
     private double actualRPM;
     private double doneBound;
@@ -20,6 +22,8 @@ public class Shooter extends HazySubsystem {
         shooterMotorSlave = new CANTalon(Ports.SHOOTER_SLAVE_MOTOR);
         shooterMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
         shooterMotorSlave.set(shooterMotorMaster.getDeviceID());
+        leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
+        rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
     }
 
     public static Shooter getInstance() {

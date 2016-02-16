@@ -91,9 +91,11 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
         SmartDashboard.putNumber("T_ActualAngle", actualAngle);
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
+        SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);
         SmartDashboard.putNumber("E_ActualExtension", actualExtension);
         SmartDashboard.putNumber("E_ActualExtensionRate", actualExtensionRate);
+        SmartDashboard.putNumber("E_MotorOutput", elevatorMotorOutput);
     }
 
     public void setControlPoint(double x, double y) {

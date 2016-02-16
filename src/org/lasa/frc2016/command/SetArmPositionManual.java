@@ -22,4 +22,10 @@ public class SetArmPositionManual extends HazyCommand{
         
         arm.setMotorSpeeds(tilt, elevator);
     }
+    
+    @Override
+    public void stop() {
+        arm.setMotorSpeeds(0.0, 0.0);
+        super.stop();
+    }
 }

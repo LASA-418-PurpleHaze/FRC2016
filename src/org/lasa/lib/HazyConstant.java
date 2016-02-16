@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class HazyConstant {
 
-    private static ArrayList<Constant> constManager = new ArrayList(11);
+    private static final ArrayList<Constant> constants = new ArrayList(11);
     BufferedReader r;
     
     public abstract String getFileLocation();
@@ -21,7 +21,7 @@ public abstract class HazyConstant {
         public Constant(String name, double value) {
             this.name = name;
             this.value = value;
-            constManager.add(this);
+            constants.add(this);
         }
 
         public void setVal(double value) {
@@ -47,8 +47,8 @@ public abstract class HazyConstant {
                 spaceIndex = line.indexOf(" ");
                 key = line.substring(0, spaceIndex);
                 value = Double.valueOf(line.substring(spaceIndex + 1));
-                for (Constant constant : constManager) {
-                    if (!key.equals(constant.name)) {
+                for (Constant constant : constants) {
+                    if (key.equals(constant.name)) {
                         constant.setVal(value);
                     }
                 }
