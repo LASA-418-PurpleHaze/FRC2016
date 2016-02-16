@@ -44,21 +44,23 @@ public class Shooter extends HazySubsystem {
 
     @Override
     public void run() {
-        switch(mode) {
-            case OVERRIDE:
-                shooterMotorMaster.set(motorOutput);
-                break;
-            case CONTROLLED:
-                actualRPM = shooterMotorMaster.getSpeed();
-                break;
+        if (null != mode) {
+            switch (mode) {
+                case OVERRIDE:
+                    shooterMotorMaster.set(motorOutput);
+                    break;
+                case CONTROLLED:
+                    actualRPM = shooterMotorMaster.getSpeed();
+                    break;
+            }
         }
-        
     }
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putNumber("F_TargetRPM", targetRPM);
-        SmartDashboard.putNumber("F_ActualRPM", actualRPM);
+        SmartDashboard.putNumber("S_TargetRPM", targetRPM);
+        SmartDashboard.putNumber("S_ActualRPM", actualRPM);
+        SmartDashboard.putNumber("S_MotorOutput", targetRPM);
     }
 
     public void setControlPoint(double RPM) {

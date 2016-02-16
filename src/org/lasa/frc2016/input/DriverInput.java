@@ -100,7 +100,6 @@ public class DriverInput implements Runnable {
         } else if(operator.getSelect()) {
             overrideMode = true;
         }
-        
     }
 
     private void latch() {
@@ -119,8 +118,21 @@ public class DriverInput implements Runnable {
         lastPrepShooterOverride = prepShooterOverride;
     }
 
+    private void intakeControl() {
+        if (intake && !lastIntake) {
+            CommandManager.addCommand(new InfeedBall("Infeed", 10));
+        } else if (outtake && !lastOuttake) {
+            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
+        } else if (!intake && lastIntake) {
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        } else if (!outtake && lastOuttake) {
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        }
+    }
+    
     private void shooterControl() {
         if (!overrideMode) {
+            shooter.setMode(Shooter.Mode.CONTROLLED);
             if (prepShooter && !lastPrepShooter) {
                 CommandManager.addCommand(new AutoPrepShooter("AutoPrepShooter", 10));
             } else if (!prepShooter && lastPrepShooter) {
@@ -130,8 +142,9 @@ public class DriverInput implements Runnable {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }
         } else {
+            shooter.setMode(Shooter.Mode.OVERRIDE);
             if (prepShooterOverride && !lastPrepShooterOverride) {
-                CommandManager.addCommand(new ManualPrepShooter("PrepShooter", 10, 14000));
+                CommandManager.addCommand(new ManualPrepShooter("PrepShooter", 10));
             } else if (!prepShooterOverride && lastPrepShooterOverride) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             }
@@ -162,24 +175,12 @@ public class DriverInput implements Runnable {
         }
     }
 
-    private void intakeControl() {
-        if (intake && !lastIntake) {
-            CommandManager.addCommand(new InfeedBall("Infeed", 10));
-        } else if (outtake && !lastOuttake) {
-            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
-        } else if (!intake && lastIntake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
-        } else if (!outtake && lastOuttake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
-        }
-    }
-
     @Override
     public void run() {
         input();
         intakeControl();
-        armControl();
         shooterControl();
+        armControl();
         latch();
     }
 }

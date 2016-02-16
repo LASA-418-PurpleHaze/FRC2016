@@ -2,7 +2,7 @@ package org.lasa.frc2016.command;
 
 public class ManualPrepShooter extends HazyCommand {
 
-    private double output;
+    private final double output;
 
     public ManualPrepShooter(String nm, double t) {
         super(nm, t);
@@ -17,7 +17,7 @@ public class ManualPrepShooter extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return shooter.isSpunUp();
+        return true;
     }
 
     @Override
