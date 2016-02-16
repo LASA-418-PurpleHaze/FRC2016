@@ -16,6 +16,7 @@ public class Shooter extends HazySubsystem {
     private double actualRPM;
     private double doneBound;
     private double doneCycles;
+    private double motorOutput;
 
     private Shooter() {
         shooterMotorMaster = new CANTalon(Ports.SHOOTER_MASTER_MOTOR);
@@ -30,9 +31,27 @@ public class Shooter extends HazySubsystem {
         return (instance == null) ? instance = new Shooter() : instance;
     }
 
+    public static enum Mode {
+        OVERRIDE, CONTROLLED
+    }
+
+    Mode mode;
+
+    public void setMode(Mode m) {
+        mode = m;
+    }
+
     @Override
     public void run() {
-        actualRPM = shooterMotorMaster.getSpeed();
+        switch(mode) {
+            case OVERRIDE:
+                shooterMotorMaster.set(motorOutput);
+                break;
+            case CONTROLLED:
+                actualRPM = shooterMotorMaster.getSpeed();
+                break;
+        }
+        
     }
 
     @Override
@@ -41,12 +60,20 @@ public class Shooter extends HazySubsystem {
         SmartDashboard.putNumber("F_ActualRPM", actualRPM);
     }
 
-    public void setShooterSpeed(double RPM) {
-        if (RPM == 0) {
-           shooterMotorMaster.disableControl();
+    public void setControlPoint(double RPM) {
+        if (mode == Mode.CONTROLLED) {
+            if (RPM == 0) {
+                shooterMotorMaster.disableControl();
+            }
+            targetRPM = RPM;
+            shooterMotorMaster.set(targetRPM);
         }
-        shooterMotorMaster.set(targetRPM);
-        targetRPM = RPM;
+    }
+
+    public void setMotorOutput(double motorOutput) {
+        if (mode == Mode.OVERRIDE) {
+            
+        }
     }
 
     public double getShooterSpeed() {

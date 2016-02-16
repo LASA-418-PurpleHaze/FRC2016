@@ -11,7 +11,7 @@ public class ManualPrepShooter extends HazyCommand {
 
     public void start() {
         super.start();
-        shooter.setShooterSpeed(RPM);
+        shooter.setControlPoint(RPM);
     }
 
     @Override

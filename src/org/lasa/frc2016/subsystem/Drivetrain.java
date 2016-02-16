@@ -24,7 +24,7 @@ public class Drivetrain extends HazySubsystem {
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
 
-    public enum Mode {
+    public static enum Mode {
         OVERRIDE, STRAIGHT_CONTROLLED, TURN_CONTROLLED;
     }
 
@@ -39,8 +39,8 @@ public class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        leftFrontMotor.setInverted(true);
-        leftBackMotor.setInverted(true);
+        rightFrontMotor.setInverted(true);
+        rightBackMotor.setInverted(true);
         straightPID = new HazyPID();
         turnPID = new HazyPID();
     }

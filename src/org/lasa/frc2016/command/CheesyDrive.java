@@ -21,7 +21,7 @@ public class CheesyDrive extends HazyCommand {
         wheel = driverInput.getWheel();
         quickTurnEnabled = driverInput.getQuickTurn();
 
-        cheesyDrive.cheesyDrive(throttle, -wheel, quickTurnEnabled);
+        cheesyDrive.cheesyDrive(throttle, wheel, quickTurnEnabled);
         drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
     }
 
