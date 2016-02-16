@@ -2,11 +2,11 @@ package org.lasa.frc2016.command;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class SetArmPositionManual extends HazyCommand{
+public class OverrideArmPosition extends HazyCommand{
     
     private double tilt, elevator;
 
-    public SetArmPositionManual(String nm, double t) {
+    public OverrideArmPosition(String nm, double t) {
         super(nm, t);
     }
 
