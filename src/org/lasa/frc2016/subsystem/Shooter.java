@@ -21,6 +21,7 @@ public class Shooter extends HazySubsystem {
     private Shooter() {
         shooterMotorMaster = new CANTalon(Ports.SHOOTER_MASTER_MOTOR);
         shooterMotorSlave = new CANTalon(Ports.SHOOTER_SLAVE_MOTOR);
+        shooterMotorMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         shooterMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
         shooterMotorSlave.set(shooterMotorMaster.getDeviceID());
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
@@ -72,7 +73,7 @@ public class Shooter extends HazySubsystem {
 
     public void setMotorOutput(double motorOutput) {
         if (mode == Mode.OVERRIDE) {
-            
+            shooterMotorMaster.set(motorOutput);
         }
     }
 
