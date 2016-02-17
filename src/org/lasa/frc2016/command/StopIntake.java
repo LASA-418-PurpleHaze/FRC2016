@@ -10,7 +10,7 @@ public class StopIntake extends HazyCommand {
 
     @Override
     public void start() {
-        intake.setState(Intake.OFF);
+        intake.setMode(Intake.Mode.OFF);
     }
 
     @Override

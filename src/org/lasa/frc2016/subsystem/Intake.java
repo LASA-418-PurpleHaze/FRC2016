@@ -10,15 +10,6 @@ public class Intake extends HazySubsystem {
 
     private final VictorSP intakeMotor;
     private double intakeSpeed;
-
-    private byte state;
-
-    public static final byte OFF = 0;
-    public static final byte INTAKING = 1;
-    public static final byte OUTTAKING = 2;
-    public static final byte LOADINGSHOOTER = 3;
-    private final static String[] STATENAMES = {"OFF", "INTAKING", "OUTTAKING", "LOADINGSHOOTER"};
-
     private boolean hasBall;
 
     private Intake() {
@@ -29,45 +20,52 @@ public class Intake extends HazySubsystem {
         return (instance == null) ? instance = new Intake() : instance;
     }
 
-    public void setState(byte state) {
-        this.state = state;
+    public static enum Mode {
+        OFF, INTAKING, OUTTAKING, LOADINGSHOOTER
     }
 
-    public void run() {
-        byte newState = state;
+    Mode mode;
+            
+    public void setMode(Mode m) {
+        mode = m;
+    }
 
-        switch (state) {
-            case OFF:
-                intakeSpeed = 0.0;
-                break;
-            case INTAKING:
-                if (!sensorInput.getIntakeSwitchValue()) {
-                    hasBall = true;
-                    newState = OFF;
-                } else {
+    @Override
+    public void run() {
+        Mode newMode = mode;
+        if (null != mode) {
+            switch (mode) {
+                case OFF:
+                    intakeSpeed = 0.0;
+                    break;
+                case INTAKING:
+                    if (!sensorInput.getIntakeSwitchValue()) {
+                        hasBall = true;
+                        newMode = Mode.OFF;
+                    } else {
+                        intakeSpeed = 1.0;
+                    }
+                    break;
+                case OUTTAKING:
+                    hasBall = false;
+                    intakeSpeed = -1.0;
+                    break;
+                case LOADINGSHOOTER:
+                    hasBall = false;
                     intakeSpeed = 1.0;
-                }
-                break;
-            case OUTTAKING:
-                hasBall = false;
-                intakeSpeed = -1.0;
-                break;
-            case LOADINGSHOOTER:
-                hasBall = false;
-                intakeSpeed = 1.0;
-                break;
+                    break;
+            }
+            if (newMode != mode) {
+                mode = newMode;
+                run();
+            }
         }
-        if (newState != state) {
-            state = newState;
-            run();
-        }
-        //output
         intakeMotor.set(intakeSpeed);
     }
 
     @Override
     public void pushToDashboard() {
-        SmartDashboard.putString("I_State", STATENAMES[state]);
+        SmartDashboard.putString("I_State", mode.toString());
     }
 
     public boolean hasBall() {

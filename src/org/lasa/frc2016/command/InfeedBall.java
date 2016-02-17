@@ -11,7 +11,7 @@ public class InfeedBall extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        intake.setState(Intake.INTAKING);
+        intake.setMode(Intake.Mode.INTAKING);
     }
 
     @Override

@@ -51,18 +51,18 @@ public class Arm extends HazySubsystem {
     public void run() {
         dt = Timer.getFPGATimestamp() - prevTime;
         prevTime = Timer.getFPGATimestamp();
-        actualAngle = sensorInput.getArmTiltPostion();
-        actualExtension = sensorInput.getArmExtensionPostion();
-        actualAngleRate = sensorInput.getArmTiltRate();
-        actualExtensionRate = sensorInput.getArmExtensionRate();
-
-        if (mode == Mode.CONTROLLED) {
-            tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
-            elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, actualExtension, actualExtensionRate);
-            tiltProfile.calculateNextSituation(dt);
-            elevatorProfile.calculateNextSituation(dt);
+        if (null != mode) {
+            switch (mode) {
+                case CONTROLLED:
+                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
+                    elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
+                    tiltProfile.calculateNextSituation(dt);
+                    elevatorProfile.calculateNextSituation(dt);
+                    break;
+                case OVERRIDE:
+                    break;
+            }
         }
-
         leftArmTilter.set(tiltMotorOutput);
         rightArmTifter.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
@@ -89,12 +89,12 @@ public class Arm extends HazySubsystem {
     public void pushToDashboard() {
         SmartDashboard.putString("A_Mode", mode.toString());
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
-        SmartDashboard.putNumber("T_ActualAngle", actualAngle);
-        SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
+        SmartDashboard.putNumber("T_ActualAngle", sensorInput.getArmTiltPostion());
+        SmartDashboard.putNumber("T_ActualAngleRate", sensorInput.getArmTiltRate());
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);
-        SmartDashboard.putNumber("E_ActualExtension", actualExtension);
-        SmartDashboard.putNumber("E_ActualExtensionRate", actualExtensionRate);
+        SmartDashboard.putNumber("E_ActualExtension", sensorInput.getArmExtensionPostion());
+        SmartDashboard.putNumber("E_ActualExtensionRate", sensorInput.getArmExtensionRate());
         SmartDashboard.putNumber("E_MotorOutput", elevatorMotorOutput);
     }
 

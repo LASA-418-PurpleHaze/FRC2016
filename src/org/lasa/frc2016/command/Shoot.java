@@ -11,7 +11,7 @@ public class Shoot extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        intake.setState(Intake.LOADINGSHOOTER);
+        intake.setMode(Intake.Mode.LOADINGSHOOTER);
     }
 
     @Override
