@@ -20,7 +20,7 @@ class Shooter:
 		# Torque constant
 		self.Kt = self.stall_torque / self.stall_current
 		# timestep
-		self.dt = 0.01
+		self.dt = 0.001
 		# gear ratio
 		self.G = 12.0 / 18.0
 
@@ -32,10 +32,11 @@ class Shooter:
 		self.a = 0.0
 
 	def sim(self):
-		target = 500
+		target = 11000
+		kP = 0.009
 		rpm = self.w * 60.0 / 2.0 / numpy.pi
-		volts = 0.009 * 12.0 * (target - rpm)
-		volts += (12.0 / 12519.12) * target
+		volts = kP * 12.0 * (target - rpm)
+		volts += (12.0 / 12486.667) * target
 		if (volts > 12.0):
 			volts = 12.0
 		if (volts < -12.0):
@@ -58,5 +59,5 @@ for time in range(0, 5000):
 	t += x.dt
 
 plt.plot(times, angles)
-plt.axis([0, 0.5, 0, 1000])
+plt.axis([0, 3, 0, 15000])
 plt.show()
