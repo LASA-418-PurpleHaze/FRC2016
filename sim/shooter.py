@@ -56,7 +56,6 @@ for time in range(0, 5000):
 	x.sim()
 	times.append(t)
 	t += x.dt
-	print(x.w * 60.0 / 2.0 / numpy.pi)
 
 plt.plot(times, angles)
 plt.axis([0, 0.5, 0, 1000])
