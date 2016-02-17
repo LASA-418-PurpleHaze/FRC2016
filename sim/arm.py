@@ -45,7 +45,7 @@ def main():
 	targetPosition = 40
 	x = Arm()
 	trap = HazyTMP(15, 30)
-	controlloop = HazyPV(trap, 1, 1, 0, 0)
+	controlloop = HazyPV(trap, 0, 0, 0, 0)
 
 	trap.generateTrapezoid(targetPosition, 0, 0)
 
