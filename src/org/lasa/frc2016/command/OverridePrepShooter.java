@@ -11,8 +11,7 @@ public class OverridePrepShooter extends HazyCommand {
     }
 
     @Override
-    public void start() {
-        super.start();
+    public void run() {
         output = driverInput.getPrepElevatorOverride();
         shooter.setMotorOutput(output);
     }
@@ -23,8 +22,8 @@ public class OverridePrepShooter extends HazyCommand {
     }
 
     @Override
-    public void run() {
-        //lol
+    public void stop() {
+        shooter.setMotorOutput(0);
+        super.stop();
     }
-
 }
