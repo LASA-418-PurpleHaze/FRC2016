@@ -2,7 +2,7 @@
 dist/
 build/
 sysProps.xml
- 
+
 #netbeans specific
 core
 nbproject/*
@@ -17,10 +17,13 @@ nb-configuration.xml
 #*.jar
 *.war
 *.ear
- 
+
 #java specific
 *.class
- 
+
+#python specific
+*.pyc
+
 #general swap/backup files
 *.so
 *.log
