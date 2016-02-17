@@ -12,12 +12,12 @@ public class Ports {
     public static final int LEFT_BACK_MOTOR = 3;
     public static final int SHOOTER_MASTER_MOTOR = 0;
     public static final int SHOOTER_SLAVE_MOTOR = 1;
-    public static final int LEFT_ARM_LIFTER = 7;
-    public static final int RIGHT_ARM_LIFTER = 8;
-    public static final int LEFT_ARM_EXTENDER = 9;
-    public static final int RIGHT_ARM_EXTENDER = 10;
-    public static final int LEFT_SHOOTER_SERVO = 11;
-    public static final int RIGHT_SHOOTER_SERVO = 12;
+    public static final int LEFT_ARM_LIFTER = 18;
+    public static final int RIGHT_ARM_LIFTER = 13;
+    public static final int LEFT_ARM_EXTENDER = 19;
+    public static final int RIGHT_ARM_EXTENDER = 14;
+    public static final int LEFT_SHOOTER_SERVO = 5;
+    public static final int RIGHT_SHOOTER_SERVO = 6;
 
     // Encoder Ports
     public static final int LEFT_SIDE_A_ENCODER = 0;
@@ -36,6 +36,4 @@ public class Ports {
     //Arm input stuff
     public static final int DISTANCE_SENSOR = 3;
     public static final int ANGLE_SENSOR = 2;
-    
-    //Servo ports
 }
