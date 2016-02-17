@@ -22,7 +22,7 @@ class Flywheel:
 		# timesteop
 		self.dt = 0.01
 		# gear ratio
-		self.G = 12.0 / 15.0
+		self.G = 12.0 / 18.0
 		
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
@@ -32,7 +32,14 @@ class Flywheel:
 		self.a = 0.0
 	
 	def sim(self):
-		self.a = self.A * self.w + self.B * 12.0
+		rpm = self.w * 2.0 * 3.14159 / 60.0
+		volts = 12
+		if (volts > 12.0):
+			volts = 12.0
+		if (volts < -12.0):
+			volts = -12.0
+		volts = 12
+		self.a = self.A * self.w + self.B * volts
 		self.w += self.a * self.dt
 		self.theta += self.w * self.dt + 0.5 * self.a * self.dt * self.dt
 		
@@ -42,11 +49,12 @@ angles = []
 times = []
 t = 0.0
 
-for time in range(0, 500):
+for time in range(0, 1000):
+	angles.append(x.w * 2.0 * 3.14159 / 60.0)
 	x.sim()
-	angles.append(x.a * 180.0 / numpy.pi * 60)
 	times.append(t)
 	t += x.dt
 	
 plt.plot(times, angles)
+plt.axis([0, 10, 0, 7000])
 plt.show()
