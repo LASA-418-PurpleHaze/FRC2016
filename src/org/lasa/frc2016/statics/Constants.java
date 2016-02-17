@@ -44,7 +44,7 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_PID_MAXU = new Constant("S_maxU", 1);
     public static final Constant SHOOTER_PID_MINU = new Constant("S_minU", -1);
     public static final Constant SHOOTER_PID_IZONE = new Constant("S_IZone", 0);
-    public static final Constant SHOOTER_PID_RAMPRATE = new Constant("S_RampRate", 0);
+    public static final Constant SHOOTER_PID_RAMPRATE = new Constant("S_RampRate", 48);
     public static final Constant SHOOTER_PID_PROFILE = new Constant("S_Profile", 0);
     public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 0);
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 0);

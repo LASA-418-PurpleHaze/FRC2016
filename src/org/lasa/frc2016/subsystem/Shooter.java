@@ -12,18 +12,20 @@ public class Shooter extends HazySubsystem {
 
     private final CANTalon shooterMotorMaster, shooterMotorSlave;
     private final Servo leftShooterServo, rightShooterServo;
-    private double targetRPM;
-    private double actualRPM;
-    private double doneBound;
-    private double doneCycles;
+    private double targetRPM, actualRPM;
+    private double doneBound, doneCycles;
     private double motorOutput;
-
+    private double encoderOutput;
+    
     private Shooter() {
         shooterMotorMaster = new CANTalon(Ports.SHOOTER_MASTER_MOTOR);
         shooterMotorSlave = new CANTalon(Ports.SHOOTER_SLAVE_MOTOR);
         shooterMotorMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         shooterMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
         shooterMotorSlave.set(shooterMotorMaster.getDeviceID());
+        shooterMotorSlave.reverseOutput(true);
+        shooterMotorMaster.setFeedbackDevice(CANTalon.FeedbackDevice.EncRising);
+        shooterMotorMaster.configEncoderCodesPerRev(1);
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
         rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
     }
@@ -54,7 +56,7 @@ public class Shooter extends HazySubsystem {
                     break;
             }
         }
-        
+        encoderOutput = shooterMotorMaster.getEncVelocity();
     }
 
     @Override
@@ -62,6 +64,7 @@ public class Shooter extends HazySubsystem {
         SmartDashboard.putNumber("S_TargetRPM", targetRPM);
         SmartDashboard.putNumber("S_ActualRPM", actualRPM);
         SmartDashboard.putNumber("S_MotorOutput", targetRPM);
+        SmartDashboard.putNumber("S_EncOutput", encoderOutput);
     }
 
     public void setControlPoint(double RPM) {
