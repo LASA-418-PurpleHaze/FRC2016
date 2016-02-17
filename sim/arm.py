@@ -45,7 +45,7 @@ def main():
 	targetPosition = 50.0
 	x = Arm()
 	trap = HazyTMP(15.0, 40.0)
-	controlloop = HazyPV(trap, 0.5, 0.04375, 0.0, 0)
+	controlloop = HazyPV(trap, 0.5, 0.04375, 0.0, 0, .5)
 
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 
@@ -56,7 +56,7 @@ def main():
 	for time in range(0, 1000):
 		output.append(x.theta * 60.0 / 2.0 / numpy.pi)
 		trap.calculateNextSituation()
-		volts = 12 * controlloop.calculate(trap, x.theta * 60.0 / 2.0 / numpy.pi, x.w * 60.0 / 2.0 / numpy.pi)
+		volts = controlloop.calculate(trap, x.theta * 60.0 / 2.0 / numpy.pi, x.w * 60.0 / 2.0 / numpy.pi)
 		x.sim(volts)
 		times.append(t)
 		t += x.dt
