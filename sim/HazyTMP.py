@@ -1,4 +1,5 @@
 import numpy
+import math
 
 class HazyTMP:
 
@@ -20,13 +21,13 @@ class HazyTMP:
     def generateTrapezoid(self, targetPosition, realPosition, realSpeed):
         self.positionError = targetPosition - realPosition
 
-        if abs(positionError) < 0.01:
+        if abs(self.positionError) < 0.01:
             self.currentPosition = realPosition
             self.currentVelocity = 0.0
             self.currentAcceleration = 0.0
             return
 
-        maximumPossibleSpeed = math.sqrt((2 * self.maxA * positionError + realSpeed ** 2)/2)
+        maximumPossibleSpeed = math.sqrt((2 * self.maxA * self.positionError + realSpeed ** 2)/2)
 
         self.topSpeed = min(maximumPossibleSpeed, self.maxV)
 
@@ -35,15 +36,15 @@ class HazyTMP:
 
         accelerationDistance = max(((self.topSpeed ** 2 - realSpeed **2) / (2 * self.acceleration)), 0.0)
 
-        self.deceleration =  -1 * acceleration
+        self.deceleration =  -1 * self.acceleration
         self.decelerationTime = (0 - self.topSpeed) / self.deceleration
 
-        decelerationDistance = -1 * (self.topSpeed ** 2) / (2 * deceleration)
+        decelerationDistance = -1 * (self.topSpeed ** 2) / (2 * self.deceleration)
 
         cruiseDistance = self.positionError  - accelerationDistance - decelerationDistance
 
-        if(topSpeed != 0):
-            cruiseTime = cruiseDistance / selftopSpeed
+        if(self.topSpeed != 0):
+            cruiseTime = cruiseDistance / self.topSpeed
         else:
             cruiseTime = 0.0
 
@@ -52,50 +53,50 @@ class HazyTMP:
 
     def calculateNextSituation(self):
         if self.accelerationTime > self.dt:
-            accelerate(self.dt)
-            self.accelerationTime -= dt
+            self.accelerate(self.dt)
+            self.accelerationTime -= self.dt
         elif (self.accelerationTime + self.cruiseTime) > self.dt:
-            accelerate(self.accelerationTime)
-            cruise(dt - self.accelerationTime)
+            self.accelerate(self.accelerationTime)
+            self.cruise(self.dt - self.accelerationTime)
 
             cruiseTime -= (self.dt - self.accelereationTime)
             self.accelerationTime = 0.0
-        elif (self.accelereationTime + self.cruiseTime + self.decelerationTime) > self.dt:
-            accelerate(self.accelerationTime)
-            cruise(self.cruiseTime)
-            deceleratie(self.dt - self.accelerationTime - self.cruiseTime)
+        elif (self.accelerationTime + self.cruiseTime + self.decelerationTime) > self.dt:
+            self.accelerate(self.accelerationTime)
+            self.cruise(self.cruiseTime)
+            self.deceleratie(self.dt - self.accelerationTime - self.cruiseTime)
 
             self.decelerationTime -= (self.dt - self.accelerationTime - self.cruiseTime)
             self.accelerationTime = 0.0
             self.cruiseTime = 0.0
         else:
-            accelerate(self.accelereationTime)
-            cruise(self.cruiseTime)
-            decelerate(self.decelerationTime)
+            self.accelerate(self.accelerationTime)
+            self.cruise(self.cruiseTime)
+            self.decelerate(self.decelerationTime)
 
             self.accelerationTime = 0.0
             self.cruiseTime = 0.0
             self.decelerationTime = 0.0
             self.currentAcceleration = 0.0
 
-    def accelerate(self):
+    def accelerate(self, dt):
         self.currentAcceleration = self.acceleration
-        self.currentPosition += (self.currentVelocity * self.dt + .5 * self.currentAcceleration * dt ** 2)
-        self.currentVelocity += (self.currentAcceleration * self.dt)
+        self.currentPosition += (self.currentVelocity * dt + .5 * self.currentAcceleration * dt ** 2)
+        self.currentVelocity += (self.currentAcceleration * dt)
 
         if self.currentVelocity > self.topSpeed:
             self.currentVelocity = self.topSpeed
         elif self.currentVelocity < -self.topSpeed:
             self.currentVelocity = -self.topSpeed
 
-    def cruise(self):
+    def cruise(self, dt):
         self.currentAcceleration = 0.0
-        self.currentPosition += self.currentVelocity * self.dt
+        self.currentPosition += self.currentVelocity * dt
 
-    def decelerate(self):
+    def decelerate(self, dt):
         self.currentAcceleration = self.deceleration
-        self.currentPosition += (self.currentVelocity * self.dt + .5 * self.deceleration * dt ** 2)
-        self.currentVelocity += (self.currentAcceleration * self.dt)
+        self.currentPosition += (self.currentVelocity * dt + .5 * self.deceleration * dt ** 2)
+        self.currentVelocity += (self.currentAcceleration * dt)
 
         if self.currentVelocity > self.topSpeed:
             self.currentVelocity = self.topSpeed

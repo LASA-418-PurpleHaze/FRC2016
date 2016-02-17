@@ -1,5 +1,7 @@
 import numpy
 import matplotlib.pyplot as plt
+from HazyPV import HazyPV
+from HazyTMP import HazyTMP
 
 class Arm:
 	def __init__(self):
@@ -33,33 +35,33 @@ class Arm:
 		self.w = 0.0
 		self.a = 0.0
 
-	def sim(self):
+	def sim(self, volts):
 		self.a = self.A * self.w + self.B * 12.0
 		self.a += -9.81 * 6.8 * 0.59 * numpy.sin(self.theta) / self.J
 		self.w += self.a * self.dt
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
 
 def main():
-	targetPosition = 90
+	targetPosition = 30
 	x = Arm()
 	trap = HazyTMP(15, 30)
 	controlloop = HazyPV(trap, 0, 0, 0, 0)
 
 	trap.generateTrapezoid(targetPosition, 0, 0)
-	trap.calculateNextSituation()
-
-
+	
 	output = []
 	times = []
 	t = 0.0
 
-	for time in range(0, 100):
-		x.sim()
-		angles.append(controlloop.calculate(trap, x.theta, x.w))
+	for time in range(0, 5000):
+		output.append(trap.currentPosition)
+		trap.calculateNextSituation()
+		print(trap.currentPosition)
+		x.sim(12 * controlloop.calculate(trap, x.theta, x.w))
 		times.append(t)
 		t += x.dt
 
-	plt.plot(times, angles)
+	plt.plot(times, output)
 	plt.show()
 
 

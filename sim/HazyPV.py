@@ -24,8 +24,8 @@ class HazyPV:
         return output
 
     def isDone(self, HazyTMP):
-        if abs(HazyTMP.currentPosition - actualPosition) < positionDoneRange && abs(HazyTMP.currentVelocity - actualVelocity) < doneRange:
-            doneCyclesCount++
+        if abs(HazyTMP.currentPosition - actualPosition) < positionDoneRange and abs(HazyTMP.currentVelocity - actualVelocity) < doneRange:
+            doneCyclesCount+=1
         else:
             doneCyclesCount = 0
 

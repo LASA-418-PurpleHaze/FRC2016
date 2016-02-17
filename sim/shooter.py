@@ -32,9 +32,10 @@ class Shooter:
 		self.a = 0.0
 	
 	def sim(self):
+		target = 500
 		rpm = self.w * 60.0 / 2.0 / numpy.pi
-		volts = 0.5 * (10000 - rpm)
-		volts += (12.0 / 12500.0) * 10000
+		volts = 0.009 * 12.0 * (target - rpm)
+		volts += (12.0 / 12519.12) * target
 		if (volts > 12.0):
 			volts = 12.0
 		if (volts < -12.0):
@@ -55,7 +56,8 @@ for time in range(0, 5000):
 	x.sim()
 	times.append(t)
 	t += x.dt
+	print(x.w * 60.0 / 2.0 / numpy.pi)
 	
 plt.plot(times, angles)
-plt.axis([0, 3.5, 0, 15000])
+plt.axis([0, 0.5, 0, 1000])
 plt.show()

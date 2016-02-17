@@ -54,6 +54,7 @@ public class Shooter extends HazySubsystem {
                     break;
             }
         }
+        
     }
 
     @Override
