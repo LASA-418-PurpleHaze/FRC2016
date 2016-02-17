@@ -27,23 +27,23 @@ class HazyTMP:
             self.currentAcceleration = 0.0
             return
 
-        self.maximumPossibleSpeed = math.sqrt((2 * self.maxA * self.positionError + realSpeed ** 2)/2)
+        self.maximumPossibleSpeed = math.sqrt((2.0 * self.maxA * self.positionError + realSpeed ** 2)/2.0)
 
         self.topSpeed = min(self.maximumPossibleSpeed, self.maxV)
 
         self.acceleration = self.maxA
-        self.accelerationTime = max(((self.topSpeed ** 2 - realSpeed ** 2) / (2 * self.acceleration)), 0.0)
+        self.accelerationTime = max(((self.topSpeed - realSpeed) / self.acceleration), 0.0)
 
-        self.accelerationDistance = max(((self.topSpeed ** 2 - realSpeed **2) / (2 * self.acceleration)), 0.0)
+        self.accelerationDistance = max(((self.topSpeed ** 2 - realSpeed **2) / (2.0 * self.acceleration)), 0.0)
 
-        self.deceleration =  -1 * self.acceleration
-        self.decelerationTime = (0 - self.topSpeed) / self.deceleration
+        self.deceleration =  -1.0 * self.acceleration
+        self.decelerationTime = (0.0 - self.topSpeed) / self.deceleration
 
-        self.decelerationDistance = -1 * (self.topSpeed ** 2) / (2 * self.deceleration)
+        self.decelerationDistance = -1.0 * (self.topSpeed ** 2) / (2.0 * self.deceleration)
 
         self.cruiseDistance = self.positionError  - self.accelerationDistance - self.decelerationDistance
-
-        if(self.topSpeed != 0):
+		
+        if(self.topSpeed != 0.0):
             self.cruiseTime = self.cruiseDistance / self.topSpeed
         else:
             self.cruiseTime = 0.0
@@ -94,11 +94,11 @@ class HazyTMP:
         self.currentPosition += self.currentVelocity * dt
 
     def decelerate(self, dt):
-        self.currentAcceleration = self.deceleration
-        self.currentPosition += (self.currentVelocity * dt + .5 * self.deceleration * dt ** 2)
-        self.currentVelocity += (self.currentAcceleration * dt)
-
-        if self.currentVelocity > self.topSpeed:
-            self.currentVelocity = self.topSpeed
-        elif self.currentVelocity < -self.topSpeed:
-            self.currentVelocity = -self.topSpeed
+		self.currentAcceleration = self.deceleration
+		self.currentPosition += (self.currentVelocity * dt + .5 * self.deceleration * dt ** 2)
+		self.currentVelocity += (self.currentAcceleration * dt)
+		
+		if self.currentVelocity > self.topSpeed:
+			self.currentVelocity = self.topSpeed
+		elif self.currentVelocity < -self.topSpeed:
+			self.currentVelocity = -self.topSpeed
