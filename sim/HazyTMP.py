@@ -6,7 +6,7 @@ class HazyTMP:
     def __init__(self, maxVelocity, maxAccel):
         self.maxV = maxVelocity
         self.maxA = maxAccel
-        self.dt = 0.001
+        self.dt = 0.01
 
         self.acceleration = 0.0
         self.accelerationTime = 0.0

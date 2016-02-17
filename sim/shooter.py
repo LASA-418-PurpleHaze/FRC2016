@@ -19,18 +19,18 @@ class Shooter:
 		self.Kv = ((self.free_speed / 60.0 * 2.0 * numpy.pi) / (12.0 - self.R * self.free_current))
 		# Torque constant
 		self.Kt = self.stall_torque / self.stall_current
-		# timesteop
+		# timestep
 		self.dt = 0.01
 		# gear ratio
 		self.G = 12.0 / 18.0
-		
+
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
-		
+
 		self.theta = 0.0
 		self.w = 0.0
 		self.a = 0.0
-	
+
 	def sim(self):
 		target = 500
 		rpm = self.w * 60.0 / 2.0 / numpy.pi
@@ -44,7 +44,7 @@ class Shooter:
 		self.a = self.A * self.w + self.B * volts
 		self.w += self.a * self.dt
 		self.theta += self.w * self.dt + 0.5 * self.a * self.dt * self.dt
-		
+
 x = Shooter()
 
 angles = []
@@ -57,7 +57,7 @@ for time in range(0, 5000):
 	times.append(t)
 	t += x.dt
 	print(x.w * 60.0 / 2.0 / numpy.pi)
-	
+
 plt.plot(times, angles)
 plt.axis([0, 0.5, 0, 1000])
 plt.show()

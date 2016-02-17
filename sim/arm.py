@@ -45,18 +45,17 @@ def main():
 	targetPosition = 30
 	x = Arm()
 	trap = HazyTMP(15, 30)
-	controlloop = HazyPV(trap, 0, 0, 0, 0)
+	controlloop = HazyPV(trap, 1, 1, 0, 0)
 
 	trap.generateTrapezoid(targetPosition, 0, 0)
-	
+
 	output = []
 	times = []
 	t = 0.0
 
-	for time in range(0, 5000):
+	for time in range(0, 500):
 		output.append(trap.currentPosition)
 		trap.calculateNextSituation()
-		print(trap.currentPosition)
 		x.sim(12 * controlloop.calculate(trap, x.theta, x.w))
 		times.append(t)
 		t += x.dt
