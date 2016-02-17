@@ -26,6 +26,13 @@ class HazyTMP:
             self.currentVelocity = 0.0
             self.currentAcceleration = 0.0
             return
+        elif self.positionError < 0.0:
+            generateTrapezoid(-targetPosition, -realPosition, -realSpeed)
+            self.acceleration *= -1
+            self.deceleration *= -1
+            self.currentPosition *= -1
+            self.currentVelocity *= -1
+            return
 
         self.maximumPossibleSpeed = math.sqrt((2.0 * self.maxA * self.positionError + realSpeed ** 2)/2.0)
 
@@ -42,7 +49,7 @@ class HazyTMP:
         self.decelerationDistance = -1.0 * (self.topSpeed ** 2) / (2.0 * self.deceleration)
 
         self.cruiseDistance = self.positionError  - self.accelerationDistance - self.decelerationDistance
-		
+
         if(self.topSpeed != 0.0):
             self.cruiseTime = self.cruiseDistance / self.topSpeed
         else:
@@ -97,7 +104,7 @@ class HazyTMP:
 		self.currentAcceleration = self.deceleration
 		self.currentPosition += (self.currentVelocity * dt + .5 * self.deceleration * dt ** 2)
 		self.currentVelocity += (self.currentAcceleration * dt)
-		
+
 		if self.currentVelocity > self.topSpeed:
 			self.currentVelocity = self.topSpeed
 		elif self.currentVelocity < -self.topSpeed:

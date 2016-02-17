@@ -31,22 +31,26 @@ class Arm:
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
 
+
+		self.degrees = 60.0 / 2.0 / numpy.pi
 		self.theta = 0.0
 		self.w = 0.0
 		self.a = 0.0
 
-	def sim(self, volts):
+	def sim(self, input):
+		volts = input * 12
+		volts = 12
 		self.a = self.A * self.w + self.B * volts
 		self.a += -9.81 * 6.8 * 0.59 * numpy.sin(self.theta) / self.J
 		self.w += self.a * self.dt
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
 
 def main():
-	targetPosition = 50.0
 	x = Arm()
-	trap = HazyTMP(15.0, 40.0)
-	controlloop = HazyPV(trap, 0.5, 0.04375, 0.0, 0, .5)
+	trap = HazyTMP(55.0, 100.0)
+	controlloop = HazyPV(trap, 4.5, .02, 1, 0)
 
+	targetPosition = 50.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 
 	output = []
@@ -54,9 +58,9 @@ def main():
 	t = 0.0
 
 	for time in range(0, 1000):
-		output.append(x.theta * 60.0 / 2.0 / numpy.pi)
+		output.append(x.theta * x.degrees)
 		trap.calculateNextSituation()
-		volts = controlloop.calculate(trap, x.theta * 60.0 / 2.0 / numpy.pi, x.w * 60.0 / 2.0 / numpy.pi)
+		volts = controlloop.calculate(trap, x.theta * x.degrees, x.w * x.degrees)
 		x.sim(volts)
 		times.append(t)
 		t += x.dt
