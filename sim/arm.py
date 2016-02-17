@@ -39,7 +39,6 @@ class Arm:
 
 	def sim(self, input):
 		volts = input * 12
-		volts = 12
 		self.a = self.A * self.w + self.B * volts
 		self.a += -9.81 * 6.8 * 0.59 * numpy.sin(self.theta) / self.J
 		self.w += self.a * self.dt
@@ -48,7 +47,7 @@ class Arm:
 def main():
 	x = Arm()
 	trap = HazyTMP(55.0, 100.0)
-	controlloop = HazyPV(trap, 4.5, .02, 1, 0)
+	controlloop = HazyPV(trap, 4.5, .02, 1, 0, 0)
 
 	targetPosition = 50.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
