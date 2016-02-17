@@ -27,26 +27,26 @@ class HazyTMP:
             self.currentAcceleration = 0.0
             return
 
-        maximumPossibleSpeed = math.sqrt((2 * self.maxA * self.positionError + realSpeed ** 2)/2)
+        self.maximumPossibleSpeed = math.sqrt((2 * self.maxA * self.positionError + realSpeed ** 2)/2)
 
-        self.topSpeed = min(maximumPossibleSpeed, self.maxV)
+        self.topSpeed = min(self.maximumPossibleSpeed, self.maxV)
 
         self.acceleration = self.maxA
         self.accelerationTime = max(((self.topSpeed ** 2 - realSpeed ** 2) / (2 * self.acceleration)), 0.0)
 
-        accelerationDistance = max(((self.topSpeed ** 2 - realSpeed **2) / (2 * self.acceleration)), 0.0)
+        self.accelerationDistance = max(((self.topSpeed ** 2 - realSpeed **2) / (2 * self.acceleration)), 0.0)
 
         self.deceleration =  -1 * self.acceleration
         self.decelerationTime = (0 - self.topSpeed) / self.deceleration
 
-        decelerationDistance = -1 * (self.topSpeed ** 2) / (2 * self.deceleration)
+        self.decelerationDistance = -1 * (self.topSpeed ** 2) / (2 * self.deceleration)
 
-        cruiseDistance = self.positionError  - accelerationDistance - decelerationDistance
+        self.cruiseDistance = self.positionError  - self.accelerationDistance - self.decelerationDistance
 
         if(self.topSpeed != 0):
-            cruiseTime = cruiseDistance / self.topSpeed
+            self.cruiseTime = self.cruiseDistance / self.topSpeed
         else:
-            cruiseTime = 0.0
+            self.cruiseTime = 0.0
 
         self.currentPosition = realPosition
         self.currentVelocity = realSpeed
@@ -59,12 +59,12 @@ class HazyTMP:
             self.accelerate(self.accelerationTime)
             self.cruise(self.dt - self.accelerationTime)
 
-            cruiseTime -= (self.dt - self.accelereationTime)
+            self.cruiseTime -= (self.dt - self.accelerationTime)
             self.accelerationTime = 0.0
         elif (self.accelerationTime + self.cruiseTime + self.decelerationTime) > self.dt:
             self.accelerate(self.accelerationTime)
             self.cruise(self.cruiseTime)
-            self.deceleratie(self.dt - self.accelerationTime - self.cruiseTime)
+            self.decelerate(self.dt - self.accelerationTime - self.cruiseTime)
 
             self.decelerationTime -= (self.dt - self.accelerationTime - self.cruiseTime)
             self.accelerationTime = 0.0

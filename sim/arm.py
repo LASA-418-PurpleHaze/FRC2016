@@ -42,7 +42,7 @@ class Arm:
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
 
 def main():
-	targetPosition = 30
+	targetPosition = 40
 	x = Arm()
 	trap = HazyTMP(15, 30)
 	controlloop = HazyPV(trap, 1, 1, 0, 0)
