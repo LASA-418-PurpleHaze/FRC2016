@@ -24,7 +24,7 @@ public class AutoPrepShooter extends HazyCommand {
     @Override
     public boolean isDone() {
         return /**
-                 * flywheel.getFlywheelSpeed() >*
+                 * shooter.getShooterSpeed() >*
                  */
                 false;
     }

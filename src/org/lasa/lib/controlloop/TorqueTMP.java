@@ -103,7 +103,6 @@ public class TorqueTMP {
         } else {
             cruiseTime = 0.0;
         }
-        System.out.println(accelerationTime + cruiseTime + decelerationTime);
 
         currentPosition = realPosition;
         currentVelocity = realSpeed;
@@ -125,7 +124,7 @@ public class TorqueTMP {
             cruise(dt - accelerationTime);
 
             cruiseTime -= (dt - accelerationTime);
-            accelerationTime = 0.0;
+            accelerationTime =  0.0;
         } else if ((accelerationTime + cruiseTime + decelerationTime) > dt) {
             accelerate(accelerationTime);
             cruise(cruiseTime);

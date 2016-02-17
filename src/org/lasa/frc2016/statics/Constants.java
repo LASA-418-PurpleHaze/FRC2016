@@ -8,6 +8,7 @@ public class Constants extends HazyConstant {
     public static final Constant VISIONHANDLER_INITIAL_DELAY = new Constant("V_InitialDelay", 10);
     public static final Constant VISIONHANDLER_PERIOD = new Constant("V_Period", 200);
 
+    public static final Constant USBCAMERA_DIAGONAL_FOV = new Constant("V_CameraDiagonalFOV", 68.5);
     public static final Constant USBCAMERA_IMAGE_WIDTH = new Constant("V_CameraWidth", 480);
     public static final Constant USBCAMERA_IMAGE_HEIGHT = new Constant("V_CameraHeight", 640);
 
@@ -35,18 +36,18 @@ public class Constants extends HazyConstant {
     public static final Constant GYRO_PID_MAXU = new Constant("G_maxU", 1);
     public static final Constant GYRO_PID_MINU = new Constant("G_minU", -1);
 
-    public static final Constant SHOOTER_PID_KP = new Constant("F_kP", 0);
-    public static final Constant SHOOTER_PID_KI = new Constant("F_kI", 0);
-    public static final Constant SHOOTER_PID_KD = new Constant("F_kD", 0);
-    public static final Constant SHOOTER_PID_KF = new Constant("F_kF", 0);
-    public static final Constant SHOOTER_PID_DONE_BOUND = new Constant("F_DoneBound", 1000);
-    public static final Constant SHOOTER_PID_MAXU = new Constant("F_maxU", 1);
-    public static final Constant SHOOTER_PID_MINU = new Constant("F_minU", -1);
-    public static final Constant SHOOTER_PID_IZONE = new Constant("F_IZone", 0);
-    public static final Constant SHOOTER_PID_RAMPRATE = new Constant("F_RampRate", 0);
-    public static final Constant SHOOTER_PID_PROFILE = new Constant("F_Profile", 0);
-    public static final Constant SHOOTER_SHORT_RPM = new Constant("F_ShortShotRPM", 0);
-    public static final Constant SHOOTER_LONG_RPM = new Constant("F_LongShotRPM", 0);
+    public static final Constant SHOOTER_PID_KP = new Constant("S_kP", 0);
+    public static final Constant SHOOTER_PID_KI = new Constant("S_kI", 0);
+    public static final Constant SHOOTER_PID_KD = new Constant("S_kD", 0);
+    public static final Constant SHOOTER_PID_KF = new Constant("S_kF", 0);
+    public static final Constant SHOOTER_PID_DONE_BOUND = new Constant("S_DoneBound", 1000);
+    public static final Constant SHOOTER_PID_MAXU = new Constant("S_maxU", 1);
+    public static final Constant SHOOTER_PID_MINU = new Constant("S_minU", -1);
+    public static final Constant SHOOTER_PID_IZONE = new Constant("S_IZone", 0);
+    public static final Constant SHOOTER_PID_RAMPRATE = new Constant("S_RampRate", 0);
+    public static final Constant SHOOTER_PID_PROFILE = new Constant("S_Profile", 0);
+    public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 0);
+    public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 0);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
 

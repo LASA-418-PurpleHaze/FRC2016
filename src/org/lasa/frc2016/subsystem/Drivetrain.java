@@ -1,4 +1,4 @@
-package org.lasa.frc2016.subsystem;
+  package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +24,7 @@ public class Drivetrain extends HazySubsystem {
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
 
-    public enum Mode {
+    public static enum Mode {
         OVERRIDE, STRAIGHT_CONTROLLED, TURN_CONTROLLED;
     }
 
@@ -76,6 +76,7 @@ public class Drivetrain extends HazySubsystem {
         SmartDashboard.putNumber("D_LeftSpeed", leftSpeed);
         SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
         SmartDashboard.putString("D_Mode", mode.toString());
+        SmartDashboard.putNumber("TESTConstants", Constants.DRIVE_SENSITIVITY.getDouble());
     }
 
     public void setDriveSpeeds(double left, double right) {

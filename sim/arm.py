@@ -25,31 +25,42 @@ class Arm:
 		self.dt = 0.01
 		# gear ratio
 		self.G = (16.0 / 54.0) * (1 / 90.0)
-		
+
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
-		
+
 		self.theta = 0.0
 		self.w = 0.0
 		self.a = 0.0
-	
+
 	def sim(self):
 		self.a = self.A * self.w + self.B * 12.0
 		self.a += -9.81 * 6.8 * 0.59 * numpy.sin(self.theta) / self.J
 		self.w += self.a * self.dt
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
-		
-x = Arm()
 
-angles = []
-times = []
-t = 0.0
+def main():
+	targetPosition = 90
+	x = Arm()
+	trap = HazyTMP(15, 30)
+	controlloop = HazyPV(trap, 0, 0, 0, 0)
 
-for time in range(0, 100):
-	x.sim()
-	angles.append(x.theta * 180.0 / 3.14)
-	times.append(t)
-	t += x.dt
-	
-plt.plot(times, angles)
-plt.show()
+	trap.generateTrapezoid(targetPosition, 0, 0)
+	trap.calculateNextSituation()
+
+
+	output = []
+	times = []
+	t = 0.0
+
+	for time in range(0, 100):
+		x.sim()
+		angles.append(controlloop.calculate(trap, x.theta, x.w))
+		times.append(t)
+		t += x.dt
+
+	plt.plot(times, angles)
+	plt.show()
+
+
+main()

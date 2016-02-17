@@ -14,28 +14,27 @@ import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.frc2016.command.SetArmPositionManual;
+import org.lasa.frc2016.command.OverridePrepShooter;
+import org.lasa.frc2016.command.OverrideArmPosition;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
 
 public class Robot extends HazyIterative {
 
-    HazyVision hazyVision;
-    ScheduledExecutorService scheduler;
+//    ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
     Shooter shooter;
     Intake intake;
     Arm arm;
     DriverInput driverInput;
     SensorInput sensorInput;
-    Constants constManager;
+    Constants constants;
     
     @Override 
     public void robotInit() {
-        constManager = new Constants();
-//        new Thread(HazyVision.getInstance()).start();
-        //scheduler = Executors.newScheduledThreadPool(1);
-        //final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(hazyVision, Constants.VISIONHANDLER_INITIAL_DELAY, Constants.VISIONHANDLER_PERIOD, TimeUnit.MILLISECONDS);
+        constants = new Constants();
+//        scheduler = Executors.newScheduledThreadPool(1);
+//        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         intake = Intake.getInstance();
@@ -46,9 +45,10 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        constManager.loadFromFile();
+        constants.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        CommandManager.addCommand(new SetArmPositionManual("ManualArmPosition", 10));
+        CommandManager.addCommand(new OverrideArmPosition("OverrideArm", 10));
+        CommandManager.addCommand(new OverridePrepShooter("OverrideShooter", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
         shooter.updateConstants();
@@ -72,13 +72,12 @@ public class Robot extends HazyIterative {
     @Override
     public void teleopContinuous() {
         sensorInput.run();
-        
         arm.run();
     }
 
     @Override
     public void autonomousInit() {
-        constManager.loadFromFile();
+        constants.loadFromFile();
         drivetrain.updateConstants();
         shooter.updateConstants();
         intake.updateConstants();

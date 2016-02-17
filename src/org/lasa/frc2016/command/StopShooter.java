@@ -12,7 +12,7 @@ public class StopShooter extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        shooter.setShooterSpeed(RPM);
+        shooter.setControlPoint(RPM);
     }
 
     @Override
