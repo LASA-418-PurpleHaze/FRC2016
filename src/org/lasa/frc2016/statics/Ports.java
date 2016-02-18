@@ -30,10 +30,8 @@ public class Ports {
     public static final int ARM_EXTENSION_B_ENCODER = 8;
 
     // Analog IO Ports
+    public static final int ARM_TILT_POTENTIOMETER = 0;
+    public static final int ARM_EXTENSION_POTENTIOMETER = 1;
     // Digital IO Ports
     public static final int INTAKE_BUMP_SWITCH = 6;
-
-    //Arm input stuff
-    public static final int DISTANCE_SENSOR = 3;
-    public static final int ANGLE_SENSOR = 2;
 }

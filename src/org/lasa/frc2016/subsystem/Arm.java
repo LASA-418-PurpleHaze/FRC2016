@@ -54,8 +54,8 @@ public class Arm extends HazySubsystem {
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
-                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
-                    elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
+                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());
+                    elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
                     tiltProfile.calculateNextSituation(dt);
                     elevatorProfile.calculateNextSituation(dt);
                     break;
@@ -83,20 +83,20 @@ public class Arm extends HazySubsystem {
         elevatorProfileFollower.setDoneCycles(Constants.ELEVATOR_MPF_DONE_CYCLES.getInt());
         elevatorProfileFollower.setDoneRange(Constants.ELEVATOR_MPF_DONE_RANGE.getDouble());
         elevatorProfileFollower.setPositionDoneRange(Constants.ELEVATOR_MPF_POSITION_DONE_RANGE.getDouble());
-        tiltProfile.generateTrapezoid(sensorInput.getArmTiltPostion(), sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
-        elevatorProfile.generateTrapezoid(sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
+        tiltProfile.generateTrapezoid(sensorInput.getArmTiltPosition(), sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());
+        elevatorProfile.generateTrapezoid(sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
     }
 
     @Override
     public void pushToDashboard() {
         SmartDashboard.putString("A_Mode", mode.toString());
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
-        SmartDashboard.putNumber("T_ActualAngle", sensorInput.getArmTiltPostion());
+        SmartDashboard.putNumber("T_ActualAngle", sensorInput.getArmTiltPosition());
         SmartDashboard.putNumber("T_ActualAngleRate", sensorInput.getArmTiltRate());
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);
-        SmartDashboard.putNumber("E_ActualExtension", sensorInput.getArmExtensionPostion());
+        SmartDashboard.putNumber("E_ActualExtension", sensorInput.getArmExtensionPosition());
         SmartDashboard.putNumber("E_ActualExtensionRate", sensorInput.getArmExtensionRate());
         SmartDashboard.putNumber("E_MotorOutput", elevatorMotorOutput);
         SmartDashboard.putNumber("E_TMPPosition", elevatorProfile.getCurrentPosition());
@@ -110,8 +110,8 @@ public class Arm extends HazySubsystem {
             x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
             targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
             targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-            tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
-            elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
+            tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());
+            elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
         }
     }
 
