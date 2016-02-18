@@ -133,6 +133,7 @@ public class DriverInput implements Runnable {
             if (shoot && !lastShoot && shooter.isSpunUp()) {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }
+            
         }
     }
 

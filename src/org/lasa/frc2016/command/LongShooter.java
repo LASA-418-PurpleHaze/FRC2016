@@ -2,9 +2,9 @@ package org.lasa.frc2016.command;
 
 import org.lasa.frc2016.subsystem.Shooter;
 
-public class Shoot extends HazyCommand {
+public class LongShooter extends HazyCommand {
 
-    public Shoot(String nm, double t) {
+    public LongShooter(String nm, double t) {
         super(nm, t);
     }
 
@@ -12,6 +12,7 @@ public class Shoot extends HazyCommand {
     public void start() {
         super.start();
         shooter.setMode(Shooter.Mode.CONTROLLED);
+        shooter.setHoodAngle(angle goes here);
     }
 
     @Override
@@ -19,14 +20,14 @@ public class Shoot extends HazyCommand {
         super.stop();
         shooter.setControlPoint(0.0);
     }
-
-    @Override
-    public void run() {
-    }
-
+    
     @Override
     public boolean isDone() {
         return shooter.getShooterSpeed() == 0;
     }
 
+    @Override
+    public void run() {
+    }
+    
 }

@@ -100,6 +100,11 @@ public class Shooter extends HazySubsystem {
         return doneCycles > 10;
     }
 
+    public void setHoodAngle(int angle){
+        leftShooterServo.setRaw(127+angle);
+        rightShooterServo.setRaw(127-angle);
+    }
+    
     @Override
     public void updateConstants() {
         doneBound = Constants.SHOOTER_PID_DONE_BOUND.getDouble();
