@@ -15,6 +15,12 @@ public class Shoot extends HazyCommand {
     }
 
     @Override
+    public void stop() {
+        super.stop();
+        intake.setMode(Intake.Mode.OFF);
+    }
+
+    @Override
     public void run() {
     }
 
