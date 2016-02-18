@@ -13,12 +13,12 @@ class Arm:
 		self.free_speed = 5840.0
 		# Free Current in Amps
 		self.free_current = 3.0
-		# Moment of inertia of the arm in kg m^2
+		# Moment of inertia of the arm
 		self.mass = 15.0 * 0.454
 		self.radius = 23.5 * 0.0254
 		self.J = self.mass * self.radius
 		# Resistance of the motor, divided by 2 to account for the 2 motors
-		self.R = 12.0 / self.stall_current / 2
+		self.R = 12.0 / self.stall_current / 2.0
 		# Motor velocity constant
 		self.Kv = ((self.free_speed / 60.0 * 2.0 * numpy.pi) / (12.0 - self.R * self.free_current))
 		# Torque constant
@@ -26,7 +26,7 @@ class Arm:
 		# timestep
 		self.dt = 0.01
 		# gear ratio
-		self.G = (16.0 / 54.0) * (1 / 90.0)
+		self.G = (16.0 / 54.0) * (1.0 / 90.0)
 
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
@@ -38,34 +38,39 @@ class Arm:
 		self.a = 0.0
 
 	def sim(self, input):
-		volts = input * 12
-		volts = 12
-		self.a = self.A * self.w + self.B * volts
-		self.a += -9.81 * 6.8 * 0.59 * numpy.sin(self.theta) / self.J
+		u = input * 12
+		#u = 12.0
+		self.a = self.A * self.w + self.B * u
+		print(self.w)
+		self.a += (-9.81 * self.mass * self.radius * numpy.cos(self.theta)) / self.J
 		self.w += self.a * self.dt
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
 
 def main():
 	x = Arm()
-	trap = HazyTMP(55.0, 100.0)
-	controlloop = HazyPV(trap, 4.5, .02, 1, 0)
+	trap = HazyTMP(35.0, 100.0)
+	controlloop = HazyPV(trap, 0.5, 0.0, 0.0, 0)
 
 	targetPosition = 50.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 
 	output = []
+	target = []
 	times = []
 	t = 0.0
 
-	for time in range(0, 1000):
-		output.append(x.theta * x.degrees)
+	for time in range(0, 500):
+		output.append(x.theta * 180.0 / numpy.pi)
 		trap.calculateNextSituation()
-		volts = controlloop.calculate(trap, x.theta * x.degrees, x.w * x.degrees)
-		x.sim(volts)
+		motor = controlloop.calculate(trap, x.theta * 180.0 / numpy.pi, x.w * 180.0 / numpy.pi)
+		x.sim(motor)
 		times.append(t)
+		target.append(trap.currentPosition)
 		t += x.dt
 
+	#plt.axis([0, 1, 0, 100])
 	plt.plot(times, output)
+	plt.plot(times, target)
 	plt.show()
 
 
