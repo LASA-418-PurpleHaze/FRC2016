@@ -31,8 +31,6 @@ class Arm:
 		self.A = -self.Kt / (self.Kv * self.R * self.J * self.G * self.G)
 		self.B = self.Kt / (self.R * self.J * self.G)
 
-
-		self.degrees = 60.0 / 2.0 / numpy.pi
 		self.theta = 0.0
 		self.w = 0.0
 		self.a = 0.0
@@ -41,7 +39,6 @@ class Arm:
 		u = input * 12
 		#u = 12.0
 		self.a = self.A * self.w + self.B * u
-		print(self.w)
 		self.a += (-9.81 * self.mass * self.radius * numpy.cos(self.theta)) / self.J
 		self.w += self.a * self.dt
 		self.theta += (self.w * self.dt + 0.5 * self.a * self.dt * self.dt)
@@ -49,7 +46,7 @@ class Arm:
 def main():
 	x = Arm()
 	trap = HazyTMP(35.0, 100.0)
-	controlloop = HazyPV(trap, 0.5, 0.0, 0.0, 0)
+	controlloop = HazyPV(trap, 0.5, 0.0, 0.0, 0.0, 0)
 	targetPosition = 50.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 
