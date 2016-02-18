@@ -101,8 +101,8 @@ public class Shooter extends HazySubsystem {
     }
 
     public void setHoodAngle(int angle){
-        leftShooterServo.setRaw(127+angle);
-        rightShooterServo.setRaw(127-angle);
+        leftShooterServo.setRaw(angle);
+        rightShooterServo.setRaw(255-angle);
     }
     
     @Override
