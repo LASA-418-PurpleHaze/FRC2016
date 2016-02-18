@@ -2,7 +2,7 @@ package org.lasa.lib.controlloop;
 
 public class HazyPID {
 
-    double kP, kI, kD, kF;
+    double kP, kI, kD, kFF;
     double targetValue, previousValue, output;
     double error, errorSum, doneBound;
     double maxU, minU;
@@ -29,11 +29,11 @@ public class HazyPID {
         return targetValue;
     }
 
-    public void updatePID(double kP, double kI, double kD, double kF, double doneBound) {
+    public void updatePID(double kP, double kI, double kD, double kFF, double doneBound) {
         this.kP = kP;
         this.kI = kI;
         this.kD = kD;
-        this.kF = kF;
+        this.kFF = kFF;
         this.doneBound = doneBound;
     }
 
@@ -49,7 +49,7 @@ public class HazyPID {
     public double calculate(double currentValue) {
         error = targetValue - currentValue;
         if (!firstCycle) {
-            output = kP * error + kI * errorSum - kD * (currentValue - previousValue) + kF * targetValue;
+            output = kP * error + kI * errorSum - kD * (currentValue - previousValue) + kFF * targetValue;
             if (maxU >= kI * (errorSum + error) && minU <= kI * (errorSum + error)) {
                 errorSum += error;
             } else if (errorSum > 0) {
@@ -59,7 +59,7 @@ public class HazyPID {
             }
         } else {
             firstCycle = false;
-            output = kP * error + kF * targetValue;
+            output = kP * error + kFF * targetValue;
         }
 
         previousValue = currentValue;

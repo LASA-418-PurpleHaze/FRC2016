@@ -1,4 +1,4 @@
-  package org.lasa.frc2016.subsystem;
+package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,7 +35,7 @@ public class Drivetrain extends HazySubsystem {
         OVERRIDE, STRAIGHT_CONTROLLED, TURN_CONTROLLED;
     }
 
-    Mode mode;
+    static Mode mode;
 
     public void setMode(Mode m) {
         mode = m;
@@ -104,9 +104,9 @@ public class Drivetrain extends HazySubsystem {
     
     @Override
     public void updateConstants() {
-        straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
+        straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KFF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
         straightPID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU.getDouble(), Constants.DRIVETRAIN_PID_MINU.getDouble());
-        turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
+        turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KFF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
     

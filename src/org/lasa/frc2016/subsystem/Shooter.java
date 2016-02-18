@@ -38,7 +38,7 @@ public class Shooter extends HazySubsystem {
         OVERRIDE, CONTROLLED
     }
 
-    Mode mode;
+    static Mode mode;
 
     public void setMode(Mode m) {
         mode = m;
@@ -105,7 +105,7 @@ public class Shooter extends HazySubsystem {
         doneBound = Constants.SHOOTER_PID_DONE_BOUND.getDouble();
         shooterMotorMaster.setPID(Constants.SHOOTER_PID_KP.getDouble(),
                 Constants.SHOOTER_PID_KI.getDouble(), Constants.SHOOTER_PID_KD.getDouble(),
-                Constants.SHOOTER_PID_KF.getDouble(), Constants.SHOOTER_PID_IZONE.getInt(),
+                Constants.SHOOTER_PID_KFF.getDouble(), Constants.SHOOTER_PID_IZONE.getInt(),
                 Constants.SHOOTER_PID_RAMPRATE.getDouble(), Constants.SHOOTER_PID_PROFILE.getInt());
     }
 }

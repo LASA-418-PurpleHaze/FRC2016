@@ -1,5 +1,6 @@
 import numpy
 import matplotlib.pyplot as plt
+from matplotlib import Slider, Button, RadioButtons
 from HazyPV import HazyPV
 from HazyTMP import HazyTMP
 
@@ -46,7 +47,7 @@ class Arm:
 def main():
 	x = Arm()
 	trap = HazyTMP(35.0, 100.0)
-	controlloop = HazyPV(trap, 0.5, 0.0, 0.0, 0.0, 0)
+	controlloop = HazyPV(trap, 4.5, 0.0, 0.0, 0.0, 0)
 	targetPosition = 50.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 

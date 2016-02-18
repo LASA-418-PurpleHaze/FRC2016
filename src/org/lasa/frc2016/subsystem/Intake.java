@@ -24,7 +24,7 @@ public class Intake extends HazySubsystem {
         OFF, INTAKING, OUTTAKING, LOADINGSHOOTER
     }
 
-    Mode mode;
+    static Mode mode;
             
     public void setMode(Mode m) {
         mode = m;

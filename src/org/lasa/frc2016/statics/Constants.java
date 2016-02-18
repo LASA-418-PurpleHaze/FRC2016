@@ -23,7 +23,7 @@ public class Constants extends HazyConstant {
     public static final Constant DRIVETRAIN_PID_KP = new Constant("D_kP", 0);
     public static final Constant DRIVETRAIN_PID_KI = new Constant("D_kI", 0);
     public static final Constant DRIVETRAIN_PID_KD = new Constant("D_kD", 0);
-    public static final Constant DRIVETRAIN_PID_KF = new Constant("D_kF", 0);
+    public static final Constant DRIVETRAIN_PID_KFF = new Constant("D_kFF", 0);
     public static final Constant DRIVETRAIN_PID_DONE_BOUND = new Constant("D_DoneBound", 0);
     public static final Constant DRIVETRAIN_PID_MAXU = new Constant("D_maxU", 1);
     public static final Constant DRIVETRAIN_PID_MINU = new Constant("D_minU", -1);
@@ -31,7 +31,7 @@ public class Constants extends HazyConstant {
     public static final Constant GYRO_PID_KP = new Constant("G_kP", 0);
     public static final Constant GYRO_PID_KI = new Constant("G_kI", 0);
     public static final Constant GYRO_PID_KD = new Constant("G_kD", 0);
-    public static final Constant GYRO_PID_KF = new Constant("G_kF", 0);
+    public static final Constant GYRO_PID_KFF = new Constant("G_kFF", 0);
     public static final Constant GYRO_PID_DONE_BOUND = new Constant("G_DoneBound", 0);
     public static final Constant GYRO_PID_MAXU = new Constant("G_maxU", 1);
     public static final Constant GYRO_PID_MINU = new Constant("G_minU", -1);
@@ -39,7 +39,7 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_PID_KP = new Constant("S_kP", 0);
     public static final Constant SHOOTER_PID_KI = new Constant("S_kI", 0);
     public static final Constant SHOOTER_PID_KD = new Constant("S_kD", 0);
-    public static final Constant SHOOTER_PID_KF = new Constant("S_kF", 0);
+    public static final Constant SHOOTER_PID_KFF = new Constant("S_kFF", 0);
     public static final Constant SHOOTER_PID_DONE_BOUND = new Constant("S_DoneBound", 1000);
     public static final Constant SHOOTER_PID_MAXU = new Constant("S_maxU", 1);
     public static final Constant SHOOTER_PID_MINU = new Constant("S_minU", -1);

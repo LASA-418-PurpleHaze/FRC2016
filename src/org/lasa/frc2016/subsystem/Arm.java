@@ -16,8 +16,7 @@ public class Arm extends HazySubsystem {
     private final VictorSP leftArmTilter, rightArmTifter, leftArmElevator, rightArmElevator;
     private final TorqueTMP tiltProfile, elevatorProfile;
     private final TorquePV tiltProfileFollower, elevatorProfileFollower;
-    private double targetAngle, actualAngle, actualAngleRate;
-    private double targetExtension, actualExtension, actualExtensionRate;
+    private double targetAngle, targetExtension;
     private double tiltMotorOutput, elevatorMotorOutput;
     private double dt, prevTime;
 
@@ -41,7 +40,7 @@ public class Arm extends HazySubsystem {
         OVERRIDE, CONTROLLED;
     }
 
-    static volatile Mode mode;
+    static Mode mode;
 
     public void setMode(Mode m) {
         mode = m;
@@ -49,6 +48,7 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
+        
         dt = Timer.getFPGATimestamp() - prevTime;
         prevTime = Timer.getFPGATimestamp();
         if (null != mode) {
@@ -83,6 +83,8 @@ public class Arm extends HazySubsystem {
         elevatorProfileFollower.setDoneCycles(Constants.ELEVATOR_MPF_DONE_CYCLES.getInt());
         elevatorProfileFollower.setDoneRange(Constants.ELEVATOR_MPF_DONE_RANGE.getDouble());
         elevatorProfileFollower.setPositionDoneRange(Constants.ELEVATOR_MPF_POSITION_DONE_RANGE.getDouble());
+        tiltProfile.generateTrapezoid(sensorInput.getArmTiltPostion(), sensorInput.getArmTiltPostion(), sensorInput.getArmTiltRate());
+        elevatorProfile.generateTrapezoid(sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionPostion(), sensorInput.getArmExtensionRate());
     }
 
     @Override
@@ -92,10 +94,12 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_ActualAngle", sensorInput.getArmTiltPostion());
         SmartDashboard.putNumber("T_ActualAngleRate", sensorInput.getArmTiltRate());
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
+        SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);
         SmartDashboard.putNumber("E_ActualExtension", sensorInput.getArmExtensionPostion());
         SmartDashboard.putNumber("E_ActualExtensionRate", sensorInput.getArmExtensionRate());
         SmartDashboard.putNumber("E_MotorOutput", elevatorMotorOutput);
+        SmartDashboard.putNumber("E_TMPPosition", elevatorProfile.getCurrentPosition());
     }
 
     public void setControlPoint(double x, double y) {
