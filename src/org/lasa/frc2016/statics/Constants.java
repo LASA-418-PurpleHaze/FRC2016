@@ -50,6 +50,7 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 0);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
+    public static final Constant ELEVATOR_POT_CONVERSION = new Constant("E_potConversion", 0);
 
     public static final Constant ELEVATOR_MP_MAX_VELOCITY = new Constant("EMP_maxV", 15);
     public static final Constant ELEVATOR_MP_MAX_ACCELERATION = new Constant("EMP_maxA", 30);
@@ -64,6 +65,7 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_MPF_POSITION_DONE_RANGE = new Constant("EMPF_PositonDoneRange", 5);
 
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
+    public static final Constant TILT_POT_CONVERSION = new Constant("T_potConversion", 0);
 
     public static final Constant TILT_MP_MAX_VELOCITY = new Constant("TMP_maxV", 15);
     public static final Constant TILT_MP_MAX_ACCELERATION = new Constant("TMP_maxA", 30);
