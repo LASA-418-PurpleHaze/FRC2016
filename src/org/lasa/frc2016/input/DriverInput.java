@@ -57,7 +57,7 @@ public class DriverInput implements Runnable {
         return elevatorOverride;
     }
     
-    public double getPrepElevatorOverride() {
+    public double getPrepShooterOverride() {
         return prepShooterOverride;
     }
     

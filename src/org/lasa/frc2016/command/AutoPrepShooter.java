@@ -23,10 +23,7 @@ public class AutoPrepShooter extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return /**
-                 * shooter.getShooterSpeed() >*
-                 */
-                false;
+        return shooter.isSpunUp();
     }
 
 }
