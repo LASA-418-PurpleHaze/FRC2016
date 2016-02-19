@@ -28,11 +28,9 @@ public class Robot extends HazyIterative {
     Arm arm;
     DriverInput driverInput;
     SensorInput sensorInput;
-    Constants constants;
     
     @Override 
     public void robotInit() {
-        constants = new Constants();
 //        scheduler = Executors.newScheduledThreadPool(1);
 //        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
@@ -45,7 +43,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        constants.loadFromFile();
+        Constants.getInstance().loadFromFile();
         new Thread(Manual.getInstance()).start();
         /**
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
@@ -80,7 +78,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
-        constants.loadFromFile();
+        Constants.getInstance().loadFromFile();
         drivetrain.updateConstants();
         shooter.updateConstants();
         intake.updateConstants();
