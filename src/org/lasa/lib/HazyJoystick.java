@@ -69,9 +69,21 @@ public class HazyJoystick {
     }
     
     public boolean getNorth() {
-        return controller.getPOV() == 1;
+        return controller.getPOV(0) == 0;
+    }
+    
+    public boolean getEast() {
+        return controller.getPOV(0) == 90;
+    }
+    
+    public boolean getSouth() {
+        return controller.getPOV(0) == 180;
     }
 
+    public boolean getWest() {
+        return controller.getPOV(0) == 270;
+    }
+    
     private double handleDeadBand(double input) {
         if (Math.abs(input) > deadband) {
             if (input > 0) {

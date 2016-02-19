@@ -4,16 +4,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class OverridePrepShooter extends HazyCommand {
 
-    private double output;
-    
     public OverridePrepShooter(String nm, double t) {
         super(nm, t);
     }
 
     @Override
     public void run() {
-        output = driverInput.getPrepShooterOverride();
-        shooter.setMotorOutput(output);
+        shooter.setMotorOutput(1);
     }
 
     @Override

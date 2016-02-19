@@ -22,15 +22,15 @@ public class DriverInput implements Runnable {
     private static Shooter shooter;
     private static Arm arm;
 
-    private double throttle, wheel, tiltOverride, elevatorOverride, prepShooterOverride;
+    private double throttle, wheel, tiltOverride, elevatorOverride;
     private boolean lastIntake, lastOuttake,
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm,
-            lastPrepShooter, lastShoot = false;
+            lastPrepShooter, lastShoot, lastLongShot, lastShortShot = false;
     private boolean quickTurn;
     private boolean overrideMode = false;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
-    private boolean prepShooter, shoot;
+    private boolean prepShooter, shoot, longShot, shortShot, prepShooterOverride;
 
     private DriverInput() {
         shooter = Shooter.getInstance();
@@ -57,7 +57,7 @@ public class DriverInput implements Runnable {
         return elevatorOverride;
     }
     
-    public double getPrepShooterOverride() {
+    public boolean getPrepShooterOverride() {
         return prepShooterOverride;
     }
     
@@ -78,11 +78,13 @@ public class DriverInput implements Runnable {
         sallyPort = operator.getB();
         drawBridge = operator.getX();
         seeSaw = operator.getY();
-        prepShooter = operator.getLeftTrigger() > .1;
+        prepShooter = operator.getNorth();
+        longShot = operator.getEast();
+        shortShot = operator.getWest();
         
         tiltOverride = operator.getLeftY();
         elevatorOverride = operator.getRightY();
-        prepShooterOverride = operator.getLeftTrigger();
+        prepShooterOverride = operator.getSouth();
 
         if(operator.getStart()) {
             overrideMode = false;
@@ -103,6 +105,8 @@ public class DriverInput implements Runnable {
 
         lastPrepShooter = prepShooter;
         lastShoot = shoot;
+        lastLongShot = longShot;
+        lastShortShot = shortShot;
     }
 
     private void intakeControl() {
@@ -113,6 +117,8 @@ public class DriverInput implements Runnable {
         } else if (!intake && lastIntake) {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         } else if (!outtake && lastOuttake) {
+            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+        } else if (intake && !lastIntake && outtake && !lastOuttake) {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
     }
@@ -130,7 +136,16 @@ public class DriverInput implements Runnable {
             }
         } else {
             shooter.setMode(Shooter.Mode.OVERRIDE);
-            if (shoot && !lastShoot && shooter.isSpunUp()) {
+            if (longShot && !lastLongShot) {
+                
+            } else if (shortShot && !lastShortShot) {
+                
+            } else if (!longShot && lastLongShot) {
+                
+            } else if (!shortShot && lastShortShot) {
+                
+            } else if (!shortShot
+            if (shoot && !lastShoot) {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }
             
@@ -155,6 +170,7 @@ public class DriverInput implements Runnable {
             }
         } else {
             arm.setMode(Arm.Mode.OVERRIDE);
+            arm.setMotorSpeeds(tiltOverride, elevatorOverride);
         }
     }
 

@@ -44,13 +44,8 @@ public class Robot extends HazyIterative {
     @Override
     public void teleopInit() {
         Constants.getInstance().loadFromFile();
-        new Thread(Manual.getInstance()).start();
-        /**
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        CommandManager.addCommand(new OverrideArmPosition("OverrideArm", 10));
-        CommandManager.addCommand(new OverridePrepShooter("OverrideShooter", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
-        **/
         drivetrain.updateConstants();
         shooter.updateConstants();
         intake.updateConstants();
