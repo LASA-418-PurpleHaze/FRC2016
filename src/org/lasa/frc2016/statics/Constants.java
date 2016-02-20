@@ -53,6 +53,7 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_MIN_ANGLE = new Constant("S_MinAngle", -0.306);
     public static final Constant SHOOTER_MAX_ANGLE = new Constant("S_MaxAngle", 0.072);
     public static final Constant SHOOTER_STOP_RPM = new Constant("S_StopRPM", 0);
+    public static final Constant SHOOTER_OVERRIDE_POWER = new Constant("S_OverridePower", 0.8);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
     public static final Constant ELEVATOR_POT_CONVERSION = new Constant("E_potConversion", 0);

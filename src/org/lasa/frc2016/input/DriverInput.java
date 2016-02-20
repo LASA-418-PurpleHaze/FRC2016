@@ -148,7 +148,7 @@ public class DriverInput implements Runnable {
         } else {
             shooter.setMode(Shooter.Mode.OVERRIDE);
             if (overrideShot && !lastOverrideShot) {
-                CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", wheel, throttle));
+                CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 10, Constants.SHOOTER_OVERRIDE_POWER.getDouble()));
             } else if (!overrideShot && lastOverrideShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
             }
