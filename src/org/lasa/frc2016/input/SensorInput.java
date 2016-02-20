@@ -70,11 +70,11 @@ public class SensorInput implements Runnable {
     }
 
     public double getArmTiltPosition() {
-        return armTiltPostionVal - (armTiltPotVal * Constants.TILT_POT_CONVERSION.getDouble());
+        return armTiltPostionVal;
     }
 
     public double getArmExtensionPosition() {
-        return armExtensionPositionVal - (armExtensionPotVal * Constants.ELEVATOR_POT_CONVERSION.getDouble());
+        return armExtensionPositionVal / 250.0 * 1.432;
     }
 
     public double getArmTiltRate() {
@@ -82,6 +82,6 @@ public class SensorInput implements Runnable {
     }
 
     public double getArmExtensionRate() {
-        return armExtensionRateVal;
+        return armExtensionRateVal / 250.0 * 1.432;
     }
 }
