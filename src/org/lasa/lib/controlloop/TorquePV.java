@@ -9,7 +9,7 @@ public class TorquePV extends ControlLoop {
     private double kFFA;
     private double errorSum;
 
-    private TorqueTMP profile;
+    private HazyTMP profile;
     private double actualPosition;
     private double actualVelocity;
     private double positionDoneRange;
@@ -25,7 +25,7 @@ public class TorquePV extends ControlLoop {
         errorSum = 0.0;
     }
 
-    public double calculate(TorqueTMP tmProfile, double currentPosition, double currentVelocity) {
+    public double calculate(HazyTMP tmProfile, double currentPosition, double currentVelocity) {
         //Dont worry about what this does for now.
         double voltageAdjustment = /*tunedVoltage / ds.getBatteryVoltage();*/ 1.0;
 
@@ -48,9 +48,9 @@ public class TorquePV extends ControlLoop {
 
         //Acceleration FeedForward
         output += (profile.getCurrentAcceleration() * kFFA * voltageAdjustment);
-        
+
         output += errorSum * kI;
-        if ((1 >= kI * errorSum) && (-1 <= kI* errorSum)) {
+        if ((1 >= kI * errorSum) && (-1 <= kI * errorSum)) {
             errorSum += error;
         } else if (errorSum > 0) {
             errorSum = 1;
@@ -89,7 +89,7 @@ public class TorquePV extends ControlLoop {
     }
 
     public boolean onTrack() {
-        if(profile == null) {
+        if (profile == null) {
             return false;
         }
         return Math.abs(profile.getCurrentVelocity() - actualVelocity) < doneRange;

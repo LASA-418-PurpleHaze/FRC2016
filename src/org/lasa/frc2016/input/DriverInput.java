@@ -1,19 +1,14 @@
 package org.lasa.frc2016.input;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasa.frc2016.command.AutoPrepShooter;
-import org.lasa.frc2016.command.InfeedBall;
-import org.lasa.frc2016.command.OutfeedBall;
-import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.frc2016.command.LongShot;
-import org.lasa.frc2016.command.OverrideShot;
 import org.lasa.frc2016.command.SetArmPosition;
-import org.lasa.frc2016.command.Shoot;
-import org.lasa.frc2016.command.ShortShot;
-import org.lasa.frc2016.command.StopShooter;
+import org.lasa.frc2016.command.SetIntakeMode;
+import org.lasa.frc2016.command.SetShooterHoodAngle;
+import org.lasa.frc2016.command.SetShooterOverridePower;
+import org.lasa.frc2016.command.SetShooterRPM;
+import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.subsystem.Arm;
+import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.subsystem.Shooter;
 import org.lasa.lib.HazyJoystick;
 
@@ -30,12 +25,12 @@ public class DriverInput implements Runnable {
     private double throttle, wheel, tiltOverride, elevatorOverride;
     private boolean lastIntake, lastOuttake,
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm,
-            lastPrepShooter, lastShoot, lastLongShot, lastShortShot, lastOverrideShot = false;
+            lastPrepVisionShooter, lastShoot, lastLongShot, lastShortShot, lastOverrideShot = false;
     private boolean quickTurn;
     private boolean overrideMode = false;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
-    private boolean prepShooter, shoot, longShot, shortShot, overrideShot;
+    private boolean prepVisionShooter, shoot, longShot, shortShot, overrideShot;
 
     private DriverInput() {
         shooter = Shooter.getInstance();
@@ -83,7 +78,7 @@ public class DriverInput implements Runnable {
         sallyPort = operator.getB();
         drawBridge = operator.getX();
         seeSaw = operator.getY();
-        prepShooter = operator.getNorth();
+        prepVisionShooter = operator.getNorth();
         longShot = operator.getEast();
         shortShot = operator.getWest();
 
@@ -108,7 +103,7 @@ public class DriverInput implements Runnable {
         lastSeeSaw = seeSaw;
         lastResetArm = resetArm;
 
-        lastPrepShooter = prepShooter;
+        lastPrepVisionShooter = prepVisionShooter;
         lastShoot = shoot;
         lastLongShot = longShot;
         lastShortShot = shortShot;
@@ -117,51 +112,52 @@ public class DriverInput implements Runnable {
 
     private void intakeControl() {
         if (intake && !lastIntake) {
-            CommandManager.addCommand(new InfeedBall("Infeed", 10));
+            CommandManager.addCommand(new SetIntakeMode("Infeed", 10, Intake.Mode.INTAKING));
         } else if (outtake && !lastOuttake) {
-            CommandManager.addCommand(new OutfeedBall("Outfeed", 10));
+            CommandManager.addCommand(new SetIntakeMode("Outfeed", 10, Intake.Mode.OUTTAKING));
         } else if (!intake && lastIntake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+            CommandManager.addCommand(new SetIntakeMode("Off", 10, Intake.Mode.OFF));
         } else if (!outtake && lastOuttake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+            CommandManager.addCommand(new SetIntakeMode("Off", 10, Intake.Mode.OFF));
         } else if (intake && !lastIntake && outtake && !lastOuttake) {
-            CommandManager.addCommand(new StopIntake("StopIntake", 10));
+            CommandManager.addCommand(new SetIntakeMode("Off", 10, Intake.Mode.OFF));
         }
     }
 
     private void shooterControl() {
         if (!overrideMode) {
             shooter.setMode(Shooter.Mode.CONTROLLED);
-            if (prepShooter && !lastPrepShooter) {
-                CommandManager.addCommand(new AutoPrepShooter("AutoPrepShooter", 10));
-            } else if (!prepShooter && lastPrepShooter) {
-                CommandManager.addCommand(new StopShooter("StopShooter", 10));
+            if (prepVisionShooter && !lastPrepVisionShooter) {
             } else if (longShot && !lastLongShot) {
-                CommandManager.addCommand(new LongShot("LongShot", 10));
+                CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_ANGLE.getInt()));
             } else if (shortShot && !lastShortShot) {
-                CommandManager.addCommand(new ShortShot("ShortShot", 10));
+                CommandManager.addCommand(new SetShooterRPM("ShortRPM", 10, Constants.SHOOTER_SHORT_RPM.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_ANGLE.getInt()));
+            } else if (!prepVisionShooter && lastPrepVisionShooter) {
             } else if (!longShot && lastLongShot) {
-                CommandManager.addCommand(new StopShooter("StopShooter", 10));
+                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_MIN_ANGLE.getDouble()));
             } else if (!shortShot && lastShortShot) {
-                CommandManager.addCommand(new StopShooter("StopShooter", 10));
-                if (shoot && !lastShoot && shooter.isSpunUp()) {
-                    CommandManager.addCommand(new Shoot("Shoot", 10));
-                }
-            } else {
-                shooter.setMode(Shooter.Mode.OVERRIDE);
-                if (overrideShot && !lastOverrideShot) {
-                    CommandManager.addCommand(new OverrideShot("OverrideShot", 10));
-                } else if (!overrideShot && lastOverrideShot) {
-                    CommandManager.addCommand(new StopShooter("StopShooter", 10));
-                }
-                if (shoot && !lastShoot) {
-                    CommandManager.addCommand(new Shoot("Shoot", 10));
-                }
-
+                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_MIN_ANGLE.getDouble()));
+            }
+            if (shoot && !lastShoot && shooter.isSpunUp()) {
+                CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
+            }
+        } else {
+            shooter.setMode(Shooter.Mode.OVERRIDE);
+            if (overrideShot && !lastOverrideShot) {
+                CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", wheel, throttle));
+            } else if (!overrideShot && lastOverrideShot) {
+                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
+            }
+            if (shoot && !lastShoot) {
+                CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
             }
         }
     }
-    
+
     private void armControl() {
         if (!overrideMode) {
             arm.setMode(Arm.Mode.CONTROLLED);

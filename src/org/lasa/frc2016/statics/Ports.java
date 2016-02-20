@@ -2,8 +2,6 @@ package org.lasa.frc2016.statics;
 
 public class Ports {
 
-    public static String AXIS_CAMERA_IP = "10.4.18.10";
-
     // PWM Ports
     public static final int INTAKE_MOTOR = 0;
     public static final int RIGHT_FRONT_MOTOR = 2;
@@ -16,8 +14,8 @@ public class Ports {
     public static final int RIGHT_ARM_TILTER = 13;
     public static final int LEFT_ARM_EXTENDER = 19;
     public static final int RIGHT_ARM_EXTENDER = 14;
-    public static final int LEFT_SHOOTER_SERVO = 5;
-    public static final int RIGHT_SHOOTER_SERVO = 6;
+    public static final int LEFT_SHOOTER_SERVO = 6;
+    public static final int RIGHT_SHOOTER_SERVO = 7;
 
     // Encoder Ports
     public static final int LEFT_SIDE_A_ENCODER = 6;
@@ -32,7 +30,7 @@ public class Ports {
     // Analog IO Ports
     public static final int ARM_TILT_POTENTIOMETER = 0;
     public static final int ARM_EXTENSION_POTENTIOMETER = 1;
-    
+
     // Digital IO Ports
     public static final int INTAKE_BUMP_SWITCH = 3;
 }

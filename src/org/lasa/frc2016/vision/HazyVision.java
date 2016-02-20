@@ -26,7 +26,7 @@ public final class HazyVision implements Runnable {
     private static HazyVision instance;
 
     private ArrayList<Integer> visionLookUpTable;
-    
+
     USBCamera camera;
     static Image image;
     ROI roi;
@@ -57,8 +57,7 @@ public final class HazyVision implements Runnable {
         //plane = NIVision.imaqCalibrationSetAxisInfo(image);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
-        
-        
+
     }
 
     public static HazyVision getInstance() {
@@ -109,10 +108,10 @@ public final class HazyVision implements Runnable {
         }
         return image;
     }
-    
+
     private double calculate() {
-        midX = (highestX - lowestX)/2;
-        midY = (highestY - lowestY)/2;
+        midX = (highestX - lowestX) / 2;
+        midY = (highestY - lowestY) / 2;
         length = Math.sqrt(Math.pow(highestX - midX, 2) + Math.pow(highestY - midY, 2));
         return 0;
     }
@@ -127,7 +126,7 @@ public final class HazyVision implements Runnable {
             BufferedReader r = new BufferedReader(new FileReader("VisionTable.txt"));
             String line;
             while ((line = r.readLine()) != null) {
-                for(int x = 0;!line.equals(""); x++) {
+                for (int x = 0; !line.equals(""); x++) {
                     visionLookUpTable.add(Integer.parseInt(line));
                 }
             }
@@ -138,7 +137,7 @@ public final class HazyVision implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(HazyVision.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         hue = new Range(Constants.HAZYVISION_HUE_LOWER_BOUND.getInt(), Constants.HAZYVISION_HUE_UPPER_BOUND.getInt());
         saturation = new Range(Constants.HAZYVISION_SATURATION_LOWER_BOUND.getInt(), Constants.HAZYVISION_SATURATION_UPPER_BOUND.getInt());
         luminence = new Range(Constants.HAZYVISION_LUMINENCE_LOWER_BOUND.getInt(), Constants.HAZYVISION_LUMINENCE_UPPER_BOUND.getInt());

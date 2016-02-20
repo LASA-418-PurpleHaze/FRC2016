@@ -27,8 +27,10 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
-    
-    @Override 
+
+    double time;
+
+    @Override
     public void robotInit() {
         constants = new Constants();
 //        scheduler = Executors.newScheduledThreadPool(1);
@@ -50,6 +52,7 @@ public class Robot extends HazyIterative {
         shooter.updateConstants();
         intake.updateConstants();
         arm.updateConstants();
+        time = 0;
     }
 
     @Override
@@ -59,16 +62,16 @@ public class Robot extends HazyIterative {
         drivetrain.run();
         shooter.run();
         intake.run();
-        sensorInput.run();
         drivetrain.pushToDashboard();
         shooter.pushToDashboard();
         intake.pushToDashboard();
         arm.pushToDashboard();
+        time++;
     }
 
     @Override
     public void teleopContinuous() {
-        
+        sensorInput.run();
         arm.run();
     }
 
@@ -117,7 +120,7 @@ public class Robot extends HazyIterative {
         drivetrain.pushToDashboard();
         super.disabledPeriodic(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void testInit() {
         super.testInit(); //To change body of generated methods, choose Tools | Templates.

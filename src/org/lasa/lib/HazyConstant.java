@@ -11,7 +11,7 @@ public abstract class HazyConstant {
 
     private static final ArrayList<Constant> constants = new ArrayList(0);
     BufferedReader r;
-    
+
     public abstract String getFileLocation();
 
     public static class Constant {

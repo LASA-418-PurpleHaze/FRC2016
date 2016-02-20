@@ -39,7 +39,7 @@ public class SensorInput implements Runnable {
     public static SensorInput getInstance() {
         return (instance == null) ? instance = new SensorInput() : instance;
     }
-    
+
     public void start() {
         navX.reset();
     }
@@ -89,11 +89,11 @@ public class SensorInput implements Runnable {
     public double getArmExtensionRate() {
         return -(armExtensionRateVal / 250.0 * 1.432);
     }
-    
+
     public double getArmTiltPot() {
         return armTiltPot.getValue();
     }
-    
+
     public double getArmExtensionPot() {
         return armExtension.get();
     }

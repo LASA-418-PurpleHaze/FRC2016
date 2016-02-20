@@ -19,11 +19,11 @@ public class HazyJoystick {
     public double getLeftY() {
         return handleDeadBand(controller.getRawAxis(1));
     }
-    
+
     public double getLeftTrigger() {
         return controller.getRawAxis(2);
     }
-    
+
     public double getRightTrigger() {
         return controller.getRawAxis(3);
     }
@@ -67,15 +67,15 @@ public class HazyJoystick {
     public boolean getStart() {
         return controller.getRawButton(8);
     }
-    
+
     public boolean getNorth() {
         return controller.getPOV(0) == 0;
     }
-    
+
     public boolean getEast() {
         return controller.getPOV(0) == 90;
     }
-    
+
     public boolean getSouth() {
         return controller.getPOV(0) == 180;
     }
@@ -83,7 +83,7 @@ public class HazyJoystick {
     public boolean getWest() {
         return controller.getPOV(0) == 270;
     }
-    
+
     private double handleDeadBand(double input) {
         if (Math.abs(input) > deadband) {
             if (input > 0) {

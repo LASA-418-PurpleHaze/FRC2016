@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Ports;
 
-public class Intake extends HazySubsystem {
+public final class Intake extends HazySubsystem {
 
     private static Intake instance;
 
@@ -14,7 +14,7 @@ public class Intake extends HazySubsystem {
 
     private Intake() {
         intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
-        mode = Mode.OFF;
+        this.setMode(Mode.OFF);
     }
 
     public static Intake getInstance() {
@@ -26,7 +26,7 @@ public class Intake extends HazySubsystem {
     }
 
     static Mode mode;
-            
+
     public void setMode(Mode m) {
         mode = m;
     }

@@ -1,33 +1,32 @@
 package org.lasa.frc2016;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasa.frc2016.command.AutoPrepShooter;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.command.DriveStraight;
 import org.lasa.frc2016.command.DriveTurn;
 import org.lasa.frc2016.command.SetArmPosition;
-import org.lasa.frc2016.command.Shoot;
+import org.lasa.frc2016.command.SetShooterRPM;
 
 public class Auto implements Runnable {
-    
+
     private static Auto instance;
-    
+
     private final byte AUTONOMOUS_KEY;
-    
+
     private boolean ROBOT_SLEEP;
-    
+
     private Auto() {
         AUTONOMOUS_KEY = (byte) SmartDashboard.getNumber("Auto Key");
     }
-    
+
     public static Auto getInstance() {
         return (instance == null) ? instance = new Auto() : instance;
     }
-    
+
     @Override
     public void run() {
-        
-        switch(AUTONOMOUS_KEY) {
+
+        switch (AUTONOMOUS_KEY) {
             case 0:
                 CommandManager.addCommand(new DriveStraight("DriveOverDefense", 10, 24));
                 break;
@@ -58,12 +57,9 @@ public class Auto implements Runnable {
                 ROBOT_SLEEP = true;
                 break;
         }
-        
-        if(CommandManager.empty() && !ROBOT_SLEEP) {
-            CommandManager.addCommand(new AutoPrepShooter("PrepShooter", 10));
-            CommandManager.addSequential(new Shoot("Shoot", 10));
+
+        if (CommandManager.empty() && !ROBOT_SLEEP) {
         }
-        
-        
+
     }
 }

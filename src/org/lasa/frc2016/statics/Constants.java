@@ -50,6 +50,9 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_LONG_ANGLE = new Constant("S_LongShotAngle", 90);
     public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 90);
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 90);
+    public static final Constant SHOOTER_MIN_ANGLE = new Constant("S_MinAngle", -0.306);
+    public static final Constant SHOOTER_MAX_ANGLE = new Constant("S_MaxAngle", 0.072);
+    public static final Constant SHOOTER_STOP_RPM = new Constant("S_StopRPM", 0);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
     public static final Constant ELEVATOR_POT_CONVERSION = new Constant("E_potConversion", 0);
@@ -79,10 +82,9 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
 
-    
     public Constants() {
     }
-    
+
     @Override
     public String getFileLocation() {
         return "home/admin/constants.txt";
