@@ -5,8 +5,10 @@ import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
+import org.lasa.frc2016.command.LongShot;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
+import org.lasa.frc2016.command.ShortShot;
 import org.lasa.frc2016.command.StopShooter;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
@@ -25,12 +27,12 @@ public class DriverInput implements Runnable {
     private double throttle, wheel, tiltOverride, elevatorOverride;
     private boolean lastIntake, lastOuttake,
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm,
-            lastPrepShooter, lastShoot, lastLongShot, lastShortShot = false;
+            lastPrepShooter, lastShoot, lastLongShot, lastShortShot, lastOverrideShot = false;
     private boolean quickTurn;
     private boolean overrideMode = false;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
-    private boolean prepShooter, shoot, longShot, shortShot, prepShooterOverride;
+    private boolean prepShooter, shoot, longShot, shortShot, overrideShot;
 
     private DriverInput() {
         shooter = Shooter.getInstance();
@@ -58,7 +60,7 @@ public class DriverInput implements Runnable {
     }
     
     public boolean getPrepShooterOverride() {
-        return prepShooterOverride;
+        return overrideShot;
     }
     
     public boolean getQuickTurn() {
@@ -84,7 +86,7 @@ public class DriverInput implements Runnable {
         
         tiltOverride = operator.getLeftY();
         elevatorOverride = operator.getRightY();
-        prepShooterOverride = operator.getSouth();
+        overrideShot = operator.getSouth();
 
         if(operator.getStart()) {
             overrideMode = false;
@@ -107,6 +109,7 @@ public class DriverInput implements Runnable {
         lastShoot = shoot;
         lastLongShot = longShot;
         lastShortShot = shortShot;
+        lastOverrideShot = overrideShot;
     }
 
     private void intakeControl() {
@@ -137,14 +140,18 @@ public class DriverInput implements Runnable {
         } else {
             shooter.setMode(Shooter.Mode.OVERRIDE);
             if (longShot && !lastLongShot) {
-                
+                CommandManager.addCommand(new LongShot("LongShot", 10));
             } else if (shortShot && !lastShortShot) {
+                CommandManager.addCommand(new ShortShot("ShortShot", 10));
+            } else if (overrideShot && !lastOverrideShot) {
                 
             } else if (!longShot && lastLongShot) {
-                
+                CommandManager.addCommand(new StopShooter("StopShooter", 10));
             } else if (!shortShot && lastShortShot) {
-                
-            } else if (!shortShot
+                CommandManager.addCommand(new StopShooter("StopShooter", 10));
+            } else if (!overrideShot && lastOverrideShot) {
+                CommandManager.addCommand(new StopShooter("StopShooter", 10));
+            }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new Shoot("Shoot", 10));
             }

@@ -32,6 +32,7 @@ public class Ports {
     // Analog IO Ports
     public static final int ARM_TILT_POTENTIOMETER = 0;
     public static final int ARM_EXTENSION_POTENTIOMETER = 1;
+    
     // Digital IO Ports
     public static final int INTAKE_BUMP_SWITCH = 6;
 }

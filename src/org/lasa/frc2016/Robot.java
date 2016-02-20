@@ -14,8 +14,6 @@ import org.lasa.frc2016.vision.HazyVision;
 import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
-import org.lasa.frc2016.command.OverridePrepShooter;
-import org.lasa.frc2016.command.OverrideArmPosition;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
 
@@ -28,9 +26,11 @@ public class Robot extends HazyIterative {
     Arm arm;
     DriverInput driverInput;
     SensorInput sensorInput;
+    Constants constants;
     
     @Override 
     public void robotInit() {
+        constants = new Constants();
 //        scheduler = Executors.newScheduledThreadPool(1);
 //        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
@@ -43,7 +43,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        Constants.getInstance().loadFromFile();
+        constants.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
 //        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
@@ -73,7 +73,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
-        Constants.getInstance().loadFromFile();
+        constants.loadFromFile();
         drivetrain.updateConstants();
         shooter.updateConstants();
         intake.updateConstants();

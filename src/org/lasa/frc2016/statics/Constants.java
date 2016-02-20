@@ -81,14 +81,8 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
 
-    private static Constants instance;
     
-    private Constants() {
-        
-    }
-    
-    public static Constants getInstance() {
-        return (instance == null) ? instance = new Constants() : instance;
+    public Constants() {
     }
     
     @Override

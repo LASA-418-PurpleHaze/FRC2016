@@ -115,6 +115,7 @@ public class Drivetrain extends HazySubsystem {
         SmartDashboard.putNumber("D_LeftSpeed", leftSpeed);
         SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
         SmartDashboard.putString("D_Mode", mode.toString());
+        SmartDashboard.putNumber("D_NavXHeading", sensorInput.getNavXCompassHeading());
         SmartDashboard.putNumber("TESTConstants", Constants.DRIVE_SENSITIVITY.getDouble());
     }
 }

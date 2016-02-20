@@ -1,7 +1,6 @@
 package org.lasa.frc2016.input;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;

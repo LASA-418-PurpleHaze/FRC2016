@@ -14,6 +14,7 @@ public class Intake extends HazySubsystem {
 
     private Intake() {
         intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
+        mode = Mode.OFF;
     }
 
     public static Intake getInstance() {

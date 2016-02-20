@@ -13,7 +13,7 @@ public class Arm extends HazySubsystem {
 
     private static Arm instance;
 
-    private final VictorSP leftArmTilter, rightArmTifter, leftArmElevator, rightArmElevator;
+    private final VictorSP leftArmTilter, rightArmTilter, leftArmElevator, rightArmElevator;
     private final TorqueTMP tiltProfile, elevatorProfile;
     private final TorquePV tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
@@ -23,9 +23,11 @@ public class Arm extends HazySubsystem {
     private Arm() {
         prevTime = Timer.getFPGATimestamp(); // FIX
         leftArmTilter = new VictorSP(Ports.LEFT_ARM_LIFTER);
-        rightArmTifter = new VictorSP(Ports.RIGHT_ARM_LIFTER);
+        rightArmTilter = new VictorSP(Ports.RIGHT_ARM_LIFTER);
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
+        leftArmTilter.setInverted(true);
+        rightArmElevator.setInverted(true);
         tiltProfile = new TorqueTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
         elevatorProfile = new TorqueTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         tiltProfileFollower = new TorquePV();
@@ -35,7 +37,7 @@ public class Arm extends HazySubsystem {
     public static Arm getInstance() {
         return (instance == null) ? instance = new Arm() : instance;
     }
-
+    
     public static enum Mode {
         OVERRIDE, CONTROLLED;
     }
@@ -64,7 +66,7 @@ public class Arm extends HazySubsystem {
             }
         }
         leftArmTilter.set(tiltMotorOutput);
-        rightArmTifter.set(tiltMotorOutput);
+        rightArmTilter.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
         rightArmElevator.set(elevatorMotorOutput);
     }

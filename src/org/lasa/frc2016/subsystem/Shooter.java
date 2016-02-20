@@ -65,6 +65,7 @@ public class Shooter extends HazySubsystem {
         SmartDashboard.putNumber("S_ActualRPM", actualRPM);
         SmartDashboard.putNumber("S_MotorOutput", targetRPM);
         SmartDashboard.putNumber("S_EncOutput", encoderOutput);
+        SmartDashboard.putString("S_Mode", mode.toString());
     }
 
     public void setControlPoint(double RPM) {
