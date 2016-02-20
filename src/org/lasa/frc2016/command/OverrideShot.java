@@ -15,12 +15,11 @@ public class OverrideShot extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return DriverStation.getInstance().isDisabled();
+        return true;
     }
-
+    
     @Override
     public void stop() {
-        shooter.setMotorOutput(0);
         super.stop();
     }
 }

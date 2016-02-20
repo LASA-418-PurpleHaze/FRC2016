@@ -1,5 +1,7 @@
 package org.lasa.frc2016.input;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.command.AutoPrepShooter;
 import org.lasa.frc2016.command.InfeedBall;
 import org.lasa.frc2016.command.OutfeedBall;
@@ -158,11 +160,8 @@ public class DriverInput implements Runnable {
 
             }
         }
-
+    }
     
-
-    
-
     private void armControl() {
         if (!overrideMode) {
             arm.setMode(Arm.Mode.CONTROLLED);
