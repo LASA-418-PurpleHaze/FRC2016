@@ -51,8 +51,6 @@ public abstract class HazyConstant {
                 for (Constant constant : constants) {
                     if (key.equals(constant.name)) {
                         constant.setVal(value);
-                        DriverStation.reportError(constant.name, false);
-                        DriverStation.reportError(Double.toString(constant.value), false);
                     }
                 }
             }

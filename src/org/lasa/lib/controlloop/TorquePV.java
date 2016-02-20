@@ -4,8 +4,10 @@ public class TorquePV extends ControlLoop {
 
     private double kP;
     private double kV;
+    private double kI;
     private double kFFV;
     private double kFFA;
+    private double errorSum;
 
     private TorqueTMP profile;
     private double actualPosition;
@@ -17,8 +19,10 @@ public class TorquePV extends ControlLoop {
 
         kP = 0.0;
         kV = 0.0;
+        kI = 0.0;
         kFFV = 0.0;
         kFFA = 0.0;
+        errorSum = 0.0;
     }
 
     public double calculate(TorqueTMP tmProfile, double currentPosition, double currentVelocity) {
@@ -44,13 +48,23 @@ public class TorquePV extends ControlLoop {
 
         //Acceleration FeedForward
         output += (profile.getCurrentAcceleration() * kFFA * voltageAdjustment);
+        
+        output += errorSum * kI;
+        if ((1 >= kI * errorSum) && (-1 <= kI* errorSum)) {
+            errorSum += error;
+        } else if (errorSum > 0) {
+            errorSum = 1;
+        } else if (errorSum < 0) {
+            errorSum = -1;
+        }
 
         return output;
     }
 
-    public void setGains(double p, double v, double ffV, double ffA) {
+    public void setGains(double p, double v, double i, double ffV, double ffA) {
         kP = p;
         kV = v;
+        kI = i;
         kFFV = ffV;
         kFFA = ffA;
     }

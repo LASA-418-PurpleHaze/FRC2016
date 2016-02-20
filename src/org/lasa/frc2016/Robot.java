@@ -59,6 +59,7 @@ public class Robot extends HazyIterative {
         drivetrain.run();
         shooter.run();
         intake.run();
+        sensorInput.run();
         drivetrain.pushToDashboard();
         shooter.pushToDashboard();
         intake.pushToDashboard();
@@ -67,7 +68,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopContinuous() {
-        sensorInput.run();
+        
         arm.run();
     }
 
@@ -99,9 +100,24 @@ public class Robot extends HazyIterative {
         if (!CommandManager.empty()) {
             CommandManager.cancelAll();
         }
-        super.disabledInit(); //To change body of generated methods, choose Tools | Templates.
+        constants.loadFromFile();
+        drivetrain.updateConstants();
+        shooter.updateConstants();
+        intake.updateConstants();
+        arm.updateConstants();
+        sensorInput.start();
     }
 
+    @Override
+    public void disabledPeriodic() {
+        sensorInput.run();
+        shooter.pushToDashboard();
+        intake.pushToDashboard();
+        arm.pushToDashboard();
+        drivetrain.pushToDashboard();
+        super.disabledPeriodic(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public void testInit() {
         super.testInit(); //To change body of generated methods, choose Tools | Templates.

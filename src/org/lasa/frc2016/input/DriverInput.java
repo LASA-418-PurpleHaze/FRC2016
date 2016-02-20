@@ -6,6 +6,7 @@ import org.lasa.frc2016.command.OutfeedBall;
 import org.lasa.frc2016.command.StopIntake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.command.LongShot;
+import org.lasa.frc2016.command.OverrideShot;
 import org.lasa.frc2016.command.SetArmPosition;
 import org.lasa.frc2016.command.Shoot;
 import org.lasa.frc2016.command.ShortShot;
@@ -20,7 +21,7 @@ public class DriverInput implements Runnable {
     HazyJoystick operator = new HazyJoystick(1, 0.15);
 
     private static DriverInput instance;
-    
+
     private static Shooter shooter;
     private static Arm arm;
 
@@ -38,7 +39,7 @@ public class DriverInput implements Runnable {
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
     }
-    
+
     public static DriverInput getInstance() {
         return (instance == null) ? instance = new DriverInput() : instance;
     }
@@ -50,19 +51,19 @@ public class DriverInput implements Runnable {
     public double getWheel() {
         return wheel;
     }
-    
+
     public double getTiltOverride() {
         return tiltOverride;
     }
-    
+
     public double getElevatorOverride() {
         return elevatorOverride;
     }
-    
+
     public boolean getPrepShooterOverride() {
         return overrideShot;
     }
-    
+
     public boolean getQuickTurn() {
         return quickTurn;
     }
@@ -71,26 +72,26 @@ public class DriverInput implements Runnable {
         throttle = -driver.getLeftY();
         wheel = driver.getRightX();
         quickTurn = driver.getRightBumper();
-        resetArm = driver.getA();
         shoot = driver.getRightTrigger() > .1;
 
         intake = operator.getRightBumper();
         outtake = operator.getLeftBumper();
-        portcullis = operator.getA();
+        resetArm = operator.getA();
+        portcullis = false;
         sallyPort = operator.getB();
         drawBridge = operator.getX();
         seeSaw = operator.getY();
         prepShooter = operator.getNorth();
         longShot = operator.getEast();
         shortShot = operator.getWest();
-        
+
         tiltOverride = operator.getLeftY();
         elevatorOverride = operator.getRightY();
         overrideShot = operator.getSouth();
 
-        if(operator.getStart()) {
+        if (operator.getStart()) {
             overrideMode = false;
-        } else if(operator.getSelect()) {
+        } else if (operator.getSelect()) {
             overrideMode = true;
         }
     }
@@ -125,7 +126,7 @@ public class DriverInput implements Runnable {
             CommandManager.addCommand(new StopIntake("StopIntake", 10));
         }
     }
-    
+
     private void shooterControl() {
         if (!overrideMode) {
             shooter.setMode(Shooter.Mode.CONTROLLED);
@@ -133,31 +134,34 @@ public class DriverInput implements Runnable {
                 CommandManager.addCommand(new AutoPrepShooter("AutoPrepShooter", 10));
             } else if (!prepShooter && lastPrepShooter) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
-            }
-            if (shoot && !lastShoot && shooter.isSpunUp()) {
-                CommandManager.addCommand(new Shoot("Shoot", 10));
-            }
-        } else {
-            shooter.setMode(Shooter.Mode.OVERRIDE);
-            if (longShot && !lastLongShot) {
+            } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new LongShot("LongShot", 10));
             } else if (shortShot && !lastShortShot) {
                 CommandManager.addCommand(new ShortShot("ShortShot", 10));
-            } else if (overrideShot && !lastOverrideShot) {
-                
             } else if (!longShot && lastLongShot) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
             } else if (!shortShot && lastShortShot) {
                 CommandManager.addCommand(new StopShooter("StopShooter", 10));
-            } else if (!overrideShot && lastOverrideShot) {
-                CommandManager.addCommand(new StopShooter("StopShooter", 10));
+                if (shoot && !lastShoot && shooter.isSpunUp()) {
+                    CommandManager.addCommand(new Shoot("Shoot", 10));
+                }
+            } else {
+                shooter.setMode(Shooter.Mode.OVERRIDE);
+                if (overrideShot && !lastOverrideShot) {
+                    CommandManager.addCommand(new OverrideShot("OverrideShot", 10));
+                } else if (!overrideShot && lastOverrideShot) {
+                    CommandManager.addCommand(new StopShooter("StopShooter", 10));
+                }
+                if (shoot && !lastShoot) {
+                    CommandManager.addCommand(new Shoot("Shoot", 10));
+                }
+
             }
-            if (shoot && !lastShoot) {
-                CommandManager.addCommand(new Shoot("Shoot", 10));
-            }
-            
         }
-    }
+
+    
+
+    
 
     private void armControl() {
         if (!overrideMode) {
@@ -177,7 +181,7 @@ public class DriverInput implements Runnable {
             }
         } else {
             arm.setMode(Arm.Mode.OVERRIDE);
-            arm.setMotorSpeeds(tiltOverride, elevatorOverride);
+            arm.setMotorSpeeds(tiltOverride, elevatorOverride);;
         }
     }
 

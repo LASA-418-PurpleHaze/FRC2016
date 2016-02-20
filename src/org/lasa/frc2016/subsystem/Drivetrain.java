@@ -25,6 +25,7 @@ public class Drivetrain extends HazySubsystem {
         rightBackMotor.setInverted(true);
         straightPID = new HazyPID();
         turnPID = new HazyPID();
+        mode = Mode.OVERRIDE;
     }
 
     public static Drivetrain getInstance() {
@@ -49,7 +50,7 @@ public class Drivetrain extends HazySubsystem {
                     leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftSideValue() + sensorInput.getRightSideValue()) / 2);
                     break;
                 case TURN_CONTROLLED:
-                    double power = turnPID.calculate(sensorInput.getNavXCompassHeading());
+                    double power = turnPID.calculate(sensorInput.getNavXAngle());
                     leftSpeed = -power;
                     rightSpeed = power;
                     break;
@@ -115,7 +116,8 @@ public class Drivetrain extends HazySubsystem {
         SmartDashboard.putNumber("D_LeftSpeed", leftSpeed);
         SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
         SmartDashboard.putString("D_Mode", mode.toString());
-        SmartDashboard.putNumber("D_NavXHeading", sensorInput.getNavXCompassHeading());
-        SmartDashboard.putNumber("TESTConstants", Constants.DRIVE_SENSITIVITY.getDouble());
+        SmartDashboard.putNumber("D_NavXAngle", sensorInput.getNavXAngle());
+        SmartDashboard.putNumber("D_LeftEnc", sensorInput.getLeftSideValue());
+        SmartDashboard.putNumber("D_RightEnc", sensorInput.getRightSideValue());
     }
 }

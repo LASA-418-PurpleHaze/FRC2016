@@ -28,6 +28,7 @@ public class Shooter extends HazySubsystem {
         shooterMotorMaster.configEncoderCodesPerRev(1);
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
         rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
+        mode = Mode.CONTROLLED;
     }
 
     public static Shooter getInstance() {
