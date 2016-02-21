@@ -2,6 +2,7 @@ package org.lasa.frc2016.command;
 
 import edu.wpi.first.wpilibj.Timer;
 import java.sql.Time;
+import org.lasa.frc2016.Robot;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
 import org.lasa.frc2016.subsystem.Arm;
@@ -27,7 +28,8 @@ public abstract class HazyCommand {
     String name;
 
     //Initialize this to something impossibly large instead of 0 so that isDone works right.
-    private double startTime;
+    protected double startTime;
+    protected double currentTime;
     double timeOut;
 
     //Booleans to keep track of what state the command is in.
@@ -84,7 +86,9 @@ public abstract class HazyCommand {
 
     public abstract boolean isDone();
 
-    public abstract void run();
+    public void run() {
+        currentTime = Timer.getFPGATimestamp();
+    }
 
     public void stop() {
         stopped = true;
@@ -92,6 +96,10 @@ public abstract class HazyCommand {
 
     public boolean isStopped() {
         return stopped;
+    }
+    
+    public boolean isTimedOut() {
+        return (currentTime - startTime) > timeOut;
     }
 
     public boolean isLeftDone() {

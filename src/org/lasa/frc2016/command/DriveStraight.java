@@ -11,12 +11,12 @@ public class DriveStraight extends HazyCommand {
 
     @Override
     public void run() {
-        //lol
+        super.run();
     }
 
     @Override
     public boolean isDone() {
-        return drivetrain.isDistanceDone();
+        return drivetrain.isDistanceDone() && isTimedOut();
     }
 
     @Override

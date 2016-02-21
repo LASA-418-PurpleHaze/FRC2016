@@ -11,13 +11,13 @@ public class DriveTurn extends HazyCommand {
 
     @Override
     public void run() {
-        //lol
+        super.run();
     }
 
     @Override
     public boolean isDone() {
-        return drivetrain.isTurnDone();
-    }
+        return drivetrain.isTurnDone() && isTimedOut()
+;    }
 
     @Override
     public void stop() {
