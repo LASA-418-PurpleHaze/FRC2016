@@ -51,8 +51,8 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        dt = Timer.getFPGATimestamp() - time;
-        time = Timer.getFPGATimestamp();
+        dt = Robot.getTime() - time;
+        time = Robot.getTime();
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
