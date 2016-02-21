@@ -1,6 +1,6 @@
 import numpy
 import matplotlib.pyplot as plt
-from matplotlib import Slider, Button, RadioButtons
+from matplotlib.widgets import Slider, Button, RadioButtons
 from HazyPV import HazyPV
 from HazyTMP import HazyTMP
 
@@ -46,9 +46,9 @@ class Arm:
 
 def main():
 	x = Arm()
-	trap = HazyTMP(35.0, 100.0)
-	controlloop = HazyPV(trap, 4.5, 0.0, 0.0, 0.0, 0)
-	targetPosition = 50.0
+	trap = HazyTMP(70.0, 140.0)
+	controlloop = HazyPV(trap, 0.75, 0.000425, 0.0125, 0.00975, 0.0)
+	targetPosition = 90.0
 	trap.generateTrapezoid(targetPosition, 0.0, 0.0)
 
 	output = []
@@ -60,12 +60,13 @@ def main():
 		output.append(x.theta * 180.0 / numpy.pi)
 		trap.calculateNextSituation()
 		motor = controlloop.calculate(trap, x.theta * 180.0 / numpy.pi, x.w * 180.0 / numpy.pi)
+		#print(trap.currentAcceleration * 0.0005)
 		x.sim(motor)
 		times.append(t)
 		target.append(trap.currentPosition)
 		t += x.dt
 
-	#plt.axis([0, 1, 0, 100])
+	plt.axis([0, 2, 0, 100])
 	plt.plot(times, output)
 	plt.plot(times, target)
 	plt.show()
