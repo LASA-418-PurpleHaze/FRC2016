@@ -29,7 +29,7 @@ public class Robot extends HazyIterative {
 
     private void pushToDashboard() {
         time++;
-        SmartDashboard.putNumber("time", time);
+        SmartDashboard.putNumber("Time", time);
         drivetrain.pushToDashboard();
         shooter.pushToDashboard();
         intake.pushToDashboard();
