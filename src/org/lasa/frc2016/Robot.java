@@ -88,13 +88,13 @@ public class Robot extends HazyIterative {
     public void autonomousPeriodic() {
         CommandManager.run();
         shooter.run();
+        intake.run();
     }
 
     @Override
     public void autonomousContinuous() {
         sensorInput.run();
         drivetrain.run();
-        intake.run();
         arm.run();
     }
 
