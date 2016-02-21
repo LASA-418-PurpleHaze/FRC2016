@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasa.frc2016.Robot;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 import org.lasa.lib.controlloop.HazyPVI;
@@ -18,10 +19,9 @@ public class Arm extends HazySubsystem {
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
     private double tiltMotorOutput, elevatorMotorOutput;
-    private double dt, prevTime;
+    private double dt;
 
     private Arm() {
-        prevTime = Timer.getFPGATimestamp(); // FIX
         leftArmTilter = new VictorSP(Ports.LEFT_ARM_TILTER);
         rightArmTilter = new VictorSP(Ports.RIGHT_ARM_TILTER);
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
@@ -51,8 +51,8 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        dt = Timer.getFPGATimestamp() - prevTime;;
-        prevTime = Timer.getFPGATimestamp();
+        dt = Timer.getFPGATimestamp() - time;
+        time = Timer.getFPGATimestamp();
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
@@ -113,6 +113,7 @@ public class Arm extends HazySubsystem {
     public void setControlPoint(double x, double y) {
         if (mode == Mode.CONTROLLED) {
             if (!DriverStation.getInstance().isFMSAttached() || DriverStation.getInstance().getMatchTime() < 20) {
+                // Only time this wouldn't run is if it IS attached and the matchtime IS less than 20 seconds
                 y = Math.min(y, 40);
             }
             x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
@@ -130,7 +131,11 @@ public class Arm extends HazySubsystem {
         }
     }
 
-    public boolean isDone() {
-        return tiltProfileFollower.isDone() && elevatorProfileFollower.isDone();
+    public boolean isTiltDone() {
+        return tiltProfileFollower.isDone();
+    }
+
+    public boolean isElevatorDone() {
+        return elevatorProfileFollower.isDone();
     }
 }

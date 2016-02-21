@@ -1,5 +1,7 @@
 package org.lasa.frc2016;
 
+import com.sun.prism.shader.FillPgram_RadialGradient_REPEAT_Loader;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.command.CheesyDrive;
 import org.lasa.lib.HazyIterative;
@@ -23,7 +25,7 @@ public class Robot extends HazyIterative {
     SensorInput sensorInput;
     Constants constants;
 
-    int time = 0;
+    static double time;
 
     private void pushToDashboard() {
         time++;
@@ -61,7 +63,7 @@ public class Robot extends HazyIterative {
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
         updateConstants();
         sensorInput.start();
-        time = 0;
+        time = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -84,7 +86,7 @@ public class Robot extends HazyIterative {
     public void autonomousInit() {
         updateConstants();
         sensorInput.start();
-        time = 0;
+        time = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -107,7 +109,7 @@ public class Robot extends HazyIterative {
         CommandManager.cancelAll();
         updateConstants();
         sensorInput.start();
-        time = 0;
+        time = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -118,5 +120,9 @@ public class Robot extends HazyIterative {
     @Override
     public void disabledContinuous() {
         sensorInput.run();
+    }
+    
+    public static double getTime() {
+        return time;
     }
 }

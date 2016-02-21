@@ -2,11 +2,11 @@ package org.lasa.frc2016.command;
 
 public class DriveStraight extends HazyCommand {
 
-    private double distance;
+    private final double setpoint;
 
-    public DriveStraight(String name, double timeOut, double distance) {
+    public DriveStraight(String name, double timeOut, double setpoint) {
         super(name, timeOut);
-        this.distance = distance;
+        this.setpoint = setpoint;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DriveStraight extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        drivetrain.setDistanceSetpoint(distance);
+        drivetrain.setDistanceSetpoint(setpoint);
     }
 
 }

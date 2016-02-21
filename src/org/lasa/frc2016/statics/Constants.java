@@ -87,6 +87,24 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 1);
     public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -1);
 
+    public static final Constant ARM_MIN_X = new Constant("A_minX", 0);
+    public static final Constant ARM_MIN_Y = new Constant("A_minY", 0);
+    public static final Constant ARM_MAX_X = new Constant("A_minX", 15);
+    public static final Constant ARM_MAX_Y = new Constant("A_minY", 20);
+    public static final Constant ARM_PORTCULLIS_X = new Constant("A_portX", 2);
+    public static final Constant ARM_PORTCULLIS_Y = new Constant("A_portY", 2);
+    public static final Constant ARM_PORTCULLIS_PREP_X = new Constant("A_portPrepX", 2);
+    public static final Constant ARM_PORTCULLIS_PREP_Y = new Constant("A_portPrepY", 2);
+    public static final Constant ARM_DRAWBRIDGE_X = new Constant("A_drawX", 2);
+    public static final Constant ARM_DRAWBRIDGE_Y = new Constant("A_drawY", 2);
+    public static final Constant ARM_DRAWBRIDGE_PREP_X = new Constant("A_drawPrepX", 2);
+    public static final Constant ARM_DRAWBRIDGE_PREP_Y = new Constant("A_drawPrepY", 2);
+    public static final Constant ARM_SALLYPORT_X = new Constant("A_sallyX", 2);
+    public static final Constant ARM_SALLYPORT_Y = new Constant("A_sallyY", 2);
+    public static final Constant ARM_SEESAW_X = new Constant("A_seeSawX", 2);
+    public static final Constant ARM_SEESAW_Y = new Constant("A_seeSawX", 2);
+    public static final Constant ARM_SEESAW_PREP_X = new Constant("A_seeSawPrepX", 2);
+    public static final Constant ARM_SEESAW_PREP_Y = new Constant("A_seeSawPrepY", 2);
     public Constants() {
     }
 

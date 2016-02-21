@@ -162,17 +162,17 @@ public class DriverInput implements Runnable {
         if (!overrideMode) {
             arm.setMode(Arm.Mode.CONTROLLED);
             if (portcullis && !lastPortcullis) {
-                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, 10, 10));
-                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, 10, 24));
+                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, Constants.ARM_PORTCULLIS_PREP_X.getDouble(), Constants.ARM_PORTCULLIS_PREP_Y.getDouble()));
+                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, Constants.ARM_PORTCULLIS_X.getDouble(), Constants.ARM_PORTCULLIS_Y.getDouble()));
             } else if (sallyPort && !lastSallyPort) {
-                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, 8, 12));
+                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, Constants.ARM_SALLYPORT_X.getDouble(), Constants.ARM_SALLYPORT_Y.getDouble()));
             } else if (drawBridge && !lastDrawBridge) {
-                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, 15, 16));
+                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, Constants.ARM_DRAWBRIDGE_X.getDouble(), Constants.ARM_DRAWBRIDGE_Y.getDouble()));
             } else if (seeSaw && !lastSeeSaw) {
-                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, 15, 1));
-                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, 15, 0));
+                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, Constants.ARM_SEESAW_PREP_X.getDouble(), Constants.ARM_SEESAW_PREP_Y.getDouble()));
+                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, Constants.ARM_SEESAW_X.getDouble(), Constants.ARM_SEESAW_Y.getDouble()));
             } else if (resetArm && !lastResetArm) {
-                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, 0, 0));
+                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, Constants.ARM_MIN_X.getDouble(), Constants.ARM_MIN_Y.getDouble()));
             }
         } else {
             arm.setMode(Arm.Mode.OVERRIDE);

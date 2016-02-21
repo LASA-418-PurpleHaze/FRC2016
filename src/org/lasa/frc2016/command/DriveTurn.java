@@ -2,11 +2,11 @@ package org.lasa.frc2016.command;
 
 public class DriveTurn extends HazyCommand {
 
-    private double angle;
+    private double setpoint;
 
-    public DriveTurn(String name, double timeOut, double angle) {
+    public DriveTurn(String name, double timeOut, double setpoint) {
         super(name, timeOut);
-        this.angle = angle;
+        this.setpoint = setpoint;
     }
 
     @Override
@@ -28,6 +28,6 @@ public class DriveTurn extends HazyCommand {
     @Override
     public void start() {
         super.start();
-        drivetrain.setTurnSetpoint(angle);
+        drivetrain.setTurnSetpoint(setpoint);
     }
 }

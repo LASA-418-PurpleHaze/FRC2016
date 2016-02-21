@@ -13,6 +13,18 @@ public class SetIntakeMode extends HazyCommand {
 
     @Override
     public boolean isDone() {
+        if (null != mode) {
+            switch (mode) {
+                case OFF:
+                    return true;
+                case INTAKING:
+                    return intake.hasBall();
+                case OUTTAKING:
+                    return !intake.hasBall();
+                case LOADINGSHOOTER:
+                    return !intake.hasBall();
+            }
+        }
         return true;
     }
 
