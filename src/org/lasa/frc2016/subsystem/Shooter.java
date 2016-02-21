@@ -113,7 +113,11 @@ public final class Shooter extends HazySubsystem {
     }
 
     public void setHoodValue(double value) {
-        value = Math.max(Math.min(value, Constants.SHOOTER_MAX_ANGLE.getDouble()), Constants.SHOOTER_MIN_ANGLE.getInt());
+        if (value > Constants.SHOOTER_HOOD_MAXVALUE.getDouble()) {
+            value = Constants.SHOOTER_HOOD_MAXVALUE.getDouble();
+        } else if (value < Constants.SHOOTER_HOOD_MINVALUE.getDouble()) {
+            value = Constants.SHOOTER_HOOD_MINVALUE.getDouble();
+        }
         leftShooterServo.set(.5 + value);
         rightShooterServo.set(.5 - value);
     }

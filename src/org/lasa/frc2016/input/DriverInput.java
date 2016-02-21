@@ -130,17 +130,17 @@ public class DriverInput implements Runnable {
             if (prepVisionShooter && !lastPrepVisionShooter) {
             } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_ANGLE.getInt()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_ANGLE.getDouble()));
             } else if (shortShot && !lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("ShortRPM", 10, Constants.SHOOTER_SHORT_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_ANGLE.getInt()));
+                CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_ANGLE.getDouble()));
             } else if (!prepVisionShooter && lastPrepVisionShooter) {
             } else if (!longShot && lastLongShot) {
-                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_MIN_ANGLE.getDouble()));
+                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
             } else if (!shortShot && lastShortShot) {
-                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_MIN_ANGLE.getDouble()));
+                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
             }
             if (shoot && !lastShoot && shooter.isSpunUp()) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
@@ -150,7 +150,7 @@ public class DriverInput implements Runnable {
             if (overrideShot && !lastOverrideShot) {
                 CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 10, Constants.SHOOTER_OVERRIDE_POWER.getDouble()));
             } else if (!overrideShot && lastOverrideShot) {
-                CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP_RPM.getDouble()));
+                CommandManager.addCommand(new SetShooterOverridePower("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
             }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
