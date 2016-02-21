@@ -123,7 +123,7 @@ public final class HazyVision implements Runnable {
     private void updateConstants() {
         visionLookUpTable = new ArrayList<>(1);
         try {
-            BufferedReader r = new BufferedReader(new FileReader("VisionTable.txt"));
+            BufferedReader r = new BufferedReader(new FileReader("home/admin/visiontable.txt"));
             String line;
             while ((line = r.readLine()) != null) {
                 for (int x = 0; !line.equals(""); x++) {
