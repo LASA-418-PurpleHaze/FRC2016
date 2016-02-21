@@ -47,7 +47,6 @@ public class Robot extends HazyIterative {
     public void teleopInit() {
         constants.loadFromFile();
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-//        CommandManager.addCommand(new ArcadeDrive("ArcadeDrive", 10));
         drivetrain.updateConstants();
         shooter.updateConstants();
         intake.updateConstants();
@@ -118,11 +117,9 @@ public class Robot extends HazyIterative {
         intake.pushToDashboard();
         arm.pushToDashboard();
         drivetrain.pushToDashboard();
-        super.disabledPeriodic(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void testInit() {
-        super.testInit(); //To change body of generated methods, choose Tools | Templates.
     }
 }
