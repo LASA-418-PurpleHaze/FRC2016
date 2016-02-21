@@ -44,6 +44,10 @@ public class Robot extends HazyIterative {
         arm.updateConstants();
         //hazyvision.updateConstants();
     }
+    
+    public static double getTime() {
+        return time;
+    }
 
     @Override
     public void robotInit() {
@@ -63,7 +67,7 @@ public class Robot extends HazyIterative {
         CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
         updateConstants();
         sensorInput.start();
-        time = Timer.getFPGATimestamp();
+        time = 0;
     }
 
     @Override
@@ -86,7 +90,7 @@ public class Robot extends HazyIterative {
     public void autonomousInit() {
         updateConstants();
         sensorInput.start();
-        time = Timer.getFPGATimestamp();
+        time = 0;
     }
 
     @Override
@@ -109,7 +113,7 @@ public class Robot extends HazyIterative {
         CommandManager.cancelAll();
         updateConstants();
         sensorInput.start();
-        time = Timer.getFPGATimestamp();
+        time = 0;
     }
 
     @Override
@@ -120,9 +124,5 @@ public class Robot extends HazyIterative {
     @Override
     public void disabledContinuous() {
         sensorInput.run();
-    }
-    
-    public static double getTime() {
-        return time;
     }
 }
