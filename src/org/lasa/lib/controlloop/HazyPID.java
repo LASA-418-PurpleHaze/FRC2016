@@ -1,6 +1,6 @@
 package org.lasa.lib.controlloop;
 
-public class HazyPID extends ControlLoop{
+public class HazyPID extends ControlLoop {
 
     double kP, kI, kD, kFF;
     double targetValue, previousValue, output;

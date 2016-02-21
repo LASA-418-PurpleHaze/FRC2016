@@ -72,7 +72,7 @@ public class HazyPVI extends ControlLoop {
         kFFV = ffV;
         kFFA = ffA;
     }
-    
+
     public void updateMaxMin(double maxU, double minU) {
         this.maxU = maxU;
         this.minU = minU;
