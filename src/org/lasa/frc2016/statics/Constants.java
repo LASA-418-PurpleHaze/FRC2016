@@ -68,6 +68,8 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_MPF_DONE_CYCLES = new Constant("EMPF_DoneCycles", 5);
     public static final Constant ELEVATOR_MPF_DONE_RANGE = new Constant("EMPF_DoneRange", 5);
     public static final Constant ELEVATOR_MPF_POSITION_DONE_RANGE = new Constant("EMPF_PositonDoneRange", 5);
+    public static final Constant ELEVATOR_MPF_MAXU = new Constant("EMPF_maxU", 1);
+    public static final Constant ELEVATOR_MPF_MINU = new Constant("EMPF_minU", -1);
 
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
     public static final Constant TILT_POT_CONVERSION = new Constant("T_potConversion", 0);
@@ -82,6 +84,8 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
+    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 1);
+    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -1);
 
     public Constants() {
     }
