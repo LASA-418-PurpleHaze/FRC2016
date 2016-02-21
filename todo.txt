@@ -1,0 +1,31 @@
+GUIDELINES:
+-DO NOT DELETE ANYTHING FROM THIS FILE. Strikethrough and put your initials in front when its fixed.
+-Add a new section with the date AT THE BOTTOM when you add stuff.
+
+
+2/21/16 code review:
+
+CheesyDrive.java & ArcadeDrive.java - part of me wonders why these two commands exist.
+SetArmPosition.java:15 - should return isDone() && setpoint is the setpoint given to it by this command.
+CommandManager.java:43 - need to make sure that after we remove a command we don't go and run it a few lines later.
+DriveStraight.java:19 - should return isDone() && setpoint is the setpoint given to it by this command.
+DriveTurn.java:19 - should return isDone() && setpoint is the setpoint given to it by this command.
+SetIntakeMode:16 - should not always return true. e.g. if the mode was intake it should not return true until we have collected the ball.
+SetShooterHoodAngle:14 - should not always return true. Since we don't have a sensor we should have a time based approximation of when it is done.
+DriverInput.java - every arm setpoint needs to be a constant.
+SensorInput.java - need to simplify the real unit conversions into 1 number after they're verified to be correct.
+SensorInput.java - left and right side value is ambiguous and confusing. also needs rates and real unit conversion.
+Arm.java:24 - make every subsystem grab prevTime in Robot.XXXinit() methods.
+Arm.java:75 - have another person double check all the constants are the correct ones and consistent.
+Arm.java:115 - incorrect logic I think
+Arm.java:113 - need to talk about how x, y, angle, extension are defined.
+Arm.java:133 - seperate methods here so that we can know which control loop is done.
+Arm.java - do the whole synchronizing movement between tilt and extension thing.
+Constants.java - check to see if there are unused constants in there.
+Every command class - implement timeout and provide information about what caused the timeout. In auton decide if we should keep going or abort for every possible timeout.
+
+2/21/16 Other tasks to do asap:
+
+see if pyConsole can be made to work
+finish up the new SmartDash Grapher
+make a utility program to make editing constants easier.
