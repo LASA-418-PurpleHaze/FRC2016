@@ -15,8 +15,7 @@ public class SensorInput implements Runnable {
     private static AHRS navX;
     private static DigitalInput intakeSwitch;
     private static Encoder leftSide, rightSide, armTilt, armExtension;
-    private static AnalogPotentiometer armExtensionPot;
-    private static AnalogInput armTiltPot;
+    private static AnalogPotentiometer armTiltPot, armExtensionPot;
 
     private volatile double navXAngleVal;
     private volatile double rightSideEncoderVal, leftSideEncoderVal;
@@ -32,7 +31,7 @@ public class SensorInput implements Runnable {
         intakeSwitch = new DigitalInput(Ports.INTAKE_BUMP_SWITCH);
         armTilt = new Encoder(Ports.ARM_TILT_A_ENCODER, Ports.ARM_TILT_B_ENCODER);
         armExtension = new Encoder(Ports.ARM_EXTENSION_A_ENCODER, Ports.ARM_EXTENSION_B_ENCODER);
-        armTiltPot = new AnalogInput(Ports.ARM_TILT_POTENTIOMETER);
+        armTiltPot = new AnalogPotentiometer(Ports.ARM_TILT_POTENTIOMETER);
         armExtensionPot = new AnalogPotentiometer(Ports.ARM_EXTENSION_POTENTIOMETER);
     }
 
@@ -54,7 +53,7 @@ public class SensorInput implements Runnable {
         armExtensionPositionVal = armExtension.get();
         armTiltRateVal = armTilt.getRate();
         armExtensionRateVal = armExtension.getRate();
-        //armTiltPotVal = armTiltPot.get();
+        armTiltPotVal = armTiltPot.get();
         armExtensionPotVal = armExtensionPot.get();
     }
 
@@ -91,7 +90,7 @@ public class SensorInput implements Runnable {
     }
 
     public double getArmTiltPot() {
-        return armTiltPot.getValue();
+        return armTiltPot.get();
     }
 
     public double getArmExtensionPot() {
