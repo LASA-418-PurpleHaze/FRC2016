@@ -25,6 +25,7 @@ class HazyPV:
     		output += (HazyTMP.currentAcceleration * self.kFFA * voltageAdjustment)
 
     		output += self.errorSum * self.kI
+			
     		if (1.0 >= self.kI * (self.errorSum + error)) and (-1.0 <= self.kI * (self.errorSum + error)):
     			self.errorSum += error
     		elif (self.errorSum > 0):

@@ -6,7 +6,7 @@ import org.lasa.lib.controlloop.HazyPID;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
 
-public class Drivetrain extends HazySubsystem {
+public final class Drivetrain extends HazySubsystem {
 
     private static Drivetrain instance;
 
@@ -25,6 +25,7 @@ public class Drivetrain extends HazySubsystem {
         rightBackMotor.setInverted(true);
         straightPID = new HazyPID();
         turnPID = new HazyPID();
+        this.setMode(Mode.OVERRIDE);
     }
 
     public static Drivetrain getInstance() {
@@ -40,7 +41,7 @@ public class Drivetrain extends HazySubsystem {
     public void setMode(Mode m) {
         mode = m;
     }
-    
+
     @Override
     public void run() {
         if (null != mode) {
@@ -49,7 +50,7 @@ public class Drivetrain extends HazySubsystem {
                     leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftSideValue() + sensorInput.getRightSideValue()) / 2);
                     break;
                 case TURN_CONTROLLED:
-                    double power = turnPID.calculate(sensorInput.getNavXCompassHeading());
+                    double power = turnPID.calculate(sensorInput.getNavXAngle());
                     leftSpeed = -power;
                     rightSpeed = power;
                     break;
@@ -101,7 +102,7 @@ public class Drivetrain extends HazySubsystem {
         turnPID.setTarget(turnSetpoint);
         turnPID.reset();
     }
-    
+
     @Override
     public void updateConstants() {
         straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KFF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
@@ -109,12 +110,14 @@ public class Drivetrain extends HazySubsystem {
         turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KFF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }
-    
+
     @Override
     public void pushToDashboard() {
         SmartDashboard.putNumber("D_LeftSpeed", leftSpeed);
         SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
         SmartDashboard.putString("D_Mode", mode.toString());
-        SmartDashboard.putNumber("TESTConstants", Constants.DRIVE_SENSITIVITY.getDouble());
+        SmartDashboard.putNumber("D_NavXAngle", sensorInput.getNavXAngle());
+        SmartDashboard.putNumber("D_LeftEnc", sensorInput.getLeftSideValue());
+        SmartDashboard.putNumber("D_RightEnc", sensorInput.getRightSideValue());
     }
 }

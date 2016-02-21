@@ -1,27 +1,35 @@
 package org.lasa.lib.controlloop;
 
-public class TorquePV extends ControlLoop {
+public class HazyPVI extends ControlLoop {
 
     private double kP;
     private double kV;
+    private double kI;
     private double kFFV;
     private double kFFA;
+    private double errorSum;
+    private double maxU;
+    private double minU;
 
-    private TorqueTMP profile;
+    private HazyTMP profile;
     private double actualPosition;
     private double actualVelocity;
     private double positionDoneRange;
 
-    public TorquePV() {
+    public HazyPVI() {
         super();
 
         kP = 0.0;
         kV = 0.0;
+        kI = 0.0;
         kFFV = 0.0;
         kFFA = 0.0;
+        errorSum = 0.0;
+        maxU = 1.0;
+        minU = -1.0;
     }
 
-    public double calculate(TorqueTMP tmProfile, double currentPosition, double currentVelocity) {
+    public double calculate(HazyTMP tmProfile, double currentPosition, double currentVelocity) {
         //Dont worry about what this does for now.
         double voltageAdjustment = /*tunedVoltage / ds.getBatteryVoltage();*/ 1.0;
 
@@ -45,14 +53,29 @@ public class TorquePV extends ControlLoop {
         //Acceleration FeedForward
         output += (profile.getCurrentAcceleration() * kFFA * voltageAdjustment);
 
+        output += errorSum * kI;
+        if ((maxU >= kI * errorSum) && (minU <= kI * errorSum)) {
+            errorSum += error;
+        } else if (errorSum > 0) {
+            errorSum = maxU;
+        } else if (errorSum < 0) {
+            errorSum = minU;
+        }
+
         return output;
     }
 
-    public void setGains(double p, double v, double ffV, double ffA) {
+    public void updateGains(double p, double v, double i, double ffV, double ffA) {
         kP = p;
         kV = v;
+        kI = i;
         kFFV = ffV;
         kFFA = ffA;
+    }
+
+    public void updateMaxMin(double maxU, double minU) {
+        this.maxU = maxU;
+        this.minU = minU;
     }
 
     public void reset() {
@@ -75,7 +98,7 @@ public class TorquePV extends ControlLoop {
     }
 
     public boolean onTrack() {
-        if(profile == null) {
+        if (profile == null) {
             return false;
         }
         return Math.abs(profile.getCurrentVelocity() - actualVelocity) < doneRange;

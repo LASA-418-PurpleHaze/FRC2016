@@ -50,50 +50,49 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_LONG_ANGLE = new Constant("S_LongShotAngle", 90);
     public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 90);
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 90);
+    public static final Constant SHOOTER_HOOD_MINVALUE = new Constant("S_MinAngle", -0.306);
+    public static final Constant SHOOTER_HOOD_MAXVALUE = new Constant("S_MaxAngle", 0.072);
+    public static final Constant SHOOTER_STOP = new Constant("S_StopRPM", 0);
+    public static final Constant SHOOTER_OVERRIDE_POWER = new Constant("S_OverridePower", 0.8);
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
     public static final Constant ELEVATOR_POT_CONVERSION = new Constant("E_potConversion", 0);
-
     public static final Constant ELEVATOR_MP_MAX_VELOCITY = new Constant("EMP_maxV", 15);
     public static final Constant ELEVATOR_MP_MAX_ACCELERATION = new Constant("EMP_maxA", 30);
-
     public static final Constant ELEVATOR_MPF_KP = new Constant("EMPF_kP", 0);
     public static final Constant ELEVATOR_MPF_KV = new Constant("EMPF_kV", 0);
+    public static final Constant ELEVATOR_MPF_KI = new Constant("EMPF_kI", 0);
     public static final Constant ELEVATOR_MPF_KFFV = new Constant("EMPF_kFFV", 0);
     public static final Constant ELEVATOR_MPF_KFFA = new Constant("EMPF_kFFA", 0);
     public static final Constant ELEVATOR_MPF_TUNED_VOLTAGE = new Constant("EMPF_TunedVoltage", 15);
     public static final Constant ELEVATOR_MPF_DONE_CYCLES = new Constant("EMPF_DoneCycles", 5);
     public static final Constant ELEVATOR_MPF_DONE_RANGE = new Constant("EMPF_DoneRange", 5);
     public static final Constant ELEVATOR_MPF_POSITION_DONE_RANGE = new Constant("EMPF_PositonDoneRange", 5);
+    public static final Constant ELEVATOR_MPF_MAXU = new Constant("EMPF_maxU", 1);
+    public static final Constant ELEVATOR_MPF_MINU = new Constant("EMPF_minU", -1);
 
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
     public static final Constant TILT_POT_CONVERSION = new Constant("T_potConversion", 0);
-
     public static final Constant TILT_MP_MAX_VELOCITY = new Constant("TMP_maxV", 15);
     public static final Constant TILT_MP_MAX_ACCELERATION = new Constant("TMP_maxA", 30);
-
     public static final Constant TILT_MPF_KP = new Constant("TMPF_kP", 0);
     public static final Constant TILT_MPF_KV = new Constant("TMPF_kV", 0);
+    public static final Constant TILT_MPF_KI = new Constant("TMPF_kI", 0);
     public static final Constant TILT_MPF_KFFV = new Constant("TMPF_kFFV", 0);
     public static final Constant TILT_MPF_KFFA = new Constant("TMPF_kFFA", 0);
     public static final Constant TILT_MPF_TUNED_VOLTAGE = new Constant("TMPF_TunedVoltage", 15);
     public static final Constant TILT_MPF_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
+    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 1);
+    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -1);
 
-    private static Constants instance;
-    
-    private Constants() {
-        
+    public Constants() {
     }
-    
-    public static Constants getInstance() {
-        return (instance == null) ? instance = new Constants() : instance;
-    }
-    
+
     @Override
     public String getFileLocation() {
-        return "~/constants.txt";
+        return "home/admin/constants.txt";
     }
 
 }

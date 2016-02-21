@@ -1,5 +1,6 @@
 package org.lasa.lib;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,9 +9,9 @@ import java.util.ArrayList;
 
 public abstract class HazyConstant {
 
-    private static final ArrayList<Constant> constants = new ArrayList(11);
+    private static final ArrayList<Constant> constants = new ArrayList(0);
     BufferedReader r;
-    
+
     public abstract String getFileLocation();
 
     public static class Constant {

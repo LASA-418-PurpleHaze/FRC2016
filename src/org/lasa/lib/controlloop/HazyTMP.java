@@ -1,6 +1,6 @@
 package org.lasa.lib.controlloop;
 
-public class TorqueTMP {
+public class HazyTMP {
 
     //Current value
     private double currentPosition;
@@ -19,7 +19,7 @@ public class TorqueTMP {
     private double deceleration;
     private double decelerationTime;
 
-    public TorqueTMP(double maxV, double maxA) {
+    public HazyTMP(double maxV, double maxA) {
         maxAllowedVelocity = maxV;
         maxAllowedAcceleration = maxA;
     }
@@ -124,7 +124,7 @@ public class TorqueTMP {
             cruise(dt - accelerationTime);
 
             cruiseTime -= (dt - accelerationTime);
-            accelerationTime =  0.0;
+            accelerationTime = 0.0;
         } else if ((accelerationTime + cruiseTime + decelerationTime) > dt) {
             accelerate(accelerationTime);
             cruise(cruiseTime);
@@ -187,6 +187,11 @@ public class TorqueTMP {
         } else if (currentVelocity < -topSpeed) {
             currentVelocity = -topSpeed;
         }
+    }
+
+    public void setMaxVAndA(double maxV, double maxA) {
+        maxAllowedVelocity = maxV;
+        maxAllowedAcceleration = maxA;
     }
 
     public String toString() {
