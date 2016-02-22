@@ -25,7 +25,7 @@ public class Robot extends HazyIterative {
     SensorInput sensorInput;
     Constants constants;
 
-    static double time;
+    private static int time;
 
     private void pushToDashboard() {
         time++;
@@ -45,7 +45,7 @@ public class Robot extends HazyIterative {
         //hazyvision.updateConstants();
     }
     
-    public static double getTime() {
+    public static int getTime() {
         return time;
     }
 
