@@ -38,10 +38,10 @@ public class Robot extends HazyIterative {
 
     private void updateConstants() {
         constants.loadFromFile();
-        drivetrain.updateConstants();
-        shooter.updateConstants();
-        intake.updateConstants();
-        arm.updateConstants();
+        drivetrain.initSubsystem();
+        shooter.initSubsystem();
+        intake.initSubsystem();
+        arm.initSubsystem();
         //hazyvision.updateConstants();
     }
     

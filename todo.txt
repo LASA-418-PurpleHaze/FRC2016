@@ -7,7 +7,7 @@ GUIDELINES:
 
 CheesyDrive.java & ArcadeDrive.java - part of me wonders why these two commands exist.
 JVA**SetArmPosition.java:15 - should return isDone() && setpoint is the setpoint given to it by this command.
-CommandManager.java:43 - need to make sure that after we remove a command we don't go and run it a few lines later.
+JVA**CommandManager.java:43 - need to make sure that after we remove a command we don't go and run it a few lines later.
 JVA**DriveStraight.java:19 - should return isDone() && setpoint is the setpoint given to it by this command.
 JVA**DriveTurn.java:19 - should return isDone() && setpoint is the setpoint given to it by this command.
 JVA**SetIntakeMode:16 - should not always return true. e.g. if the mode was intake it should not return true until we have collected the ball.

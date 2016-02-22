@@ -74,6 +74,6 @@ public final class Intake extends HazySubsystem {
     }
 
     @Override
-    public void updateConstants() {
+    public void initSubsystem() {
     }
 }

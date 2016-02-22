@@ -9,16 +9,14 @@ public abstract class HazySubsystem {
 
     protected String errorMsg;
     protected final String fileName = "logger.csv";
-    protected double time;
 
     protected HazySubsystem() {
         sensorInput = SensorInput.getInstance();
-        time = Robot.getTime();
     }
 
     public abstract void run();
 
-    public abstract void updateConstants();
+    public abstract void initSubsystem();
 
     public abstract void pushToDashboard();
 }

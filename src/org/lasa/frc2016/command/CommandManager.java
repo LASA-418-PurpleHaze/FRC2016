@@ -43,6 +43,7 @@ public class CommandManager {
             if (c.isDone()) {
                 c.stop();
                 it.remove();
+                continue;
             }
 
             if (c.shouldRun()) {

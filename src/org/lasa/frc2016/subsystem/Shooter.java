@@ -123,7 +123,7 @@ public final class Shooter extends HazySubsystem {
     }
 
     @Override
-    public void updateConstants() {
+    public void initSubsystem() {
         doneBound = Constants.SHOOTER_PID_DONE_BOUND.getDouble();
         shooterMotorMaster.setPID(Constants.SHOOTER_PID_KP.getDouble(),
                 Constants.SHOOTER_PID_KI.getDouble(), Constants.SHOOTER_PID_KD.getDouble(),

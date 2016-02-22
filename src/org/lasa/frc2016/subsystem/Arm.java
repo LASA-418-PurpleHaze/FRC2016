@@ -19,7 +19,7 @@ public class Arm extends HazySubsystem {
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
     private double tiltMotorOutput, elevatorMotorOutput;
-    private double dt;
+    private double dt, time;
 
     private Arm() {
         leftArmTilter = new VictorSP(Ports.LEFT_ARM_TILTER);
@@ -51,8 +51,8 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        dt = Robot.getTime() - time;
-        time = Robot.getTime();
+        dt = Timer.getFPGATimestamp() - time;
+        time = Timer.getFPGATimestamp();
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
@@ -72,9 +72,8 @@ public class Arm extends HazySubsystem {
     }
 
     @Override
-    public void updateConstants() {
+    public void initSubsystem() {
         tiltProfile.setMaxVAndA(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
-        elevatorProfile.setMaxVAndA(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         tiltProfileFollower.updateGains(Constants.TILT_MPF_KP.getDouble(), Constants.TILT_MPF_KV.getDouble(),
                 Constants.TILT_MPF_KI.getDouble(), Constants.TILT_MPF_KFFV.getDouble(), Constants.TILT_MPF_KFFA.getDouble());
         tiltProfileFollower.setTunedVoltage(Constants.TILT_MPF_TUNED_VOLTAGE.getDouble());
@@ -82,6 +81,7 @@ public class Arm extends HazySubsystem {
         tiltProfileFollower.setDoneRange(Constants.TILT_MPF_DONE_RANGE.getDouble());
         tiltProfileFollower.setPositionDoneRange(Constants.TILT_MPF_POSITION_DONE_RANGE.getDouble());
         tiltProfileFollower.updateMaxMin(Constants.TILT_MPF_MAXU.getDouble(), Constants.TILT_MPF_MINU.getDouble());
+        elevatorProfile.setMaxVAndA(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         elevatorProfileFollower.updateGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
                 Constants.ELEVATOR_MPF_KI.getDouble(), Constants.ELEVATOR_MPF_KFFV.getDouble(), Constants.ELEVATOR_MPF_KFFA.getDouble());
         elevatorProfileFollower.setTunedVoltage(Constants.ELEVATOR_MPF_TUNED_VOLTAGE.getDouble());
@@ -91,6 +91,7 @@ public class Arm extends HazySubsystem {
         elevatorProfileFollower.updateMaxMin(Constants.ELEVATOR_MPF_MAXU.getDouble(), Constants.ELEVATOR_MPF_MINU.getDouble());
         tiltProfile.generateTrapezoid(sensorInput.getArmTiltPosition(), sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());
         elevatorProfile.generateTrapezoid(sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
+        time = Timer.getFPGATimestamp();
     }
 
     @Override
