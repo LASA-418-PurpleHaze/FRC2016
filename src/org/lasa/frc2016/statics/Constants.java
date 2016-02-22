@@ -50,8 +50,8 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_LONG_ANGLE = new Constant("S_LongShotAngle", 90);
     public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 90);
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 90);
-    public static final Constant SHOOTER_HOOD_MINVALUE = new Constant("S_MinAngle", -0.306);
-    public static final Constant SHOOTER_HOOD_MAXVALUE = new Constant("S_MaxAngle", 0.072);
+    public static final Constant SHOOTER_HOOD_MINVALUE = new Constant("S_MinValue", -0.306);
+    public static final Constant SHOOTER_HOOD_MAXVALUE = new Constant("S_MaxValue", 0.072);
     public static final Constant SHOOTER_STOP = new Constant("S_StopRPM", 0);
     public static final Constant SHOOTER_OVERRIDE_POWER = new Constant("S_OverridePower", 0.8);
 
