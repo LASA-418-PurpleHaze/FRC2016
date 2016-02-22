@@ -1,9 +1,6 @@
 package org.lasa.frc2016;
 
-import com.sun.prism.shader.FillPgram_RadialGradient_REPEAT_Loader;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasa.frc2016.command.CheesyDrive;
 import org.lasa.lib.HazyIterative;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
@@ -36,12 +33,13 @@ public class Robot extends HazyIterative {
         arm.pushToDashboard();
     }
 
-    private void updateConstants() {
+    private void initSubsystems() {
         constants.loadFromFile();
         drivetrain.initSubsystem();
         shooter.initSubsystem();
         intake.initSubsystem();
         arm.initSubsystem();
+        sensorInput.start();
         //hazyvision.updateConstants();
     }
     
@@ -64,9 +62,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
-        CommandManager.addCommand(new CheesyDrive("CheesyDrive", 10));
-        updateConstants();
-        sensorInput.start();
+        initSubsystems();
         time = 0;
     }
 
@@ -88,8 +84,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
-        updateConstants();
-        sensorInput.start();
+        initSubsystems();
         time = 0;
     }
 
@@ -111,8 +106,7 @@ public class Robot extends HazyIterative {
     @Override
     public void disabledInit() {
         CommandManager.cancelAll();
-        updateConstants();
-        sensorInput.start();
+        initSubsystems();
         time = 0;
     }
 

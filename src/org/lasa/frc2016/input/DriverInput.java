@@ -8,8 +8,10 @@ import org.lasa.frc2016.command.SetShooterOverridePower;
 import org.lasa.frc2016.command.SetShooterRPM;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.subsystem.Arm;
+import org.lasa.frc2016.subsystem.Drivetrain;
 import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.subsystem.Shooter;
+import org.lasa.lib.CheesyDriveHelper;
 import org.lasa.lib.HazyJoystick;
 
 public class DriverInput implements Runnable {
@@ -19,8 +21,10 @@ public class DriverInput implements Runnable {
 
     private static DriverInput instance;
 
+    private static Drivetrain drivetrain;
     private static Shooter shooter;
     private static Arm arm;
+    private CheesyDriveHelper cheesyDrive;
 
     private double throttle, wheel, tiltOverride, elevatorOverride;
     private boolean lastIntake, lastOuttake,
@@ -33,8 +37,10 @@ public class DriverInput implements Runnable {
     private boolean prepVisionShooter, shoot, longShot, shortShot, overrideShot;
 
     private DriverInput() {
+        drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
+        cheesyDrive = new CheesyDriveHelper();
     }
 
     public static DriverInput getInstance() {
@@ -110,6 +116,11 @@ public class DriverInput implements Runnable {
         lastOverrideShot = overrideShot;
     }
 
+    private void drivetrainControl() {
+        cheesyDrive.cheesyDrive(throttle, wheel, quickTurn);
+        drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
+    }
+    
     private void intakeControl() {
         if (intake && !lastIntake) {
             CommandManager.addCommand(new SetIntakeMode("Infeed", 10, Intake.Mode.INTAKING));
@@ -183,6 +194,7 @@ public class DriverInput implements Runnable {
     @Override
     public void run() {
         input();
+        drivetrainControl();
         intakeControl();
         shooterControl();
         armControl();
