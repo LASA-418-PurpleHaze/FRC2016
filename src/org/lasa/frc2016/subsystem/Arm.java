@@ -19,6 +19,8 @@ public class Arm extends HazySubsystem {
     private double targetAngle, targetExtension;
     private double tiltMotorOutput, elevatorMotorOutput;
     private double dt, time;
+    private double targetX, targetY;
+    private double actualX, actualY;
 
     private Arm() {
         leftArmTilter = new VictorSP(Ports.LEFT_ARM_TILTER);
@@ -96,6 +98,10 @@ public class Arm extends HazySubsystem {
     @Override
     public void pushToDashboard() {
         SmartDashboard.putString("A_Mode", mode.toString());
+        SmartDashboard.putNumber("A_TargetX", targetX);
+        SmartDashboard.putNumber("A_TargetY", targetY);
+        SmartDashboard.putNumber("A_ActualX", sensorInput.getArmExtensionPosition() * Math.cos(sensorInput.getArmTiltPosition()));
+        SmartDashboard.putNumber("A_ActualY", sensorInput.getArmExtensionPosition() * Math.sin(sensorInput.getArmTiltPosition()));
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
         SmartDashboard.putNumber("T_ActualAngle", sensorInput.getArmTiltPosition());
         SmartDashboard.putNumber("T_ActualAngleRate", sensorInput.getArmTiltRate());
@@ -112,13 +118,15 @@ public class Arm extends HazySubsystem {
 
     public void setControlPoint(double x, double y) {
         if (mode == Mode.CONTROLLED) {
-            if (!DriverStation.getInstance().isFMSAttached() || DriverStation.getInstance().getMatchTime() < 20) {
+            if (DriverStation.getInstance().isFMSAttached() || (DriverStation.getInstance().getMatchTime() > 20)) {
                 // Only time this wouldn't run is if it IS attached and the matchtime IS less than 20 seconds
                 y = Math.min(y, 40);
             }
             x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
             targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
             targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+            targetY = y;
+            targetX = x;
             tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());
             elevatorProfile.generateTrapezoid(targetExtension, sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
         }

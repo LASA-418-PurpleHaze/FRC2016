@@ -1,6 +1,5 @@
 package org.lasa.frc2016.command;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,20 +26,13 @@ public class CommandManager {
         list.add(c);
     }
 
-    // I believe this would be fine
-    public static void addContinuous(HazyCommand c) {
-        c.setLeft(lastAdded);
-        c.setUp(c);
-        list.add(c);
-    }
-
     public static void run() {
         //Iterator because it is the only way to remove items from a collection while traversing it.
         //Going through all commands every cycle isn't great but should be ok since we won't have very many commands.
         for (Iterator<HazyCommand> it = list.iterator(); it.hasNext();) {
             HazyCommand c = it.next();
             //This part should look kinda familiar.
-            if (c.isDone()) {
+            if (c.isDone() || c.isTimedOut()) {
                 c.stop();
                 it.remove();
                 continue;

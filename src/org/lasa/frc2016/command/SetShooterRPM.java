@@ -11,11 +11,12 @@ public class SetShooterRPM extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return shooter.isSpunUp() || isTimedOut();
+        return shooter.isSpunUp();
     }
 
     @Override
     public void run() {
+        super.run();
     }
 
     @Override

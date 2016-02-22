@@ -16,6 +16,7 @@ public class SetShooterOverridePower extends HazyCommand {
 
     @Override
     public void run() {
+        super.run();
     }
 
     @Override

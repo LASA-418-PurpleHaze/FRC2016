@@ -12,11 +12,12 @@ public class SetArmPosition extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return arm.isTiltDone() && arm.isElevatorDone() || isTimedOut();
+        return arm.isTiltDone() && arm.isElevatorDone();
     }
 
     @Override
     public void run() {
+        super.run();
     }
 
     @Override

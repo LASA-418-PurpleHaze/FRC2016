@@ -11,11 +11,12 @@ public class SetShooterHoodAngle extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return true;
+        return false;
     }
 
     @Override
     public void run() {
+        super.run();
     }
 
     @Override

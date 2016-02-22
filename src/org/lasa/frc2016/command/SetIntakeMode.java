@@ -18,11 +18,11 @@ public class SetIntakeMode extends HazyCommand {
                 case OFF:
                     return true;
                 case INTAKING:
-                    return intake.hasBall() || isTimedOut();
+                    return intake.hasBall();
                 case OUTTAKING:
-                    return !intake.hasBall() || isTimedOut();
+                    return !intake.hasBall();
                 case LOADINGSHOOTER:
-                    return !intake.hasBall() || isTimedOut();
+                    return !intake.hasBall();
             }
         }
         return true;
@@ -30,6 +30,7 @@ public class SetIntakeMode extends HazyCommand {
 
     @Override
     public void run() {
+        super.run();
     }
 
     @Override
