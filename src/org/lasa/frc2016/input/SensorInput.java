@@ -61,12 +61,12 @@ public class SensorInput implements Runnable {
         return navXAngleVal;
     }
 
-    public double getLeftSideValue() {
-        return leftSideEncoderVal;
+    public double getLeftDistance() {
+        return (leftSideEncoderVal / 250) * 8 * Math.PI;
     }
 
-    public double getRightSideValue() {
-        return rightSideEncoderVal;
+    public double getRightDistance() {
+        return (rightSideEncoderVal / 250) * 8 * Math.PI;
     }
 
     public boolean getIntakeSwitchValue() {
