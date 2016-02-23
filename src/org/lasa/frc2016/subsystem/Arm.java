@@ -40,6 +40,11 @@ public class Arm extends HazySubsystem {
         return (instance == null) ? instance = new Arm() : instance;
     }
 
+    public boolean isArmHere(double Xpos, double Ypos)
+    {
+        return (Xpos==targetX&&Ypos==targetY&&isTiltDone()&&isElevatorDone());
+    }
+    
     public static enum Mode {
         OVERRIDE, CONTROLLED;
     }
@@ -49,7 +54,7 @@ public class Arm extends HazySubsystem {
     public void setMode(Mode m) {
         mode = m;
     }
-
+    
     @Override
     public void run() {
         dt = Timer.getFPGATimestamp() - time;

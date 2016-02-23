@@ -16,7 +16,7 @@ public class DriveStraight extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return drivetrain.isDistanceDone() && drivetrain.getStraightSetpoint();
+        return drivetrain.isDistanceDone() && drivetrain.getStraightSetpoint()==setpoint;
     }
 
     @Override
