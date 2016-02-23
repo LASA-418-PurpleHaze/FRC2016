@@ -12,10 +12,10 @@ EMPF_DoneRange 5
 EMPF_PositonDoneRange 5
 T_maxAngle 90
 T_potConversion 0
-TMP_maxV 15
-TMP_maxA 30
-TMPF_kP 0.225
-TMPF_kV 0
+TMP_maxV 35
+TMP_maxA 100
+TMPF_kP 0.35
+TMPF_kV 0.0005
 TMPF_kFFV 0.00975
 TMPF_kFFA 0
 TMPF_TunedVoltage 15

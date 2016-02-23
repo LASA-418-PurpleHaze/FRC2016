@@ -46,18 +46,16 @@ public final class HazyVision implements Runnable {
     private final CameraServer cameraServer;
 
     private HazyVision() {
-        this.updateConstants();
         camera = new USBCamera();
         cameraServer = CameraServer.getInstance();
-        camera.setExposureManual(30);
-        camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
+        //camera.setExposureManual(30);
+        //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
-        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
+        //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         //roi = NIVision.imaqCreateROI();
         //plane = NIVision.imaqCalibrationSetAxisInfo(image);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
-
     }
 
     public static HazyVision getInstance() {
@@ -68,7 +66,6 @@ public final class HazyVision implements Runnable {
     public void run() {
         while (true) {
             try {
-                cameraServer.setImage(this.getImage());
                 distance = this.calculate();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -120,8 +117,8 @@ public final class HazyVision implements Runnable {
         return visionLookUpTable.get((int) distance);
     }
 
-    private void updateConstants() {
-        visionLookUpTable = new ArrayList<>(1);
+    public void updateConstants() {
+        visionLookUpTable = new ArrayList<>(11);
         try {
             BufferedReader r = new BufferedReader(new FileReader("home/admin/visiontable.txt"));
             String line;

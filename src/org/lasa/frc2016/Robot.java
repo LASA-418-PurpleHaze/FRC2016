@@ -10,6 +10,7 @@ import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
+import org.lasa.frc2016.vision.HazyVision;
 
 public class Robot extends HazyIterative {
 
@@ -40,7 +41,7 @@ public class Robot extends HazyIterative {
         intake.initSubsystem();
         arm.initSubsystem();
         sensorInput.start();
-        //hazyvision.updateConstants();
+//        HazyVision.getInstance().updateConstants();
     }
     
     public static int getTime() {
@@ -50,6 +51,7 @@ public class Robot extends HazyIterative {
     @Override
     public void robotInit() {
         constants = new Constants();
+//        new Thread(HazyVision.getInstance()).start();
 //        scheduler = Executors.newScheduledThreadPool(1);
 //        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
@@ -80,7 +82,7 @@ public class Robot extends HazyIterative {
         sensorInput.run();
         arm.run();
         intake.run();
-    }
+    }   
 
     @Override
     public void autonomousInit() {

@@ -141,10 +141,10 @@ public class DriverInput implements Runnable {
             if (prepVisionShooter && !lastPrepVisionShooter) {
             } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_ANGLE.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_VALUE.getDouble()));
             } else if (shortShot && !lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("ShortRPM", 10, Constants.SHOOTER_SHORT_RPM.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_ANGLE.getDouble()));
+                CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_VALUE.getDouble()));
             } else if (!prepVisionShooter && lastPrepVisionShooter) {
             } else if (!longShot && lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
@@ -159,9 +159,9 @@ public class DriverInput implements Runnable {
         } else {
             shooter.setMode(Shooter.Mode.OVERRIDE);
             if (overrideShot && !lastOverrideShot) {
-                CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 10, Constants.SHOOTER_OVERRIDE_POWER.getDouble()));
+                CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 2000, Constants.SHOOTER_OVERRIDE_POWER.getDouble()));
             } else if (!overrideShot && lastOverrideShot) {
-                CommandManager.addCommand(new SetShooterOverridePower("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
+                CommandManager.addCommand(new SetShooterOverridePower("StopShooter", 100, Constants.SHOOTER_STOP.getDouble()));
             }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
