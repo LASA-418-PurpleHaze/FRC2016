@@ -13,7 +13,6 @@ public class SensorInput implements Runnable {
     private static SensorInput instance;
 
     private static AHRS navX;
-    private static DigitalInput intakeSwitch;
     private static Encoder leftSide, rightSide, armTilt, armExtension;
     private static AnalogPotentiometer armTiltPot, armExtensionPot;
 

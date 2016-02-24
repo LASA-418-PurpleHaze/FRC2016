@@ -34,7 +34,6 @@ public final class Intake extends HazySubsystem {
 
     @Override
     public void run() {
-        Mode newMode = mode;
         if (null != mode) {
             switch (mode) {
                 case OFF:
@@ -54,10 +53,6 @@ public final class Intake extends HazySubsystem {
                     intakeSpeed = 1.0;
                     loaderSpeed = 1.0;
                     break;
-            }
-            if (newMode != mode) {
-                mode = newMode;
-                run();
             }
         }
         intakeMotor.set(intakeSpeed);
