@@ -1,8 +1,8 @@
 package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
@@ -13,7 +13,7 @@ public class Arm extends HazySubsystem {
 
     private static Arm instance;
 
-    private final VictorSP leftArmTilter, rightArmTilter, leftArmElevator, rightArmElevator;
+    private final Talon leftArmTilter, rightArmTilter, leftArmElevator, rightArmElevator;
     private final HazyTMP tiltProfile, elevatorProfile;
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
@@ -21,38 +21,42 @@ public class Arm extends HazySubsystem {
     private double dt, time;
     private double targetX, targetY;
     private double actualX, actualY;
+    
+    
+    static Mode mode;
 
     private Arm() {
-        leftArmTilter = new VictorSP(Ports.LEFT_ARM_TILTER);
-        rightArmTilter = new VictorSP(Ports.RIGHT_ARM_TILTER);
-        leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
-        rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
+        leftArmTilter = new Talon(Ports.LEFT_ARM_TILTER);
+        rightArmTilter = new Talon(Ports.RIGHT_ARM_TILTER);
+        leftArmElevator = new Talon(Ports.LEFT_ARM_EXTENDER);
+        rightArmElevator = new Talon(Ports.RIGHT_ARM_EXTENDER);
         leftArmTilter.setInverted(true);
         rightArmElevator.setInverted(true);
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
         elevatorProfile = new HazyTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         tiltProfileFollower = new HazyPVI();
         elevatorProfileFollower = new HazyPVI();
-        this.setMode(Mode.CONTROLLED);
+        Arm.setMode(Mode.CONTROLLED);
     }
 
     public static Arm getInstance() {
         return (instance == null) ? instance = new Arm() : instance;
     }
 
-    public boolean isArmHere(double Xpos, double Ypos)
-    {
-        return (Xpos==targetX&&Ypos==targetY&&isTiltDone()&&isElevatorDone());
-    }
     
     public static enum Mode {
         OVERRIDE, CONTROLLED;
     }
 
-    static Mode mode;
 
-    public void setMode(Mode m) {
+    public static void setMode(Mode m) {
         mode = m;
+    }
+    
+    
+    public boolean isArmHere(double Xpos, double Ypos)
+    {
+        return (Xpos==targetX && Ypos==targetY && isTiltDone() && isElevatorDone());
     }
     
     @Override
@@ -104,7 +108,9 @@ public class Arm extends HazySubsystem {
     public void pushToDashboard() {
         SmartDashboard.putString("A_Mode", mode.toString());
         SmartDashboard.putNumber("A_TargetX", targetX);
+        SmartDashboard.putNumber("A_ActualX", actualX);
         SmartDashboard.putNumber("A_TargetY", targetY);
+        SmartDashboard.putNumber("A_ActualY", actualY);
         SmartDashboard.putNumber("A_ActualX", sensorInput.getArmExtensionPosition() * Math.cos(sensorInput.getArmTiltPosition()));
         SmartDashboard.putNumber("A_ActualY", sensorInput.getArmExtensionPosition() * Math.sin(sensorInput.getArmTiltPosition()));
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);

@@ -24,7 +24,7 @@ public class DriverInput implements Runnable {
     private static Drivetrain drivetrain;
     private static Shooter shooter;
     private static Arm arm;
-    private CheesyDriveHelper cheesyDrive;
+    private final CheesyDriveHelper cheesyDrive;
 
     private double throttle, wheel, tiltOverride, elevatorOverride;
     private boolean lastIntake, lastOuttake,
