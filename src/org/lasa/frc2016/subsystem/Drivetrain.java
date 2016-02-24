@@ -21,8 +21,8 @@ public final class Drivetrain extends HazySubsystem {
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        rightFrontMotor.setInverted(true);
-        rightBackMotor.setInverted(true);
+        leftFrontMotor.setInverted(true);
+        leftBackMotor.setInverted(true);
         straightPID = new HazyPID();
         turnPID = new HazyPID();
         this.setMode(Mode.OVERRIDE);

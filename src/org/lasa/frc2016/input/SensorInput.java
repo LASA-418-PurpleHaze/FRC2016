@@ -22,13 +22,11 @@ public class SensorInput implements Runnable {
     private volatile double armTiltPostionVal, armExtensionPositionVal;
     private volatile double armTiltRateVal, armExtensionRateVal;
     private volatile double armTiltPotVal, armExtensionPotVal;
-    private volatile boolean intakeSwitchVal;
 
     private SensorInput() {
         navX = new AHRS(SPI.Port.kMXP);
         leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
         rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
-        intakeSwitch = new DigitalInput(Ports.INTAKE_BUMP_SWITCH);
         armTilt = new Encoder(Ports.ARM_TILT_A_ENCODER, Ports.ARM_TILT_B_ENCODER);
         armExtension = new Encoder(Ports.ARM_EXTENSION_A_ENCODER, Ports.ARM_EXTENSION_B_ENCODER);
         armTiltPot = new AnalogPotentiometer(Ports.ARM_TILT_POTENTIOMETER);
@@ -48,7 +46,6 @@ public class SensorInput implements Runnable {
         navXAngleVal = navX.getAngle();
         leftSideEncoderVal = leftSide.get();
         rightSideEncoderVal = rightSide.get();
-        intakeSwitchVal = intakeSwitch.get();
         armTiltPostionVal = armTilt.get();
         armExtensionPositionVal = armExtension.get();
         armTiltRateVal = armTilt.getRate();
@@ -67,10 +64,6 @@ public class SensorInput implements Runnable {
 
     public double getRightDistance() {
         return (rightSideEncoderVal / 250) * 8 * Math.PI;
-    }
-
-    public boolean getIntakeSwitchValue() {
-        return intakeSwitchVal;
     }
 
     public double getArmTiltPosition() {

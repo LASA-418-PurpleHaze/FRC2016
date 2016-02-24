@@ -1,5 +1,6 @@
 package org.lasa.frc2016.subsystem;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -14,7 +15,7 @@ public class Arm extends HazySubsystem {
 
     private static Arm instance;
 
-    private final Talon leftArmTilter, rightArmTilter;
+    private final CANTalon armTilterMaster, armTilterSlave;
     private final VictorSP leftArmElevator, rightArmElevator;
     private final HazyTMP tiltProfile, elevatorProfile;
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
@@ -28,17 +29,19 @@ public class Arm extends HazySubsystem {
     static Mode mode;
 
     private Arm() {
-        leftArmTilter = new Talon(Ports.LEFT_ARM_TILTER);
-        rightArmTilter = new Talon(Ports.RIGHT_ARM_TILTER);
+        armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
+        armTilterSlave = new CANTalon(Ports.ARM_TILTER_SLAVE);
+        armTilterSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+        armTilterSlave.set(armTilterMaster.getDeviceID());
+        armTilterSlave.setInverted(true);
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
-        leftArmTilter.setInverted(true);
         rightArmElevator.setInverted(true);
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
         elevatorProfile = new HazyTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         tiltProfileFollower = new HazyPVI();
         elevatorProfileFollower = new HazyPVI();
-        Arm.setMode(Mode.CONTROLLED);
+        this.setMode(Mode.CONTROLLED);
     }
 
     public static Arm getInstance() {
@@ -51,14 +54,24 @@ public class Arm extends HazySubsystem {
     }
 
 
-    public static void setMode(Mode m) {
+    public void setMode(Mode m) {
         mode = m;
+        if (null != mode) {
+            switch (mode) {
+                case CONTROLLED:
+                    armTilterMaster.changeControlMode(CANTalon.TalonControlMode.Speed);
+                    break;
+                case OVERRIDE:
+                    armTilterMaster.changeControlMode(CANTalon.TalonControlMode.Voltage);
+                    break;
+            }
+        }
     }
     
     
     public boolean isArmHere(double Xpos, double Ypos)
     {
-        return (Xpos==targetX && Ypos==targetY && isTiltDone() && isElevatorDone());
+        return ((Xpos==targetX && Ypos==targetY) && (isTiltDone() && isElevatorDone()));
     }
     
     @Override
@@ -77,8 +90,7 @@ public class Arm extends HazySubsystem {
                     break;
             }
         }
-        leftArmTilter.set(tiltMotorOutput);
-        rightArmTilter.set(tiltMotorOutput);
+        armTilterMaster.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
         rightArmElevator.set(elevatorMotorOutput);
     }

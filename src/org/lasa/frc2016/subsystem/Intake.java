@@ -42,12 +42,8 @@ public final class Intake extends HazySubsystem {
                     loaderSpeed = 0.0;
                     break;
                 case INTAKING:
-                    if (!sensorInput.getIntakeSwitchValue()) {
-                        hasBall = true;
-                        newMode = Mode.OFF;
-                    } else {
-                        intakeSpeed = 1.0;
-                    }
+                    hasBall = true;
+                    intakeSpeed = 1.0;
                     break;
                 case OUTTAKING:
                     hasBall = false;
