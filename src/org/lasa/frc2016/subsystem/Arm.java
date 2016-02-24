@@ -2,7 +2,6 @@ package org.lasa.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +27,7 @@ public class Arm extends HazySubsystem {
     private Arm() {
         armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
         armTilterSlave = new CANTalon(Ports.ARM_TILTER_SLAVE);
+        armTilterMaster.changeControlMode(CANTalon.TalonControlMode.Voltage);
         armTilterSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
         armTilterSlave.set(armTilterMaster.getDeviceID());
         armTilterSlave.setInverted(true);
@@ -54,16 +54,6 @@ public class Arm extends HazySubsystem {
 
     public void setMode(Mode m) {
         mode = m;
-        if (null != mode) {
-            switch (mode) {
-                case CONTROLLED:
-                    armTilterMaster.changeControlMode(CANTalon.TalonControlMode.Speed);
-                    break;
-                case OVERRIDE:
-                    armTilterMaster.changeControlMode(CANTalon.TalonControlMode.Voltage);
-                    break;
-            }
-        }
     }
     
     
