@@ -155,6 +155,8 @@ public class DriverInput implements Runnable {
             }
             if (shoot && !lastShoot && shooter.isSpunUp()) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
+            } else if(!shoot && lastShoot) {
+                CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.OFF));
             }
         } else {
             shooter.setMode(Shooter.Mode.OVERRIDE);
@@ -165,6 +167,8 @@ public class DriverInput implements Runnable {
             }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
+            } else if( !shoot && !lastShoot) {
+                CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.OFF));
             }
         }
     }

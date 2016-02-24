@@ -25,9 +25,6 @@ public class Arm extends HazySubsystem {
     private double targetX, targetY;
     private double actualX, actualY;
     
-    
-    static Mode mode;
-
     private Arm() {
         armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
         armTilterSlave = new CANTalon(Ports.ARM_TILTER_SLAVE);
@@ -53,6 +50,7 @@ public class Arm extends HazySubsystem {
         OVERRIDE, CONTROLLED;
     }
 
+    static Mode mode;
 
     public void setMode(Mode m) {
         mode = m;
