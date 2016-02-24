@@ -167,7 +167,7 @@ public class DriverInput implements Runnable {
             }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
-            } else if( !shoot && !lastShoot) {
+            } else if(!shoot && lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.OFF));
             }
         }
