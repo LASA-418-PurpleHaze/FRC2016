@@ -3,6 +3,7 @@ package org.lasa.frc2016.subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.frc2016.statics.Constants;
 import org.lasa.frc2016.statics.Ports;
@@ -13,7 +14,8 @@ public class Arm extends HazySubsystem {
 
     private static Arm instance;
 
-    private final Talon leftArmTilter, rightArmTilter, leftArmElevator, rightArmElevator;
+    private final Talon leftArmTilter, rightArmTilter;
+    private final VictorSP leftArmElevator, rightArmElevator;
     private final HazyTMP tiltProfile, elevatorProfile;
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
@@ -28,8 +30,8 @@ public class Arm extends HazySubsystem {
     private Arm() {
         leftArmTilter = new Talon(Ports.LEFT_ARM_TILTER);
         rightArmTilter = new Talon(Ports.RIGHT_ARM_TILTER);
-        leftArmElevator = new Talon(Ports.LEFT_ARM_EXTENDER);
-        rightArmElevator = new Talon(Ports.RIGHT_ARM_EXTENDER);
+        leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
+        rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
         leftArmTilter.setInverted(true);
         rightArmElevator.setInverted(true);
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
