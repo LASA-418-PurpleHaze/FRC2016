@@ -13,8 +13,8 @@ public class Ports {
     public static final int SHOOTER_SLAVE_MOTOR = 1;
     public static final int ARM_TILTER_MASTER = 2;
     public static final int ARM_TILTER_SLAVE = 3;
-    public static final int LEFT_ARM_EXTENDER = 19;
-    public static final int RIGHT_ARM_EXTENDER = 18;
+    public static final int LEFT_ARM_EXTENDER = 18;
+    public static final int RIGHT_ARM_EXTENDER = 19;
     public static final int LEFT_SHOOTER_SERVO = 8;
     public static final int RIGHT_SHOOTER_SERVO = 9;
 
