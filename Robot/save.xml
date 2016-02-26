@@ -1,7 +1,7 @@
 <xml version="1.0">
 <dashboard>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
-		<location x="907" y="38"/>
+		<location x="902" y="51"/>
 	</static-widget>
 	<widget field="A_ActualX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="288" y="364"/>

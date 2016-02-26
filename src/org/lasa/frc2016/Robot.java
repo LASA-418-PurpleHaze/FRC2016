@@ -1,6 +1,10 @@
 package org.lasa.frc2016;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import org.lasa.lib.HazyIterative;
 import org.lasa.frc2016.input.DriverInput;
 import org.lasa.frc2016.input.SensorInput;
@@ -14,7 +18,7 @@ import org.lasa.frc2016.vision.HazyVision;
 
 public class Robot extends HazyIterative {
 
-//    ScheduledExecutorService scheduler;
+    ScheduledExecutorService scheduler;
     Drivetrain drivetrain;
     Shooter shooter;
     Intake intake;
@@ -52,8 +56,8 @@ public class Robot extends HazyIterative {
     public void robotInit() {
         constants = new Constants();
 //        new Thread(HazyVision.getInstance()).start();
-//        scheduler = Executors.newScheduledThreadPool(1);
-//        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
+        scheduler = Executors.newScheduledThreadPool(1);
+        final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         intake = Intake.getInstance();

@@ -48,6 +48,7 @@ public final class HazyVision implements Runnable {
     private HazyVision() {
         camera = new USBCamera();
         cameraServer = CameraServer.getInstance();
+        image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         //camera.setExposureManual(30);
         //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
@@ -65,12 +66,9 @@ public final class HazyVision implements Runnable {
     @Override
     public void run() {
         while (true) {
-            try {
-                distance = this.calculate();
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println("Meow");
-            }
+            camera.getImage(image);
+            cameraServer.setImage(image);
+            distance = this.calculate();
         }
     }
 
