@@ -33,7 +33,7 @@ public class Robot extends HazyIterative {
         time++;
         SmartDashboard.putNumber("Time", time);
         drivetrain.pushToDashboard();
-        shooter.pushToDashboard();
+        //shooter.pushToDashboard();
         intake.pushToDashboard();
         arm.pushToDashboard();
     }
@@ -41,7 +41,7 @@ public class Robot extends HazyIterative {
     private void initSubsystems() {
         constants.loadFromFile();
         drivetrain.initSubsystem();
-        shooter.initSubsystem();
+        //shooter.initSubsystem();
         intake.initSubsystem();
         arm.initSubsystem();
         sensorInput.start();
@@ -59,7 +59,7 @@ public class Robot extends HazyIterative {
         scheduler = Executors.newScheduledThreadPool(1);
         final ScheduledFuture<?> visionHandler = scheduler.scheduleAtFixedRate(HazyVision.getInstance(), (long)Constants.VISIONHANDLER_INITIAL_DELAY.getDouble(), (long)Constants.VISIONHANDLER_PERIOD.getDouble(), TimeUnit.MILLISECONDS);
         drivetrain = Drivetrain.getInstance();
-        shooter = Shooter.getInstance();
+        //shooter = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
@@ -77,7 +77,7 @@ public class Robot extends HazyIterative {
         CommandManager.run();
         driverInput.run();
         drivetrain.run();
-        shooter.run();
+        //shooter.run();
         pushToDashboard();
     }
 

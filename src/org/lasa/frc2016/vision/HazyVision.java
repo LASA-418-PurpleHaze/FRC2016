@@ -53,8 +53,8 @@ public final class HazyVision implements Runnable {
         //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
         //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
-        //roi = NIVision.imaqCreateROI();
-        //plane = NIVision.imaqCalibrationSetAxisInfo(image);
+        roi = NIVision.imaqCreateROI();
+        plane = NIVision.imaqCalibrationSetAxisInfo(image);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
     }
@@ -66,8 +66,8 @@ public final class HazyVision implements Runnable {
     @Override
     public void run() {
         while (true) {
-            camera.getImage(image);
-            cameraServer.setImage(image);
+            ;
+            cameraServer.setImage(this.getImage());
             distance = this.calculate();
         }
     }
