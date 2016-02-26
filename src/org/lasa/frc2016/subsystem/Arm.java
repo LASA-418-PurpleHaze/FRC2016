@@ -131,6 +131,12 @@ public class Arm extends HazySubsystem {
 
     public void setControlPoint(double x, double y) {
         if (mode == Mode.CONTROLLED) {
+            if(x < 0){
+                x = 0;
+            }
+            else if(y < 0){
+                y = 0;
+            }
             if (DriverStation.getInstance().isFMSAttached() || (DriverStation.getInstance().getMatchTime() > 20)) {
                 // Only time this wouldn't run is if it IS attached and the matchtime IS less than 20 seconds
                 y = Math.min(y, 40);
@@ -138,6 +144,12 @@ public class Arm extends HazySubsystem {
             x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
             targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
             targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+            if (targetExtension > Constants.ELEVATOR_MAX_EXTENSION.getDouble()){
+                targetExtension = Constants.ELEVATOR_MAX_EXTENSION.getDouble();
+            }
+            else if (targetAngle > Constants.TILT_MAX_ANGLE.getDouble()){
+                targetAngle = Constants.TILT_MAX_ANGLE.getDouble();
+            }
             targetY = y;
             targetX = x;
             tiltProfile.generateTrapezoid(targetAngle, sensorInput.getArmTiltPosition(), sensorInput.getArmTiltRate());

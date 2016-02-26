@@ -105,6 +105,7 @@ public class Constants extends HazyConstant {
     public static final Constant ARM_SEESAW_Y = new Constant("A_seeSawX", 2);
     public static final Constant ARM_SEESAW_PREP_X = new Constant("A_seeSawPrepX", 2);
     public static final Constant ARM_SEESAW_PREP_Y = new Constant("A_seeSawPrepY", 2);
+    
     public Constants() {
     }
 
