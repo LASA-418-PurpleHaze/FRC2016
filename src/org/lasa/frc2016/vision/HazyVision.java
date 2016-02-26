@@ -55,7 +55,7 @@ public final class HazyVision implements Runnable {
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
         //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         roi = NIVision.imaqCreateROI();
-        plane = NIVision.imaqCalibrationSetAxisInfo(image);
+        plane = new CoordinateSystem(new NIVision.PointFloat(320, 240), 90, NIVision.AxisOrientation.DIRECT);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
     }
