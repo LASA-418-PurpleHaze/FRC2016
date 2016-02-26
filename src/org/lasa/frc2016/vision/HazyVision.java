@@ -4,6 +4,7 @@ import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.CoordinateSystem;
 import com.ni.vision.NIVision.FindEdgeOptions2;
 import com.ni.vision.NIVision.FindEdgeReport;
+import com.ni.vision.NIVision.GetPointsOnLineResult;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.Point;
 import com.ni.vision.NIVision.ROI;
@@ -54,7 +55,7 @@ public final class HazyVision implements Runnable {
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
         //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         roi = NIVision.imaqCreateROI();
-        plane = NIVision.imaqBuildCoordinateSystem(new Point(), NIVision.ReferenceMode.COORD_X_Y, NIVision.AxisOrientation.DIRECT);
+        plane = NIVision.imaqCalibrationSetAxisInfo(image);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
     }
