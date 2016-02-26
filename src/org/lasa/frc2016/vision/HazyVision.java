@@ -41,15 +41,11 @@ public final class HazyVision implements Runnable {
     private int highestX, highestY = 0;
     private int midX, midY;
     private double length;
-    private Point[] planeArr;
 
     private double distance;
     private final CameraServer cameraServer;
 
     private HazyVision() {
-        planeArr = new Point[2];
-        planeArr[0] = new Point(320, 240);
-        planeArr[1] = new Point(320, 480);
         camera = new USBCamera();
         cameraServer = CameraServer.getInstance();
         image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
@@ -58,7 +54,7 @@ public final class HazyVision implements Runnable {
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
         //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         roi = NIVision.imaqCreateROI();
-        plane = NIVision.imaqBuildCoordinateSystem(planeArr[0], NIVision.ReferenceMode.COORD_X_Y, NIVision.AxisOrientation.DIRECT);
+        plane = NIVision.imaqBuildCoordinateSystem(new Point(), NIVision.ReferenceMode.COORD_X_Y, NIVision.AxisOrientation.DIRECT);
         //findEdgeOptions = new FindEdgeOptions2();
         //straightEdgeOptions = new StraightEdgeOptions();
     }
