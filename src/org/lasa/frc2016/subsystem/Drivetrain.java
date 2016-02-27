@@ -19,12 +19,16 @@ public final class Drivetrain extends HazySubsystem {
     private Drivetrain() {
         leftFrontMotor = new VictorSP(Ports.LEFT_FRONT_MOTOR);
         leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
+        
         rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
         rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
+        
         rightFrontMotor.setInverted(true);
         rightBackMotor.setInverted(true);
+        
         straightPID = new HazyPID();
         turnPID = new HazyPID();
+        
         this.setMode(Mode.OVERRIDE);
     }
 
@@ -115,6 +119,7 @@ public final class Drivetrain extends HazySubsystem {
     public void initSubsystem() {
         straightPID.updatePID(Constants.DRIVETRAIN_PID_KP.getDouble(), Constants.DRIVETRAIN_PID_KI.getDouble(), Constants.DRIVETRAIN_PID_KD.getDouble(), Constants.DRIVETRAIN_PID_KFF.getDouble(), Constants.DRIVETRAIN_PID_DONE_BOUND.getDouble());
         straightPID.updateMaxMin(Constants.DRIVETRAIN_PID_MAXU.getDouble(), Constants.DRIVETRAIN_PID_MINU.getDouble());
+        
         turnPID.updatePID(Constants.GYRO_PID_KP.getDouble(), Constants.GYRO_PID_KI.getDouble(), Constants.GYRO_PID_KD.getDouble(), Constants.GYRO_PID_KFF.getDouble(), Constants.GYRO_PID_DONE_BOUND.getDouble());
         turnPID.updateMaxMin(Constants.GYRO_PID_MAXU.getDouble(), Constants.GYRO_PID_MINU.getDouble());
     }

@@ -5,7 +5,7 @@ import org.lasa.lib.HazyConstant;
 public class Constants extends HazyConstant {
 
     // Vision Constants
-    public static final Constant VISIONHANDLER_INITIAL_DELAY = new Constant("V_InitialDelay", 10);
+    public static final Constant VISIONHANDLER_INITIAL_DELAY = new Constant("V_InitialDelay", 0);
     public static final Constant VISIONHANDLER_PERIOD = new Constant("V_Period", 200);
 
     public static final Constant USBCAMERA_DIAGONAL_FOV = new Constant("V_CameraDiagonalFOV", 68.5);
@@ -71,7 +71,11 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_MPF_MAXU = new Constant("EMPF_maxU", 1);
     public static final Constant ELEVATOR_MPF_MINU = new Constant("EMPF_minU", -1);
 
+    
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
+    public static final Constant TILT_MIN_ANGLE = new Constant("T_minAngle", 0);
+    public static final Constant TILT_MAX_VALUE = new Constant("T_maxPot", 5);
+    public static final Constant TILT_MIN_VALUE = new Constant("T_minPot", 1);
     public static final Constant TILT_POT_CONVERSION = new Constant("T_potConversion", 0);
     public static final Constant TILT_MP_MAX_VELOCITY = new Constant("TMP_maxV", 15);
     public static final Constant TILT_MP_MAX_ACCELERATION = new Constant("TMP_maxA", 30);
@@ -84,8 +88,8 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
-    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 1);
-    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -1);
+    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 12);
+    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -12);
 
     public static final Constant ARM_MIN_X = new Constant("A_minX", 0);
     public static final Constant ARM_MIN_Y = new Constant("A_minY", 0);

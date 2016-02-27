@@ -14,7 +14,9 @@ public final class Intake extends HazySubsystem {
 
     private Intake() {
         intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
+        
         loaderMotor = new VictorSP(Ports.LOADER_MOTOR);
+        
         this.setMode(Mode.OFF);
     }
 

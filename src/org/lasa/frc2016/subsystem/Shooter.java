@@ -17,6 +17,7 @@ public final class Shooter extends HazySubsystem {
     private double doneBound, doneCycles;
     private double motorOutput;
     private double encoderOutput;
+    private double leftHoodVal, rightHoodVal;
 
     private Shooter() {
         shooterMotorMaster = new CANTalon(Ports.SHOOTER_MASTER_MOTOR);
@@ -26,8 +27,10 @@ public final class Shooter extends HazySubsystem {
         shooterMotorSlave.reverseOutput(true);
         shooterMotorMaster.setFeedbackDevice(CANTalon.FeedbackDevice.EncRising);
         shooterMotorMaster.configEncoderCodesPerRev(1);
+        
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
         rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
+        
         this.setMode(Mode.CONTROLLED);
     }
 
@@ -77,6 +80,8 @@ public final class Shooter extends HazySubsystem {
         SmartDashboard.putNumber("S_ActualRPM", actualRPM);
         SmartDashboard.putNumber("S_MotorOutput", motorOutput);
         SmartDashboard.putNumber("S_EncOutput", encoderOutput);
+        SmartDashboard.putNumber("S_LeftHood", leftHoodVal);
+        SmartDashboard.putNumber("S_RightHood", rightHoodVal);
         SmartDashboard.putString("S_Mode", mode.toString());
     }
 
@@ -119,8 +124,10 @@ public final class Shooter extends HazySubsystem {
         } else if (value < Constants.SHOOTER_HOOD_MINVALUE.getDouble()) {
             value = Constants.SHOOTER_HOOD_MINVALUE.getDouble();
         }
-        leftShooterServo.set(.5 + value);
-        rightShooterServo.set(.5 - value);
+        leftHoodVal = .5 + value;
+        rightHoodVal = .5 - value;
+        leftShooterServo.set(leftHoodVal);
+        rightShooterServo.set(rightHoodVal);
     }
 
     @Override

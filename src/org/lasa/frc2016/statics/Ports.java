@@ -23,13 +23,14 @@ public class Ports {
     public static final int LEFT_SIDE_B_ENCODER = 7;
     public static final int RIGHT_SIDE_A_ENCODER = 8;
     public static final int RIGHT_SIDE_B_ENCODER = 9;
-    public static final int ARM_TILT_A_ENCODER = 0;
-    public static final int ARM_TILT_B_ENCODER = 1;
     public static final int ARM_EXTENSION_A_ENCODER = 4;
     public static final int ARM_EXTENSION_B_ENCODER = 5;
 
     // Analog IO Ports
     public static final int ARM_TILT_POTENTIOMETER = 0;
     public static final int ARM_EXTENSION_POTENTIOMETER = 1;
+    
+    // Digital IO Ports
+    public static final int ARM_LIMIT_SWITCH = 2;
 
 }

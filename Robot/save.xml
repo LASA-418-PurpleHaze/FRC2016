@@ -1,8 +1,11 @@
 <xml version="1.0">
 <dashboard>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
-		<location x="902" y="51"/>
-	</static-widget>
+	<widget field="S_LeftHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="848" y="44"/>
+	</widget>
+	<widget field="S_RightHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="848" y="76"/>
+	</widget>
 	<widget field="A_ActualX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="288" y="364"/>
 	</widget>
@@ -16,10 +19,11 @@
 		<location x="288" y="396"/>
 	</widget>
 	<widget field="E_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="332"/>
+		<location x="256" y="304"/>
 	</widget>
 	<widget field="T_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="332"/>
+		<location x="48" y="304"/>
+		<height>20</height>
 	</widget>
 	<widget field="Time" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="127" y="485"/>
@@ -37,16 +41,10 @@
 		<location x="48" y="176"/>
 	</widget>
 	<widget field="D_RightEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="291" y="60"/>
+		<location x="288" y="60"/>
 	</widget>
 	<widget field="D_LeftEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="96" y="64"/>
-	</widget>
-	<widget field="E_PotOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="300"/>
-	</widget>
-	<widget field="T_PotOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="300"/>
 	</widget>
 	<widget field="S_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="672" y="172"/>
@@ -99,4 +97,6 @@
 </dashboard>
 <live-window>
 </live-window>
+	<hidden field="T_PotOutput"/>
+	<hidden field="E_PotOutput"/>
 </xml>
