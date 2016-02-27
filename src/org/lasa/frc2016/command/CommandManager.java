@@ -10,6 +10,7 @@ public class CommandManager {
 
     public static void addCommand(HazyCommand c) {
         list.add(c);
+        lastAdded = c;
     }
 
     public static void addSequential(HazyCommand c) {
