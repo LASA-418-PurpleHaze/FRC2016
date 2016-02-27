@@ -51,7 +51,10 @@ public final class HazyVision implements Runnable {
 
     private HazyVision() {
         camera = new USBCamera();
+        camera.setFPS(5);
+        camera.setSize(480, 640);
         cameraServer = CameraServer.getInstance();
+        cameraServer.setQuality(50);
         image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         roi = NIVision.imaqCreateROI();
         plane = new NIVision.CoordinateSystem(new NIVision.PointFloat(320, 240), 0, NIVision.AxisOrientation.INDIRECT);
@@ -72,12 +75,18 @@ public final class HazyVision implements Runnable {
     @Override
     public void run() {
         while (true) {
-            cameraServer.setImage(this.getImage());
-            distance = this.calculate();
+            try {
+                cameraServer.setImage(this.getImage());
+                distance = this.calculate();
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(HazyVision.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 
-    private Image getImage() {
+    private NIVision.Image getImage() {
         camera.getImage(image);
         NIVision.imaqColorThreshold(image, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
         detectRectangleReport = NIVision.imaqDetectRectangles(image, rectDescriptor, curveOptions, shapeDectectOptions, roi);
