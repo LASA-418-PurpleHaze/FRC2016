@@ -2,9 +2,9 @@ package org.lasa.frc2016.vision;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.CoordinateSystem;
+import com.ni.vision.NIVision.EdgeOptions;
 import com.ni.vision.NIVision.FindEdgeOptions2;
 import com.ni.vision.NIVision.FindEdgeReport;
-import com.ni.vision.NIVision.GetPointsOnLineResult;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.Point;
 import com.ni.vision.NIVision.ROI;
@@ -53,11 +53,12 @@ public final class HazyVision implements Runnable {
         //camera.setExposureManual(30);
         //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
         //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
-        //image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
         roi = NIVision.imaqCreateROI();
-        plane = new CoordinateSystem(new NIVision.PointFloat(320, 240), 90, NIVision.AxisOrientation.DIRECT);
-        //findEdgeOptions = new FindEdgeOptions2();
-        //straightEdgeOptions = new StraightEdgeOptions();
+        plane = new CoordinateSystem(new NIVision.PointFloat(320, 240), 0, NIVision.AxisOrientation.INDIRECT);
+        findEdgeOptions = new FindEdgeOptions2(NIVision.RakeDirection.LEFT_TO_RIGHT, 1, 1, 1, 1, 
+                new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 0, 255, 0), "Target", 
+                new NIVision.EdgeOptions2(NIVision.EdgePolaritySearchMode.SEARCH_FOR_ALL_EDGES, 3, 3, 10, NIVision.InterpolationMethod.BILINEAR_FIXED, NIVision.ColumnProcessingMode.AVERAGE_COLUMNS));
+        straightEdgeOptions = new StraightEdgeOptions(4, NIVision.StraightEdgeSearchMode.USE_BEST_HOUGH_LINE, 5, 50, 0, 45, 1, 7, 0, 25, 5);
     }
 
     public static HazyVision getInstance() {
@@ -75,10 +76,10 @@ public final class HazyVision implements Runnable {
 
     private Image getImage() {
         camera.getImage(image);
-        NIVision.imaqColorThreshold(null, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
+        NIVision.imaqColorThreshold(image, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
         findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
         for (NIVision.StraightEdge straightEdge : findEdgeReport.straightEdges) {
-            NIVision.imaqDrawLineOnImage(null, image, NIVision.DrawMode.DRAW_VALUE,
+            NIVision.imaqDrawLineOnImage(image, image, NIVision.DrawMode.DRAW_VALUE,
                     startPoint = new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y),
                     endPoint = new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
             if (lowestX > startPoint.x) {
