@@ -139,19 +139,25 @@ public class DriverInput implements Runnable {
         if (!overrideMode) {
             shooter.setMode(Shooter.Mode.CONTROLLED);
             if (prepVisionShooter && !lastPrepVisionShooter) {
+                
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 15, 0));
             } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_VALUE.getDouble()));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
             } else if (shortShot && !lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("ShortRPM", 10, Constants.SHOOTER_SHORT_RPM.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_VALUE.getDouble()));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
             } else if (!prepVisionShooter && lastPrepVisionShooter) {
             } else if (!longShot && lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
             } else if (!shortShot && lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
             }
             if (shoot && !lastShoot && shooter.isSpunUp()) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
