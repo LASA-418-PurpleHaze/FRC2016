@@ -1,15 +1,9 @@
 package org.lasa.frc2016.vision;
 
 import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.CoordinateSystem;
-import com.ni.vision.NIVision.EdgeOptions;
-import com.ni.vision.NIVision.FindEdgeOptions2;
-import com.ni.vision.NIVision.FindEdgeReport;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.Point;
-import com.ni.vision.NIVision.ROI;
 import com.ni.vision.NIVision.Range;
-import com.ni.vision.NIVision.StraightEdgeOptions;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.vision.USBCamera;
@@ -28,37 +22,47 @@ public final class HazyVision implements Runnable {
 
     private ArrayList<Integer> visionLookUpTable;
 
-    USBCamera camera;
-    static Image image;
-    ROI roi;
-    CoordinateSystem plane;
-    FindEdgeOptions2 findEdgeOptions;
-    StraightEdgeOptions straightEdgeOptions;
-    FindEdgeReport findEdgeReport;
-
-    private Range hue, saturation, luminence;
-    private Point startPoint, endPoint;
-    private int lowestX, lowestY = Integer.MAX_VALUE;
-    private int highestX, highestY = 0;
-    private int midX, midY;
-    private double length;
+    private USBCamera camera;
+    private final CameraServer cameraServer;
+    static NIVision.Image image;
+    private NIVision.ROI roi;
+    private NIVision.CoordinateSystem plane;
+    
+    private NIVision.FindEdgeOptions2 findEdgeOptions;
+    private NIVision.StraightEdgeOptions straightEdgeOptions;
+    private NIVision.DetectRectanglesResult detectRectangleReport;
+    private NIVision.RectangleDescriptor rectDescriptor;
+    private NIVision.CurveOptions curveOptions;
+    private NIVision.ShapeDetectionOptions shapeDectectOptions;
+    private NIVision.RangeFloat[] angleRanges = new NIVision.RangeFloat[1];
+    private NIVision.RangeFloat scaleRange;
+    private ArrayList<NIVision.PointFloat> cornerPoints;
+    private NIVision.Rect rectangle;
+    private NIVision.RGBValue rectColor;
+   
+    
+    private float top = 0;
+    private float left = Float.MAX_VALUE;
+    
+    private NIVision.Range hue, saturation, luminence;
 
     private double distance;
-    private final CameraServer cameraServer;
+    
 
     private HazyVision() {
         camera = new USBCamera();
         cameraServer = CameraServer.getInstance();
         image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL, Constants.USBCAMERA_IMAGE_WIDTH.getInt());
-        //camera.setExposureManual(30);
-        //camera.setSize(Constants.USBCAMERA_IMAGE_WIDTH.getInt(), Constants.USBCAMERA_IMAGE_HEIGHT.getInt());
-        //NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeGuard);
         roi = NIVision.imaqCreateROI();
-        plane = new CoordinateSystem(new NIVision.PointFloat(320, 240), 0, NIVision.AxisOrientation.INDIRECT);
-        findEdgeOptions = new FindEdgeOptions2(NIVision.RakeDirection.LEFT_TO_RIGHT, 1, 1, 1, 1, 
-                new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 255, 0, 0), new NIVision.RGBValue(0, 0, 255, 0), "Target", 
-                new NIVision.EdgeOptions2(NIVision.EdgePolaritySearchMode.SEARCH_FOR_ALL_EDGES, 3, 3, 10, NIVision.InterpolationMethod.BILINEAR_FIXED, NIVision.ColumnProcessingMode.AVERAGE_COLUMNS));
-        straightEdgeOptions = new StraightEdgeOptions(4, NIVision.StraightEdgeSearchMode.USE_BEST_HOUGH_LINE, 5, 50, 0, 45, 1, 7, 0, 25, 5);
+        plane = new NIVision.CoordinateSystem(new NIVision.PointFloat(320, 240), 0, NIVision.AxisOrientation.INDIRECT);
+        
+        rectDescriptor = new NIVision.RectangleDescriptor(20, 100, 10, 70);
+        curveOptions = new NIVision.CurveOptions(NIVision.ExtractionMode.NORMAL_IMAGE, 75, NIVision.EdgeFilterSize.NORMAL, 25, 15, 15, 10, 1, 0);
+        angleRanges[0] = new NIVision.RangeFloat(0, 45);
+        scaleRange = new NIVision.RangeFloat(600, 3000);
+        shapeDectectOptions = new NIVision.ShapeDetectionOptions(1, angleRanges, scaleRange, distance);
+        cornerPoints = new ArrayList<>(4);
+        rectColor = new NIVision.RGBValue(0, 255, 0, 0);
     }
 
     public static HazyVision getInstance() {
@@ -68,7 +72,6 @@ public final class HazyVision implements Runnable {
     @Override
     public void run() {
         while (true) {
-            ;
             cameraServer.setImage(this.getImage());
             distance = this.calculate();
         }
@@ -77,39 +80,29 @@ public final class HazyVision implements Runnable {
     private Image getImage() {
         camera.getImage(image);
         NIVision.imaqColorThreshold(image, image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
-        findEdgeReport = NIVision.imaqFindEdge2(image, roi, plane, plane, findEdgeOptions, straightEdgeOptions);
-        for (NIVision.StraightEdge straightEdge : findEdgeReport.straightEdges) {
-            NIVision.imaqDrawLineOnImage(image, image, NIVision.DrawMode.DRAW_VALUE,
-                    startPoint = new Point((int) straightEdge.straightEdgeCoordinates.start.x, (int) straightEdge.straightEdgeCoordinates.start.y),
-                    endPoint = new Point((int) straightEdge.straightEdgeCoordinates.end.x, (int) straightEdge.straightEdgeCoordinates.end.y), 15);
-            if (lowestX > startPoint.x) {
-                lowestX = startPoint.x;
-            } else if (lowestX > endPoint.x) {
-                lowestX = endPoint.x;
-            }
-            if (lowestY > startPoint.y) {
-                lowestY = startPoint.y;
-            } else if (lowestY > endPoint.y) {
-                lowestY = endPoint.y;
-            }
-            if (highestX < startPoint.x) {
-                highestX = startPoint.x;
-            } else if (highestX > endPoint.x) {
-                highestX = endPoint.x;
-            }
-            if (highestY < startPoint.y) {
-                highestY = startPoint.y;
-            } else if (highestY > endPoint.y) {
-                highestY = endPoint.y;
-            }
+        detectRectangleReport = NIVision.imaqDetectRectangles(image, rectDescriptor, curveOptions, shapeDectectOptions, roi);
+        for (int x = 0; x < detectRectangleReport.array.length; x++) {
+           for (int y = 0; y < 4; y++) {
+               cornerPoints.add(detectRectangleReport.array[x].corner[y]);
+           }
+           for(NIVision.PointFloat pointFloat : cornerPoints) {
+               if (pointFloat.y > top) {
+                    top = pointFloat.y;
+               }
+               if (pointFloat.x < left) {
+                    left = pointFloat.x;
+               }
+           }
+           rectangle.height = (int)detectRectangleReport.array[x].height;
+           rectangle.width = (int)detectRectangleReport.array[x].width;
+           rectangle.top = (int)top;
+           rectangle.left = (int)left;
+           NIVision.imaqOverlayRect(image, rectangle, rectColor, NIVision.DrawMode.DRAW_VALUE, "Target");
         }
         return image;
     }
 
     private double calculate() {
-        midX = (highestX - lowestX) / 2;
-        midY = (highestY - lowestY) / 2;
-        length = Math.sqrt(Math.pow(highestX - midX, 2) + Math.pow(highestY - midY, 2));
         return 0;
     }
 
