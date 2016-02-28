@@ -39,13 +39,14 @@ public final class HazyVision implements Runnable {
     private float top = 0;
     private float left = Float.MAX_VALUE;
 
-    private NIVision.Range hue, saturation, luminence;;
+    private NIVision.Range hue, saturation, luminence;
+    ;
 
     private int tick;
     private double distance;
 
     private HazyVision() {
-        
+
         image
                 = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_HSL,
                         Constants.USBCAMERA_IMAGE_WIDTH.getInt());
@@ -67,7 +68,7 @@ public final class HazyVision implements Runnable {
         rectColor = new NIVision.RGBValue(0, 255, 0, 0);
         NIVision.IMAQdxConfigureGrab(session);
         NIVision.IMAQdxStartAcquisition(session);
-        
+
     }
 
     public static HazyVision getInstance() {
@@ -75,19 +76,13 @@ public final class HazyVision implements Runnable {
                 = new HazyVision() : instance;
     }
 
-    @Override
     public void run() {
-        CameraServer.getInstance().setImage(this.getImage());
-    }
-
-    private NIVision.Image getImage() {
         DriverStation.reportError("Meow", false);
         NIVision.imaqColorThreshold(image,
                 image, 0, NIVision.ColorMode.HSL, hue, saturation, luminence);
         detectRectangleReport = NIVision.imaqDetectRectangles(image, rectDescriptor,
                 curveOptions, shapeDectectOptions, roi);
-        for (int x = 0; x
-                < detectRectangleReport.array.length; x++) {
+        for (int x = 0; x < detectRectangleReport.array.length; x++) {
             for (int y = 0; y < 4; y++) {
                 cornerPoints.add(detectRectangleReport.array[x].corner[y]);
             }
@@ -103,12 +98,13 @@ public final class HazyVision implements Runnable {
             rectangle.width = (int) detectRectangleReport.array[x].width;
             rectangle.top = (int) top;
             rectangle.left = (int) left;
-            NIVision.imaqOverlayRect(image, rectangle,
-                    rectColor, NIVision.DrawMode.DRAW_VALUE, "Target");
+            NIVision.imaqOverlayRect(image, rectangle, rectColor, NIVision.DrawMode.DRAW_VALUE, "Target");
         }
-        return image;
-    }
 
+        CameraServer.getInstance().setImage(image);
+
+        image.free();
+    }
 
     private double calculate() {
         return 0;
@@ -121,7 +117,7 @@ public final class HazyVision implements Runnable {
     public void pushToDashboard() {
         SmartDashboard.putNumber("C_TickCount", tick);
     }
-    
+
     public void updateConstants() {
         tick = 0;
         visionLookUpTable = new ArrayList<>(11);
