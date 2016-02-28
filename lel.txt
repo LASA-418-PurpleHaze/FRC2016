@@ -1,0 +1,36 @@
+
+monday + tuesday:
+verify angle tilt angle sensors are correct
+tilt pid
+extension pid
+drawbridge setpoint 1
+drawbridge setpoint 2
+sally port setpoint 1
+sally port setpoint 2
+seesaw setpoint 1
+seesaw setpoint 2
+portcullis setpoint 1
+portcullis setpoint 2
+test driver controls are working correctly
+
+wednesday:
+mount shooter and second intake roller
+
+thursday:
+shooter pid
+long shot angle
+long shot rpm
+short shot angle
+short shot rpm
+test driver controls are working correctly
+
+saturday + monday:
+get vision working
+vision rpm distance lookup table (~36 values)
+drivetrain straight pid
+drivetrain automomous distances
+drivetrain turn pid
+drivetrain autonomous turn angles
+
+tuesday:
+driver practice if all of the above somehow gets done without delays
