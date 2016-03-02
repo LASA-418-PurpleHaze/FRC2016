@@ -73,7 +73,7 @@ public class DriverInput implements Runnable {
 
     private void input() {
         throttle = driver.getLeftY();
-        wheel = driver.getRightX();
+        wheel = -driver.getRightX();
         quickTurn = driver.getRightBumper();
         shoot = driver.getRightTrigger() > .1;
 
@@ -88,8 +88,8 @@ public class DriverInput implements Runnable {
         longShot = operator.getEast();
         shortShot = operator.getWest();
 
-        tiltOverride = operator.getLeftY();
-        elevatorOverride = operator.getRightY();
+        tiltOverride = -operator.getLeftY();
+        elevatorOverride = -operator.getRightY();
         overrideShot = operator.getSouth();
 
         if (operator.getStart()) {
@@ -119,6 +119,7 @@ public class DriverInput implements Runnable {
     private void drivetrainControl() {
         cheesyDrive.cheesyDrive(throttle, wheel, quickTurn);
         drivetrain.setDriveSpeeds(cheesyDrive.getLeftPWM(), cheesyDrive.getRightPWM());
+        //drivetrain.setDriveSpeeds(throttle + wheel, throttle - wheel);
     }
 
     private void intakeControl() {

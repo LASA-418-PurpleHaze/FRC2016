@@ -88,8 +88,8 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MPF_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
     public static final Constant TILT_MPF_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
     public static final Constant TILT_MPF_POSITION_DONE_RANGE = new Constant("TMPF_PositonDoneRange", 5);
-    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 12);
-    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -12);
+    public static final Constant TILT_MPF_MAXU = new Constant("TMPF_maxU", 1);
+    public static final Constant TILT_MPF_MINU = new Constant("TMPF_minU", -1);
 
     public static final Constant ARM_MIN_X = new Constant("A_minX", 0);
     public static final Constant ARM_MIN_Y = new Constant("A_minY", 0);

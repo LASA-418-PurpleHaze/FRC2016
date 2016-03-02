@@ -1,5 +1,9 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="T_PotOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="48" y="332"/>
+		<height>20</height>
+	</widget>
 	<widget field="S_LeftHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="848" y="44"/>
 	</widget>
@@ -97,6 +101,4 @@
 </dashboard>
 <live-window>
 </live-window>
-	<hidden field="T_PotOutput"/>
-	<hidden field="E_PotOutput"/>
 </xml>

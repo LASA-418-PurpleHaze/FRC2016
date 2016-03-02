@@ -10,6 +10,7 @@ import org.lasa.frc2016.subsystem.Intake;
 import org.lasa.frc2016.command.CommandManager;
 import org.lasa.frc2016.subsystem.Arm;
 import org.lasa.frc2016.subsystem.Shooter;
+import org.lasa.frc2016.vision.HazyVision;
 
 public class Robot extends HazyIterative {
 
@@ -35,7 +36,7 @@ public class Robot extends HazyIterative {
     private void initSubsystems() {
         constants.loadFromFile();
         drivetrain.initSubsystem();
-        //shooter.initSubsystem();
+        shooter.initSubsystem();
         intake.initSubsystem();
         arm.initSubsystem();
         sensorInput.start();
@@ -48,6 +49,7 @@ public class Robot extends HazyIterative {
     @Override
     public void robotInit() {
         constants = new Constants();
+        new Thread(HazyVision.getInstance()).start();
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         intake = Intake.getInstance();
