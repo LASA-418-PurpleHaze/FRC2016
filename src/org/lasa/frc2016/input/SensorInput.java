@@ -1,7 +1,6 @@
 package org.lasa.frc2016.input;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -13,7 +12,6 @@ public class SensorInput implements Runnable {
 
     private static AHRS navX;
     private static Encoder leftSide, rightSide, armExtension;
-    private static AnalogPotentiometer armTiltPot, armExtensionPot;
     private static DigitalInput armTopLimitSwitch, armBottomLimitSwitch;
 
     private volatile double navXAngleVal;
@@ -27,7 +25,6 @@ public class SensorInput implements Runnable {
         leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
         rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
         armExtension = new Encoder(Ports.ARM_EXTENSION_A_ENCODER, Ports.ARM_EXTENSION_B_ENCODER);
-        armExtensionPot = new AnalogPotentiometer(Ports.ARM_EXTENSION_POTENTIOMETER);
         armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH);
         armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH);
     }
