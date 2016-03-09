@@ -27,10 +27,10 @@ public final class Shooter extends HazySubsystem {
         shooterMotorSlave.reverseOutput(true);
         shooterMotorMaster.setFeedbackDevice(CANTalon.FeedbackDevice.EncRising);
         shooterMotorMaster.configEncoderCodesPerRev(1);
-        
+
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
         rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
-        
+
         this.setMode(Mode.CONTROLLED);
     }
 

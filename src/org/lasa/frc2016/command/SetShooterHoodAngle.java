@@ -11,7 +11,7 @@ public class SetShooterHoodAngle extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return (this.currentTime-this.startTime>.25);
+        return (this.currentTime - this.startTime > .25);
     }
 
     @Override

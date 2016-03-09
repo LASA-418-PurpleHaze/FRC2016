@@ -16,7 +16,7 @@ public class DriveTurn extends HazyCommand {
 
     @Override
     public boolean isDone() {
-        return (drivetrain.isTurnDone()&&drivetrain.getTurnSetpoint()==setpoint);
+        return (drivetrain.isTurnDone() && drivetrain.getTurnSetpoint() == setpoint);
     }
 
     @Override

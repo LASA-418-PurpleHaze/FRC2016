@@ -1,104 +1,104 @@
 <xml version="1.0">
-<dashboard>
-	<widget field="T_PotOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="332"/>
-		<height>20</height>
-	</widget>
-	<widget field="S_LeftHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="848" y="44"/>
-	</widget>
-	<widget field="S_RightHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="848" y="76"/>
-	</widget>
-	<widget field="A_ActualX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="288" y="364"/>
-	</widget>
-	<widget field="A_TargetY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="96" y="396"/>
-	</widget>
-	<widget field="A_TargetX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="96" y="364"/>
-	</widget>
-	<widget field="A_ActualY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="288" y="396"/>
-	</widget>
-	<widget field="E_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="304"/>
-	</widget>
-	<widget field="T_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="304"/>
-		<height>20</height>
-	</widget>
-	<widget field="Time" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="127" y="485"/>
-	</widget>
-	<widget field="D_NavXAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="208" y="124"/>
-	</widget>
-	<widget field="E_TargetExtension" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="255" y="176"/>
-	</widget>
-	<widget field="T_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="268"/>
-	</widget>
-	<widget field="T_TargetAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="176"/>
-	</widget>
-	<widget field="D_RightEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="288" y="60"/>
-	</widget>
-	<widget field="D_LeftEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="96" y="64"/>
-	</widget>
-	<widget field="S_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="172"/>
-	</widget>
-	<widget field="S_EncOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="140"/>
-		<height>20</height>
-	</widget>
-	<widget field="S_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="108"/>
-	</widget>
-	<widget field="S_ActualRPM" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="76"/>
-		<height>20</height>
-	</widget>
-	<widget field="S_TargetRPM" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="48"/>
-	</widget>
-	<widget field="E_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="268"/>
-	</widget>
-	<widget field="E_ActualExtensionRate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="236"/>
-	</widget>
-	<widget field="E_ActualExtension" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="256" y="204"/>
-	</widget>
-	<widget field="A_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="179" y="444"/>
-		<height>20</height>
-	</widget>
-	<widget field="I_State" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="496" y="80"/>
-	</widget>
-	<widget field="D_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="208" y="92"/>
-	</widget>
-	<widget field="D_RightSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="288" y="32"/>
-	</widget>
-	<widget field="D_LeftSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="96" y="34"/>
-	</widget>
-	<widget field="T_ActualAngleRate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="236"/>
-	</widget>
-	<widget field="T_ActualAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="48" y="208"/>
-	</widget>
-</dashboard>
-<live-window>
-</live-window>
+    <dashboard>
+        <widget field="T_PotOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="332"/>
+            <height>20</height>
+        </widget>
+        <widget field="S_LeftHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="848" y="44"/>
+        </widget>
+        <widget field="S_RightHood" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="848" y="76"/>
+        </widget>
+        <widget field="A_ActualX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="288" y="364"/>
+        </widget>
+        <widget field="A_TargetY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="96" y="396"/>
+        </widget>
+        <widget field="A_TargetX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="96" y="364"/>
+        </widget>
+        <widget field="A_ActualY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="288" y="396"/>
+        </widget>
+        <widget field="E_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="256" y="304"/>
+        </widget>
+        <widget field="T_TMPPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="304"/>
+            <height>20</height>
+        </widget>
+        <widget field="Time" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="127" y="485"/>
+        </widget>
+        <widget field="D_NavXAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="208" y="124"/>
+        </widget>
+        <widget field="E_TargetExtension" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="255" y="176"/>
+        </widget>
+        <widget field="T_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="268"/>
+        </widget>
+        <widget field="T_TargetAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="176"/>
+        </widget>
+        <widget field="D_RightEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="288" y="60"/>
+        </widget>
+        <widget field="D_LeftEnc" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="96" y="64"/>
+        </widget>
+        <widget field="S_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="672" y="172"/>
+        </widget>
+        <widget field="S_EncOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="672" y="140"/>
+            <height>20</height>
+        </widget>
+        <widget field="S_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="672" y="108"/>
+        </widget>
+        <widget field="S_ActualRPM" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="672" y="76"/>
+            <height>20</height>
+        </widget>
+        <widget field="S_TargetRPM" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="672" y="48"/>
+        </widget>
+        <widget field="E_MotorOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="256" y="268"/>
+        </widget>
+        <widget field="E_ActualExtensionRate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="256" y="236"/>
+        </widget>
+        <widget field="E_ActualExtension" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="256" y="204"/>
+        </widget>
+        <widget field="A_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="179" y="444"/>
+            <height>20</height>
+        </widget>
+        <widget field="I_State" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="496" y="80"/>
+        </widget>
+        <widget field="D_Mode" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="208" y="92"/>
+        </widget>
+        <widget field="D_RightSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="288" y="32"/>
+        </widget>
+        <widget field="D_LeftSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="96" y="34"/>
+        </widget>
+        <widget field="T_ActualAngleRate" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="236"/>
+        </widget>
+        <widget field="T_ActualAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="48" y="208"/>
+        </widget>
+    </dashboard>
+    <live-window>
+    </live-window>
 </xml>

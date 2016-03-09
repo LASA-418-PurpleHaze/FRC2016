@@ -21,6 +21,7 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
+    HazyVision hazyVision;
 
     private static int time;
 
@@ -28,17 +29,18 @@ public class Robot extends HazyIterative {
         time++;
         SmartDashboard.putNumber("Time", time);
         drivetrain.pushToDashboard();
-        shooter.pushToDashboard();
+//        shooter.pushToDashboard();
         intake.pushToDashboard();
-        arm.pushToDashboard();
+//        arm.pushToDashboard();
     }
 
     private void initSubsystems() {
         constants.loadFromFile();
+//        hazyVision.updateConstants();
         drivetrain.initSubsystem();
-        shooter.initSubsystem();
+//        shooter.initSubsystem();
         intake.initSubsystem();
-        arm.initSubsystem();
+//        arm.initSubsystem();
         sensorInput.start();
     }
 
@@ -49,12 +51,12 @@ public class Robot extends HazyIterative {
     @Override
     public void robotInit() {
         constants = new Constants();
-        new Thread(HazyVision.getInstance()).start();
+//        hazyVision = HazyVision.getInstance();
         drivetrain = Drivetrain.getInstance();
-        shooter = Shooter.getInstance();
+//        shooter = Shooter.getInstance();
         intake = Intake.getInstance();
-        arm = Arm.getInstance();
-        driverInput = DriverInput.getInstance();
+//        arm = Arm.getInstance();
+//        driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
     }
 
@@ -66,17 +68,19 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopPeriodic() {
+//        hazyVision.run();
         CommandManager.run();
-        driverInput.run();
+//        driverInput.run();
         drivetrain.run();
-        shooter.run();
+//        shooter.run();
         pushToDashboard();
     }
 
     @Override
     public void teleopContinuous() {
+
         sensorInput.run();
-        arm.run();
+//        arm.run();
         intake.run();
     }
 
@@ -88,8 +92,9 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousPeriodic() {
+        hazyVision.run();
         CommandManager.run();
-        shooter.run();
+//        shooter.run();
         pushToDashboard();
     }
 
@@ -97,7 +102,7 @@ public class Robot extends HazyIterative {
     public void autonomousContinuous() {
         sensorInput.run();
         drivetrain.run();
-        arm.run();
+//        arm.run();
         intake.run();
     }
 

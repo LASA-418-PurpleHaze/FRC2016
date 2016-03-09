@@ -97,7 +97,7 @@ public abstract class HazyCommand {
     public boolean isStopped() {
         return stopped;
     }
-    
+
     public boolean isTimedOut() {
         return (currentTime - startTime) > timeOut;
     }

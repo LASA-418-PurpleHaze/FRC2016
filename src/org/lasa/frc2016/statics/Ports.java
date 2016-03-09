@@ -29,7 +29,7 @@ public class Ports {
     // Analog IO Ports
     public static final int ARM_TILT_POTENTIOMETER = 0;
     public static final int ARM_EXTENSION_POTENTIOMETER = 1;
-    
+
     // Digital IO Ports
     public static final int ARM_TOP_LIMIT_SWITCH = 2;
     public static final int ARM_BOTTOM_LIMIT_SWITCH = 3;

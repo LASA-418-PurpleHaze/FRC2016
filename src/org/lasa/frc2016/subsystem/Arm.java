@@ -19,12 +19,11 @@ public class Arm extends HazySubsystem {
     private final HazyTMP tiltProfile, elevatorProfile;
     private final HazyPVI tiltProfileFollower, elevatorProfileFollower;
     private double targetAngle, targetExtension;
-    private double actualAngle, actualAngleRate, actualAnglePot;
+    private double actualAngle, actualAngleRate;
     private double tiltMotorOutput, elevatorMotorOutput;
     private double dt, time;
     private double targetX, targetY;
     private double actualX, actualY;
-    private int cycles;
 
     private Arm() {
         armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
@@ -34,17 +33,17 @@ public class Arm extends HazySubsystem {
         armTilterSlave.set(armTilterMaster.getDeviceID());
         armTilterSlave.reverseOutput(true);
         armTilterMaster.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
-        
+
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);
         rightArmElevator.setInverted(true);
-        
+
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
         elevatorProfile = new HazyTMP(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
-        
+
         tiltProfileFollower = new HazyPVI();
         elevatorProfileFollower = new HazyPVI();
-        
+
         this.setMode(Mode.OVERRIDE);
     }
 
@@ -68,7 +67,7 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        actualAngle = armTilterMaster.getEncPosition() * 360 /4096 / 3;
+        actualAngle = armTilterMaster.getEncPosition() * 360 / 4096 / 3;
         actualAngleRate = armTilterMaster.getEncVelocity();
         dt = Timer.getFPGATimestamp() - time;
         time = Timer.getFPGATimestamp();
@@ -86,17 +85,15 @@ public class Arm extends HazySubsystem {
         }
         if (sensorInput.getArmTopLimitSwitch()) {
             tiltMotorOutput = Math.min(tiltMotorOutput, 0);
-        }
-        
-        else if (sensorInput.getArmBottomLimitSwitch()) {
+        } else if (sensorInput.getArmBottomLimitSwitch()) {
             tiltMotorOutput = Math.max(tiltMotorOutput, 0);
         }
-        
-        if (!sensorInput.getArmBottomLimitSwitch() && actualAngle == 0){
+
+        if (!sensorInput.getArmBottomLimitSwitch() && actualAngle == 0) {
             tiltMotorOutput = 0;
             this.setMode(Mode.OVERRIDE);
         }
-        
+
         armTilterMaster.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
         rightArmElevator.set(elevatorMotorOutput);
@@ -104,7 +101,6 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void initSubsystem() {
-        actualAnglePot = armTilterMaster.getAnalogInPosition();
         tiltProfile.setMaxVAndA(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
         tiltProfileFollower.updateGains(Constants.TILT_MPF_KP.getDouble(), Constants.TILT_MPF_KV.getDouble(),
                 Constants.TILT_MPF_KI.getDouble(), Constants.TILT_MPF_KFFV.getDouble(), Constants.TILT_MPF_KFFA.getDouble());
@@ -113,7 +109,7 @@ public class Arm extends HazySubsystem {
         tiltProfileFollower.setDoneRange(Constants.TILT_MPF_DONE_RANGE.getDouble());
         tiltProfileFollower.setPositionDoneRange(Constants.TILT_MPF_POSITION_DONE_RANGE.getDouble());
         tiltProfileFollower.updateMaxMin(Constants.TILT_MPF_MAXU.getDouble(), Constants.TILT_MPF_MINU.getDouble());
-        
+
         elevatorProfile.setMaxVAndA(Constants.ELEVATOR_MP_MAX_VELOCITY.getDouble(), Constants.ELEVATOR_MP_MAX_ACCELERATION.getDouble());
         elevatorProfileFollower.updateGains(Constants.ELEVATOR_MPF_KP.getDouble(), Constants.ELEVATOR_MPF_KV.getDouble(),
                 Constants.ELEVATOR_MPF_KI.getDouble(), Constants.ELEVATOR_MPF_KFFV.getDouble(), Constants.ELEVATOR_MPF_KFFA.getDouble());
@@ -122,10 +118,9 @@ public class Arm extends HazySubsystem {
         elevatorProfileFollower.setDoneRange(Constants.ELEVATOR_MPF_DONE_RANGE.getDouble());
         elevatorProfileFollower.setPositionDoneRange(Constants.ELEVATOR_MPF_POSITION_DONE_RANGE.getDouble());
         elevatorProfileFollower.updateMaxMin(Constants.ELEVATOR_MPF_MAXU.getDouble(), Constants.ELEVATOR_MPF_MINU.getDouble());
-        
+
         tiltProfile.generateTrapezoid(actualAngle, actualAngle, actualAngleRate);
         elevatorProfile.generateTrapezoid(sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
-        cycles = 0;
         time = Timer.getFPGATimestamp();
     }
 
@@ -141,7 +136,6 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_TargetAngle", targetAngle);
         SmartDashboard.putNumber("T_ActualAngle", actualAngle);
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
-        SmartDashboard.putNumber("T_PotOutput", armTilterMaster.getAnalogInRaw());
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);

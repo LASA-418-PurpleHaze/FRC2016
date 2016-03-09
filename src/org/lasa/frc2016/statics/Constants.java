@@ -71,7 +71,6 @@ public class Constants extends HazyConstant {
     public static final Constant ELEVATOR_MPF_MAXU = new Constant("EMPF_maxU", 1);
     public static final Constant ELEVATOR_MPF_MINU = new Constant("EMPF_minU", -1);
 
-    
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
     public static final Constant TILT_MIN_ANGLE = new Constant("T_minAngle", 0);
     public static final Constant TILT_MAX_VALUE = new Constant("T_maxPot", 5);
@@ -109,7 +108,7 @@ public class Constants extends HazyConstant {
     public static final Constant ARM_SEESAW_Y = new Constant("A_seeSawX", 2);
     public static final Constant ARM_SEESAW_PREP_X = new Constant("A_seeSawPrepX", 2);
     public static final Constant ARM_SEESAW_PREP_Y = new Constant("A_seeSawPrepY", 2);
-    
+
     public Constants() {
     }
 

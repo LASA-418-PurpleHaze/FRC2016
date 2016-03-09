@@ -67,12 +67,12 @@ public class SensorInput implements Runnable {
     public double getArmExtensionRate() {
         return -(armExtensionRateVal / 250.0 * 1.432);
     }
-    
+
     public boolean getArmTopLimitSwitch() {
         return armTopLimitSwitchVal;
     }
-    
-    public boolean getArmBottomLimitSwitch(){
+
+    public boolean getArmBottomLimitSwitch() {
         return armBottomLimitSwitchVal;
     }
 }
