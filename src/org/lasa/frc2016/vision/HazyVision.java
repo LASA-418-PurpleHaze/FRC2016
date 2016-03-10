@@ -148,8 +148,8 @@ public final class HazyVision implements Runnable {
     @Override
     public void run() {
         try {
-//            NIVision.IMAQdxGrab(session, frame, 0);
-            camera.getImage(frame);
+            NIVision.IMAQdxGrab(session, frame, 1);
+//            camera.getImage(frame);
             //Threshold the image looking for green (retroreflective target color)
             NIVision.imaqColorThreshold(binaryFrame, frame, 255, NIVision.ColorMode.HSL, hue, saturation, luminence);
 
