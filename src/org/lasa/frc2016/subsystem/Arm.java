@@ -74,10 +74,10 @@ public class Arm extends HazySubsystem {
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
-                    tiltProfile.calculateNextSituation(dt);
-                    elevatorProfile.calculateNextSituation(dt);
-                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
-                    elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
+//                    tiltProfile.calculateNextSituation(dt);
+//                    elevatorProfile.calculateNextSituation(dt);
+//                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
+//                    elevatorMotorOutput = elevatorProfileFollower.calculate(elevatorProfile, sensorInput.getArmExtensionPosition(), sensorInput.getArmExtensionRate());
                     break;
                 case OVERRIDE:
                     break;
@@ -138,6 +138,8 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
+        SmartDashboard.putBoolean("T_BottomSwitch", sensorInput.getArmBottomLimitSwitch());
+        SmartDashboard.putBoolean("T_TopSwitch", sensorInput.getArmTopLimitSwitch());
         SmartDashboard.putNumber("E_TargetExtension", targetExtension);
         SmartDashboard.putNumber("E_ActualExtension", sensorInput.getArmExtensionPosition());
         SmartDashboard.putNumber("E_ActualExtensionRate", sensorInput.getArmExtensionRate());
