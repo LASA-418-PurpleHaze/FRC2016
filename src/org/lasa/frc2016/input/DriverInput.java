@@ -31,7 +31,7 @@ public class DriverInput implements Runnable {
             lastPortcullis, lastSallyPort, lastDrawBridge, lastSeeSaw, lastResetArm,
             lastPrepVisionShooter, lastShoot, lastLongShot, lastShortShot, lastOverrideShot = false;
     private boolean quickTurn;
-    private boolean overrideMode = false;
+    private boolean overrideMode = true;
     private boolean intake, outtake;
     private boolean portcullis, sallyPort, drawBridge, seeSaw, resetArm;
     private boolean prepVisionShooter, shoot, longShot, shortShot, overrideShot;
