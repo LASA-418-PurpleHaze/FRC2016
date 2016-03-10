@@ -35,6 +35,8 @@ public class SensorInput implements Runnable {
 
     public void start() {
         navX.reset();
+        leftSide.reset();
+        rightSide.reset();
     }
 
     @Override

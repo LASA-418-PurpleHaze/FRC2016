@@ -4,7 +4,7 @@ public class Ports {
 
     // PWM Ports
     public static final int INTAKE_MOTOR = 0;
-    public static final int LOADER_MOTOR = 6;
+    public static final int LOADER_MOTOR = 18;
     public static final int RIGHT_FRONT_MOTOR = 3;
     public static final int RIGHT_BACK_MOTOR = 4;
     public static final int LEFT_FRONT_MOTOR = 1;
@@ -13,8 +13,8 @@ public class Ports {
     public static final int SHOOTER_SLAVE_MOTOR = 1;
     public static final int ARM_TILTER_MASTER = 2;
     public static final int ARM_TILTER_SLAVE = 3;
-    public static final int LEFT_ARM_EXTENDER = 18;
-    public static final int RIGHT_ARM_EXTENDER = 19;
+    public static final int LEFT_ARM_EXTENDER = 19;
+    public static final int RIGHT_ARM_EXTENDER = 6;
     public static final int LEFT_SHOOTER_SERVO = 8;
     public static final int RIGHT_SHOOTER_SERVO = 9;
 
