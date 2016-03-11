@@ -75,6 +75,6 @@ public class SensorInput implements Runnable {
     }
 
     public boolean getArmBottomLimitSwitch() {
-        return armBottomLimitSwitchVal;
+        return !armBottomLimitSwitchVal;
     }
 }

@@ -60,7 +60,7 @@ public class HazyJoystick {
         return controller.getRawButton(6);
     }
 
-    public boolean getSelect() {
+    public boolean getBack() {
         return controller.getRawButton(7);
     }
 
@@ -87,9 +87,9 @@ public class HazyJoystick {
     private double handleDeadBand(double input) {
         if (Math.abs(input) > deadband) {
             if (input > 0) {
-                return Math.pow((input - deadband) / (1 - deadband), 2);
+                return (input - deadband) / (1 - deadband);
             } else {
-                return -Math.pow((input + deadband) / (1 - deadband), 2);
+                return (input + deadband) / (1 - deadband);
             }
         } else {
             return 0.0;

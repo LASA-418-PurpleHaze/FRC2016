@@ -62,6 +62,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopInit() {
+        CommandManager.cancelAll();
         initSubsystems();
         time = 0;
     }
@@ -85,24 +86,25 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
-        initSubsystems();
-        time = 0;
+        CommandManager.cancelAll();
+//        initSubsystems();
+//        time = 0;
     }
 
     @Override
-    public void autonomousPeriodic() {
+   public void autonomousPeriodic() {
 //        hazyVision.run();
-        CommandManager.run();
-        shooter.run();
-        pushToDashboard();
+//        CommandManager.run();
+//        shooter.run();
+//        pushToDashboard();
     }
 
     @Override
     public void autonomousContinuous() {
-        sensorInput.run();
-        drivetrain.run();
-        arm.run();
-        intake.run();
+   //     sensorInput.run();
+    //    drivetrain.run();
+  //      arm.run();
+ //       intake.run();
     }
 
     @Override

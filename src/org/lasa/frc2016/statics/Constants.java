@@ -46,14 +46,14 @@ public class Constants extends HazyConstant {
     public static final Constant SHOOTER_PID_IZONE = new Constant("S_IZone", 0);
     public static final Constant SHOOTER_PID_RAMPRATE = new Constant("S_RampRate", 48);
     public static final Constant SHOOTER_PID_PROFILE = new Constant("S_Profile", 0);
-    public static final Constant SHOOTER_SHORT_VALUE = new Constant("S_ShortShotValue", 90);
-    public static final Constant SHOOTER_LONG_VALUE = new Constant("S_LongShotValue", .5);
-    public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", -.1);
+    public static final Constant SHOOTER_SHORT_VALUE = new Constant("S_ShortShotValue", -.306);
+    public static final Constant SHOOTER_LONG_VALUE = new Constant("S_LongShotValue", 0.072);
+    public static final Constant SHOOTER_SHORT_RPM = new Constant("S_ShortShotRPM", 90);
     public static final Constant SHOOTER_LONG_RPM = new Constant("S_LongShotRPM", 90);
     public static final Constant SHOOTER_HOOD_MINVALUE = new Constant("S_MinValue", -0.306);
     public static final Constant SHOOTER_HOOD_MAXVALUE = new Constant("S_MaxValue", 0.072);
     public static final Constant SHOOTER_STOP = new Constant("S_StopRPM", 0);
-    public static final Constant SHOOTER_OVERRIDE_POWER = new Constant("S_OverridePower", -0.8);
+    public static final Constant SHOOTER_OVERRIDE_POWER = new Constant("S_OverridePower", 0.8);;
 
     public static final Constant ELEVATOR_MAX_EXTENSION = new Constant("E_maxExtension", 15);
     public static final Constant ELEVATOR_POT_CONVERSION = new Constant("E_potConversion", 0);

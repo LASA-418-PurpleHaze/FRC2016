@@ -85,16 +85,16 @@ public class DriverInput implements Runnable {
         drawBridge = operator.getX();
         seeSaw = operator.getY();
         prepVisionShooter = operator.getNorth();
-        longShot = operator.getEast();
-        shortShot = operator.getWest();
+        longShot = operator.getB();
+        shortShot = operator.getX();
 
         tiltOverride = -operator.getLeftY();
         elevatorOverride = -operator.getRightY();
-        overrideShot = operator.getSouth();
+        overrideShot = operator.getA();
 
         if (operator.getStart()) {
             overrideMode = false;
-        } else if (operator.getSelect()) {
+        } else if (operator.getBack()) {
             overrideMode = true;
         }
     }
@@ -179,10 +179,8 @@ public class DriverInput implements Runnable {
                 CommandManager.addCommand(new SetShooterOverridePower("StopShooter", 100, Constants.SHOOTER_STOP.getDouble()));
             } else if (!longShot && lastLongShot) {
                 CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 2000, Constants.SHOOTER_STOP.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
             } else if (!shortShot && lastShortShot) {
                 CommandManager.addCommand(new SetShooterOverridePower("OverrideShooter", 2000, Constants.SHOOTER_STOP.getDouble()));
-                CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
             }
             if (shoot && !lastShoot) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));

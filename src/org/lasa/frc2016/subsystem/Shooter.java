@@ -31,7 +31,7 @@ public final class Shooter extends HazySubsystem {
         leftShooterServo = new Servo(Ports.LEFT_SHOOTER_SERVO);
         rightShooterServo = new Servo(Ports.RIGHT_SHOOTER_SERVO);
 
-        this.setMode(Mode.CONTROLLED);
+        this.setMode(Mode.OVERRIDE);
     }
 
     public static Shooter getInstance() {
