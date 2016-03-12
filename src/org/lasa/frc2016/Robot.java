@@ -22,7 +22,7 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
-    Auton auto;
+    Auton auton;
     
     private static int time;
 
@@ -58,6 +58,7 @@ public class Robot extends HazyIterative {
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
+        auton = Auton.getInstance();
     }
 
     @Override
@@ -83,19 +84,16 @@ public class Robot extends HazyIterative {
         intake.run();
     }
 
-    double autonStartTime;
-
     @Override
     public void autonomousInit() {
         CommandManager.cancelAll();
-        auto.start();
+        auton.start();
     }
 
     @Override
     public void autonomousPeriodic() {
         pushToDashboard();
-        auto.pushToDashboard();
-        auto.run();
+        auton.run();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.lasa.frc2016.command;
 
+import org.lasa.frc2016.subsystem.Arm;
+
 public class SetArmOverridePower extends HazyCommand {
     
     private double tiltPower, elevatorPower;

@@ -29,25 +29,19 @@ public class Auton implements Runnable {
 
     public void start() {
         doAuton = SmartDashboard.getBoolean("doAuton", false);
-
+        arm.setMode(Arm.Mode.OVERRIDE);
+        drivetrain.setMode(Drivetrain.Mode.OVERRIDE);
     }
 
     @Override
     public void run() {
         if (doAuton) {
-            
             CommandManager.addCommand(new SetArmOverridePower("LowerArm", 100, 0.15, 0));
             if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
                 drivetrain.setDriveSpeeds(1, 1);
             } else {
                 drivetrain.setDriveSpeeds(0, 0);
             }
-            
         }
     }
-
-    public void pushToDashboard() {
-
-    }
-
 }
