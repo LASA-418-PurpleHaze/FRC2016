@@ -1,7 +1,5 @@
 package org.lasa.frc2016.command;
 
-import org.lasa.frc2016.subsystem.Arm;
-
 public class SetArmOverridePower extends HazyCommand {
     
     private double tiltPower, elevatorPower;
@@ -27,4 +25,12 @@ public class SetArmOverridePower extends HazyCommand {
         super.start();
         arm.setMotorSpeeds(tiltPower, elevatorPower);
     }
+
+    @Override
+    public void stop() {
+        super.stop();
+        arm.setMotorSpeeds(0, 0);
+    }
+    
+    
 }
