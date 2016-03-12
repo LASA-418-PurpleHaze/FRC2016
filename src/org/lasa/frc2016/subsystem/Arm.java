@@ -83,21 +83,16 @@ public class Arm extends HazySubsystem {
                     break;
             }
         }
-        if(armTilterMaster.getOutputCurrent() >= 30) {
+        if (armTilterMaster.getOutputCurrent() >= 30) {
             tiltMotorOutput = 0;
         }
-//        if (sensorInput.getArmTopLimitSwitch()) {
-//            tiltMotorOutput = Math.min(tiltMotorOutput, 0);
-//       } else 
-        if (sensorInput.getArmBottomLimitSwitch()) {
+        if (sensorInput.getArmTopLimitSwitch()) {
             tiltMotorOutput = Math.max(tiltMotorOutput, 0);
         }
-
-//        if (!sensorInput.getArmBottomLimitSwitch() && actualAngle == 0) {
-//            tiltMotorOutput = 0;
-//            this.setMode(Mode.OVERRIDE);
-//        }
-
+        if (sensorInput.getArmBottomLimitSwitch()) {
+            tiltMotorOutput = Math.min(tiltMotorOutput, 0);
+        }
+        
         armTilterMaster.set(tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
         rightArmElevator.set(elevatorMotorOutput);

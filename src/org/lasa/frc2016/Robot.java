@@ -1,5 +1,6 @@
 package org.lasa.frc2016;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasa.lib.HazyIterative;
 import org.lasa.frc2016.input.DriverInput;
@@ -50,6 +51,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
+        SmartDashboard.putBoolean("doAuton", false);
         constants = new Constants();
 //        hazyVision = HazyVision.getInstance();
         drivetrain = Drivetrain.getInstance();
@@ -84,27 +86,44 @@ public class Robot extends HazyIterative {
         intake.run();
     }
 
+    double autonStartTime;
+
     @Override
     public void autonomousInit() {
+        autonStartTime = Timer.getFPGATimestamp();
         CommandManager.cancelAll();
+        sensorInput.start();
 //        initSubsystems();
 //        time = 0;
+        drivetrain.setMode(Drivetrain.Mode.OVERRIDE);
+        arm.setMode(Arm.Mode.OVERRIDE);
     }
 
     @Override
-   public void autonomousPeriodic() {
+    public void autonomousPeriodic() {
+        if (SmartDashboard.getBoolean("doAuton", false)) {
+            arm.setMotorSpeeds(0.15, 0);
+            if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
+
+                drivetrain.setDriveSpeeds(1, 1);
+            } else {
+                drivetrain.setDriveSpeeds(0, 0);
+            }
+        }
 //        hazyVision.run();
 //        CommandManager.run();
 //        shooter.run();
-//        pushToDashboard();
+        pushToDashboard();
+        sensorInput.run();
+        drivetrain.run();
+        arm.run();
     }
 
     @Override
     public void autonomousContinuous() {
-   //     sensorInput.run();
-    //    drivetrain.run();
-  //      arm.run();
- //       intake.run();
+
+        //      arm.run();
+        //       intake.run();
     }
 
     @Override

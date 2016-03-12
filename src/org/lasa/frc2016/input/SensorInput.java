@@ -55,7 +55,7 @@ public class SensorInput implements Runnable {
     }
 
     public double getLeftDistance() {
-        return (leftSideEncoderVal / 250) * 8 * Math.PI;
+        return -(leftSideEncoderVal / 250) * 8 * Math.PI;
     }
 
     public double getRightDistance() {
@@ -71,7 +71,7 @@ public class SensorInput implements Runnable {
     }
 
     public boolean getArmTopLimitSwitch() {
-        return armTopLimitSwitchVal;
+        return !armTopLimitSwitchVal;
     }
 
     public boolean getArmBottomLimitSwitch() {

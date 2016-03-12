@@ -89,7 +89,7 @@ public class DriverInput implements Runnable {
         shortShot = operator.getX();
 
         tiltOverride = -operator.getLeftY();
-        elevatorOverride = -operator.getRightY();
+        elevatorOverride = operator.getRightY();
         overrideShot = operator.getA();
 
         if (operator.getStart()) {
