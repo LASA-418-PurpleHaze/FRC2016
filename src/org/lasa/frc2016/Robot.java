@@ -29,6 +29,7 @@ public class Robot extends HazyIterative {
     private void pushToDashboard() {
         time++;
         SmartDashboard.putNumber("Time", time);
+        SmartDashboard.putBoolean("doAuton", false);
         drivetrain.pushToDashboard();
         shooter.pushToDashboard();
         intake.pushToDashboard();
@@ -50,9 +51,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
-        SmartDashboard.putBoolean("doAuton", false);
         constants = new Constants();
-//        hazyVision = HazyVision.getInstance();
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         intake = Intake.getInstance();
@@ -70,7 +69,6 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopPeriodic() {
-//        hazyVision.run();
         CommandManager.run();
         driverInput.run();
         drivetrain.run();
