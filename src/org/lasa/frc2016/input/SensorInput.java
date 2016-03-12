@@ -12,13 +12,13 @@ public class SensorInput implements Runnable {
 
     private static AHRS navX;
     private static Encoder leftSide, rightSide, armExtension;
-    private static DigitalInput armTopLimitSwitch, armBottomLimitSwitch;
+    private static DigitalInput armTopLimitSwitch, armBottomLimitSwitch, intakeSwitch;
 
     private volatile double navXAngleVal;
     private volatile double rightSideEncoderVal, leftSideEncoderVal;
     private volatile double armExtensionPositionVal;
     private volatile double armExtensionRateVal;
-    private volatile boolean armTopLimitSwitchVal, armBottomLimitSwitchVal;
+    private volatile boolean armTopLimitSwitchVal, armBottomLimitSwitchVal, intakeSwitchVal;
 
     private SensorInput() {
         navX = new AHRS(SPI.Port.kMXP);
@@ -27,6 +27,7 @@ public class SensorInput implements Runnable {
         armExtension = new Encoder(Ports.ARM_EXTENSION_A_ENCODER, Ports.ARM_EXTENSION_B_ENCODER);
         armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH);
         armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH);
+        intakeSwitch = new DigitalInput(Ports.INTAKE_SWITCH);
     }
 
     public static SensorInput getInstance() {
@@ -48,6 +49,7 @@ public class SensorInput implements Runnable {
         armExtensionRateVal = armExtension.getRate();
         armTopLimitSwitchVal = armTopLimitSwitch.get();
         armBottomLimitSwitchVal = armBottomLimitSwitch.get();
+        intakeSwitchVal = intakeSwitch.get();
     }
 
     public double getNavXAngle() {
@@ -76,5 +78,9 @@ public class SensorInput implements Runnable {
 
     public boolean getArmBottomLimitSwitch() {
         return !armBottomLimitSwitchVal;
+    }
+    
+    public boolean getIntakeSwitch() {
+        return !intakeSwitchVal;
     }
 }

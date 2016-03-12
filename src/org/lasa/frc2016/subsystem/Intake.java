@@ -8,14 +8,12 @@ public final class Intake extends HazySubsystem {
 
     private static Intake instance;
 
-    private final VictorSP intakeMotor, loaderMotor;
-    private double intakeSpeed, loaderSpeed;
+    private final VictorSP intakeMotor;
+    private double intakeSpeed;
     private boolean hasBall;
 
     private Intake() {
         intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
-
-        loaderMotor = new VictorSP(Ports.LOADER_MOTOR);
 
         this.setMode(Mode.OFF);
     }
@@ -34,17 +32,23 @@ public final class Intake extends HazySubsystem {
         mode = m;
     }
 
+    Mode newMode;
+
     @Override
     public void run() {
+        newMode = mode;
         if (null != mode) {
             switch (mode) {
                 case OFF:
                     intakeSpeed = 0.0;
-                    loaderSpeed = 0.0;
                     break;
                 case INTAKING:
-                    hasBall = true;
-                    intakeSpeed = 1.0;
+                    if (sensorInput.getIntakeSwitch()) {
+                        hasBall = true;
+                        newMode = Mode.OFF;
+                    } else {
+                        intakeSpeed = 1.0;
+                    }
                     break;
                 case OUTTAKING:
                     hasBall = false;
@@ -53,12 +57,15 @@ public final class Intake extends HazySubsystem {
                 case LOADINGSHOOTER:
                     hasBall = false;
                     intakeSpeed = 1.0;
-                    loaderSpeed = -1.0;
                     break;
             }
         }
+        if (newMode != mode) {
+            mode = newMode;
+            this.run();
+        }
+
         intakeMotor.set(intakeSpeed);
-        loaderMotor.set(loaderSpeed);
     }
 
     @Override
