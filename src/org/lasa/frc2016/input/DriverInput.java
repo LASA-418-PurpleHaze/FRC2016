@@ -72,13 +72,13 @@ public class DriverInput implements Runnable {
     }
 
     private void input() {
-        throttle = driver.getLeftY();
+        throttle = -driver.getLeftY();
         wheel = -driver.getRightX();
         quickTurn = driver.getRightBumper();
-        shoot = driver.getRightTrigger() > .1;
-
+        
         intake = operator.getRightBumper();
         outtake = operator.getLeftBumper();
+        shoot = operator.getRightTrigger() > .1;
         resetArm = operator.getLeftTrigger() > .1;
         portcullis = operator.getA();
         sallyPort = operator.getB();

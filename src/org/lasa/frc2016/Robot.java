@@ -22,7 +22,6 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
-    HazyVision hazyVision;
 
     private static int time;
 
@@ -51,7 +50,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
-        SmartDashboard.putBoolean("doAuton", false);
+        SmartDashboard.putBoolean("doAuton", true);
         constants = new Constants();
 //        hazyVision = HazyVision.getInstance();
         drivetrain = Drivetrain.getInstance();
@@ -101,7 +100,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousPeriodic() {
-        if (SmartDashboard.getBoolean("doAuton", false)) {
+        if (SmartDashboard.getBoolean("doAuton", true)) {
             arm.setMotorSpeeds(0.15, 0);
             if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
 
