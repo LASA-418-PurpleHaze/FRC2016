@@ -93,7 +93,9 @@ public class Arm extends HazySubsystem {
             tiltMotorOutput = Math.min(tiltMotorOutput, 0);
         }
         
-        armTilterMaster.set(tiltMotorOutput);
+        
+        
+        armTilterMaster.set(.3 * tiltMotorOutput);
         leftArmElevator.set(elevatorMotorOutput);
         rightArmElevator.set(elevatorMotorOutput);
     }

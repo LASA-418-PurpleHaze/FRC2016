@@ -22,12 +22,18 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
+<<<<<<< HEAD
 
+=======
+    Auton auton;
+    
+>>>>>>> test
     private static int time;
 
     private void pushToDashboard() {
         time++;
         SmartDashboard.putNumber("Time", time);
+        SmartDashboard.putBoolean("doAuton", false);
         drivetrain.pushToDashboard();
         shooter.pushToDashboard();
         intake.pushToDashboard();
@@ -36,7 +42,6 @@ public class Robot extends HazyIterative {
 
     private void initSubsystems() {
         constants.loadFromFile();
-//        hazyVision.updateConstants();
         drivetrain.initSubsystem();
         shooter.initSubsystem();
         intake.initSubsystem();
@@ -50,15 +55,18 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
+<<<<<<< HEAD
         SmartDashboard.putBoolean("doAuton", true);
+=======
+>>>>>>> test
         constants = new Constants();
-//        hazyVision = HazyVision.getInstance();
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
+        auton = Auton.getInstance();
     }
 
     @Override
@@ -70,7 +78,6 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopPeriodic() {
-//        hazyVision.run();
         CommandManager.run();
         driverInput.run();
         drivetrain.run();
@@ -85,21 +92,15 @@ public class Robot extends HazyIterative {
         intake.run();
     }
 
-    double autonStartTime;
-
     @Override
     public void autonomousInit() {
-        autonStartTime = Timer.getFPGATimestamp();
         CommandManager.cancelAll();
-        sensorInput.start();
-//        initSubsystems();
-//        time = 0;
-        drivetrain.setMode(Drivetrain.Mode.OVERRIDE);
-        arm.setMode(Arm.Mode.OVERRIDE);
+        auton.start();
     }
 
     @Override
     public void autonomousPeriodic() {
+<<<<<<< HEAD
         if (SmartDashboard.getBoolean("doAuton", true)) {
             arm.setMotorSpeeds(0.15, 0);
             if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
@@ -112,17 +113,17 @@ public class Robot extends HazyIterative {
 //        hazyVision.run();
 //        CommandManager.run();
 //        shooter.run();
+=======
+>>>>>>> test
         pushToDashboard();
-        sensorInput.run();
-        drivetrain.run();
-        arm.run();
+        auton.run();
     }
 
     @Override
     public void autonomousContinuous() {
-
-        //      arm.run();
-        //       intake.run();
+        sensorInput.run();
+        drivetrain.run();
+        arm.run();
     }
 
     @Override
