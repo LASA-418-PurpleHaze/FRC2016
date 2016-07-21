@@ -22,12 +22,12 @@ public class Robot extends HazyIterative {
     DriverInput driverInput;
     SensorInput sensorInput;
     Constants constants;
-<<<<<<< HEAD
-
-=======
-    Auton auton;
-    
->>>>>>> test
+//<<<<<<< HEAD
+//
+//=======
+//    Auton auton;
+//    
+//>>>>>>> test
     private static int time;
 
     private void pushToDashboard() {
@@ -55,10 +55,10 @@ public class Robot extends HazyIterative {
 
     @Override
     public void robotInit() {
-<<<<<<< HEAD
-        SmartDashboard.putBoolean("doAuton", true);
-=======
->>>>>>> test
+//<<<<<<< HEAD
+//        SmartDashboard.putBoolean("doAuton", true);
+//=======
+//>>>>>>> test
         constants = new Constants();
         drivetrain = Drivetrain.getInstance();
         shooter = Shooter.getInstance();
@@ -66,7 +66,7 @@ public class Robot extends HazyIterative {
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         sensorInput = SensorInput.getInstance();
-        auton = Auton.getInstance();
+//        auton = Auton.getInstance();
     }
 
     @Override
@@ -95,28 +95,28 @@ public class Robot extends HazyIterative {
     @Override
     public void autonomousInit() {
         CommandManager.cancelAll();
-        auton.start();
+//        auton.start();
     }
 
     @Override
     public void autonomousPeriodic() {
-<<<<<<< HEAD
-        if (SmartDashboard.getBoolean("doAuton", true)) {
-            arm.setMotorSpeeds(0.15, 0);
-            if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
-
-                drivetrain.setDriveSpeeds(1, 1);
-            } else {
-                drivetrain.setDriveSpeeds(0, 0);
-            }
-        }
-//        hazyVision.run();
-//        CommandManager.run();
-//        shooter.run();
-=======
->>>>>>> test
+//<<<<<<< HEAD
+//        if (SmartDashboard.getBoolean("doAuton", true)) {
+//            arm.setMotorSpeeds(0.15, 0);
+//            if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
+//
+//                drivetrain.setDriveSpeeds(1, 1);
+//            } else {
+//                drivetrain.setDriveSpeeds(0, 0);
+//            }
+//        }
+////        hazyVision.run();
+////        CommandManager.run();
+////        shooter.run();
+//=======
+//>>>>>>> test
         pushToDashboard();
-        auton.run();
+//        auton.run();
     }
 
     @Override

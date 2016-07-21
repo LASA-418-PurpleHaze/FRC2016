@@ -53,7 +53,7 @@ public final class Intake extends HazySubsystem {
                 case OUTTAKING:
                     hasBall = false;
                     intakeSpeed = -1.0;
-                    loaderSpeed = 1.0;
+//                    loaderSpeed = 1.0;
                     break;
                 case LOADINGSHOOTER:
                     hasBall = false;

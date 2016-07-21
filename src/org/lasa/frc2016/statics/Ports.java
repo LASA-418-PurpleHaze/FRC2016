@@ -34,6 +34,6 @@ public class Ports {
     public static final int INTAKE_SWITCH = 1;
     public static final int ARM_TOP_LIMIT_SWITCH = 2;
     public static final int ARM_BOTTOM_LIMIT_SWITCH = 3;
-    public static final int INTAKE_SWITCH = 0;
+//    public static final int INTAKE_SWITCH = 0;
 
 }

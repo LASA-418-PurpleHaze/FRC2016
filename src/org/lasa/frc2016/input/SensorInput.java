@@ -82,10 +82,11 @@ public class SensorInput implements Runnable {
     }
     
     public boolean getIntakeSwitch() {
-<<<<<<< HEAD
-        return intakeSwitchVal;
-=======
-        return !intakeSwitchVal;
->>>>>>> test
+//<<<<<<< HEAD
+//        return intakeSwitchVal;
+//=======
+//        return !intakeSwitchVal;
+//>>>>>>> test
+        return true;
     }
 }
