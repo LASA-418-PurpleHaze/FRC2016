@@ -1,6 +1,6 @@
 package org.lasarobotics.frc2016.command;
 
-public class SetShooterOverridePower extends HazyCommand {
+public class SetShooterOverridePower extends Command {
 
     double motorOutput;
 
@@ -16,13 +16,15 @@ public class SetShooterOverridePower extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
     public void start() {
-        super.start();
         shooter.setMotorOutput(motorOutput);
+    }
+
+    @Override
+    public void stop() {
     }
 
 }

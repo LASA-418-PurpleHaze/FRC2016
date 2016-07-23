@@ -1,6 +1,6 @@
 package org.lasarobotics.frc2016.command;
 
-public class SetArmPosition extends HazyCommand {
+public class SetArmPosition extends Command {
 
     private final double setpointX, setpointY;
 
@@ -17,12 +17,15 @@ public class SetArmPosition extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
     public void start() {
-        super.start();
         arm.setControlPoint(setpointX, setpointY);
+    }
+
+    @Override
+    public void stop() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -2,7 +2,7 @@ package org.lasarobotics.frc2016.command;
 
 import org.lasarobotics.frc2016.subsystem.Intake.Mode;
 
-public class SetIntakeMode extends HazyCommand {
+public class SetIntakeMode extends Command {
 
     Mode mode;
 
@@ -30,18 +30,15 @@ public class SetIntakeMode extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
     public void start() {
-        super.start();
         intake.setMode(mode);
     }
 
     @Override
     public void stop() {
-        super.stop();
     }
 
 }

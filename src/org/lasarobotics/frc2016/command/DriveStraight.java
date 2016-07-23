@@ -1,6 +1,6 @@
 package org.lasarobotics.frc2016.command;
 
-public class DriveStraight extends HazyCommand {
+public class DriveStraight extends Command {
 
     private final double setpoint;
 
@@ -11,7 +11,6 @@ public class DriveStraight extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
@@ -21,13 +20,11 @@ public class DriveStraight extends HazyCommand {
 
     @Override
     public void stop() {
-        super.stop();
         drivetrain.setDriveSpeeds(0.0, 0.0);
     }
 
     @Override
     public void start() {
-        super.start();
         drivetrain.setDistanceSetpoint(setpoint);
     }
 

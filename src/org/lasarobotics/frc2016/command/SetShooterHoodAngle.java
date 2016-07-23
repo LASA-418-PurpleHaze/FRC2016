@@ -1,6 +1,6 @@
 package org.lasarobotics.frc2016.command;
 
-public class SetShooterHoodAngle extends HazyCommand {
+public class SetShooterHoodAngle extends Command {
 
     double value;
 
@@ -16,13 +16,15 @@ public class SetShooterHoodAngle extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
     public void start() {
-        super.start();
         shooter.setHoodValue(value);
+    }
+
+    @Override
+    public void stop() {
     }
 
 }

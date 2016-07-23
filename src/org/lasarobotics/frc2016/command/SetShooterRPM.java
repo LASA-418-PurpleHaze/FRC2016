@@ -1,6 +1,6 @@
 package org.lasarobotics.frc2016.command;
 
-public class SetShooterRPM extends HazyCommand {
+public class SetShooterRPM extends Command {
 
     double RPM;
 
@@ -16,13 +16,15 @@ public class SetShooterRPM extends HazyCommand {
 
     @Override
     public void run() {
-        super.run();
     }
 
     @Override
     public void start() {
-        super.start();
         shooter.setControlPoint(RPM);
+    }
+
+    @Override
+    public void stop() {
     }
 
 }
