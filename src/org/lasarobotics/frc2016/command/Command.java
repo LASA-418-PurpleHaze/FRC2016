@@ -2,7 +2,7 @@ package org.lasarobotics.frc2016.command;
 
 import edu.wpi.first.wpilibj.Timer;
 import org.lasarobotics.frc2016.input.DriverInput;
-import org.lasarobotics.frc2016.input.SensorInput;
+import org.lasarobotics.frc2016.input.Input;
 import org.lasarobotics.frc2016.subsystem.Arm;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Shooter;
@@ -15,7 +15,7 @@ public abstract class Command {
     protected Shooter shooter;
     protected Arm arm;
     protected DriverInput driverInput;
-    protected SensorInput sensorInput;
+    protected Input sensorInput;
 //    protected HazyVision hazyVision;
 
     String name;
@@ -35,7 +35,7 @@ public abstract class Command {
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
-        sensorInput = SensorInput.getInstance();
+        sensorInput = Input.getInstance();
 //        hazyVision = HazyVision.getInstance();;
 
         this.name = name;

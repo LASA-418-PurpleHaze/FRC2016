@@ -140,8 +140,7 @@ public class DriverInput implements Runnable {
         if (!overrideMode) {
             shooter.setMode(Shooter.Mode.CONTROLLED);
             if (prepVisionShooter && !lastPrepVisionShooter) {
-
-                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 15, 0));
+                CommandManager.addCommand(new SetArmPosition("ArmDown", 10, 15, 0));
             } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_VALUE.getDouble()));

@@ -5,10 +5,10 @@ public class Ports {
     // PWM Ports
     public static final int INTAKE_MOTOR = 0;
     public static final int LOADER_MOTOR = 18;
-    public static final int RIGHT_FRONT_MOTOR = 3;
-    public static final int RIGHT_BACK_MOTOR = 4;
-    public static final int LEFT_FRONT_MOTOR = 1;
-    public static final int LEFT_BACK_MOTOR = 2;
+    public static final int RIGHT_FRONT_DRIVE_MOTOR = 3;
+    public static final int RIGHT_BACK_DRIVE_MOTOR = 4;
+    public static final int LEFT_FRONT_DRIVE_MOTOR = 1;
+    public static final int LEFT_BACK_DRIVE_MOTOR = 2;
     public static final int SHOOTER_MASTER_MOTOR = 0;
     public static final int SHOOTER_SLAVE_MOTOR = 1;
     public static final int ARM_TILTER_MASTER = 2;
@@ -19,10 +19,10 @@ public class Ports {
     public static final int RIGHT_SHOOTER_SERVO = 9;
 
     // Encoder Ports
-    public static final int LEFT_SIDE_A_ENCODER = 6;
-    public static final int LEFT_SIDE_B_ENCODER = 7;
-    public static final int RIGHT_SIDE_A_ENCODER = 8;
-    public static final int RIGHT_SIDE_B_ENCODER = 9;
+    public static final int LEFT_DRIVE_ENCODER_A = 6;
+    public static final int LEFT_DRIVE_ENCODER_B = 7;
+    public static final int RIGHT_DRIVE_ENCODER_A = 8;
+    public static final int RIGHT_DRIVE_ENCODER_B = 9;
     public static final int ARM_EXTENSION_A_ENCODER = 4;
     public static final int ARM_EXTENSION_B_ENCODER = 5;
 

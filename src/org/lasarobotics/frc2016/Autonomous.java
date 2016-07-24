@@ -1,7 +1,7 @@
 package org.lasarobotics.frc2016;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasarobotics.frc2016.input.SensorInput;
+import org.lasarobotics.frc2016.input.Input;
 import org.lasarobotics.frc2016.subsystem.Arm;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Intake;
@@ -14,7 +14,7 @@ public class Autonomous implements Runnable {
     private Arm arm;
     private Intake intake;
     
-    private SensorInput sensorInput;
+    private Input sensorInput;
     
     public final int DO_NOTHING = 0;
     public final int DRIVE_OVER = 1;
@@ -29,7 +29,7 @@ public class Autonomous implements Runnable {
         arm = Arm.getInstance();
         intake = Intake.getInstance();
         
-        sensorInput = SensorInput.getInstance();
+        sensorInput = Input.getInstance();
         
         SmartDashboard.putNumber("AutoMode", 0);
     }
