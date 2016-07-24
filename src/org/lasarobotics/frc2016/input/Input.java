@@ -22,10 +22,10 @@ public class Input implements Runnable {
     private volatile boolean armTopLimitSwitchVal, armBottomLimitSwitchVal, intakeSwitchVal;
 
     private Input() {
-        rightFrontDriveMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
-        leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_MOTOR);
-        rightBackDriveMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-        leftBackDriveMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
+        rightFrontDriveMotor = new VictorSP(Ports.RIGHT_FRONT_DRIVE_MOTOR);
+        leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_DRIVE_MOTOR);
+        rightBackDriveMotor = new VictorSP(Ports.RIGHT_BACK_DRIVE_MOTOR);
+        leftBackDriveMotor = new VictorSP(Ports.LEFT_BACK_DRIVE_MOTOR);
         
         leftFrontDriveMotor.setInverted(true);
         leftBackDriveMotor.setInverted(true);
