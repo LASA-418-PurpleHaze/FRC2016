@@ -26,13 +26,6 @@ public class Arm extends HazySubsystem {
     private double actualX, actualY;
 
     private Arm() {
-        armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
-        armTilterSlave = new CANTalon(Ports.ARM_TILTER_SLAVE);
-        armTilterMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-        armTilterSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
-        armTilterSlave.set(armTilterMaster.getDeviceID());
-        armTilterSlave.reverseOutput(true);
-        armTilterMaster.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 
         leftArmElevator = new VictorSP(Ports.LEFT_ARM_EXTENDER);
         rightArmElevator = new VictorSP(Ports.RIGHT_ARM_EXTENDER);

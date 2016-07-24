@@ -1,16 +1,16 @@
 package org.lasarobotics.frc2016.subsystem;
 
-import org.lasarobotics.frc2016.input.SensorInput;
+import org.lasarobotics.frc2016.input.Input;
 
 public abstract class HazySubsystem {
 
-    protected SensorInput sensorInput;
+    protected Input sensorInput;
 
     protected String errorMsg;
     protected final String fileName = "logger.csv";
 
     protected HazySubsystem() {
-        sensorInput = SensorInput.getInstance();
+        sensorInput = Input.getInstance();
     }
 
     //Aaron's first commit

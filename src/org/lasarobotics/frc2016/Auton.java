@@ -3,7 +3,7 @@ package org.lasarobotics.frc2016;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasarobotics.frc2016.command.CommandManager;
 import org.lasarobotics.frc2016.command.SetArmOverridePower;
-import org.lasarobotics.frc2016.input.SensorInput;
+import org.lasarobotics.frc2016.input.Input;
 import org.lasarobotics.frc2016.subsystem.Arm;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
 
@@ -13,7 +13,7 @@ public class Auton implements Runnable {
 
     private Arm arm;
     private Drivetrain drivetrain;
-    private SensorInput sensorInput;
+    private Input sensorInput;
 
     private boolean doAuton;
     private boolean firstRun;
@@ -21,7 +21,7 @@ public class Auton implements Runnable {
     private Auton() {
         arm = Arm.getInstance();
         drivetrain = Drivetrain.getInstance();
-        sensorInput = SensorInput.getInstance();
+        sensorInput = Input.getInstance();
     }
 
     public static Auton getInstance() {
