@@ -42,7 +42,7 @@ public class Auton implements Runnable {
                 CommandManager.addCommand(new SetArmOverridePower("LowerArm", 100, 0.15, 0));
                 firstRun = false;
             }
-            if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
+            if ((sensorInput.getLeftDriveDistance() + sensorInput.getRightDriveDistance()) / 2 > -150.0) {
                 drivetrain.setDriveSpeeds(1, 1);
             } else {
                 drivetrain.setDriveSpeeds(0, 0);

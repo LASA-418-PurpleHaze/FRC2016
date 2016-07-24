@@ -19,10 +19,10 @@ public class Ports {
     public static final int RIGHT_SHOOTER_SERVO = 9;
 
     // Encoder Ports
-    public static final int LEFT_SIDE_A_ENCODER = 6;
-    public static final int LEFT_SIDE_B_ENCODER = 7;
-    public static final int RIGHT_SIDE_A_ENCODER = 8;
-    public static final int RIGHT_SIDE_B_ENCODER = 9;
+    public static final int LEFT_DRIVE_ENCODER_A = 6;
+    public static final int LEFT_DRIVE_ENCODER_B = 7;
+    public static final int RIGHT_DRIVE_ENCODER_A = 8;
+    public static final int RIGHT_DRIVE_ENCODER_B = 9;
     public static final int ARM_EXTENSION_A_ENCODER = 4;
     public static final int ARM_EXTENSION_B_ENCODER = 5;
 

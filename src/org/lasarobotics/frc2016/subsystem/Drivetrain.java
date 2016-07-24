@@ -1,30 +1,21 @@
 package org.lasarobotics.frc2016.subsystem;
 
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasarobotics.frc2016.input.Input;
 import org.lasarobotics.lib.controlloop.HazyPID;
 import org.lasarobotics.frc2016.statics.Constants;
-import org.lasarobotics.frc2016.statics.Ports;
 
 public final class Drivetrain extends HazySubsystem {
 
     private static Drivetrain instance;
 
-    private final VictorSP leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
+    
     private double leftSpeed, rightSpeed;
 
     private final HazyPID straightPID, turnPID;
     private double straightSetpoint, turnSetpoint;
 
     private Drivetrain() {
-        leftFrontMotor = new VictorSP(Ports.LEFT_FRONT_MOTOR);
-        leftBackMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
-
-        rightFrontMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
-        rightBackMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
-
-        leftFrontMotor.setInverted(true);
-        leftBackMotor.setInverted(true);
 
         straightPID = new HazyPID();
         turnPID = new HazyPID();
@@ -51,7 +42,7 @@ public final class Drivetrain extends HazySubsystem {
         if (null != mode) {
             switch (mode) {
                 case STRAIGHT_CONTROLLED:
-                    leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2);
+                    leftSpeed = rightSpeed = straightPID.calculate((sensorInput.getLeftDriveDistance() + sensorInput.getRightDriveDistance()) / 2);
                     break;
                 case TURN_CONTROLLED:
                     double power = turnPID.calculate(sensorInput.getNavXAngle());
@@ -62,10 +53,8 @@ public final class Drivetrain extends HazySubsystem {
                     break;
             }
         }
-        leftFrontMotor.set(leftSpeed);
-        leftBackMotor.set(leftSpeed);
-        rightFrontMotor.set(rightSpeed);
-        rightBackMotor.set(rightSpeed);
+        
+        Input.setDriveSpeeds(leftSpeed, rightSpeed);
     }
 
     public void setDriveSpeeds(double left, double right) {
@@ -130,7 +119,7 @@ public final class Drivetrain extends HazySubsystem {
         SmartDashboard.putNumber("D_RightSpeed", rightSpeed);
         SmartDashboard.putString("D_Mode", mode.toString());
         SmartDashboard.putNumber("D_NavXAngle", sensorInput.getNavXAngle());
-        SmartDashboard.putNumber("D_LeftEnc", sensorInput.getLeftDistance());
-        SmartDashboard.putNumber("D_RightEnc", sensorInput.getRightDistance());
+        SmartDashboard.putNumber("D_LeftEnc", sensorInput.getLeftDriveDistance());
+        SmartDashboard.putNumber("D_RightEnc", sensorInput.getRightDriveDistance());
     }
 }

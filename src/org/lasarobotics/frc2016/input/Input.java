@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.VictorSP;
 import org.lasarobotics.frc2016.statics.Ports;
 
 public class Input implements Runnable {
@@ -12,17 +13,28 @@ public class Input implements Runnable {
     private static Input instance;
 
     private static AHRS navX;
-    private static Encoder leftSide, rightSide;
+    private static Encoder leftDriveEncoder, rightDriveEncoder;
     private static DigitalInput armTopLimitSwitch, armBottomLimitSwitch, intakeSwitch;
+    private static VictorSP leftFrontDriveMotor, leftBackDriveMotor, rightFrontDriveMotor, rightBackDriveMotor;
 
     private volatile double navXAngleVal;
     private volatile double rightSideEncoderVal, leftSideEncoderVal;
     private volatile boolean armTopLimitSwitchVal, armBottomLimitSwitchVal, intakeSwitchVal;
 
     private Input() {
+        rightFrontDriveMotor = new VictorSP(Ports.RIGHT_FRONT_MOTOR);
+        leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_MOTOR);
+        rightBackDriveMotor = new VictorSP(Ports.RIGHT_BACK_MOTOR);
+        leftBackDriveMotor = new VictorSP(Ports.LEFT_BACK_MOTOR);
+        
+        leftFrontDriveMotor.setInverted(true);
+        leftBackDriveMotor.setInverted(true);
+        
         navX = new AHRS(SPI.Port.kMXP);
-        leftSide = new Encoder(Ports.LEFT_SIDE_A_ENCODER, Ports.LEFT_SIDE_B_ENCODER);
-        rightSide = new Encoder(Ports.RIGHT_SIDE_A_ENCODER, Ports.RIGHT_SIDE_B_ENCODER);
+        
+        leftDriveEncoder = new Encoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B);
+        rightDriveEncoder = new Encoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B);
+        
         armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH);
         armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH);
         intakeSwitch = new DigitalInput(Ports.INTAKE_SWITCH);
@@ -34,29 +46,36 @@ public class Input implements Runnable {
 
     public void start() {
         navX.reset();
-        leftSide.reset();
-        rightSide.reset();
+        leftDriveEncoder.reset();
+        rightDriveEncoder.reset();
     }
 
     @Override
     public void run() {
         navXAngleVal = navX.getAngle();
-        leftSideEncoderVal = leftSide.get();
-        rightSideEncoderVal = rightSide.get();
+        leftSideEncoderVal = leftDriveEncoder.get();
+        rightSideEncoderVal = rightDriveEncoder.get();
         armTopLimitSwitchVal = armTopLimitSwitch.get();
         armBottomLimitSwitchVal = armBottomLimitSwitch.get();
         intakeSwitchVal = intakeSwitch.get();
     }
-
+    
+    public static void setDriveSpeeds(double leftspeed, double rightspeed){
+        rightFrontDriveMotor.set(rightspeed);
+        rightBackDriveMotor.set(rightspeed);
+        leftFrontDriveMotor.set(leftspeed);
+        leftBackDriveMotor.set(leftspeed);
+    }
+    
     public double getNavXAngle() {
         return navXAngleVal;
     }
 
-    public double getLeftDistance() {
+    public double getLeftDriveDistance() {
         return -(leftSideEncoderVal / 250) * 8 * Math.PI;
     }
 
-    public double getRightDistance() {
+    public double getRightDriveDistance() {
         return (rightSideEncoderVal / 250) * 8 * Math.PI;
     }
 
