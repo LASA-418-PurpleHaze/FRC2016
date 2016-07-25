@@ -1,7 +1,7 @@
-
 package org.lasarobotics.frc2016.input;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -16,6 +16,7 @@ public class Input implements Runnable {
     private static Encoder leftDriveEncoder, rightDriveEncoder;
     private static DigitalInput armTopLimitSwitch, armBottomLimitSwitch, intakeSwitch;
     private static VictorSP leftFrontDriveMotor, leftBackDriveMotor, rightFrontDriveMotor, rightBackDriveMotor;
+    private final CANTalon armTilterMaster, armTilterSlave;
 
     private volatile double navXAngleVal;
     private volatile double rightSideEncoderVal, leftSideEncoderVal;
@@ -26,15 +27,27 @@ public class Input implements Runnable {
         leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_DRIVE_MOTOR);
         rightBackDriveMotor = new VictorSP(Ports.RIGHT_BACK_DRIVE_MOTOR);
         leftBackDriveMotor = new VictorSP(Ports.LEFT_BACK_DRIVE_MOTOR);
-        
+
         leftFrontDriveMotor.setInverted(true);
         leftBackDriveMotor.setInverted(true);
+
+        armTilterMaster = new CANTalon(Ports.ARM_TILTER_MASTER);
+        armTilterSlave = new CANTalon(Ports.ARM_TILTER_SLAVE);
         
+        armTilterMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        armTilterSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+        
+        armTilterSlave.set(armTilterMaster.getDeviceID());
+
+        armTilterMaster.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+
+        armTilterSlave.reverseOutput(true);
+
         navX = new AHRS(SPI.Port.kMXP);
-        
+
         leftDriveEncoder = new Encoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B);
         rightDriveEncoder = new Encoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B);
-        
+
         armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH);
         armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH);
         intakeSwitch = new DigitalInput(Ports.INTAKE_SWITCH);
@@ -59,14 +72,30 @@ public class Input implements Runnable {
         armBottomLimitSwitchVal = armBottomLimitSwitch.get();
         intakeSwitchVal = intakeSwitch.get();
     }
-    
-    public static void setDriveSpeeds(double leftspeed, double rightspeed){
+
+    public static void setDriveSpeeds(double leftspeed, double rightspeed) {
         rightFrontDriveMotor.set(rightspeed);
         rightBackDriveMotor.set(rightspeed);
         leftFrontDriveMotor.set(leftspeed);
         leftBackDriveMotor.set(leftspeed);
     }
     
+    public double getArmEncoderPosition(){
+        return armTilterMaster.getEncPosition();
+    }
+    
+    public double getArmEncoderVelocity(){
+        return armTilterMaster.getEncVelocity();
+    }
+    
+    public double getArmOutputCurrent(){
+        return armTilterMaster.getOutputCurrent();
+    }
+    
+    public void setArmMotorSpeed(double armspeed){
+        armTilterMaster.set(armspeed);
+    }
+
     public double getNavXAngle() {
         return navXAngleVal;
     }
@@ -86,7 +115,7 @@ public class Input implements Runnable {
     public boolean getArmBottomLimitSwitch() {
         return !armBottomLimitSwitchVal;
     }
-    
+
     public boolean getIntakeSwitch() {
         return intakeSwitchVal;
     }
