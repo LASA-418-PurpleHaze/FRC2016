@@ -106,7 +106,7 @@ public class Arm extends HazySubsystem {
         }
     }
 
-    public void setMotorSpeeds(double tiltSpeed) {
+    public void setArmMotorSpeed(double tiltSpeed) {
         if (mode == Mode.OVERRIDE) {
             tiltMotorOutput = tiltSpeed;
         }

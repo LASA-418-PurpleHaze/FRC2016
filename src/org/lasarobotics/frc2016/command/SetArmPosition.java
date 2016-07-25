@@ -4,10 +4,9 @@ public class SetArmPosition extends Command {
 
     private final double setpointX, setpointY;
 
-    public SetArmPosition(String nm, double t, double setpointX, double setpointY) {
+    public SetArmPosition(String nm, double t, double setpointAngle) {
         super(nm, t);
-        this.setpointX = setpointX;
-        this.setpointY = setpointY;
+        this.setpointAngle = setpointAngle;
     }
 
     @Override

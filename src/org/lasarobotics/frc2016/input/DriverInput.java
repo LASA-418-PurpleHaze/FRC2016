@@ -140,24 +140,24 @@ public class DriverInput implements Runnable {
         if (!overrideMode) {
             shooter.setMode(Shooter.Mode.CONTROLLED);
             if (prepVisionShooter && !lastPrepVisionShooter) {
-                CommandManager.addCommand(new SetArmPosition("ArmDown", 10, 15, 0));
+                CommandManager.addCommand(new SetArmPosition("ArmDown", 10, 15));
             } else if (longShot && !lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("LongRPM", 10, Constants.SHOOTER_LONG_RPM.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LongHood", 10, Constants.SHOOTER_LONG_VALUE.getDouble()));
-                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0));
             } else if (shortShot && !lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("ShortRPM", 10, Constants.SHOOTER_SHORT_RPM.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("ShortHood", 10, Constants.SHOOTER_SHORT_VALUE.getDouble()));
-                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0));
             } else if (!prepVisionShooter && lastPrepVisionShooter) {
             } else if (!longShot && lastLongShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
-                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0));
             } else if (!shortShot && lastShortShot) {
                 CommandManager.addCommand(new SetShooterRPM("StopShooter", 10, Constants.SHOOTER_STOP.getDouble()));
                 CommandManager.addParallel(new SetShooterHoodAngle("LowerHood", 10, Constants.SHOOTER_HOOD_MINVALUE.getDouble()));
-                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0, 0));
+                CommandManager.addParallel(new SetArmPosition("ArmDown", 10, 0));
             }
             if (shoot && !lastShoot && shooter.isSpunUp()) {
                 CommandManager.addCommand(new SetIntakeMode("Shoot", 10, Intake.Mode.LOADINGSHOOTER));
@@ -193,17 +193,17 @@ public class DriverInput implements Runnable {
         if (!overrideMode) {
             arm.setMode(Arm.Mode.CONTROLLED);
             if (portcullis && !lastPortcullis) {
-                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, Constants.ARM_PORTCULLIS_PREP_X.getDouble(), Constants.ARM_PORTCULLIS_PREP_Y.getDouble()));
-                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, Constants.ARM_PORTCULLIS_X.getDouble(), Constants.ARM_PORTCULLIS_Y.getDouble()));
+                CommandManager.addCommand(new SetArmPosition("PrepPortcullis", 10, Constants.ARM_PORTCULLIS_PREP_X.getDouble()));
+                CommandManager.addSequential(new SetArmPosition("Portcullis", 10, Constants.ARM_PORTCULLIS_X.getDouble()));
             } else if (sallyPort && !lastSallyPort) {
-                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, Constants.ARM_SALLYPORT_X.getDouble(), Constants.ARM_SALLYPORT_Y.getDouble()));
+                CommandManager.addCommand(new SetArmPosition("SallyPort", 10, Constants.ARM_SALLYPORT_X.getDouble()));
             } else if (drawBridge && !lastDrawBridge) {
-                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, Constants.ARM_DRAWBRIDGE_X.getDouble(), Constants.ARM_DRAWBRIDGE_Y.getDouble()));
+                CommandManager.addCommand(new SetArmPosition("DrawBridge", 10, Constants.ARM_DRAWBRIDGE_X.getDouble()));
             } else if (seeSaw && !lastSeeSaw) {
-                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, Constants.ARM_SEESAW_PREP_X.getDouble(), Constants.ARM_SEESAW_PREP_Y.getDouble()));
-                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, Constants.ARM_SEESAW_X.getDouble(), Constants.ARM_SEESAW_Y.getDouble()));
+                CommandManager.addCommand(new SetArmPosition("PrepSeeSaw", 10, Constants.ARM_SEESAW_PREP_X.getDouble()));
+                CommandManager.addSequential(new SetArmPosition("SeeSaw", 10, Constants.ARM_SEESAW_X.getDouble()));
             } else if (resetArm && !lastResetArm) {
-                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, Constants.ARM_MIN_X.getDouble(), Constants.ARM_MIN_Y.getDouble()));
+                CommandManager.addCommand(new SetArmPosition("ResetArm", 10, Constants.ARM_MIN_X.getDouble()));
             }
         } else {
             arm.setMode(Arm.Mode.OVERRIDE);
