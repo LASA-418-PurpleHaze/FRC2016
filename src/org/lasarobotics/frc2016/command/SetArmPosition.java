@@ -2,7 +2,7 @@ package org.lasarobotics.frc2016.command;
 
 public class SetArmPosition extends Command {
 
-    private final double setpointX, setpointY;
+    private final double setpointAngle;
 
     public SetArmPosition(String nm, double t, double setpointAngle) {
         super(nm, t);
@@ -11,7 +11,7 @@ public class SetArmPosition extends Command {
 
     @Override
     public boolean isDone() {
-        return arm.isArmHere(setpointX, setpointY);
+        return arm.isTiltDone();
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SetArmPosition extends Command {
 
     @Override
     public void start() {
-        arm.setControlPoint(setpointX, setpointY);
+        arm.setControlPoint(setpointAngle);
     }
 
     @Override

@@ -1,21 +1,13 @@
 package org.lasarobotics.frc2016;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasarobotics.frc2016.input.Input;
-import org.lasarobotics.frc2016.subsystem.Arm;
-import org.lasarobotics.frc2016.subsystem.Drivetrain;
-import org.lasarobotics.frc2016.subsystem.Intake;
+import org.lasarobotics.frc2016.command.CommandManager;
+import org.lasarobotics.frc2016.command.DriveStraight;
 
 public class Autonomous implements Runnable {
 
     private static Autonomous instance;
 
-    private Drivetrain drivetrain;
-    private Arm arm;
-    private Intake intake;
-    
-    private Input sensorInput;
-    
     public final int DO_NOTHING = 0;
     public final int DRIVE_OVER = 1;
     public final int DRIVE_OVER_COME_BACK = 2;
@@ -25,13 +17,6 @@ public class Autonomous implements Runnable {
     private int mode = DO_NOTHING;
     
     private Autonomous() {
-        drivetrain = Drivetrain.getInstance();
-        arm = Arm.getInstance();
-        intake = Intake.getInstance();
-        
-        sensorInput = Input.getInstance();
-        
-        SmartDashboard.putNumber("AutoMode", 0);
     }
 
     public static Autonomous getInstance() {
@@ -44,6 +29,7 @@ public class Autonomous implements Runnable {
 
     @Override
     public void run() {
+        CommandManager.addCommand(new DriveStraight("AutonDrive", 10, 5));
     }
     
 }

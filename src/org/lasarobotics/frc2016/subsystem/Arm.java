@@ -3,6 +3,7 @@ package org.lasarobotics.frc2016.subsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasarobotics.frc2016.statics.Constants;
+import org.lasarobotics.lib.controlloop.HazyPID;
 import org.lasarobotics.lib.controlloop.HazyPVI;
 import org.lasarobotics.lib.controlloop.HazyTMP;
 
@@ -12,14 +13,16 @@ public class Arm extends HazySubsystem {
 
     private final HazyTMP tiltProfile;
     private final HazyPVI tiltProfileFollower;
+    private final HazyPID tiltPID;
     private double targetAngle;
     private double actualAngle, actualAngleRate;
     private double tiltMotorOutput;
+    private double motorSpeed;
     private double dt, time;
 
     private Arm() {
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
-
+        tiltPID = new HazyPID();
         tiltProfileFollower = new HazyPVI();
 
         this.setMode(Mode.OVERRIDE);
@@ -52,8 +55,7 @@ public class Arm extends HazySubsystem {
         if (null != mode) {
             switch (mode) {
                 case CONTROLLED:
-//                    tiltProfile.calculateNextSituation(dt);
-//                    tiltMotorOutput = tiltProfileFollower.calculate(tiltProfile, actualAngle, actualAngleRate);
+                    motorSpeed = tiltPID.calculate(actualAngle);
                     break;
                 case OVERRIDE:
                     break;
@@ -68,7 +70,7 @@ public class Arm extends HazySubsystem {
         if (sensorInput.getArmBottomLimitSwitch()) {
             tiltMotorOutput = Math.min(tiltMotorOutput, 0);
         }
-        
+
         sensorInput.setArmMotorSpeed(.3 * tiltMotorOutput);
     }
 
