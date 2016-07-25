@@ -1,12 +1,8 @@
 package org.lasarobotics.frc2016.subsystem;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasarobotics.frc2016.statics.Constants;
-import org.lasarobotics.frc2016.statics.Ports;
 import org.lasarobotics.lib.controlloop.HazyPVI;
 import org.lasarobotics.lib.controlloop.HazyTMP;
 
@@ -20,8 +16,6 @@ public class Arm extends HazySubsystem {
     private double actualAngle, actualAngleRate;
     private double tiltMotorOutput;
     private double dt, time;
-    private double targetX, targetY;
-    private double actualX, actualY;
 
     private Arm() {
         tiltProfile = new HazyTMP(Constants.TILT_MP_MAX_VELOCITY.getDouble(), Constants.TILT_MP_MAX_ACCELERATION.getDouble());
@@ -105,29 +99,10 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putBoolean("T_TopSwitch", sensorInput.getArmTopLimitSwitch());
     }
 
-    public void setControlPoint(double x, double y) {
+    public void setControlPoint(double angle) {
+        targetAngle = angle;
         if (mode == Mode.CONTROLLED) {
-            if (x < 0) {
-                x = 0;
-            } else if (y < 0) {
-                y = 0;
-            }
-            if (DriverStation.getInstance().isFMSAttached() && (DriverStation.getInstance().getMatchTime() > 20)) {;;
-                y = Math.min(y, 40);
-            }
-            x = Math.min(x, Constants.ELEVATOR_MAX_EXTENSION.getDouble());
-            targetAngle = Math.min(Math.toDegrees(Math.atan2(y, x)), Constants.TILT_MAX_ANGLE.getDouble());
-            targetExtension = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-            if (targetExtension > Constants.ELEVATOR_MAX_EXTENSION.getDouble()) {
-                targetExtension = Constants.ELEVATOR_MAX_EXTENSION.getDouble();
-            } else if (targetAngle > Constants.TILT_MAX_ANGLE.getDouble()) {
-                targetAngle = Constants.TILT_MAX_ANGLE.getDouble();
-            }
-            targetY = y;
-            targetX = x;
-            if (CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent == armTilterMaster.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Absolute)) {
-                tiltProfile.generateTrapezoid(targetAngle, actualAngle, actualAngleRate);
-            }
+            tiltProfileFollower.setSetpoint(targetAngle);
         }
     }
 
