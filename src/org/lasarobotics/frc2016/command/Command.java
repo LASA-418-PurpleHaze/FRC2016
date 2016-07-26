@@ -5,14 +5,12 @@ import org.lasarobotics.frc2016.input.DriverInput;
 import org.lasarobotics.frc2016.hardware.Hardware;
 import org.lasarobotics.frc2016.subsystem.Arm;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
-import org.lasarobotics.frc2016.subsystem.Shooter;
 import org.lasarobotics.frc2016.subsystem.Intake;
 
 public abstract class Command {
 
     protected Drivetrain drivetrain;
     protected Intake intake;
-    protected Shooter shooter;
     protected Arm arm;
     protected DriverInput driverInput;
     protected Hardware hardware;
@@ -32,7 +30,6 @@ public abstract class Command {
     public Command(String name, double timeOut) {
         drivetrain = Drivetrain.getInstance();
         intake = Intake.getInstance();
-        shooter = Shooter.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         hardware = Hardware.getInstance();

@@ -1,6 +1,5 @@
 package org.lasarobotics.frc2016;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasarobotics.lib.HazyIterative;
 import org.lasarobotics.frc2016.input.DriverInput;
@@ -10,13 +9,10 @@ import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Intake;
 import org.lasarobotics.frc2016.command.CommandManager;
 import org.lasarobotics.frc2016.subsystem.Arm;
-import org.lasarobotics.frc2016.subsystem.Shooter;
-import org.lasarobotics.frc2016.vision.HazyVision;
 
 public class Robot extends HazyIterative {
 
     Drivetrain drivetrain;
-    Shooter shooter;
     Intake intake;
     Arm arm;
     DriverInput driverInput;
@@ -35,7 +31,6 @@ public class Robot extends HazyIterative {
         SmartDashboard.putNumber("Time", time);
         SmartDashboard.putBoolean("doAuton", false);
         drivetrain.pushToDashboard();
-        shooter.pushToDashboard();
         intake.pushToDashboard();
         arm.pushToDashboard();
     }
@@ -43,7 +38,6 @@ public class Robot extends HazyIterative {
     private void initSubsystems() {
         constants.loadFromFile();
         drivetrain.initSubsystem();
-        shooter.initSubsystem();
         intake.initSubsystem();
         arm.initSubsystem();
         hardware.start();
@@ -61,7 +55,6 @@ public class Robot extends HazyIterative {
 //>>>>>>> test
         constants = new Constants();
         drivetrain = Drivetrain.getInstance();
-        shooter = Shooter.getInstance();
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
@@ -81,7 +74,6 @@ public class Robot extends HazyIterative {
         CommandManager.run();
         driverInput.run();
         drivetrain.run();
-        shooter.run();
         pushToDashboard();
     }
 
