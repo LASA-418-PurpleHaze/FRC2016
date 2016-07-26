@@ -14,7 +14,6 @@ public abstract class Command {
     protected Arm arm;
     protected DriverInput driverInput;
     protected Hardware hardware;
-//    protected HazyVision hazyVision;
 
     String name;
 
@@ -33,7 +32,6 @@ public abstract class Command {
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
         hardware = Hardware.getInstance();
-//        hazyVision = HazyVision.getInstance();;
 
         this.name = name;
         this.timeOut = timeOut;

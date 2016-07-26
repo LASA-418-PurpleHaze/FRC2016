@@ -4,21 +4,6 @@ import org.lasarobotics.lib.HazyConstant;
 
 public class Constants extends HazyConstant {
 
-    // Vision Constants
-    public static final Constant VISIONHANDLER_INITIAL_DELAY = new Constant("V_InitialDelay", 0);
-    public static final Constant VISIONHANDLER_PERIOD = new Constant("V_Period", 200);
-
-    public static final Constant USBCAMERA_DIAGONAL_FOV = new Constant("V_CameraDiagonalFOV", 68.5);
-    public static final Constant USBCAMERA_IMAGE_WIDTH = new Constant("V_CameraWidth", 480);
-    public static final Constant USBCAMERA_IMAGE_HEIGHT = new Constant("V_CameraHeight", 640);
-
-    public static final Constant HAZYVISION_HUE_LOWER_BOUND = new Constant("V_HueLower", 44);
-    public static final Constant HAZYVISION_HUE_UPPER_BOUND = new Constant("V_HueUpper", 88);
-    public static final Constant HAZYVISION_SATURATION_LOWER_BOUND = new Constant("V_SatLower", 199);
-    public static final Constant HAZYVISION_SATURATION_UPPER_BOUND = new Constant("V_SatUpper", 255);
-    public static final Constant HAZYVISION_LUMINENCE_LOWER_BOUND = new Constant("V_LumLower", 37);
-    public static final Constant HAZYVISION_LUMINENCE_UPPER_BOUND = new Constant("V_LumUpper", 135);
-
     public static final Constant DRIVE_SENSITIVITY = new Constant("D_Sensitivity", .65);
     public static final Constant DRIVETRAIN_PID_KP = new Constant("D_kP", 0);
     public static final Constant DRIVETRAIN_PID_KI = new Constant("D_kI", 0);
