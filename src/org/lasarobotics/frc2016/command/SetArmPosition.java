@@ -20,7 +20,7 @@ public class SetArmPosition extends Command {
 
     @Override
     public void start() {
-        arm.setControlPoint(setpointAngle);
+        arm.setAngle(setpointAngle);
     }
 
     @Override

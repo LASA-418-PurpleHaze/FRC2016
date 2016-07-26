@@ -76,7 +76,7 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putBoolean("T_TopSwitchPressed", hardware.topArmLimitPressed());
     }
 
-    public void setControlPoint(double angle) {
+    public void setAngle(double angle) {
         targetAngle = angle;
         if (mode == Mode.CONTROLLED) {
             tiltPID.setSetpoint(targetAngle);
