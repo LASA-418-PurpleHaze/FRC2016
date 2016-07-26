@@ -1,20 +1,15 @@
 package org.lasarobotics.frc2016.subsystem;
 
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasarobotics.frc2016.statics.Ports;
 
 public final class Intake extends HazySubsystem {
 
     private static Intake instance;
 
-    private final VictorSP intakeMotor;
     private double intakeSpeed;
     private boolean hasBall;
 
     private Intake() {
-        intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
-
         this.setMode(Mode.OFF);
     }
 
@@ -43,7 +38,7 @@ public final class Intake extends HazySubsystem {
                     intakeSpeed = 0.0;
                     break;
                 case INTAKING:
-                    if (sensorInput.getIntakeSwitch()) {
+                    if (sensorInput.isBallInRobot()) {
                         hasBall = true;
                         newMode = Mode.OFF;
                     } else {
@@ -69,14 +64,12 @@ public final class Intake extends HazySubsystem {
             mode = newMode;
             this.run();
         }
-
-        intakeMotor.set(intakeSpeed);
     }
 
     @Override
     public void pushToDashboard() {
         SmartDashboard.putString("I_State", mode.toString());
-        SmartDashboard.putBoolean("I_Switch", sensorInput.getIntakeSwitch());
+        SmartDashboard.putBoolean("I_Switch", sensorInput.isBallInRobot());
     }
 
     public boolean hasBall() {

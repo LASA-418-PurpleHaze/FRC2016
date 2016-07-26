@@ -1,7 +1,7 @@
 package org.lasarobotics.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasarobotics.frc2016.input.Input;
+import org.lasarobotics.frc2016.hardware.Hardware;
 import org.lasarobotics.lib.controlloop.HazyPID;
 import org.lasarobotics.frc2016.statics.Constants;
 
@@ -54,7 +54,7 @@ public final class Drivetrain extends HazySubsystem {
             }
         }
         
-        Input.setDriveSpeeds(leftSpeed, rightSpeed);
+        Hardware.setDriveSpeeds(leftSpeed, rightSpeed);
     }
 
     public void setDriveSpeeds(double left, double right) {

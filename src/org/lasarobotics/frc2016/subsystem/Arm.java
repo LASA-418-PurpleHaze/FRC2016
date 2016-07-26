@@ -64,10 +64,10 @@ public class Arm extends HazySubsystem {
         if (sensorInput.getArmOutputCurrent() >= 30) {
             tiltMotorOutput = 0;
         }
-        if (sensorInput.getArmTopLimitSwitch()) {
+        if (sensorInput.topArmLimitPressed()) {
             tiltMotorOutput = Math.max(tiltMotorOutput, 0);
         }
-        if (sensorInput.getArmBottomLimitSwitch()) {
+        if (sensorInput.bottomArmLimitPressed()) {
             tiltMotorOutput = Math.min(tiltMotorOutput, 0);
         }
 
@@ -97,8 +97,8 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
-        SmartDashboard.putBoolean("T_BottomSwitch", sensorInput.getArmBottomLimitSwitch());
-        SmartDashboard.putBoolean("T_TopSwitch", sensorInput.getArmTopLimitSwitch());
+        SmartDashboard.putBoolean("T_BottomSwitch", sensorInput.bottomArmLimitPressed());
+        SmartDashboard.putBoolean("T_TopSwitch", sensorInput.topArmLimitPressed());
     }
 
     public void setControlPoint(double angle) {

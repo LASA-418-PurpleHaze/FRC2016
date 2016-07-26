@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.lasarobotics.lib.HazyIterative;
 import org.lasarobotics.frc2016.input.DriverInput;
-import org.lasarobotics.frc2016.input.Input;
+import org.lasarobotics.frc2016.hardware.Hardware;
 import org.lasarobotics.frc2016.statics.Constants;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Intake;
@@ -20,7 +20,7 @@ public class Robot extends HazyIterative {
     Intake intake;
     Arm arm;
     DriverInput driverInput;
-    Input sensorInput;
+    Hardware sensorInput;
     Constants constants;
 //<<<<<<< HEAD
 //
@@ -65,7 +65,7 @@ public class Robot extends HazyIterative {
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
-        sensorInput = Input.getInstance();
+        sensorInput = Hardware.getInstance();
 //        auton = Auton.getInstance();
     }
 
