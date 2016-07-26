@@ -1,7 +1,6 @@
 package org.lasarobotics.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.lasarobotics.frc2016.hardware.Hardware;
 import org.lasarobotics.lib.controlloop.HazyPID;
 import org.lasarobotics.frc2016.statics.Constants;
 
@@ -43,6 +42,9 @@ public final class Drivetrain extends HazySubsystem {
             switch (mode) {
                 case STRAIGHT_CONTROLLED:
                     leftSpeed = rightSpeed = straightPID.calculate((hardware.getLeftDriveDistance() + hardware.getRightDriveDistance()) / 2);
+                    double turn = turnPID.calculate(hardware.getNavXAngle());
+                    leftSpeed -= turn;
+                    rightSpeed += turn;
                     break;
                 case TURN_CONTROLLED:
                     double power = turnPID.calculate(hardware.getNavXAngle());
