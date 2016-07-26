@@ -38,7 +38,7 @@ public final class Intake extends HazySubsystem {
                     intakeSpeed = 0.0;
                     break;
                 case INTAKING:
-                    if (sensorInput.isBallInRobot()) {
+                    if (hardware.isBallInRobot()) {
                         hasBall = true;
                         newMode = Mode.OFF;
                     } else {
@@ -64,12 +64,14 @@ public final class Intake extends HazySubsystem {
             mode = newMode;
             this.run();
         }
+        
+        hardware.setIntakeSpeed(intakeSpeed);
     }
 
     @Override
     public void pushToDashboard() {
         SmartDashboard.putString("I_State", mode.toString());
-        SmartDashboard.putBoolean("I_Switch", sensorInput.isBallInRobot());
+        SmartDashboard.putBoolean("I_Switch", hardware.isBallInRobot());
     }
 
     public boolean hasBall() {

@@ -87,6 +87,14 @@ public class Hardware implements Runnable {
         leftFrontDriveMotor.set(leftspeed);
         leftBackDriveMotor.set(leftspeed);
     }
+    
+    public void setArmMotorSpeed(double armspeed) {
+        armMotor.set(armspeed);
+    }
+    
+    public void setIntakeSpeed(double speed) {
+        intakeMotor.set(speed);
+    }
 
     public double getArmEncoderPosition() {
         return armMotor.getEncPosition();
@@ -98,10 +106,6 @@ public class Hardware implements Runnable {
 
     public double getArmOutputCurrent() {
         return armMotor.getOutputCurrent();
-    }
-
-    public void setArmMotorSpeed(double armspeed) {
-        armMotor.set(armspeed);
     }
 
     public double getNavXAngle() {

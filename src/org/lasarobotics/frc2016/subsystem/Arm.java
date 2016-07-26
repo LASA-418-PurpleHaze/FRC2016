@@ -48,8 +48,8 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void run() {
-        actualAngle = sensorInput.getArmEncoderPosition() * 360 / 4096 / 3;
-        actualAngleRate = sensorInput.getArmEncoderVelocity();
+        actualAngle = hardware.getArmEncoderPosition() * 360 / 4096 / 3;
+        actualAngleRate = hardware.getArmEncoderVelocity();
         dt = Timer.getFPGATimestamp() - time;
         time = Timer.getFPGATimestamp();
         if (null != mode) {
@@ -61,17 +61,17 @@ public class Arm extends HazySubsystem {
                     break;
             }
         }
-        if (sensorInput.getArmOutputCurrent() >= 30) {
+        if (hardware.getArmOutputCurrent() >= 30) {
             tiltMotorOutput = 0;
         }
-        if (sensorInput.topArmLimitPressed()) {
+        if (hardware.topArmLimitPressed()) {
             tiltMotorOutput = Math.max(tiltMotorOutput, 0);
         }
-        if (sensorInput.bottomArmLimitPressed()) {
+        if (hardware.bottomArmLimitPressed()) {
             tiltMotorOutput = Math.min(tiltMotorOutput, 0);
         }
 
-        sensorInput.setArmMotorSpeed(.3 * tiltMotorOutput);
+        hardware.setArmMotorSpeed(.3 * tiltMotorOutput);
     }
 
     @Override
@@ -97,8 +97,8 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_ActualAngleRate", actualAngleRate);
         SmartDashboard.putNumber("T_MotorOutput", tiltMotorOutput);
         SmartDashboard.putNumber("T_TMPPosition", tiltProfile.getCurrentPosition());
-        SmartDashboard.putBoolean("T_BottomSwitch", sensorInput.bottomArmLimitPressed());
-        SmartDashboard.putBoolean("T_TopSwitch", sensorInput.topArmLimitPressed());
+        SmartDashboard.putBoolean("T_BottomSwitch", hardware.bottomArmLimitPressed());
+        SmartDashboard.putBoolean("T_TopSwitch", hardware.topArmLimitPressed());
     }
 
     public void setControlPoint(double angle) {

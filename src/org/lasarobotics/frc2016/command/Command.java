@@ -15,7 +15,7 @@ public abstract class Command {
     protected Shooter shooter;
     protected Arm arm;
     protected DriverInput driverInput;
-    protected Hardware sensorInput;
+    protected Hardware hardware;
 //    protected HazyVision hazyVision;
 
     String name;
@@ -35,7 +35,7 @@ public abstract class Command {
         shooter = Shooter.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
-        sensorInput = Hardware.getInstance();
+        hardware = Hardware.getInstance();
 //        hazyVision = HazyVision.getInstance();;
 
         this.name = name;

@@ -4,13 +4,13 @@ import org.lasarobotics.frc2016.hardware.Hardware;
 
 public abstract class HazySubsystem {
 
-    protected Hardware sensorInput;
+    protected Hardware hardware;
 
     protected String errorMsg;
     protected final String fileName = "logger.csv";
 
     protected HazySubsystem() {
-        sensorInput = Hardware.getInstance();
+        hardware = Hardware.getInstance();
     }
 
     //Aaron's first commit

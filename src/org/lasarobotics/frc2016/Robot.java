@@ -20,7 +20,7 @@ public class Robot extends HazyIterative {
     Intake intake;
     Arm arm;
     DriverInput driverInput;
-    Hardware sensorInput;
+    Hardware hardware;
     Constants constants;
 //<<<<<<< HEAD
 //
@@ -46,7 +46,7 @@ public class Robot extends HazyIterative {
         shooter.initSubsystem();
         intake.initSubsystem();
         arm.initSubsystem();
-        sensorInput.start();
+        hardware.start();
     }
 
     public static int getTime() {
@@ -65,7 +65,7 @@ public class Robot extends HazyIterative {
         intake = Intake.getInstance();
         arm = Arm.getInstance();
         driverInput = DriverInput.getInstance();
-        sensorInput = Hardware.getInstance();
+        hardware = Hardware.getInstance();
 //        auton = Auton.getInstance();
     }
 
@@ -87,7 +87,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void teleopContinuous() {
-        sensorInput.run();
+        hardware.run();
         arm.run();
         intake.run();
     }
@@ -103,7 +103,7 @@ public class Robot extends HazyIterative {
 //<<<<<<< HEAD
 //        if (SmartDashboard.getBoolean("doAuton", true)) {
 //            arm.setMotorSpeeds(0.15, 0);
-//            if ((sensorInput.getLeftDistance() + sensorInput.getRightDistance()) / 2 > -150.0) {
+//            if ((hardware.getLeftDistance() + hardware.getRightDistance()) / 2 > -150.0) {
 //
 //                drivetrain.setDriveSpeeds(1, 1);
 //            } else {
@@ -121,7 +121,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousContinuous() {
-        sensorInput.run();
+        hardware.run();
         drivetrain.run();
         arm.run();
     }
@@ -140,6 +140,6 @@ public class Robot extends HazyIterative {
 
     @Override
     public void disabledContinuous() {
-        sensorInput.run();
+        hardware.run();
     }
 }
