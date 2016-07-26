@@ -1,5 +1,6 @@
 package org.lasarobotics.frc2016.input;
 
+import org.lasarobotics.frc2016.statics.Constants;
 import org.lasarobotics.frc2016.subsystem.Arm;
 import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Intake;
@@ -74,11 +75,11 @@ public class DriverInput implements Runnable {
             arm.setMode(Arm.Mode.CONTROLLED);
             
             if (operator.getY()) {
-                arm.setAngle(123);
+                arm.setAngle(Constants.TILT_UP_ANGLE.getDouble());
             } else if (operator.getB()) {
-                arm.setAngle(123);
+                arm.setAngle(Constants.TILT_MIDDLE_ANGLE.getDouble());
             } else if (operator.getA()) {
-                arm.setAngle(123);
+                arm.setAngle(Constants.TILT_DOWN_ANGLE.getDouble());
             }
             
         } else {

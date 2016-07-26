@@ -35,29 +35,29 @@ public class Autonomous implements Runnable {
     public void run() {
         switch (mode) {
             case DRIVE_OVER:
-                CommandManager.addCommand(new DriveStraight("Drive over defense", 10.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive over defense", 10.0, Constants.DISTANCE_OVER_DEFENSE.getDouble()));
                 break;
             case DRIVE_OVER_COME_BACK:
-                CommandManager.addCommand(new DriveStraight("Drive over defense", 7.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive over defense", 7.0, Constants.DISTANCE_OVER_DEFENSE.getDouble()));
                 CommandManager.addCommand(new DriveTurn("Turn around", 3.0, 180.0));
-                CommandManager.addCommand(new DriveStraight("Drive back over defense", 7.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive back over defense", 7.0, Constants.DISTANCE_BACK_OVER_DEFENSE.getDouble()));
                 break;
             case OVER_SEESAW:
-                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 4.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 4.0, Constants.DISTANCE_TO_SEESAW.getDouble()));
                 CommandManager.addCommand(new SetArmPosition("Lower seesaw", 2.5, Constants.TILT_DOWN_ANGLE.getDouble()));
-                CommandManager.addCommand(new DriveStraight("Drive over seesaw", 5.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive over seesaw", 5.0, Constants.DISTANCE_OVER_SEESAW.getDouble()));
                 break;
             case OVER_SEESAW_COME_BACK:
-                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 4.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 4.0, Constants.DISTANCE_TO_SEESAW.getDouble()));
                 CommandManager.addCommand(new SetArmPosition("Lower seesaw", 2.5, Constants.TILT_DOWN_ANGLE.getDouble()));
-                CommandManager.addCommand(new DriveStraight("Drive over seesaw", 5.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive over seesaw", 5.0, Constants.DISTANCE_OVER_SEESAW.getDouble()));
                 CommandGroup turnAndLiftArm = new CommandGroup("Turn and lift arm", 3.0);
                 turnAndLiftArm.addCommand(new DriveTurn("Turn around", 3.0, 180.0));
                 turnAndLiftArm.addCommand(new SetArmPosition("Lift Arm", 3.0, Constants.TILT_MIDDLE_ANGLE.getDouble()));
                 CommandManager.addCommand(turnAndLiftArm);
-                CommandManager.addCommand(new DriveStraight("Drive back to seesaw", 7.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive back to seesaw", 7.0, Constants.DISTANCE_BACK_TO_SEESAW.getDouble()));
                 CommandManager.addCommand(new SetArmPosition("Lower seesaw", 2.5, Constants.TILT_DOWN_ANGLE.getDouble()));
-                CommandManager.addCommand(new DriveStraight("Drive back over seesaw", 5.0, 123));
+                CommandManager.addCommand(new DriveStraight("Drive back over seesaw", 5.0, Constants.DISTANCE_BACK_OVER_SEESAW.getDouble()));
                 break;
             case DO_NOTHING:
                 break;

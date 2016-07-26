@@ -29,11 +29,22 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MIN_ANGLE = new Constant("T_minAngle", 0);
     public static final Constant TILT_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
     public static final Constant TILT_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
+    public static final Constant TILT_KP = new Constant("T_kP", 0.0);
+    public static final Constant TILT_KI = new Constant("T_kI", 0.0);
+    public static final Constant TILT_KD = new Constant("T_kD", 0.0);
     
     //Arm setpoints
     public static final Constant TILT_UP_ANGLE = new Constant("T_UpAngle", 0.0);
     public static final Constant TILT_MIDDLE_ANGLE = new Constant("T_MiddleAngle", 0.0);
     public static final Constant TILT_DOWN_ANGLE = new Constant("T_DownAngle", 0.0);
+    
+    //Autonomous
+    public static final Constant DISTANCE_OVER_DEFENSE = new Constant("A_DistanceOverDefense", 0.0);
+    public static final Constant DISTANCE_BACK_OVER_DEFENSE = new Constant("A_DistanceBackOverDefense", 0.0);
+    public static final Constant DISTANCE_TO_SEESAW = new Constant("A_DistanceToSeesaw", 0.0);
+    public static final Constant DISTANCE_OVER_SEESAW = new Constant("A_DistanceOverSeesaw", 0.0);
+    public static final Constant DISTANCE_BACK_TO_SEESAW = new Constant("A_DistanceBackToSeesaw", 0.0);
+    public static final Constant DISTANCE_BACK_OVER_SEESAW = new Constant("A_DistanceBackOverSeesaw", 0.0);
    
     @Override
     public String getFileLocation() {

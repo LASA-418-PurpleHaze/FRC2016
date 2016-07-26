@@ -1,6 +1,7 @@
 package org.lasarobotics.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasarobotics.frc2016.statics.Constants;
 import org.lasarobotics.lib.controlloop.HazyPID;
 
 public class Arm extends HazySubsystem {
@@ -63,6 +64,9 @@ public class Arm extends HazySubsystem {
 
     @Override
     public void initSubsystem() {
+        tiltPID.updatePID(Constants.TILT_KP.getDouble(), Constants.TILT_KI.getDouble(), Constants.TILT_KD.getDouble(), 0.0, Constants.TILT_DONE_RANGE.getDouble());
+        tiltPID.updateMaxMin(Constants.TILT_MAX_POWER.getDouble(), Constants.TILT_MIN_POWER.getDouble());
+        tiltPID.reset();
     }
 
     @Override
