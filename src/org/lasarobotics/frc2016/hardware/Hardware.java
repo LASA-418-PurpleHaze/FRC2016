@@ -35,29 +35,28 @@ public class Hardware implements Runnable {
     private volatile boolean armTopLimitSwitchPressed, armBottomLimitSwitchPressed, intakeSwitchTriggered;
 
     private Hardware() {
-        rightFrontDriveMotor = new VictorSP(Ports.RIGHT_FRONT_DRIVE_MOTOR);
-        leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_DRIVE_MOTOR);
-        rightBackDriveMotor = new VictorSP(Ports.RIGHT_BACK_DRIVE_MOTOR);
-        leftBackDriveMotor = new VictorSP(Ports.LEFT_BACK_DRIVE_MOTOR);
+        rightFrontDriveMotor = new VictorSP(Ports.RIGHT_FRONT_DRIVE_MOTOR_PORT);
+        leftFrontDriveMotor = new VictorSP(Ports.LEFT_FRONT_DRIVE_MOTOR_PORT);
+        rightBackDriveMotor = new VictorSP(Ports.RIGHT_REAR_DRIVE_MOTOR_PORT);
+        leftBackDriveMotor = new VictorSP(Ports.LEFT_REAR_DRIVE_MOTOR_PORT);
 
         leftFrontDriveMotor.setInverted(true);
         leftBackDriveMotor.setInverted(true);
 
-        armMotor = new CANTalon(Ports.ARM_TILTER_MASTER);
+        armMotor = new CANTalon(Ports.ARM_MOTOR_PORT);
         armMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         armMotor.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
-
         
-        intakeMotor = new VictorSP(Ports.INTAKE_MOTOR);
+        intakeMotor = new VictorSP(Ports.INTAKE_MOTOR_PORT);
         
         navX = new AHRS(SPI.Port.kMXP);
 
         leftDriveEncoder = new Encoder(Ports.LEFT_DRIVE_ENCODER_A, Ports.LEFT_DRIVE_ENCODER_B);
         rightDriveEncoder = new Encoder(Ports.RIGHT_DRIVE_ENCODER_A, Ports.RIGHT_DRIVE_ENCODER_B);
 
-        armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH);
-        armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH);
-        intakeSwitch = new DigitalInput(Ports.INTAKE_SWITCH);
+        armTopLimitSwitch = new DigitalInput(Ports.ARM_TOP_LIMIT_SWITCH_PORT);
+        armBottomLimitSwitch = new DigitalInput(Ports.ARM_BOTTOM_LIMIT_SWITCH_PORT);
+        intakeSwitch = new DigitalInput(Ports.INTAKE_SWITCH_PORT);
     }
 
     public void start() {
