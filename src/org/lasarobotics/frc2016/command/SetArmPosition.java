@@ -25,6 +25,5 @@ public class SetArmPosition extends Command {
 
     @Override
     public void stop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

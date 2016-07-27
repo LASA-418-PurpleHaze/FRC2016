@@ -40,8 +40,8 @@ public class Hardware implements Runnable {
         rightBackDriveMotor = new VictorSP(Ports.RIGHT_REAR_DRIVE_MOTOR_PORT);
         leftBackDriveMotor = new VictorSP(Ports.LEFT_REAR_DRIVE_MOTOR_PORT);
 
-        leftFrontDriveMotor.setInverted(true);
-        leftBackDriveMotor.setInverted(true);
+        rightFrontDriveMotor.setInverted(true);
+        rightBackDriveMotor.setInverted(true);
 
         armMotor = new CANTalon(Ports.ARM_MOTOR_PORT);
         armMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
