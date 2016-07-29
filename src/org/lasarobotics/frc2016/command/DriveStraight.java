@@ -25,6 +25,8 @@ public class DriveStraight extends Command {
 
     @Override
     public void start() {
+        hardware.resetDriveDistance();
+        hardware.resetAngle();
         drivetrain.setDistanceSetpoint(setpoint);
     }
 

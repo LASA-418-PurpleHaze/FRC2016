@@ -43,13 +43,13 @@ public final class Drivetrain extends HazySubsystem {
                 case STRAIGHT_CONTROLLED:
                     leftSpeed = rightSpeed = straightPID.calculate((hardware.getLeftDriveDistance() + hardware.getRightDriveDistance()) / 2);
                     double turn = turnPID.calculate(hardware.getNavXAngle());
-                    leftSpeed -= turn;
-                    rightSpeed += turn;
+                    leftSpeed += turn;
+                    rightSpeed -= turn;
                     break;
                 case TURN_CONTROLLED:
                     double power = turnPID.calculate(hardware.getNavXAngle());
-                    leftSpeed = -power;
-                    rightSpeed = power;
+                    leftSpeed = power;
+                    rightSpeed = -power;
                     break;
                 case OVERRIDE:
                     break;
@@ -78,11 +78,11 @@ public final class Drivetrain extends HazySubsystem {
         mode = Mode.STRAIGHT_CONTROLLED;
 
         turnSetpoint = 0.0;
-        turnPID.setTarget(0.0);
+        turnPID.setSetpoint(0.0);
         turnPID.reset();
 
         straightSetpoint = distance;
-        straightPID.setTarget(straightSetpoint);
+        straightPID.setSetpoint(straightSetpoint);
         straightPID.reset();
     }
 
@@ -90,11 +90,11 @@ public final class Drivetrain extends HazySubsystem {
         mode = Mode.TURN_CONTROLLED;
 
         straightSetpoint = 0.0;
-        straightPID.setTarget(0.0);
+        straightPID.setSetpoint(0.0);
         straightPID.reset();
 
         turnSetpoint = angle;
-        turnPID.setTarget(turnSetpoint);
+        turnPID.setSetpoint(turnSetpoint);
         turnPID.reset();
     }
 

@@ -28,11 +28,13 @@ public class Autonomous implements Runnable {
     }
 
     public void start() {
-        mode = (int) SmartDashboard.getNumber("AutoMode", DO_NOTHING);
+        SmartDashboard.putNumber("AutoMode", DO_NOTHING);
     }
 
     @Override
     public void run() {
+        mode = (int) SmartDashboard.getNumber("AutoMode", DO_NOTHING);
+        
         switch (mode) {
             case DRIVE_OVER:
                 CommandManager.addCommand(new DriveStraight("Drive over defense", 10.0, Constants.DISTANCE_OVER_DEFENSE.getDouble()));
@@ -58,6 +60,14 @@ public class Autonomous implements Runnable {
                 CommandManager.addCommand(new DriveStraight("Drive back to seesaw", 7.0, Constants.DISTANCE_BACK_TO_SEESAW.getDouble()));
                 CommandManager.addCommand(new SetArmPosition("Lower seesaw", 2.5, Constants.TILT_DOWN_ANGLE.getDouble()));
                 CommandManager.addCommand(new DriveStraight("Drive back over seesaw", 5.0, Constants.DISTANCE_BACK_OVER_SEESAW.getDouble()));
+                break;
+            case 100:
+                SmartDashboard.putNumber("poop", 69);
+                //CommandManager.addCommand(new DriveTurn("Turn around", 10.0, 90.0));
+                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 10.0, 48.0));
+                CommandManager.addCommand(new SetArmPosition("Lower seesaw", 2.5, Constants.TILT_DOWN_ANGLE.getDouble()));
+                CommandManager.addCommand(new DriveStraight("Drive to seesaw", 10.0, 48.0));
+                CommandManager.addCommand(new DriveTurn("Turn around", 10.0, 90.0));
                 break;
             case DO_NOTHING:
                 break;

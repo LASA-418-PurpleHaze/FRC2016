@@ -21,6 +21,10 @@ public abstract class ControlLoop {
     public void setSetpoint(double set) {
         setPoint = set;
     }
+    
+    public double getSetpoint() {
+        return setPoint;
+    }
 
     public void setDoneRange(double range) {
         doneRange = range;

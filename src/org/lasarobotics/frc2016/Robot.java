@@ -9,6 +9,7 @@ import org.lasarobotics.frc2016.subsystem.Drivetrain;
 import org.lasarobotics.frc2016.subsystem.Intake;
 import org.lasarobotics.frc2016.command.CommandManager;
 import org.lasarobotics.frc2016.subsystem.Arm;
+import org.omg.CORBA.COMM_FAILURE;
 
 public class Robot extends HazyIterative {
 
@@ -84,6 +85,7 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousInit() {
+        initSubsystems();
         CommandManager.cancelAll();
         autonomous.run();
     }
@@ -95,6 +97,8 @@ public class Robot extends HazyIterative {
 
     @Override
     public void autonomousContinuous() {
+        CommandManager.run();
+        
         hardware.run();
         drivetrain.run();
         arm.run();

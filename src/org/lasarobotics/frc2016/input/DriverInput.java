@@ -52,7 +52,7 @@ public class DriverInput implements Runnable {
 
     private void drivetrainControl() {
         throttle = -driver.getLeftY();
-        wheel = -driver.getRightX();
+        wheel = driver.getRightX();
         quickTurn = driver.getRightBumper();
         
         cheesyDrive.cheesyDrive(throttle, wheel, quickTurn);
@@ -84,7 +84,7 @@ public class DriverInput implements Runnable {
             
         } else {
             arm.setMode(Arm.Mode.OVERRIDE);
-            arm.setArmMotorSpeed(-operator.getLeftY());
+            arm.setArmMotorSpeed(0.5 * operator.getLeftY());
         }
     }
 }

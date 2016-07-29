@@ -67,7 +67,7 @@ public class Hardware implements Runnable {
 
     @Override
     public void run() {
-        navXAngle = navX.getAngle();
+        navXAngle = navX.getYaw();
         
         armTopLimitSwitchPressed = armTopLimitSwitch.get();
         armBottomLimitSwitchPressed = armBottomLimitSwitch.get();
@@ -75,9 +75,9 @@ public class Hardware implements Runnable {
         intakeSwitchTriggered = intakeSwitch.get();
         
         leftDriveEncoderPosition = leftDriveEncoder.get();
-        rightDriveEncoderPosition = rightDriveEncoder.get();
+        rightDriveEncoderPosition = -rightDriveEncoder.get();
         leftDriveEncoderVelocity = leftDriveEncoder.getRate();
-        rightDriveEncoderVelocity = rightDriveEncoder.getRate();
+        rightDriveEncoderVelocity = -rightDriveEncoder.getRate();
     }
 
     public void setDriveSpeeds(double leftspeed, double rightspeed) {
@@ -137,5 +137,17 @@ public class Hardware implements Runnable {
 
     public boolean isBallInRobot() {
         return intakeSwitchTriggered;
+    }
+    
+    public void resetDriveDistance() {
+        rightDriveEncoder.reset();
+        leftDriveEncoder.reset();
+        rightDriveEncoderPosition = 0.0;
+        leftDriveEncoderPosition = 0.0;
+    }
+    
+    public void resetAngle() {
+        navXAngle = 0.0;
+        navX.reset();
     }
 }

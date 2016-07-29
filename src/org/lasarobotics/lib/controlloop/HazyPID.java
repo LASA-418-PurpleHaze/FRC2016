@@ -3,7 +3,7 @@ package org.lasarobotics.lib.controlloop;
 public class HazyPID extends ControlLoop {
 
     double kP, kI, kD, kFF;
-    double targetValue, previousValue, output;
+    double previousValue, output;
     double error, errorSum, doneBound;
     double maxU, minU;
     boolean firstCycle;
@@ -17,16 +17,8 @@ public class HazyPID extends ControlLoop {
     }
 
     public boolean onTarget() {
-        count = (Math.abs(targetValue - previousValue) < doneBound) ? ++count : 0;
+        count = (Math.abs(setPoint - previousValue) < doneBound) ? ++count : 0;
         return count >= minCount;
-    }
-
-    public void setTarget(double val) {
-        targetValue = val;
-    }
-
-    public double getTargetVal() {
-        return targetValue;
     }
 
     public void updatePID(double kP, double kI, double kD, double kFF, double doneBound) {
@@ -47,9 +39,9 @@ public class HazyPID extends ControlLoop {
     }
 
     public double calculate(double currentValue) {
-        error = targetValue - currentValue;
+        error = setPoint - currentValue;
         if (!firstCycle) {
-            output = kP * error + kI * errorSum - kD * (currentValue - previousValue) + kFF * targetValue;
+            output = kP * error + kI * errorSum - kD * (currentValue - previousValue) + kFF * setPoint;
             if (maxU >= kI * (errorSum + error) && minU <= kI * (errorSum + error)) {
                 errorSum += error;
             } else if (errorSum > 0) {
@@ -59,7 +51,7 @@ public class HazyPID extends ControlLoop {
             }
         } else {
             firstCycle = false;
-            output = kP * error + kFF * targetValue;
+            output = kP * error + kFF * setPoint;
         }
 
         previousValue = currentValue;

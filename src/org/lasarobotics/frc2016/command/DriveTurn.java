@@ -25,6 +25,7 @@ public class DriveTurn extends Command {
 
     @Override
     public void start() {
+        hardware.resetAngle();
         drivetrain.setTurnSetpoint(setpoint);
     }
 }

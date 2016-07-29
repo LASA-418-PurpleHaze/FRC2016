@@ -31,7 +31,7 @@ public class Arm extends HazySubsystem {
 
     public void setMode(Mode m) {
         mode = m;
-        motorSpeed = 0.0;
+        //motorSpeed = 0.0;
     }
 
     @Override
@@ -43,23 +43,25 @@ public class Arm extends HazySubsystem {
             switch (mode) {
                 case CONTROLLED:
                     motorSpeed = tiltPID.calculate(actualAngle);
+                    SmartDashboard.putNumber("pid", motorSpeed);
                     break;
                 case OVERRIDE:
                     break;
             }
         }
 
-        if (hardware.getArmOutputCurrent() >= 30) {
+        if (hardware.getArmOutputCurrent() >= 12) {
             motorSpeed = 0;
         }
 
         if (hardware.topArmLimitPressed()) {
-            motorSpeed = Math.max(motorSpeed, 0);
-        } else if (hardware.bottomArmLimitPressed()) {
             motorSpeed = Math.min(motorSpeed, 0);
+        } else if (hardware.bottomArmLimitPressed()) {
+            motorSpeed = Math.max(motorSpeed, 0);
         }
 
-        hardware.setArmMotorSpeed(.3 * motorSpeed);
+        SmartDashboard.putNumber("pid", tiltPID.getSetpoint());
+        hardware.setArmMotorSpeed(motorSpeed);
     }
 
     @Override
@@ -78,6 +80,7 @@ public class Arm extends HazySubsystem {
         SmartDashboard.putNumber("T_MotorSpeed", motorSpeed);
         SmartDashboard.putBoolean("T_BottomSwitchPressed", hardware.bottomArmLimitPressed());
         SmartDashboard.putBoolean("T_TopSwitchPressed", hardware.topArmLimitPressed());
+        SmartDashboard.putNumber("T_motorAmps", hardware.getArmOutputCurrent());
     }
 
     public void setAngle(double angle) {

@@ -1,6 +1,7 @@
 package org.lasarobotics.frc2016.command;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.LinkedList;
 
 public class CommandManager {
@@ -23,6 +24,7 @@ public class CommandManager {
                 command.stop();
                 list.remove(command);
             } else {
+                SmartDashboard.putString("command", command.name);
                 command.run();
             }
         }

@@ -1,6 +1,8 @@
 package org.lasarobotics.frc2016.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.lasarobotics.frc2016.statics.Constants;
+import org.lasarobotics.lib.HazyConstant;
 
 public final class Intake extends HazySubsystem {
 
@@ -8,6 +10,8 @@ public final class Intake extends HazySubsystem {
 
     private double intakeSpeed;
     private boolean hasBall;
+    
+    private double operatingSpeed;
 
     private Intake() {
         this.setMode(Mode.OFF);
@@ -42,7 +46,7 @@ public final class Intake extends HazySubsystem {
                         hasBall = true;
                         newMode = Mode.OFF;
                     } else {
-                        intakeSpeed = 1.0;
+                        intakeSpeed = operatingSpeed;
                     }
                     break;
                 case OUTTAKING:
@@ -52,7 +56,7 @@ public final class Intake extends HazySubsystem {
                     break;
                 case LOADINGSHOOTER:
                     hasBall = false;
-                    intakeSpeed = 1.0;
+                    intakeSpeed = operatingSpeed;
                     break;
             }
             if (newMode != mode) {
@@ -80,5 +84,6 @@ public final class Intake extends HazySubsystem {
 
     @Override
     public void initSubsystem() {
+        operatingSpeed = Constants.INTAKE_SPEED.getDouble();
     }
 }
