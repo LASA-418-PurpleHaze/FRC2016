@@ -63,7 +63,7 @@ public class DriverInput implements Runnable {
     private void intakeControl() {
         if (operator.getRightBumper()) {
             intake.setMode(Intake.Mode.INTAKING);
-        } else if (operator.getLeftBumper()) {
+        } else if (operator.getLeftBumper() || driver.getLeftBumper()) {
             intake.setMode(Intake.Mode.OUTTAKING);
         } else {
             intake.setMode(Intake.Mode.OFF);

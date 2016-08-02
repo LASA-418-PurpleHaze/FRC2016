@@ -97,7 +97,7 @@ public class Arm extends HazySubsystem {
     }
 
     public boolean isTiltDone() {
-        return tiltPID.isDone();
+        return tiltPID.onTarget();
     }
 
 }

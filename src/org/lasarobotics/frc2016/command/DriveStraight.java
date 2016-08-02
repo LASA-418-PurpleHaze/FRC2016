@@ -15,7 +15,7 @@ public class DriveStraight extends Command {
 
     @Override
     public boolean isDone() {
-        return drivetrain.isDistanceDone() && drivetrain.getStraightSetpoint() == setpoint;
+        return startTime != Double.MAX_VALUE &&  drivetrain.isDistanceDone() && drivetrain.getStraightSetpoint() == setpoint;
     }
 
     @Override

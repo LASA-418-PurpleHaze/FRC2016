@@ -42,12 +42,13 @@ public final class Drivetrain extends HazySubsystem {
             switch (mode) {
                 case STRAIGHT_CONTROLLED:
                     leftSpeed = rightSpeed = straightPID.calculate((hardware.getLeftDriveDistance() + hardware.getRightDriveDistance()) / 2);
-                    double turn = turnPID.calculate(hardware.getNavXAngle());
+                    double turn = 0.75 * turnPID.calculate(hardware.getNavXAngle());
                     leftSpeed += turn;
                     rightSpeed -= turn;
                     break;
                 case TURN_CONTROLLED:
                     double power = turnPID.calculate(hardware.getNavXAngle());
+                    SmartDashboard.putNumber("bal", Constants.GYRO_PID_KP.getDouble());
                     leftSpeed = power;
                     rightSpeed = -power;
                     break;

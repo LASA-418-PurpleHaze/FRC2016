@@ -18,6 +18,8 @@ public class Wait extends Command {
 
     @Override
     public void run() {
+        hardware.resetAngle();
+        hardware.resetDriveDistance();
     }
 
     @Override

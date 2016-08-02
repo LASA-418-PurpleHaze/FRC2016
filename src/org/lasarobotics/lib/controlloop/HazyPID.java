@@ -12,7 +12,7 @@ public class HazyPID extends ControlLoop {
     public HazyPID() {
         this.maxU = 1;
         this.minU = -1;
-        this.minCount = 5;
+        this.minCount = 50;
         this.firstCycle = true;
     }
 

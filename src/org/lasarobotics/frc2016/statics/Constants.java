@@ -28,7 +28,7 @@ public class Constants extends HazyConstant {
     public static final Constant TILT_MAX_ANGLE = new Constant("T_maxAngle", 90);
     public static final Constant TILT_MIN_ANGLE = new Constant("T_minAngle", 0);
     public static final Constant TILT_DONE_CYCLES = new Constant("TMPF_DoneCycles", 5);
-    public static final Constant TILT_DONE_RANGE = new Constant("TMPF_DoneRange", 5);
+    public static final Constant TILT_DONE_RANGE = new Constant("T_DoneBound", 5);
     public static final Constant TILT_KP = new Constant("T_kP", 0.008);
     public static final Constant TILT_KI = new Constant("T_kI", 0.0);
     public static final Constant TILT_KD = new Constant("T_kD", 0.0);

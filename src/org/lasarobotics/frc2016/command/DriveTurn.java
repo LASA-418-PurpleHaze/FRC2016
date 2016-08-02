@@ -15,7 +15,7 @@ public class DriveTurn extends Command {
 
     @Override
     public boolean isDone() {
-        return (drivetrain.isTurnDone() && drivetrain.getTurnSetpoint() == setpoint);
+        return startTime != Double.MAX_VALUE && (drivetrain.isTurnDone() && drivetrain.getTurnSetpoint() == setpoint);
     }
 
     @Override
